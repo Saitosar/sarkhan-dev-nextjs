@@ -12,10 +12,12 @@ const Home = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to Next.js on Replit!</h1>
+        <h1 className={styles.title}>
+          Welcome to <a href="https://nextjs.org">Next.js!</a>
+        </h1>
 
         <p className={styles.description}>
-          Get started by editing{" "}
+          Get started by editing{' '}
           <code className={styles.code}>pages/index.js</code>
         </p>
 
@@ -39,14 +41,29 @@ const Home = () => {
           </a>
 
           <a
-            href="https://docs.replit.com/category/deployments"
+            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
             className={styles.card}
           >
             <h2>Deploy &rarr;</h2>
-            <p>After you are happy with this app, deploy it on Replit!</p>
+            <p>
+              Instantly deploy your Next.js site to a public URL with Vercel.
+            </p>
           </a>
         </div>
       </main>
+
+      <footer className={styles.footer}>
+        <a
+          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Powered by{' '}
+          <span className={styles.logo}>
+            <img src="/replit.svg" alt="Replit Logo" width={72} height={16} />
+          </span>
+        </a>
+      </footer>
     </div>
   );
 };
