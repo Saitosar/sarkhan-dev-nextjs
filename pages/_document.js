@@ -1,17 +1,18 @@
-import { Html, Head, Main, NextScript } from 'next/document';
-import { tektur, jura } from '@/lib/fonts';
+// pages/_document.js
+
+import { Html, Head, Main, NextScript } from 'next/document'
+
+// ВАЖНО: Удалите ручные <link> для Google Fonts отсюда.
+// Next.js/font позаботится об этом автоматически и более эффективно.
 
 export default function Document() {
   return (
-    <Html
-      lang="az"
-      className={`${jura.className} ${tektur.variable} ${jura.variable}`}
-    >
+    <Html>
       <Head />
       <body>
         <Main />
         <NextScript />
       </body>
     </Html>
-  );
+  )
 }
