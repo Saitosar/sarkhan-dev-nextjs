@@ -14,7 +14,16 @@ const ContentSecurityPolicy = `
 const securityHeaders = [
   {
     key: 'Content-Security-Policy',
-    value: ContentSecurityPolicy.replace(/\n/g, ''),
+    value: 
+    `
+      default-src 'self';
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' data: https://fonts.gstatic.com;
+      img-src 'self' data: blob:;
+      script-src 'self' 'unsafe-inline' 'unsafe-eval';
+      connect-src 'self';
+      frame-src 'self';
+    `.replace(/\s{2,}/g, ' ').trim()
   },
   {
     key: 'Referrer-Policy',
@@ -57,4 +66,14 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = {
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'placehold.co', pathname: '/**' },
+    ],
+    // или коротко: domains: ['placehold.co']
+  },
+  async headers() {
+    return [{ source: '/(.*)', headers: securityHeaders }];
+  },
+};
