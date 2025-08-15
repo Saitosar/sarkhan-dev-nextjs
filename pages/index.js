@@ -537,7 +537,6 @@ export default function HomePage({ articles, initialLang, siteUrl }) {
                 <meta name="twitter:description" content={t.docDesc} />
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             </Head>
-
             <div id="background-animation"></div>
 
             <Header t={t} lang={lang} setLang={handleLanguageChange} activeSection={activeSection} />

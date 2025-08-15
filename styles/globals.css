@@ -27,6 +27,9 @@
     --z-header: 1000;
     --z-menu: 2000;
     --z-modal: 3000;
+     /* Define font stacks using the custom properties with proper fallbacks */
+    --font-heading-stack: var(--font-heading), ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, Monaco, monospace;
+    --font-body-stack: var(--font-body), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
     /* Semantic Animation Tokens */
     --duration-normal: 0.3s;
@@ -121,7 +124,7 @@ body {
     background-color: var(--color-bg);
     color: var(--color-text-primary);
     /* ИСПРАВЛЕНИЕ: Применяем переменную шрифта напрямую с правильным резервным вариантом */
-    font-family: var(--font-body), 'Jura', sans-serif;
+    font-family: var(--font-body-stack); /* Use the complete font stack */
     line-height: 1.7;
     overflow-x: hidden;
     background-image: radial-gradient(ellipse at top left, rgba(77, 195, 255, 0.1), transparent 50%), radial-gradient(ellipse at bottom right, rgba(255, 0, 255, 0.1), transparent 50%);
@@ -162,7 +165,7 @@ section { padding-block: var(--space-section); padding-top: var(--header-offset)
 
 h1, h2, h3 {
     /* ИСПРАВЛЕНИЕ: Применяем переменную шрифта напрямую с правильным резервным вариантом */
-    font-family: var(--font-heading, var(--font-body,'Tektur')), sans-serif;
+    font-family: var(--font-heading-stack); /* Use the complete font stack */
     color: var(--color-heading);
     line-height: 1.2;
 }
@@ -174,7 +177,7 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 .modal-content p, .hero-subtitle, .resource-card p { margin-inline: auto; }
 
 /* INTERACTIVE ELEMENTS & ACCESSIBILITY */
-.btn { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-heading), 'Tektur', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: var(--space-md) var(--space-xl); border: var(--border-width) solid var(--color-primary); color: var(--color-primary); background-color: transparent; text-decoration: none; cursor: pointer; transition: color var(--duration-normal) var(--ease-out-quart), background-color var(--duration-normal) var(--ease-out-quart), box-shadow var(--duration-normal) var(--ease-out-quart); position: relative; overflow: hidden; border-radius: var(--radius-sm); }
+.btn { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-heading-stack); /* Use heading font for buttons */ font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: var(--space-md) var(--space-xl); border: var(--border-width) solid var(--color-primary); color: var(--color-primary); background-color: transparent; text-decoration: none; cursor: pointer; transition: color var(--duration-normal) var(--ease-out-quart), background-color var(--duration-normal) var(--ease-out-quart), box-shadow var(--duration-normal) var(--ease-out-quart); position: relative; overflow: hidden; border-radius: var(--radius-sm); }
 .btn:hover { color: var(--color-bg); background-color: var(--color-primary); box-shadow: 0 0 15px var(--color-primary); }
 [data-theme="light"] .btn:hover { color: #ffffff; }
 .btn:active { transform: scale(0.98); }
@@ -198,7 +201,7 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 .header.scrolled { padding-block: var(--space-md); box-shadow: var(--shadow-md); }
 .navbar { display: flex; justify-content: space-between; align-items: center; }
 .nav-right-cluster { display: flex; align-items: center; gap: var(--space-lg); }
-.logo { font-family: var(--font-heading), 'Tektur', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--color-heading); text-decoration: none; display: flex; align-items: center; gap: var(--space-sm); }
+.logo { font-family: var(--font-heading-stack); /* Use heading font for logo */ font-size: 1.8rem; font-weight: 700; color: var(--color-heading); text-decoration: none; display: flex; align-items: center; gap: var(--space-sm); }
 .logo-svg { width: 30px; height: 30px; color: var(--color-primary); transition: transform var(--duration-slow) var(--ease-in-out-quart); }
 .logo:hover .logo-svg { transform: rotate(360deg); }
 .nav-menu { display: flex; align-items: center; list-style: none; gap: var(--space-xl); position: relative; }
@@ -213,7 +216,7 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
   transition: left 280ms ease, width 280ms ease;
   will-change: left, width;
 }
-.nav-link { font-family: var(--font-heading), 'Tektur', sans-serif; text-decoration: none; color: var(--color-text-primary); font-weight: 400; transition: color var(--duration-normal) ease, text-shadow var(--duration-normal) ease; position: relative; padding-block: var(--space-sm); }
+.nav-link {  font-family: var(--font-heading-stack); /* Use heading font for navigation */ text-decoration: none; color: var(--color-text-primary); font-weight: 400; transition: color var(--duration-normal) ease, text-shadow var(--duration-normal) ease; position: relative; padding-block: var(--space-sm); }
 .nav-link:hover {
   color: var(--color-primary);
   text-shadow: 0 0 10px var(--color-primary);
@@ -234,7 +237,7 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
     backdrop-filter: blur(6px);
     cursor: pointer;
 }
-.theme-toggle, .mobile-menu-toggle { background: none; border: 1px solid transparent; color: var(--color-text-primary); font-family: var(--font-body), 'Jura', sans-serif; cursor: pointer; padding: var(--space-sm); transition: color var(--duration-normal) ease; font-weight: 700; min-height: 44px; min-width: 44px; display: flex; align-items: center; justify-content: center; }
+.theme-toggle, .mobile-menu-toggle { background: none; border: 1px solid transparent; color: var(--color-text-primary); font-family: var(--font-body-stack); /* Use body font for form inputs */ cursor: pointer; padding: var(--space-sm); transition: color var(--duration-normal) ease; font-weight: 700; min-height: 44px; min-width: 44px; display: flex; align-items: center; justify-content: center; }
 .lang-globe-btn svg { width: 24px; height: 24px; stroke: currentColor; }
 .lang-globe-btn:hover {
     border-color: rgba(96,165,250,.5);
@@ -299,7 +302,7 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 .panel { padding: var(--space-lg); text-decoration: none; text-align: center; }
 .panel-icon { width: 48px; height: 48px; margin-block-end: var(--space-md); stroke: var(--color-primary); transition: stroke var(--duration-normal) ease; }
 .panel:hover .panel-icon { stroke: var(--color-heading); }
-.panel-title { font-family: var(--font-heading), 'Tektur', sans-serif; font-size: 1.2rem; color: var(--color-heading); font-weight: 700; }
+.panel-title { font-family: var(--font-heading-stack); /* Use heading font for panel titles */ font-size: 1.2rem; color: var(--color-heading); font-weight: 700; }
 .blog-card { display: flex; flex-direction: column; cursor: pointer; padding: var(--space-xl); }
 .blog-card h3 { font-size: 1.4rem; margin-block-end: var(--space-md); color: var(--color-primary); }
 .blog-card p { flex-grow: 1; margin-block-end: var(--space-lg); }
@@ -338,7 +341,7 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 .contact-wrapper { max-width: 800px; margin-inline: auto; background: var(--color-surface); padding: var(--space-xxl); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
 .contact-form .form-group { margin-block-end: var(--space-lg); }
 .contact-form label { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
-.contact-form input, .contact-form textarea { width: 100%; padding: var(--space-md); background: var(--color-bg); border: 1px solid var(--color-border); color: var(--color-text-primary); font-family: var(--font-body), 'Jura', sans-serif; font-size: 1rem; transition: border-color var(--duration-normal) ease; border-radius: var(--radius-sm); }
+.contact-form input, .contact-form textarea { width: 100%; padding: var(--space-md); background: var(--color-bg); border: 1px solid var(--color-border); color: var(--color-text-primary); font-family: var(--font-body-stack); /* Use body font for form inputs */ font-size: 1rem; transition: border-color var(--duration-normal) ease; border-radius: var(--radius-sm); }
 .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 10px var(--color-shadow); }
 .contact-form textarea { min-height: 150px; resize: vertical; }
 .form-error { color: var(--color-secondary); font-size: 0.9rem; margin-block-start: var(--space-sm); }
