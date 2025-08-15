@@ -2,12 +2,12 @@ import { parseCookies, setCookie } from 'nookies';
 
 export const getLanguageFromCookies = (ctx = null) => {
   const cookies = parseCookies(ctx);
-  return cookies.language || 'az'; // 'az' as default
+  return cookies.lang || 'az'; // 'az' по умолчанию
 };
 
 export const setLanguageCookie = (lang) => {
-  setCookie(null, 'language', lang, {
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+  setCookie(null, 'lang', lang, {
+    maxAge: 30 * 24 * 60 * 60, // 30 дней
     path: '/',
     sameSite: 'strict',
   });

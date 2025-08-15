@@ -13,7 +13,7 @@
     --color-shadow: rgba(77, 195, 255, 0.1);
 
     /* TOKENS */
-    --font-heading: var(--font-heading-google, 'Exo 2', 'Russo One', sans-serif);
+    --font-heading: var(--font-heading-google, 'Goldman', sans-serif);
     --font-body: var(--font-body-google, 'Chakra Petch', sans-serif);
     --header-offset: 120px;
     --max-text-width: 75ch;

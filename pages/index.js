@@ -23,7 +23,7 @@ const translations = {
         blogSectionTitle: "Blog", readMore: "Daha çox oxu", closeButton: "Bağla",
         resourcesSectionTitle: "Faydalı Resurslar", viewButton: "Bax",
         res1Title: "BABOK Guide", res1Desc: "Biznes analiz biliklərinin əsas toplusu. Hər BA üçün masaüstü kitab.",
-        aboutSectionTitle: "Haqqımda", aboutName: "Sərxan",
+        aboutSectionTitle: "Haqqımda", aboutName: "Sərxan Hacıyev",
         aboutShortBio: "10 ildən artıq bank sistemləri sahəsində təcrübəyə malik IT Biznes Analitik.",
         aboutLongBio: "Mən, 10 ildən artıq korporativ bank sistemləri sahəsində təcrübəsi olan çoxşaxəli IT Biznes Analitiki Sərxan Hacıyev. Karyeram boyunca Flexcube və kart prosessinq platformalarında kritik funksionallıqların çatdırılmasında, eləcə də Azərbaycanın ən böyük bankı üçün sıfırdan daxili əsas bank sistemi olan Zeus-un layihələndirilməsində aparıcı rol oynamışam.",
         skillsTitle: "Əsas Bacarıqlar",
@@ -43,7 +43,68 @@ const translations = {
             messageMin: "Mesaj ən azı 10 simvol olmalıdır",
         }
     },
-    // ... English and Russian translations
+    en: {
+        docTitle: "Sarkhan.dev | Analytical Thinking. Practical Tools.",
+        docDesc: "A collection of useful articles, resources, and tools for IT Business Analysts.",
+        navHome: "Home", navBlog: "Blog", navResources: "Resources", navAbout: "About", navContact: "Contact",
+        heroTitlePart1: "Analytical thinking.", heroTitlePart2: "Practical tools.", heroTitlePart3: "Digital future.",
+        heroSubtitle: "Useful for IT business analysts",
+        ctaPrimary: "View resources", ctaSecondary: "Go to blog",
+        panelBlog: "Blog", panelResources: "Resources", panelAbout: "About", panelContact: "Contact",
+        blogSectionTitle: "Blog", readMore: "Read more", closeButton: "Close",
+        resourcesSectionTitle: "Useful Resources", viewButton: "View",
+        res1Title: "BABOK Guide", res1Desc: "The core body of knowledge for business analysis. A desktop book for every BA.",
+        aboutSectionTitle: "About", aboutName: "Sarkhan Hajiyev",
+        aboutShortBio: "IT Business Analyst with over 10 years of experience in banking systems.",
+        aboutLongBio: "I am Sarkhan Hajiyev, a versatile IT Business Analyst with over 10 years of experience in corporate banking systems. Throughout my career, I have played a key role in delivering critical functionalities on Flexcube and card processing platforms, as well as leading the design of the Zeus in-house core banking system from scratch for Azerbaijan's largest bank.",
+        skillsTitle: "Core Skills",
+        skillsList: ["Oracle Flexcube 12", "Zeus (in house)", "Processing (CMS/TWO)", "ELMA BPM", "Mobile bank app", "API design & integration", "SQL (Oracle)", "Jira/Confluence", "BRD/SRS", "Process Mapping (BPMN/UML)", "UAT planning", "Stakeholder management"],
+        careerMapTitle: "Career Map",
+        career1Title: "Senior IT BA - Core Banking & Integrations", career1Date: "2025 - Present", career1Desc: "Owner of API-based communication between Zeus, Processing, CRM, BPM, and external systems.",
+        career2Title: "Process Owner - Agile PDLC Optimization", career2Date: "2023-2025", career2Desc: "Led the redesign of PDLC and Agile management across 80+ teams.",
+        contactSectionTitle: "Contact", formNamePlaceholder: "Your name", formEmailPlaceholder: "Your email", formMessagePlaceholder: "Your message...", formSubmitButton: "Send",
+        formSubmitting: "Sending...",
+        themeToggle: "Toggle theme",
+        langToggle: "Change language",
+        validation: {
+            nameRequired: "Name is required",
+            emailRequired: "Email is required",
+            emailInvalid: "Invalid email format",
+            messageRequired: "Message is required",
+            messageMin: "Message must be at least 10 characters long",
+        }
+    },
+    ru: {
+        docTitle: "Sarkhan.dev | Аналитическое мышление. Практичные инструменты.",
+        docDesc: "Полезные статьи, ресурсы и инструменты для IT бизнес-аналитиков.",
+        navHome: "Главная", navBlog: "Блог", navResources: "Ресурсы", navAbout: "Обо мне", navContact: "Связь",
+        heroTitlePart1: "Аналитическое мышление.", heroTitlePart2: "Практичные инструменты.", heroTitlePart3: "Цифровое будущее.",
+        heroSubtitle: "Полезно для IT бизнес-аналитиков",
+        ctaPrimary: "К ресурсам", ctaSecondary: "В блог",
+        panelBlog: "Блог", panelResources: "Ресурсы", panelAbout: "Обо мне", panelContact: "Связь",
+        blogSectionTitle: "Блог", readMore: "Читать далее", closeButton: "Закрыть",
+        resourcesSectionTitle: "Полезные ресурсы", viewButton: "Открыть",
+        res1Title: "BABOK Guide", res1Desc: "Основное собрание знаний по бизнес-анализу. Настольная книга каждого BA.",
+        aboutSectionTitle: "Обо мне", aboutName: "Сархан Гаджиев",
+        aboutShortBio: "IT бизнес-аналитик с более чем 10-летним опытом работы в банковских системах.",
+        aboutLongBio: "Я, Серхан Гаджиев, универсальный IT бизнес-аналитик с более чем 10-летним опытом работы в корпоративных банковских системах. За время карьеры принимал ключевую роль в реализации критически важных функций на платформах Flexcube и карт-процессинге, а также возглавлял проектирование внутренней банковской системы Zeus с нуля для крупнейшего банка Азербайджана.",
+        skillsTitle: "Ключевые навыки",
+        skillsList: ["Oracle Flexcube 12", "Zeus (in house)", "Processing (CMS/TWO)", "ELMA BPM", "Mobile bank app", "Проектирование и интеграция API", "SQL (Oracle)", "Jira/Confluence", "BRD/SRS", "Моделирование процессов (BPMN/UML)", "Планирование UAT", "Управление стейкхолдерами"],
+        careerMapTitle: "Карта карьеры",
+        career1Title: "Senior IT BA - Core Banking & Integrations", career1Date: "2025 - Настоящее время", career1Desc: "Владелец API-взаимодействия между Zeus, Processing, CRM, BPM и внешними системами.",
+        career2Title: "Process Owner - Agile PDLC Optimization", career2Date: "2023-2025", career2Desc: "Руководил редизайном PDLC и Agile-управления в 80+ командах.",
+        contactSectionTitle: "Связь", formNamePlaceholder: "Ваше имя", formEmailPlaceholder: "Ваш email", formMessagePlaceholder: "Ваше сообщение...", formSubmitButton: "Отправить",
+        formSubmitting: "Отправка...",
+        themeToggle: "Сменить тему",
+        langToggle: "Сменить язык",
+        validation: {
+            nameRequired: "Имя обязательно",
+            emailRequired: "Email обязателен",
+            emailInvalid: "Неверный формат email",
+            messageRequired: "Сообщение обязательно",
+            messageMin: "Сообщение должно содержать не менее 10 символов",
+        }
+    }
 };
 
 // --- КОМПОНЕНТЫ ---
@@ -115,9 +176,20 @@ const Header = ({ t, lang, setLang, activeSection }) => {
                             <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                         </button>
                         <div className={`lang-options ${langMenuOpen ? 'active' : ''}`}>
-                            <button className={`lang-btn ${lang === 'az' ? 'active' : ''}`} onClick={() => { setLang('az'); setLangMenuOpen(false); }}>AZ</button>
-                            <button className={`lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => { setLang('en'); setLangMenuOpen(false); }}>EN</button>
-                            <button className={`lang-btn ${lang === 'ru' ? 'active' : ''}`} onClick={() => { setLang('ru'); setLangMenuOpen(false); }}>RU</button>
+                          <button
+                            className={`lang-btn ${lang === 'az' ? 'active' : ''}`}
+                            onClick={() => { setLang('az'); setLangMenuOpen(false); }}
+                          >AZ</button>
+
+                          <button
+                            className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
+                            onClick={() => { setLang('en'); setLangMenuOpen(false); }}
+                          >EN</button>
+
+                          <button
+                            className={`lang-btn ${lang === 'ru' ? 'active' : ''}`}
+                            onClick={() => { setLang('ru'); setLangMenuOpen(false); }}
+                          >RU</button>
                         </div>
                     </div>
                     <button onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')} className="theme-toggle" aria-label={t.themeToggle}>🌓</button>
@@ -364,6 +436,10 @@ const Footer = () => (
 
 export default function HomePage({ articles, initialLang, siteUrl }) {
     const [lang, setLang] = useState(initialLang);
+    useEffect(() => {
+      const saved = getLanguageFromCookies();
+      if (saved && saved !== lang) setLang(saved);
+    }, []);
     const [activeSection, setActiveSection] = useState('home');
     const t = translations[lang] || translations['az'];
 
@@ -439,42 +515,30 @@ export default function HomePage({ articles, initialLang, siteUrl }) {
 }
 
 // --- ЗАГРУЗКА ДАННЫХ С СЕРВЕРА ---
-
 export async function getServerSideProps(context) {
-    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-    const initialLang = getLanguageFromCookies(context);
+  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
-    try {
-        const res = await fetch(`${strapiUrl}/api/articles?populate=*`);
-        if (!res.ok) throw new Error(`Failed to fetch: ${res.statusText}`);
-        const response = await res.json();
+  // читаем язык из cookies через nookies-обёртку
+  const initialLang = getLanguageFromCookies(context) || 'az';
 
-        const markdownConverter = new showdown.Converter();
+  try {
+    const res = await fetch(`${strapiUrl}/api/articles?populate=*`);
+    if (!res.ok) throw new Error(`Failed to fetch: ${res.statusText}`);
+    const response = await res.json();
 
-        const articles = (response.data || []).map(article => {
-            if (article.attributes && article.attributes.body) {
-                const rawHtml = markdownConverter.makeHtml(article.attributes.body);
-                article.attributes.sanitizedBody = DOMPurify.sanitize(rawHtml);
-            }
-            return article;
-        });
+    const markdownConverter = new showdown.Converter();
+    const articles = (response.data || []).map(article => {
+      if (article.attributes && article.attributes.body) {
+        const rawHtml = markdownConverter.makeHtml(article.attributes.body);
+        article.attributes.sanitizedBody = DOMPurify.sanitize(rawHtml);
+      }
+      return article;
+    });
 
-        return {
-            props: {
-                articles,
-                initialLang,
-                siteUrl,
-            },
-        };
-    } catch (error) {
-        console.error("Failed to fetch articles from Strapi:", error);
-        return { 
-            props: { 
-                articles: [],
-                initialLang,
-                siteUrl,
-            } 
-        };
-    }
+    return { props: { articles, initialLang, siteUrl } };
+  } catch (error) {
+    console.error("Failed to fetch articles from Strapi:", error);
+    return { props: { articles: [], initialLang, siteUrl } };
+  }
 }
