@@ -1,3 +1,4 @@
+import Header from '@/components/Header';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useState, useEffect, useRef, useMemo } from 'react';
@@ -9,6 +10,7 @@ import DOMPurify from 'isomorphic-dompurify';
 import { useTheme } from 'next-themes';
 import FocusTrap from 'focus-trap-react';
 import { getLanguageFromCookies, setLanguageCookie } from '@/utils/cookies';
+
 
 // --- ДАННЫЕ И КОНФИГУРАЦИЯ ---
 const translations = {
@@ -108,7 +110,7 @@ const translations = {
 };
 
 // --- КОМПОНЕНТЫ ---
-
+/*
 const Header = ({ t, lang, setLang, activeSection }) => {
   const { theme, resolvedTheme, setTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
@@ -222,7 +224,7 @@ const Header = ({ t, lang, setLang, activeSection }) => {
     </header>
   );
 };
-
+*/
 const Hero = ({ t }) => (
     <section id="home">
         <div className="container hero-content">

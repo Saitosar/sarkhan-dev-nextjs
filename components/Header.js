@@ -1,0 +1,117 @@
+// components/Header.js
+import { useEffect, useRef, useState } from 'react';
+import { useTheme } from 'next-themes';
+
+export default function Header({ t, lang, setLang, activeSection }) {
+  const { theme, resolvedTheme, setTheme } = useTheme();
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const langSwitcherRef = useRef(null);
+
+  // >>> magic line
+  const navMenuRef = useRef(null);
+  const updateUnderline = () => {
+    const el = navMenuRef.current;
+    if (!el) return;
+    const active = el.querySelector('.nav-link.active');
+    if (!active) return;
+    const parentRect = el.getBoundingClientRect();
+    const rect = active.getBoundingClientRect();
+    el.style.setProperty('--underline-left', `${rect.left - parentRect.left}px`);
+    el.style.setProperty('--underline-width', `${rect.width}px`);
+  };
+  useEffect(() => {
+    const id = requestAnimationFrame(updateUnderline);
+    return () => cancelAnimationFrame(id);
+  }, [activeSection, lang, mobileMenuOpen]);
+  useEffect(() => {
+    const onResize = () => updateUnderline();
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+  // <<< magic line
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.classList.toggle('no-scroll', mobileMenuOpen);
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (langSwitcherRef.current && !langSwitcherRef.current.contains(event.target)) {
+        setLangMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [langSwitcherRef]);
+
+  const navLinks = [
+    { href: "#home", key: "navHome", text: t.navHome },
+    { href: "#blog", key: "navBlog", text: t.navBlog },
+    { href: "#resources", key: "navResources", text: t.navResources },
+    { href: "#about", key: "navAbout", text: t.navAbout },
+    { href: "#contact", key: "navContact", text: t.navContact },
+  ];
+
+  return (
+    <header className={`header ${scrolled ? 'scrolled' : ''}`}>
+      <div className="container navbar">
+        <a href="#home" className="logo">
+          <svg className="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M2 7L12 12L22 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M12 12V22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          <span>Sarkhan.dev</span>
+        </a>
+
+        <div className="nav-right-cluster">
+          <nav>
+            <ul
+              id="nav-menu"
+              ref={navMenuRef}
+              className={`nav-menu ${mobileMenuOpen ? 'mobile-active' : ''}`}
+            >
+              {navLinks.map(link => (
+                <li key={link.key}>
+                  <a
+                    href={link.href}
+                    className={`nav-link ${activeSection === link.href.substring(1) ? 'active' : ''}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="lang-switcher-container" ref={langSwitcherRef}>
+            <button className="lang-globe-btn" onClick={() => setLangMenuOpen(v => !v)} aria-label={t.langToggle}>
+              <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </button>
+            <div className={`lang-options ${langMenuOpen ? 'active' : ''}`}>
+              <button className={`lang-btn ${lang === 'az' ? 'active' : ''}`} onClick={() => { setLang('az'); setLangMenuOpen(false); }}>AZ</button>
+              <button className={`lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => { setLang('en'); setLangMenuOpen(false); }}>EN</button>
+              <button className={`lang-btn ${lang === 'ru' ? 'active' : ''}`} onClick={() => { setLang('ru'); setLangMenuOpen(false); }}>RU</button>
+            </div>
+          </div>
+
+          <button onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')} className="theme-toggle" aria-label={t.themeToggle}>🌓</button>
+          <button className="mobile-menu-toggle" onClick={() => setMobileMenuOpen(v => !v)} aria-expanded={mobileMenuOpen} aria-controls="nav-menu">☰</button>
+        </div>
+      </div>
+    </header>
+  );
+}
