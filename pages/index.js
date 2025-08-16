@@ -285,7 +285,7 @@ const BlogSection = ({ t, articles }) => {
                             article && article.attributes ? (
                                 <div key={article.id} className="blog-card" onClick={(e) => openModal(article, e)} tabIndex="0" onKeyDown={(e) => e.key === 'Enter' && openModal(article, e)}>
                                     <h3>{article.attributes.title}</h3>
-                                    <p>{article.attributes.description}</p>
+                                    <p>{article.attributes.excerpt}</p>
                                     <span className="btn">{t.readMore}</span>
                                 </div>
                             ) : null
@@ -564,17 +564,17 @@ export async function getServerSideProps(context) {
   const initialLang = getLanguageFromCookies(context) || 'az';
 
   try {
-    const res = await fetch(`${strapiUrl}/api/articles?populate=*`);
+      const res = await fetch(`${strapiUrl}/api/posts?populate=cover&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=3`);
     if (!res.ok) throw new Error(`Failed to fetch: ${res.statusText}`);
     const response = await res.json();
 
     const markdownConverter = new showdown.Converter();
-    const articles = (response.data || []).map(article => {
-      if (article.attributes && article.attributes.body) {
-        const rawHtml = markdownConverter.makeHtml(article.attributes.body);
-        article.attributes.sanitizedBody = DOMPurify.sanitize(rawHtml);
+    const articles = (response.data || []).map(post => {
+      if (post.attributes && post.attributes.content) {
+        const rawHtml = markdownConverter.makeHtml(post.attributes.content);
+          post.attributes.sanitizedBody = DOMPurify.sanitize(rawHtml);
       }
-      return article;
+      return post;
     });
 
     return { props: { articles, initialLang, siteUrl } };
