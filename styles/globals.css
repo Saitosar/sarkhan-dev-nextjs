@@ -460,12 +460,27 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
   }
 
   .logo-svg {
-    width: 24px; /* Уменьшаем иконку в логотипе */
+    width: 24px;
     height: 24px;
   }
 
   .nav-right-cluster {
-    gap: var(--space-xs); /* Максимально сжимаем иконки справа */
+    gap: var(--space-xs); /* Уменьшаем расстояние между иконками */
+  }
+
+  /* Уменьшаем все кнопки в правом блоке */
+  .lang-globe-btn, .theme-toggle, .mobile-menu-toggle {
+    width: 32px;
+    height: 32px;
+    min-width: 32px; /* <-- Важное правило! */
+    min-height: 32px; /* <-- И это тоже! */
+    padding: var(--space-xs);
+  }
+
+  /* Уменьшаем иконку внутри глобуса */
+  .lang-globe-btn svg {
+    width: 20px;
+    height: 20px;
   }
 }
 
