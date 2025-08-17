@@ -12,6 +12,8 @@ import FocusTrap from 'focus-trap-react';
 import { getLanguageFromCookies, setLanguageCookie } from '@/utils/cookies';
 
 
+
+
 // --- ДАННЫЕ И КОНФИГУРАЦИЯ ---
 const translations = {
     az: {
@@ -261,55 +263,62 @@ const Hero = ({ t }) => (
 );
 
 const BlogSection = ({ t, articles }) => {
-    const [selectedArticle, setSelectedArticle] = useState(null);
-    const triggerRef = useRef(null);
-    const markdownConverter = useMemo(() => new showdown.Converter(), []);
+  const [selectedArticle, setSelectedArticle] = useState(null);
+  const triggerRef = useRef(null);
 
-    const openModal = (article, e) => {
-        triggerRef.current = e.currentTarget;
-        setSelectedArticle(article);
-    };
+  const openModal = (article, e) => {
+    triggerRef.current = e.currentTarget;
+    setSelectedArticle(article);
+  };
+  const closeModal = () => {
+    setSelectedArticle(null);
+    triggerRef.current?.focus();
+  };
 
-    const closeModal = () => {
-        setSelectedArticle(null);
-        triggerRef.current?.focus();
-    };
-
-    return (
-        <>
-            <section id="blog">
-                <div className="container">
-                    <h2>{t.blogSectionTitle}</h2>
-                    <div className="blog-grid">
-                        {Array.isArray(articles) && articles.map(article => (
-                            article && article.attributes ? (
-                                <div key={article.id} className="blog-card" onClick={(e) => openModal(article, e)} tabIndex="0" onKeyDown={(e) => e.key === 'Enter' && openModal(article, e)}>
-                                    <h3>{article.attributes.title}</h3>
-                                    <p>{article.attributes.excerpt}</p>
-                                    <span className="btn">{t.readMore}</span>
-                                </div>
-                            ) : null
-                        ))}
-                    </div>
+  return (
+    <>
+      <section id="blog">
+        <div className="container">
+          <h2>{t.blogSectionTitle}</h2>
+          <div className="blog-grid">
+            {Array.isArray(articles) && articles.map(article => (
+              article ? (
+                <div
+                  key={article.id}
+                  className="blog-card"
+                  onClick={(e) => openModal(article, e)}
+                  tabIndex="0"
+                  onKeyDown={(e) => e.key === 'Enter' && openModal(article, e)}
+                >
+                  {/* Картинка, если нужна: article.cover?.url */}
+                  <h3>{article.title}</h3>
+                  <p>{article.excerpt}</p>
+                  <span className="btn">{t.readMore}</span>
                 </div>
-            </section>
+              ) : null
+            ))}
+            {(!articles || articles.length === 0) && <p>Hələ yazı yoxdur.</p>}
+          </div>
+        </div>
+      </section>
 
-            {selectedArticle && (
-                <FocusTrap active={!!selectedArticle} focusTrapOptions={{ onDeactivate: closeModal, initialFocus: false }}>
-                    <div className="modal-overlay active" onClick={closeModal}>
-                        <div className="modal-content" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="modal-title">
-                            <button className="modal-close-btn" onClick={closeModal}>&times;</button>
-                            <h3 id="modal-title">{selectedArticle.attributes.title}</h3>
-                            <div dangerouslySetInnerHTML={{ __html: selectedArticle.attributes.sanitizedBody }} />
-                            <br />
-                            <button className="btn" onClick={closeModal}>{t.closeButton}</button>
-                        </div>
-                    </div>
-                </FocusTrap>
-            )}
-        </>
-    );
+      {selectedArticle && (
+        <FocusTrap active={!!selectedArticle} focusTrapOptions={{ onDeactivate: closeModal, initialFocus: false }}>
+          <div className="modal-overlay active" onClick={closeModal}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="modal-title">
+              <button className="modal-close-btn" onClick={closeModal}>&times;</button>
+              <h3 id="modal-title">{selectedArticle.title}</h3>
+              <div dangerouslySetInnerHTML={{ __html: selectedArticle.sanitizedBody || '' }} />
+              <br />
+              <button className="btn" onClick={closeModal}>{t.closeButton}</button>
+            </div>
+          </div>
+        </FocusTrap>
+      )}
+    </>
+  );
 };
+
 
 const ResourcesSection = ({ t }) => (
     <section id="resources">
@@ -556,23 +565,24 @@ export default function HomePage({ articles, initialLang, siteUrl }) {
 }
 
 // --- ЗАГРУЗКА ДАННЫХ С СЕРВЕРА ---
-export async function getServerSideProps(context) {
-  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+    export async function getServerSideProps(context) {
+      const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL; // ВАЖНО: именно эта переменная
+      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
   // читаем язык из cookies через nookies-обёртку
-  const initialLang = getLanguageFromCookies(context) || 'az';
+      const initialLang = getLanguageFromCookies(context) || 'az';
 
-  try {
-      const res = await fetch(`${strapiUrl}/api/posts?populate=cover&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=3`);
+try {
+    const res = await fetch(`${strapiUrl}/api/posts?populate=cover&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=3`);
     if (!res.ok) throw new Error(`Failed to fetch: ${res.statusText}`);
     const response = await res.json();
 
     const markdownConverter = new showdown.Converter();
-    const articles = (response.data || []).map(post => {
-      if (post.attributes && post.attributes.content) {
-        const rawHtml = markdownConverter.makeHtml(post.attributes.content);
-          post.attributes.sanitizedBody = DOMPurify.sanitize(rawHtml);
+    const articles = (response.data || []).map((post) => {
+      // Strapi v5 — поля ПЛОСКИЕ (нет post.attributes)
+      if (post.content) {
+        const rawHtml = markdownConverter.makeHtml(post.content);
+        post.sanitizedBody = DOMPurify.sanitize(rawHtml);
       }
       return post;
     });
