@@ -142,13 +142,13 @@ body.no-scroll { overflow: hidden; }
 /* LAYOUT & TYPOGRAPHY */
 .container {
   width: 90%; /* Задаем ширину в процентах от родительского элемента */
-  max-width: 1440px; /* Увеличиваем максимальную ширину для больших экранов */
+  max-width: 1680px; /* Увеличиваем максимальную ширину для больших экранов */
   margin-inline: auto; /* Это центрирует контейнер */
   padding-inline: var(--space-lg); /* Убираем боковые отступы, так как ширина уже в % */
   container-type: inline-size;
 }
 .header .container {
-  max-width: 1600px; /* <-- А ЭТО СДЕЛАЕТ КОНТЕНТ ХЕДЕРА ШИРЕ */
+  max-width: 1800px; /* <-- А ЭТО СДЕЛАЕТ КОНТЕНТ ХЕДЕРА ШИРЕ */
 }
 section { padding-block: var(--space-section); padding-top: var(--header-offset); scroll-margin-top: var(--header-height); }
 #home { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
@@ -437,7 +437,38 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
   .hero-title { font-size: 2.2rem; }
   .hero-cta-buttons { flex-direction: column; }
   .hero-panels { grid-template-columns: 1fr; }
+
+  /* --- ДОБАВЬТЕ ЭТИ ПРАВИЛА НИЖЕ --- */
+
+  .header .container {
+    padding-inline: var(--space-md); /* 1. Уменьшаем боковые отступы хедера */
+  }
+
+  .logo {
+    font-size: 1.6rem; /* 2. Уменьшаем размер логотипа */
+  }
+
+  .nav-right-cluster {
+    gap: var(--space-sm); /* 3. Уменьшаем расстояние между иконками */
+  }
 }
+
+/* --- FIX FOR IPHONE SE & VERY NARROW SCREENS --- */
+@media (max-width: 420px) {
+  .logo {
+    font-size: 1.4rem; /* Делаем лого еще компактнее */
+  }
+
+  .logo-svg {
+    width: 24px; /* Уменьшаем иконку в логотипе */
+    height: 24px;
+  }
+
+  .nav-right-cluster {
+    gap: var(--space-xs); /* Максимально сжимаем иконки справа */
+  }
+}
+
 
 /* CONTAINER QUERIES */
 @supports (container-type: inline-size) {
