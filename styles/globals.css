@@ -455,6 +455,10 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 
 /* --- FIX FOR IPHONE SE & VERY NARROW SCREENS --- */
 @media (max-width: 420px) {
+  /* ДОБАВЬТЕ ЭТО ПРАВИЛО */
+  .logo span {
+    display: none;
+  }
   .logo {
     font-size: 1.4rem; /* Делаем лого еще компактнее */
   }
