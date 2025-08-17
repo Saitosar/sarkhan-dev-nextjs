@@ -26,13 +26,17 @@ function SiteMap() {
   // everything in getServerSideProps.
 }
 
-export async function getServerSideProps({ res }) {
-  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
-  const request = await fetch(`${strapiUrl}/api/articles`);
-  const response = await request.json();
-  const posts = response.data || [];
+  // ...
+  export async function getServerSideProps({ res }) {
+    const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+    // Было: /api/articles
+    // Стало: /api/posts
+    const request = await fetch(`${strapiUrl}/api/posts`); 
+    const response = await request.json();
+    const posts = response.data || [];
 
-  const sitemap = generateSiteMap(posts);
+    const sitemap = generateSiteMap(posts);
+  //...
 
   res.setHeader('Content-Type', 'text/xml');
   res.write(sitemap);
