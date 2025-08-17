@@ -144,8 +144,11 @@ body.no-scroll { overflow: hidden; }
   width: 90%; /* Задаем ширину в процентах от родительского элемента */
   max-width: 1440px; /* Увеличиваем максимальную ширину для больших экранов */
   margin-inline: auto; /* Это центрирует контейнер */
-  padding-inline: 0; /* Убираем боковые отступы, так как ширина уже в % */
+  padding-inline: var(--space-lg); /* Убираем боковые отступы, так как ширина уже в % */
   container-type: inline-size;
+}
+.header .container {
+  max-width: 1600px; /* <-- А ЭТО СДЕЛАЕТ КОНТЕНТ ХЕДЕРА ШИРЕ */
 }
 section { padding-block: var(--space-section); padding-top: var(--header-offset); scroll-margin-top: var(--header-height); }
 #home { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
