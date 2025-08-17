@@ -26,7 +26,18 @@ const nextConfig = {
     return [{ source: '/(.*)', headers: securityHeaders }];
   },
   images: {
-    domains: ['placehold.co'],
+    // Указываем, что для домена placehold.co можно загружать SVG
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "image-src 'self' https://placehold.co;",
   },
 };
 

@@ -24,7 +24,7 @@ const AboutSection = ({ t }) => {
                 <h2>{t.aboutSectionTitle}</h2>
                 <div className="about-content">
                     <div className="about-card" onClick={openModal}>
-                        <Image src="/assets/profile-photo.jpg" alt={t.aboutName} width={400} height={500} loading="lazy" />
+                         <Image src="/assets/profile-photo.jpg" alt={t.aboutName} width={400} height={500} loading="lazy" />
                     </div>
                     <div className="about-text">
                         <h3>{t.aboutName}</h3>
