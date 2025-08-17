@@ -1,4 +1,5 @@
 import Header from '@/components/Header';
+import ResourcesSection from '@/components/Resources';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useState, useEffect, useRef, useMemo } from 'react';
@@ -318,22 +319,6 @@ const BlogSection = ({ t, articles }) => {
     </>
   );
 };
-
-
-const ResourcesSection = ({ t }) => (
-    <section id="resources">
-        <div className="container">
-            <h2>{t.resourcesSectionTitle}</h2>
-            <div className="resources-grid">
-                 <div className="resource-card">
-                    <h3>{t.res1Title}</h3>
-                    <p>{t.res1Desc}</p>
-                    <a href="#" className="btn">{t.viewButton}</a>
-                </div>
-            </div>
-        </div>
-    </section>
-);
 
 const AboutSection = ({ t }) => {
     const [isAboutModalOpen, setAboutModalOpen] = useState(false);
