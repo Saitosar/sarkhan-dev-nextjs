@@ -141,10 +141,10 @@ body.no-scroll { overflow: hidden; }
 
 /* LAYOUT & TYPOGRAPHY */
 .container {
-  width: 100%;
-  max-width: 1200px;
-  margin-inline: auto;
-  padding-inline: var(--space-lg);
+  width: 90%; /* Задаем ширину в процентах от родительского элемента */
+  max-width: 1440px; /* Увеличиваем максимальную ширину для больших экранов */
+  margin-inline: auto; /* Это центрирует контейнер */
+  padding-inline: 0; /* Убираем боковые отступы, так как ширина уже в % */
   container-type: inline-size;
 }
 section { padding-block: var(--space-section); padding-top: var(--header-offset); scroll-margin-top: var(--header-height); }
