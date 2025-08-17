@@ -507,3 +507,76 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
   a { text-decoration: underline; }
   a[href^="http"]:after { content: " (" attr(href) ")"; }
 }
+
+/* === Final Resource Card Styles v2 === */
+
+.resource-card {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 100%;
+  padding: var(--space-xl);
+  padding-top: calc(var(--space-xl) + 40px); /* Оставляем место для тега */
+  position: relative; /* Необходимо для позиционирования тега */
+  border: 1px solid var(--color-border);
+  transition: border-color var(--duration-normal) ease, box-shadow var(--duration-normal) ease, transform var(--duration-normal) ease; /* <-- ОБНОВИТЕ ЭТУ СТРОКУ */
+}
+
+.resource-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 15px var(--color-shadow);
+  transform: translateY(-5px); /* <-- ДОБАВЬТЕ ЭТУ СТРОКУ */
+}
+
+.resource-category-tag {
+  position: absolute;
+  top: var(--space-md);
+  left: var(--space-md);
+  background-color: var(--color-surface); /* Фон как у карточки */
+  color: var(--color-text-secondary); /* Затемненный цвет текста */
+  border: 1px solid var(--color-border); /* Затемненная рамка */
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.resource-icon-wrapper {
+  color: var(--color-primary);
+  width: 48px;
+  height: 48px;
+  margin-inline: auto;
+  margin-block-end: var(--space-lg);
+}
+
+.resource-card h3 {
+  color: var(--color-heading);
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.resource-divider {
+  border: none;
+  height: 1px;
+  background: var(--color-border);
+  width: 50px;
+  margin: var(--space-md) auto;
+}
+
+.resource-card p {
+  flex-grow: 1;
+  margin-block-end: var(--space-xl);
+  color: var(--color-text-secondary);
+}
+
+.resource-card-footer {
+  /* Этот блок теперь нужен только для центрирования кнопки */
+  text-align: center;
+}
+
+/* Делаем кнопку идентичной кнопке на карточке блога */
+.resource-card .btn {
+  display: inline-block; /* Убираем flex, так как кнопка одна */
+  border-style: solid; /* Убедимся, что рамка сплошная */
+}

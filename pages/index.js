@@ -539,7 +539,7 @@ export default function HomePage({ articles, initialLang, siteUrl }) {
             <main>
                 <Hero t={t} />
                 <BlogSection t={t} articles={articles} />
-                <ResourcesSection t={t} />
+                <ResourcesSection t={t} lang={lang} />
                 <AboutSection t={t} />
                 <ContactSection t={t} />
             </main>
