@@ -650,27 +650,42 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
   border-style: solid; /* Убедимся, что рамка сплошная */
 }
 
-/* === Modal Window Layout Enhancements === */
+/* === Улучшения макета модального окна === */
+
+/* Главный заголовок в модальном окне */
 .modal-main-title {
+  text-align: center; /* Центрируем главный заголовок */
   margin-bottom: var(--space-xxl);
 }
 
+/* Основная сетка (2 колонки) */
 .modal-layout {
   display: grid;
-  grid-template-columns: 2fr 1fr; /* Левая колонка в 2 раза шире правой */
+  grid-template-columns: 1fr 2fr; /* Левая колонка (карьера) уже, правая (био) шире */
   gap: var(--space-xxl);
-  text-align: left; /* Возвращаем тексту выравнивание по левому краю */
+  text-align: left;
   align-items: flex-start;
+  margin-bottom: var(--space-xxl); /* Отступ снизу до футера с навыками */
 }
 
+/* Заголовки в колонках */
 .modal-column h4 {
   font-size: 1.5rem;
   margin-bottom: var(--space-xl);
   color: var(--color-primary);
 }
 
-.about-long-bio {
-  margin-bottom: var(--space-xxl); /* Отступ после текста "Обо мне" */
+/* Новый футер для навыков */
+.modal-footer {
+  border-top: 1px solid var(--color-border); /* Линия-разделитель */
+  padding-top: var(--space-xl);
+  text-align: center; /* Центрируем заголовок "Навыки" */
+}
+
+.modal-footer h4 {
+  margin-bottom: var(--space-lg);
+  font-size: 1.2rem;
+  color: var(--color-text-secondary);
 }
 
 /* Обновленная карьерная карта */
@@ -682,7 +697,7 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 }
 
 .timeline-item-new:last-child {
-  border-left: 2px solid transparent; /* Убираем линию у последнего элемента */
+  border-left: 2px solid transparent;
   padding-bottom: 0;
 }
 

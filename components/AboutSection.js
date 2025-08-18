@@ -43,13 +43,12 @@ const AboutSection = ({ t }) => {
                 <div className="fullscreen-overlay active" onClick={closeModal}>
                     <div className="fullscreen-content" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
                         <button className="modal-close-btn" onClick={closeModal}>&times;</button>
+                        
                         <h3 className="modal-main-title">{t.aboutName}</h3>
                         
                         <div className="modal-layout">
+                            {/* Левая колонка: Карта Карьеры */}
                             <div className="modal-column modal-column-left">
-                                <h4>{t.aboutSectionTitle}</h4>
-                                <p className="about-long-bio">{t.aboutLongBio}</p>
-
                                 <h4>{t.careerMapTitle}</h4>
                                 <div className="timeline">
                                   {t.careerHistory.map((job, index) => (
@@ -62,14 +61,21 @@ const AboutSection = ({ t }) => {
                                   ))}
                                 </div>
                             </div>
+                            
+                            {/* Правая колонка: Биография */}
                             <div className="modal-column modal-column-right">
-                                <h4>{t.skillsTitle}</h4>
-                                <ul className="skills-list">
-                                    {t.skillsList.map(skill => <li key={skill}>{skill}</li>)}
-                                </ul>
+                                <h4>{t.aboutSectionTitle}</h4>
+                                <div className="about-long-bio">{t.aboutLongBio}</div>
                             </div>
                         </div>
 
+                        {/* Футер модального окна: Навыки */}
+                        <div className="modal-footer">
+                            <h4>{t.skillsTitle}</h4>
+                            <ul className="skills-list">
+                                {t.skillsList.map(skill => <li key={skill}>{skill}</li>)}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </FocusTrap>
