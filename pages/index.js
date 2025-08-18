@@ -1,6 +1,8 @@
 import Header from '@/components/Header';
-import ResourcesSection from '@/components/Resources';
 import Head from 'next/head';
+import BlogSection from '@/components/BlogSection';
+import ResourcesSection from '@/components/Resources';
+import AboutSection from '@/components/AboutSection';
 import Image from 'next/image';
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
@@ -357,9 +359,9 @@ const Footer = () => (
 export default function HomePage({ articles, initialLang, siteUrl }) {
     const [lang, setLang] = useState(initialLang);
     useEffect(() => {
-      const saved = getLanguageFromCookies();
-      if (saved && saved !== lang) setLang(saved);
-    }, []);
+  const saved = getLanguageFromCookies();
+  if (saved && saved !== lang) setLang(saved);
+}, [lang]); // <-- Добавили lang сюда - важно
     const [activeSection, setActiveSection] = useState('home');
     const t = translations[lang] || translations['az'];
 
