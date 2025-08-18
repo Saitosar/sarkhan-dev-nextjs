@@ -612,3 +612,71 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
   display: inline-block; /* Убираем flex, так как кнопка одна */
   border-style: solid; /* Убедимся, что рамка сплошная */
 }
+/* === Modal Window Layout Enhancements === */
+.modal-main-title {
+  margin-bottom: var(--space-xxl);
+}
+
+.modal-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Левая колонка в 2 раза шире правой */
+  gap: var(--space-xxl);
+  text-align: left; /* Возвращаем тексту выравнивание по левому краю */
+  align-items: flex-start;
+}
+
+.modal-column h4 {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-xl);
+  color: var(--color-primary);
+}
+
+.about-long-bio {
+  margin-bottom: var(--space-xxl); /* Отступ после текста "Обо мне" */
+}
+
+/* Обновленная карьерная карта */
+.timeline-item-new {
+  position: relative;
+  padding-left: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  border-left: 2px solid var(--color-border);
+}
+
+.timeline-item-new:last-child {
+  border-left: 2px solid transparent; /* Убираем линию у последнего элемента */
+  padding-bottom: 0;
+}
+
+.timeline-item-new::before {
+  content: '';
+  position: absolute;
+  left: -9px;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-primary);
+}
+
+.timeline-item-new h5 {
+  font-size: 1.1rem;
+  color: var(--color-heading);
+}
+.timeline-item-new .company {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+}
+.timeline-item-new .date {
+  font-size: 0.9rem;
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 992px) {
+  .modal-layout {
+    grid-template-columns: 1fr; /* Колонки встают друг под другом */
+  }
+}

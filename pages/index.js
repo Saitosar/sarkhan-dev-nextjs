@@ -41,10 +41,48 @@ Həmkarlarım məni tez-tez xaosu nizama salan bir sistem düşüncəli insan ki
 
 Texniki biliklərimi və insana yönümlü düşüncə tərzimi transformasiya təşəbbüslərinə töhfə verə biləcəyim beynəlxalq komandalarla uzaqdan və ya hibrid iş imkanlarına açığam.`,
         skillsTitle: "Əsas Bacarıqlar",
-        skillsList: ["Oracle Flexcube 12", "Zeus (in house)", "Processing (CMS/TWO)", "ELMA BPM", "Mobile bank app", "API design & integration", "SQL (Oracle)", "Jira/Confluence", "BRD/SRS", "Process Mapping (BPMN/UML)", "UAT planning", "Stakeholder management"],
+        skillsListShort: ["Oracle Flexcube 12", "System Integration (API)", "Process Mapping (BPMN/UML)", "Agile & PDLC"],
+        skillsList: [
+    "Oracle Flexcube 12", "Zeus (in house)", "Processing (CMS/TWO)", "ELMA BPM", "Mobile bank app", 
+    "API design & integration (REST/JSON/XML)", "SQL (Oracle)", "Swagger/Postman", "Jira/Confluence", "Canva/Draw.io", 
+    "BRD", "SRS", "Process Mapping (BPMN/UML)", "API Specifications", "User Story writing", "Acceptance Criteria", 
+    "UAT planning & execution", "Functional testing", "Integration testing", "Stakeholder management", 
+    "Coaching/mentoring", "Facilitation", "Training", "System thinking", "Problem solving"
+],
         careerMapTitle: "Karyera Xəritəsi",
-        career1Title: "Senior IT BA - Core Banking & Integrations", career1Date: "2025 - Hazırda", career1Desc: "Zeus, Processing, CRM, BPM və xarici sistemlər arasında API-əsaslı kommunikasiya üçün inteqrasiya sahibi.",
-        career2Title: "Process Owner - Agile PDLC Optimization", career2Date: "2023-2025", career2Desc: "80+ komanda üzrə PDLC və Agile idarəetməsinin yenidən dizaynına rəhbərlik.",
+        careerHistory: [
+    {
+        title: "Baş IT BA - Əsas Bankçılıq və İnteqrasiyalar",
+        company: "Kapital Bank",
+        date: "2024 - Hazırda",
+        desc: "Zeus, Processing, CRM, BPM və xarici sistemlər arasında API-əsaslı kommunikasiya üçün inteqrasiya sahibi."
+    },
+    {
+        title: "Proses Sahibi - Agile PDLC Optimizasiyası",
+        company: "Kapital Bank",
+        date: "2023-2024",
+        desc: "80+ komanda üzrə PDLC və Agile idarəetməsinin yenidən dizaynına rəhbərlik."
+    },
+    {
+        title: "Agile Kouç - Məhsul və Çatdırılma Transformasiyası",
+        company: "Kapital Bank",
+        date: "2021-2023",
+        desc: "10+ Agile komandasına mentorluq və rəhbərliyə məhsul və çatdırılma mükəmməlliyi üzrə təlimlər."
+    },
+    {
+        title: "Aparıcı IT BA - Əsas Bankçılıq Transformasiyası",
+        company: "Kapital Bank",
+        date: "2016-2019",
+        desc: "Flexcube və Processing-i əvəz edən Zeus ABS-nin sıfırdan dizaynı, sənədləşdirilməsi və test edilməsi."
+    },
+    {
+        title: "Baş IT Biznes Analitik - Əsas Bankçılıq Sistemləri",
+        company: "Bank of Baku",
+        date: "2014-2016",
+        desc: "Flexcube və kart prosessinq platformaları üçün yeni funksionallıqların çatdırılması."
+    }
+],
+        
         contactSectionTitle: "Əlaqə", formNamePlaceholder: "Adınız", formEmailPlaceholder: "E-mail ünvanınız", formMessagePlaceholder: "Mesajınız...", formSubmitButton: "Göndər",
         formSubmitting: "Göndərilir...",
         themeToggle: "Temanı dəyişdir",
@@ -78,11 +116,48 @@ I’ve worked across discovery and delivery phases, turning complexity into clar
 My colleagues often describe me as a systems thinker who brings order to chaos. Whether it's untangling legacy systems, designing universal logic, or drafting precise documentation — I’m driven by curiosity, clarity, and the pursuit of meaningful solutions.
 
 Open to remote or hybrid opportunities with international teams where I can contribute to transformation initiatives with both technical insight and human-centered thinking.`,
-        skillsTitle: "Core Skills",
-        skillsList: ["Oracle Flexcube 12", "Zeus (in house)", "Processing (CMS/TWO)", "ELMA BPM", "Mobile bank app", "API design & integration", "SQL (Oracle)", "Jira/Confluence", "BRD/SRS", "Process Mapping (BPMN/UML)", "UAT planning", "Stakeholder management"],
-        careerMapTitle: "Career Map",
-        career1Title: "Senior IT BA - Core Banking & Integrations", career1Date: "2025 - Present", career1Desc: "Owner of API-based communication between Zeus, Processing, CRM, BPM, and external systems.",
-        career2Title: "Process Owner - Agile PDLC Optimization", career2Date: "2023-2025", career2Desc: "Led the redesign of PDLC and Agile management across 80+ teams.",
+skillsTitle: "Core Skills",
+skillsListShort: ["Oracle Flexcube 12", "System Integration (API)", "Process Mapping (BPMN/UML)", "Agile & PDLC"],
+skillsList: [
+    "Oracle Flexcube 12", "Zeus (in house)", "Processing (CMS/TWO)", "ELMA BPM", "Mobile bank app", 
+    "API design & integration (REST/JSON/XML)", "SQL (Oracle)", "Swagger/Postman", "Jira/Confluence", "Canva/Draw.io", 
+    "BRD", "SRS", "Process Mapping (BPMN/UML)", "API Specifications", "User Story writing", "Acceptance Criteria", 
+    "UAT planning & execution", "Functional testing", "Integration testing", "Stakeholder management", 
+    "Coaching/mentoring", "Facilitation", "Training", "System thinking", "Problem solving"
+],
+careerMapTitle: "Career Map",
+careerHistory: [
+    {
+      title: "Senior IT BA - Core Banking & Integrations",
+      company: "Kapital Bank",
+      date: "2024 - Present",
+      desc: "Act as integration owner for API-based communication between Zeus, Processing, CRM, BPM and external systems."
+    },
+    {
+      title: "Process Owner - Agile PDLC Optimization",
+      company: "Kapital Bank",
+      date: "2023-2024",
+      desc: "Led re-design of PDLC and Agile governance across 80+ teams."
+    },
+    {
+      title: "Agile Coach - Product & Delivery Transformation",
+      company: "Kapital Bank",
+      date: "2021-2023",
+      desc: "Mentored 10+ Agile teams and coached leadership on product and delivery excellence."
+    },
+    {
+      title: "Lead IT BA - Core Banking Transformation",
+      company: "Kapital Bank",
+      date: "2016-2019",
+      desc: "Designed, documented, and tested Zeus ABS from scratch, replacing Flexcube & Processing modules."
+    },
+    {
+      title: "Senior IT Business Analyst - Core Banking Systems",
+      company: "Bank of Baku",
+      date: "2014-2016",
+      desc: "Delivered new features for Flexcube and card processing platforms."
+    }
+],
         contactSectionTitle: "Contact", formNamePlaceholder: "Your name", formEmailPlaceholder: "Your email", formMessagePlaceholder: "Your message...", formSubmitButton: "Send",
         formSubmitting: "Sending...",
         themeToggle: "Toggle theme",
@@ -117,10 +192,47 @@ Open to remote or hybrid opportunities with international teams where I can cont
 
 Открыт для удаленных или гибридных возможностей в международных командах, где я могу внести свой вклад в инициативы по трансформации, сочетая технические знания с человеко-ориентированным мышлением.`,
         skillsTitle: "Ключевые навыки",
-        skillsList: ["Oracle Flexcube 12", "Zeus (in house)", "Processing (CMS/TWO)", "ELMA BPM", "Mobile bank app", "Проектирование и интеграция API", "SQL (Oracle)", "Jira/Confluence", "BRD/SRS", "Моделирование процессов (BPMN/UML)", "Планирование UAT", "Управление стейкхолдерами"],
-        careerMapTitle: "Карта карьеры",
-        career1Title: "Senior IT BA - Core Banking & Integrations", career1Date: "2025 - Настоящее время", career1Desc: "Владелец API-взаимодействия между Zeus, Processing, CRM, BPM и внешними системами.",
-        career2Title: "Process Owner - Agile PDLC Optimization", career2Date: "2023-2025", career2Desc: "Руководил редизайном PDLC и Agile-управления в 80+ командах.",
+skillsListShort: ["Oracle Flexcube 12", "Системная интеграция (API)", "Моделирование процессов (BPMN/UML)", "Agile и PDLC"],
+skillsList: [
+    "Oracle Flexcube 12", "Zeus (in house)", "Processing (CMS/TWO)", "ELMA BPM", "Mobile bank app", 
+    "Проектирование и интеграция API (REST/JSON/XML)", "SQL (Oracle)", "Swagger/Postman", "Jira/Confluence", "Canva/Draw.io", 
+    "BRD", "SRS", "Моделирование процессов (BPMN/UML)", "Спецификации API", "Написание User Story", "Критерии приемки", 
+    "Планирование и проведение UAT", "Функциональное тестирование", "Интеграционное тестирование", "Управление стейкхолдерами", 
+    "Коучинг/менторство", "Фасилитация", "Проведение тренингов", "Системное мышление", "Решение проблем"
+],
+careerMapTitle: "Карта карьеры",
+careerHistory: [
+    {
+      title: "Ведущий IT БА - Core Banking и Интеграции",
+      company: "Kapital Bank",
+      date: "2024 - настоящее время",
+      desc: "Владелец интеграции для API-взаимодействия между Zeus, процессингом, CRM, BPM и внешними системами."
+    },
+    {
+      title: "Владелец Процесса - Оптимизация Agile PDLC",
+      company: "Kapital Bank",
+      date: "2023-2024",
+      desc: "Руководил редизайном PDLC и Agile-управления в 80+ командах."
+    },
+    {
+      title: "Agile-коуч - Трансформация Продукта и Поставок",
+      company: "Kapital Bank",
+      date: "2021-2023",
+      desc: "Менторил более 10 Agile-команд и обучал руководство продуктовому и исполнительскому мастерству."
+    },
+    {
+      title: "Ведущий IT БА - Трансформация Core Banking",
+      company: "Kapital Bank",
+      date: "2016-2019",
+      desc: "Проектировал, документировал и тестировал АБС Zeus с нуля, заменяя модули Flexcube и Процессинга."
+    },
+    {
+      title: "Старший IT-бизнес-аналитик - Core Banking Системы",
+      company: "Bank of Baku",
+      date: "2014-2016",
+      desc: "Отвечал за поставку нового функционала для платформ Flexcube и карточного процессинга."
+    }
+],
         contactSectionTitle: "Связь", formNamePlaceholder: "Ваше имя", formEmailPlaceholder: "Ваш email", formMessagePlaceholder: "Ваше сообщение...", formSubmitButton: "Отправить",
         formSubmitting: "Отправка...",
         themeToggle: "Сменить тему",
