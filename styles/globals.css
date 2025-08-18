@@ -612,6 +612,7 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
   display: inline-block; /* Убираем flex, так как кнопка одна */
   border-style: solid; /* Убедимся, что рамка сплошная */
 }
+
 /* === Modal Window Layout Enhancements === */
 .modal-main-title {
   margin-bottom: var(--space-xxl);

@@ -5,13 +5,20 @@ import FocusTrap from 'focus-trap-react';
 
 const AboutSection = ({ t }) => {
     const [isAboutModalOpen, setAboutModalOpen] = useState(false);
-    // ... (код openModal и closeModal остается без изменений)
-    const openModal = (e) => { setAboutModalOpen(true); };
-    const closeModal = () => { setAboutModalOpen(false); };
+    const triggerRef = useRef(null);
+
+    const openModal = (e) => {
+        triggerRef.current = e.currentTarget;
+        setAboutModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setAboutModalOpen(false);
+        triggerRef.current?.focus();
+    };
 
     return (
      <>
-        {/* ... (код секции <section id="about"> остается без изменений) ... */}
         <section id="about">
             <div className="container">
                 <h2>{t.aboutSectionTitle}</h2>
