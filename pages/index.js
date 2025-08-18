@@ -25,7 +25,7 @@ const translations = {
     az: {
         docTitle: "Sarkhan.dev | Analitik Düşüncə. Praktiki Alətlər.",
         docDesc: "IT Biznes Analitiklər üçün faydalı məqalələr, resurslar və alətlər toplusu.",
-        navHome: "Əsas", navBlog: "Blog", navResources: "Resurslar", navAbout: "Haqqımda", navContact: "Əlaқə",
+        navHome: "Əsas", navBlog: "Blog", navResources: "Resurslar", navAbout: "Haqqımda", navContact: "Əlaqə",
         heroTitlePart1: "Analitik düşüncə.", heroTitlePart2: "Praktiki alətlər.", heroTitlePart3: "Rəqəmsal gələcək.",
         heroSubtitle: "IT biznes analitiklər üçün faydalı",
         ctaPrimary: "Resurslara bax", ctaSecondary: "Bloga keç",
