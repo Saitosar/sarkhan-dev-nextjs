@@ -16,6 +16,8 @@ import { getLanguageFromCookies, setLanguageCookie } from '@/utils/cookies';
 
 
 // --- ДАННЫЕ И КОНФИГУРАЦИЯ ---
+// pages/index.js
+
 const translations = {
     az: {
         docTitle: "Sarkhan.dev | Analitik Düşüncə. Praktiki Alətlər.",
@@ -26,11 +28,18 @@ const translations = {
         ctaPrimary: "Resurslara bax", ctaSecondary: "Bloga keç",
         panelBlog: "Blog", panelResources: "Resurslar", panelAbout: "Haqqımda", panelContact: "Əlaqə",
         blogSectionTitle: "Blog", readMore: "Daha çox oxu", closeButton: "Bağla",
-        resourcesSectionTitle: "Faydalı Resurslar", viewButton: "Bax",
-        res1Title: "BABOK Guide", res1Desc: "Biznes analiz biliklərinin əsas toplusu. Hər BA üçün masaüstü kitab.",
+        resourcesSectionTitle: "Faydalı Resurslar", viewButton: "Bax", downloadButton: "Yüklə",
         aboutSectionTitle: "Haqqımda", aboutName: "Sərxan Hacıyev",
         aboutShortBio: "10 ildən artıq bank sistemləri sahəsində təcrübəyə malik IT Biznes Analitik.",
-        aboutLongBio: "Mən, 10 ildən artıq korporativ bank sistemləri sahəsində təcrübəsi olan çoxşaxəli IT Biznes Analitiki Sərxan Hacıyev. Karyeram boyunca Flexcube və kart prosessinq platformalarında kritik funksionallıqların çatdırılmasında, eləcə də Azərbaycanın ən böyük bankı üçün sıfırdan daxili əsas bank sistemi olan Zeus-un layihələndirilməsində aparıcı rol oynamışam.",
+        aboutLongBio: `Mən Oracle Flexcube, məlumatların miqrasiyası və sistem inteqrasiyaları ilə praktiki təcrübə də daxil olmaqla, rəqəmsal bankçılıq və korporativ sistemlər sahəsində on ildən artıq təcrübəyə malik Baş IT Biznes Analitikəm. Karyeram 2013-cü ildə bankın pərakəndə satış xəttində başlamışdır — kreditlərin verilməsi, müştəri ehtiyaclarını anlamaq və pozulmuş proseslərin real təsirini görməklə.
+
+İllər keçdikcə mən front-ofis əməliyyatlarından bank texnologiyasının özəyinə keçdim. Karyeramın ən yaddaqalan məqamlarından biri, memarlıq və məhsul məntiqindən tutmuş məlumatların miqrasiyası və inteqrasiyasına qədər fərdi Əsas Bank Sistemini sıfırdan qurmaqda iştirakım oldu. Bu praktiki təcrübə, əsas bankçılığın transformasiyası, normativ uyğunluq və real vaxt rejimində əməliyyatlar kimi yüksək riskli mühitlərdə texniki həlləri biznes məqsədləri ilə uyğunlaşdırmaq bacarığımı gücləndirdi.
+
+Mən həm kəşfiyyat, həm də icra mərhələlərində çalışaraq mürəkkəbliyi aydınlığa çevirmiş, həm yerli, həm də paylanmış komandalarla əməkdaşlıq etmişəm. Həmçinin Məhsul Sahibi, Agile Kouçu və Proses Sahibi kimi vəzifələrdə çalışmışam — proqram təminatının həyat dövrünü (PDLC) təkmilləşdirmiş, kross-funksional komandalara təlimlər keçmiş, Jira və Confluence ekosistemlərini idarə etmiş və müəssisə miqyasında Agile tətbiqinə (300+ nəfər) rəhbərlik etmişəm.
+
+Həmkarlarım məni tez-tez xaosu nizama salan bir sistem düşüncəli insan kimi təsvir edirlər. İstər köhnə sistemləri anlamaq, istər universal məntiq dizayn etmək, istərsə də dəqiq sənədlər hazırlamaq olsun — məni maraq, aydınlıq və mənalı həllər axtarışı idarə edir.
+
+Texniki biliklərimi və insana yönümlü düşüncə tərzimi transformasiya təşəbbüslərinə töhfə verə biləcəyim beynəlxalq komandalarla uzaqdan və ya hibrid iş imkanlarına açığam.`,
         skillsTitle: "Əsas Bacarıqlar",
         skillsList: ["Oracle Flexcube 12", "Zeus (in house)", "Processing (CMS/TWO)", "ELMA BPM", "Mobile bank app", "API design & integration", "SQL (Oracle)", "Jira/Confluence", "BRD/SRS", "Process Mapping (BPMN/UML)", "UAT planning", "Stakeholder management"],
         careerMapTitle: "Karyera Xəritəsi",
@@ -57,11 +66,18 @@ const translations = {
         ctaPrimary: "View resources", ctaSecondary: "Go to blog",
         panelBlog: "Blog", panelResources: "Resources", panelAbout: "About", panelContact: "Contact",
         blogSectionTitle: "Blog", readMore: "Read more", closeButton: "Close",
-        resourcesSectionTitle: "Useful Resources", viewButton: "View",
-        res1Title: "BABOK Guide", res1Desc: "The core body of knowledge for business analysis. A desktop book for every BA.",
+        resourcesSectionTitle: "Useful Resources", viewButton: "View", downloadButton: "Download",
         aboutSectionTitle: "About", aboutName: "Sarkhan Hajiyev",
         aboutShortBio: "IT Business Analyst with over 10 years of experience in banking systems.",
-        aboutLongBio: "I am Sarkhan Hajiyev, a versatile IT Business Analyst with over 10 years of experience in corporate banking systems. Throughout my career, I have played a key role in delivering critical functionalities on Flexcube and card processing platforms, as well as leading the design of the Zeus in-house core banking system from scratch for Azerbaijan's largest bank.",
+        aboutLongBio: `I’m a Senior IT Business Analyst with over a decade of experience in digital banking and enterprise systems, including hands-on expertise with Oracle Flexcube, data migration, and system integrations. My career began in 2013, working on the retail frontlines of banking — issuing loans, understanding client needs, and seeing the real impact of broken processes.
+
+Over the years, I moved from front-office operations to the core of banking technology. One of the highlights of my journey was co-building a custom Core Banking System from scratch — from architecture and product logic to data migration and integrations. This hands-on experience sharpened my ability to align technical solutions with business goals in high-stakes environments like core banking transformation, regulatory compliance, and real-time operations.
+
+I’ve worked across discovery and delivery phases, turning complexity into clarity, and collaborating with both local and distributed teams. I’ve also served as Product Owner, Agile Coach, and Process Owner — improving development lifecycles (PDLC), coaching cross-functional teams, managing Jira & Confluence ecosystems, and leading enterprise-wide Agile adoption (300+ people).
+
+My colleagues often describe me as a systems thinker who brings order to chaos. Whether it's untangling legacy systems, designing universal logic, or drafting precise documentation — I’m driven by curiosity, clarity, and the pursuit of meaningful solutions.
+
+Open to remote or hybrid opportunities with international teams where I can contribute to transformation initiatives with both technical insight and human-centered thinking.`,
         skillsTitle: "Core Skills",
         skillsList: ["Oracle Flexcube 12", "Zeus (in house)", "Processing (CMS/TWO)", "ELMA BPM", "Mobile bank app", "API design & integration", "SQL (Oracle)", "Jira/Confluence", "BRD/SRS", "Process Mapping (BPMN/UML)", "UAT planning", "Stakeholder management"],
         careerMapTitle: "Career Map",
@@ -88,11 +104,18 @@ const translations = {
         ctaPrimary: "К ресурсам", ctaSecondary: "В блог",
         panelBlog: "Блог", panelResources: "Ресурсы", panelAbout: "Обо мне", panelContact: "Связь",
         blogSectionTitle: "Блог", readMore: "Читать далее", closeButton: "Закрыть",
-        resourcesSectionTitle: "Полезные ресурсы", viewButton: "Открыть",
-        res1Title: "BABOK Guide", res1Desc: "Основное собрание знаний по бизнес-анализу. Настольная книга каждого BA.",
+        resourcesSectionTitle: "Полезные ресурсы", viewButton: "Открыть", downloadButton: "Скачать",
         aboutSectionTitle: "Обо мне", aboutName: "Сархан Гаджиев",
         aboutShortBio: "IT бизнес-аналитик с более чем 10-летним опытом работы в банковских системах.",
-        aboutLongBio: "Я, Серхан Гаджиев, универсальный IT бизнес-аналитик с более чем 10-летним опытом работы в корпоративных банковских системах. За время карьеры принимал ключевую роль в реализации критически важных функций на платформах Flexcube и карт-процессинге, а также возглавлял проектирование внутренней банковской системы Zeus с нуля для крупнейшего банка Азербайджана.",
+        aboutLongBio: `Я — старший IT-бизнес-аналитик с более чем десятилетним опытом в сфере цифрового банкинга и корпоративных систем, включая практический опыт работы с Oracle Flexcube, миграцией данных и системными интеграциями. Моя карьера началась в 2013 году на передовой розничного банкинга — я выдавал кредиты, разбирался в потребностях клиентов и видел реальные последствия неэффективных процессов.
+
+Со временем я перешел от фронт-офисных операций к ядру банковских технологий. Одним из ключевых моментов моего пути стало участие в создании кастомной Core Banking System с нуля — от архитектуры и продуктовой логики до миграции данных и интеграций. Этот практический опыт отточил мою способность приводить технические решения в соответствие с бизнес-целями в таких сложных областях, как трансформация основного банкинга, соблюдение нормативных требований и операции в реальном времени.
+
+Я работал на всех этапах — от исследования до внедрения, превращая сложность в ясность и сотрудничая как с местными, так и с распределенными командами. Я также выполнял роли Владельца Продукта, Agile-коуча и Владельца Процесса — улучшал жизненный цикл разработки (PDLC), обучал кросс-функциональные команды, управлял экосистемами Jira и Confluence и руководил внедрением Agile в масштабах предприятия (более 300 человек).
+
+Коллеги часто описывают меня как системно мыслящего человека, который наводит порядок в хаосе. Будь то распутывание унаследованных систем, проектирование универсальной логики или составление точной документации — мной движет любопытство, стремление к ясности и поиск значимых решений.
+
+Открыт для удаленных или гибридных возможностей в международных командах, где я могу внести свой вклад в инициативы по трансформации, сочетая технические знания с человеко-ориентированным мышлением.`,
         skillsTitle: "Ключевые навыки",
         skillsList: ["Oracle Flexcube 12", "Zeus (in house)", "Processing (CMS/TWO)", "ELMA BPM", "Mobile bank app", "Проектирование и интеграция API", "SQL (Oracle)", "Jira/Confluence", "BRD/SRS", "Моделирование процессов (BPMN/UML)", "Планирование UAT", "Управление стейкхолдерами"],
         careerMapTitle: "Карта карьеры",
@@ -552,7 +575,7 @@ export default function HomePage({ articles, initialLang, siteUrl }) {
 // --- ЗАГРУЗКА ДАННЫХ С СЕРВЕРА ---
     export async function getServerSideProps(context) {
       const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL; // ВАЖНО: именно эта переменная
-      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || '';
 
   // читаем язык из cookies через nookies-обёртку
       const initialLang = getLanguageFromCookies(context) || 'az';
