@@ -1,19 +1,18 @@
+
+// pages/index.js - правильные импорты
+
 import Header from '@/components/Header';
 import Head from 'next/head';
 import BlogSection from '@/components/BlogSection';
 import ResourcesSection from '@/components/Resources';
 import AboutSection from '@/components/AboutSection';
+import ContactSection from '@/components/ContactSection';
 import Image from 'next/image';
-import { useState, useEffect, useRef, useMemo } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
+import { useState, useEffect, useRef } from 'react';
 import showdown from 'showdown';
 import DOMPurify from 'isomorphic-dompurify';
-import { useTheme } from 'next-themes';
 import FocusTrap from 'focus-trap-react';
 import { getLanguageFromCookies, setLanguageCookie } from '@/utils/cookies';
-
 
 
 
@@ -229,9 +228,11 @@ const Footer = () => (
 export default function HomePage({ articles, initialLang, siteUrl }) {
     const [lang, setLang] = useState(initialLang);
     useEffect(() => {
+
   const saved = getLanguageFromCookies();
   if (saved && saved !== lang) setLang(saved);
 }, [lang]); // <-- Добавили lang сюда - важно
+
     const [activeSection, setActiveSection] = useState('home');
     const t = translations[lang] || translations['az'];
 
