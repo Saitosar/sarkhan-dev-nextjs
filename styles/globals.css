@@ -344,10 +344,47 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 .blog-card h3 { font-size: 1.4rem; margin-block-end: var(--space-md); color: var(--color-primary); }
 .blog-card p { flex-grow: 1; margin-block-end: var(--space-lg); }
 .resource-card { text-align: center; padding: var(--space-xl); }
-.about-content { display: flex; align-items: center; gap: var(--space-xxl); max-width: 1000px; margin-inline: auto; }
-.about-card {
-  flex-basis: 400px; flex-shrink: 0; aspect-ratio: 4 / 5; border: 2px solid var(--color-primary);
-  box-shadow: 0 0 15px var(--color-shadow); position: relative; cursor: pointer; overflow: hidden; border-radius: var(--radius-md);
+/* Главный контейнер для секции "Обо мне" */
+.about-container {
+  display: flex;
+  align-items: stretch; /* Заставляем колонки быть одной высоты */
+  gap: var(--space-xxl);
+  max-width: 1000px;
+  margin-inline: auto;
+}
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    align-items: center; /* Центрируем фото на мобильных */
+  }
+}
+/* Контейнер для фото */
+.about-image-wrapper {
+  flex-basis: 400px;
+  flex-shrink: 0;
+  aspect-ratio: 4 / 5;
+  border: 2px solid var(--color-primary);
+  box-shadow: 0 0 15px var(--color-shadow);
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+.about-image-wrapper img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Контейнер для текста */
+.about-text {
+  flex-grow: 1; /* Позволяем занимать оставшееся место */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Вертикально центрируем всё внутри */
+  padding: var(--space-lg) 0; /* Небольшой отступ на случай, если текста много */
 }
 .about-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .about-text { flex-grow: 1; }
@@ -410,14 +447,6 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 [data-theme="light"] .skills-list li {
   background-color: color-mix(in srgb, var(--color-primary) 15%, transparent);
 }
-.timeline { position: relative; max-width: 800px; margin: 0 auto; }
-.timeline::after { content: ''; position: absolute; width: 3px; background-color: var(--color-primary); top: 0; bottom: 0; left: 50%; margin-left: -1.5px; }
-.timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
-.timeline-item.left { left: 0; }
-.timeline-item.right { left: 50%; }
-.timeline-item::after { content: ''; position: absolute; width: 20px; height: 20px; right: -10px; background-color: var(--color-bg); border: 3px solid var(--color-primary); top: 15px; border-radius: 50%; z-index: 1; }
-.timeline-item.right::after { left: -10px; }
-.timeline-content { padding: 20px 30px; background-color: var(--color-bg); position: relative; border-radius: var(--radius-md); }
 
 /* FORMS */
 .contact-wrapper { max-width: 800px; margin-inline: auto; background: var(--color-surface); padding: var(--space-xxl); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
@@ -611,4 +640,107 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 .resource-card .btn {
   display: inline-block; /* Убираем flex, так как кнопка одна */
   border-style: solid; /* Убедимся, что рамка сплошная */
+}
+
+/* === Улучшения макета модального окна === */
+
+/* Главный заголовок в модальном окне */
+.modal-main-title {
+  text-align: center; /* Центрируем главный заголовок */
+  margin-bottom: var(--space-xxl);
+}
+
+/* Основная сетка (2 колонки) */
+.modal-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Левая колонка (карьера) уже, правая (био) шире */
+  gap: var(--space-xxl);
+  text-align: left;
+  align-items: flex-start;
+  margin-bottom: var(--space-xxl); /* Отступ снизу до футера с навыками */
+}
+
+/* Заголовки в колонках */
+.modal-column h4 {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-xl);
+  color: var(--color-primary);
+}
+
+/* Новый футер для навыков */
+.modal-footer {
+  border-top: 1px solid var(--color-border); /* Линия-разделитель */
+  padding-top: var(--space-xl);
+  text-align: center; /* Центрируем заголовок "Навыки" */
+}
+
+.modal-footer h4 {
+  margin-bottom: var(--space-lg);
+  font-size: 1.2rem;
+  color: var(--color-text-secondary);
+}
+
+/* Обновленная карьерная карта */
+.timeline-item-new {
+  position: relative;
+  padding-left: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  border-left: 2px solid var(--color-border);
+}
+
+.timeline-item-new:last-child {
+  border-left: 2px solid transparent;
+  padding-bottom: 0;
+}
+
+.timeline-item-new::before {
+  content: '';
+  position: absolute;
+  left: -9px;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-primary);
+}
+
+.timeline-item-new h5 {
+  font-size: 1.1rem;
+  color: var(--color-heading);
+}
+.timeline-item-new .company {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+}
+.timeline-item-new .date {
+  font-size: 0.9rem;
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 992px) {
+  .modal-layout {
+    grid-template-columns: 1fr; /* Колонки встают друг под другом */
+  }
+}
+
+/* Контейнер для тегов-навыков в секции "Обо мне" */
+.about-skills-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm); /* Расстояние между тегами */
+  margin-block: var(--space-lg) 0; /* Отступы сверху и снизу */
+}
+
+/* Стили для каждого тега */
+.skill-tag {
+  background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 500;
 }
