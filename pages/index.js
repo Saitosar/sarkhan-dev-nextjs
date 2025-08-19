@@ -165,14 +165,6 @@ const Hero = ({ t }) => (
     </section>
 );
 
-
-const ContactSection = ({ t }) => {
-    const formSchema = z.object({
-        name: z.string().min(1, { message: t.validation.nameRequired }),
-        email: z.string().email({ message: t.validation.emailInvalid }).min(1, { message: t.validation.emailRequired }),
-        message: z.string().min(10, { message: t.validation.messageMin }),
-    });
-
     const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm({
         resolver: zodResolver(formSchema),
     });
