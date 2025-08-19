@@ -16,7 +16,6 @@ import { getLanguageFromCookies, setLanguageCookie } from '@/utils/cookies';
 
 
 
-
 // --- ДАННЫЕ И КОНФИГУРАЦИЯ ---
 const translations = {
     az: {
