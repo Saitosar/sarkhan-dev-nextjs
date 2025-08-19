@@ -447,14 +447,6 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 [data-theme="light"] .skills-list li {
   background-color: color-mix(in srgb, var(--color-primary) 15%, transparent);
 }
-.timeline { position: relative; max-width: 800px; margin: 0 auto; }
-.timeline::after { content: ''; position: absolute; width: 3px; background-color: var(--color-primary); top: 0; bottom: 0; left: 50%; margin-left: -1.5px; }
-.timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
-.timeline-item.left { left: 0; }
-.timeline-item.right { left: 50%; }
-.timeline-item::after { content: ''; position: absolute; width: 20px; height: 20px; right: -10px; background-color: var(--color-bg); border: 3px solid var(--color-primary); top: 15px; border-radius: 50%; z-index: 1; }
-.timeline-item.right::after { left: -10px; }
-.timeline-content { padding: 20px 30px; background-color: var(--color-bg); position: relative; border-radius: var(--radius-md); }
 
 /* FORMS */
 .contact-wrapper { max-width: 800px; margin-inline: auto; background: var(--color-surface); padding: var(--space-xxl); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
@@ -523,7 +515,7 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 }
 
 /* --- FIX FOR IPHONE SE & VERY NARROW SCREENS --- */
-@media (max-width: 420px) {
+@media (max-width: 400px) {
   /* ДОБАВЬТЕ ЭТО ПРАВИЛО */
   .logo span {
     display: none;
