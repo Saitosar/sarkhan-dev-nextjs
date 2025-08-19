@@ -166,7 +166,7 @@ export default function HomePage({ articles, initialLang, siteUrl }) {
     useEffect(() => {
       const saved = getLanguageFromCookies();
       if (saved && saved !== lang) setLang(saved);
-    }, []);
+    }, [lang]);
     const [activeSection, setActiveSection] = useState('home');
     const t = translations[lang] || translations['az'];
 

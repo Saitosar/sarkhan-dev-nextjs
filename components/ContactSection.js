@@ -51,7 +51,7 @@ const ContactSection = ({ t }) => {
                         
                         {/* Правая колонка: Информация */}
                         <div className="contact-info">
-                            <h3>Let's connect!</h3>
+                            <h3>Let&apos;s connect!</h3>
                             <p>
                                 Open to remote or hybrid opportunities with international teams. Feel free to reach out via email or connect with me on social media.
                             </p>
