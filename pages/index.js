@@ -13,6 +13,7 @@ import showdown from 'showdown';
 import DOMPurify from 'isomorphic-dompurify';
 import FocusTrap from 'focus-trap-react';
 import { getLanguageFromCookies, setLanguageCookie } from '@/utils/cookies';
+import { useRouter } from 'next/router';
 
 
 
@@ -183,6 +184,7 @@ const Footer = () => (
 // --- ГЛАВНАЯ СТРАНИЦА ---
 
 export default function HomePage({ articles, initialLang, siteUrl }) {
+    const router = useRouter(); 
     const [lang, setLang] = useState(initialLang);
     useEffect(() => {
 
@@ -194,9 +196,12 @@ export default function HomePage({ articles, initialLang, siteUrl }) {
     const t = translations[lang] || translations['az'];
 
     const handleLanguageChange = (newLang) => {
-        setLang(newLang);
-        setLanguageCookie(newLang);
-    };
+    setLanguageCookie(newLang);
+    router.replace(router.asPath, router.asPath, {
+      // Это не будет менять URL, но заставит Next.js
+      // заново выполнить getServerSideProps на сервере
+    });
+};
 
     useEffect(() => {
         document.documentElement.lang = lang;
@@ -289,7 +294,7 @@ export default function HomePage({ articles, initialLang, siteUrl }) {
       const initialLang = getLanguageFromCookies(context) || 'az';
 
 try {
-    const res = await fetch(`${strapiUrl}/api/posts?populate=cover&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=3`);
+    const res = await fetch(`${strapiUrl}/api/posts?locale=${initialLang}&populate=cover&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=3`);
     if (!res.ok) throw new Error(`Failed to fetch: ${res.statusText}`);
     const response = await res.json();
 
