@@ -13,6 +13,7 @@ import showdown from 'showdown';
 import DOMPurify from 'isomorphic-dompurify';
 import FocusTrap from 'focus-trap-react';
 import { getLanguageFromCookies, setLanguageCookie } from '@/utils/cookies';
+import { useRouter } from 'next/router';
 
 
 
@@ -183,6 +184,7 @@ const Footer = () => (
 // --- ГЛАВНАЯ СТРАНИЦА ---
 
 export default function HomePage({ articles, initialLang, siteUrl }) {
+    const router = useRouter(); 
     const [lang, setLang] = useState(initialLang);
     useEffect(() => {
 
@@ -194,10 +196,12 @@ export default function HomePage({ articles, initialLang, siteUrl }) {
     const t = translations[lang] || translations['az'];
 
     const handleLanguageChange = (newLang) => {
-        setLang(newLang);
-        setLanguageCookie(newLang);
-        window.location.reload();
-    };
+    setLanguageCookie(newLang);
+    router.replace(router.asPath, router.asPath, {
+      // Это не будет менять URL, но заставит Next.js
+      // заново выполнить getServerSideProps на сервере
+    });
+};
 
     useEffect(() => {
         document.documentElement.lang = lang;
