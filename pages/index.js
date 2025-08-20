@@ -196,6 +196,7 @@ export default function HomePage({ articles, initialLang, siteUrl }) {
     const handleLanguageChange = (newLang) => {
         setLang(newLang);
         setLanguageCookie(newLang);
+        window.location.reload();
     };
 
     useEffect(() => {
@@ -289,7 +290,7 @@ export default function HomePage({ articles, initialLang, siteUrl }) {
       const initialLang = getLanguageFromCookies(context) || 'az';
 
 try {
-    const res = await fetch(`${strapiUrl}/api/posts?populate=cover&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=3`);
+    const res = await fetch(`${strapiUrl}/api/posts?locale=${initialLang}&populate=cover&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=3`);
     if (!res.ok) throw new Error(`Failed to fetch: ${res.statusText}`);
     const response = await res.json();
 
