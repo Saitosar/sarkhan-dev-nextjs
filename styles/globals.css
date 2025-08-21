@@ -141,7 +141,7 @@ body.no-scroll { overflow: hidden; }
 
 /* LAYOUT & TYPOGRAPHY */
 .container {
-  width: 90%; /* Задаем ширину в процентах от родительского элемента */
+  width: 98%; /* Задаем ширину в процентах от родительского элемента */
   max-width: 1680px; /* Увеличиваем максимальную ширину для больших экранов */
   margin-inline: auto; /* Это центрирует контейнер */
   padding-inline: var(--space-lg); /* Убираем боковые отступы, так как ширина уже в % */
@@ -531,6 +531,8 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
   }
 }
 
+
+
 /* RESPONSIVE */
 @media (max-width: 1024px) { .hero-panels { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 992px) { .hero-panels { grid-template-columns: repeat(2, 1fr); } }
@@ -581,10 +583,16 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
   .nav-right-cluster {
     gap: var(--space-sm); /* 3. Уменьшаем расстояние между иконками */
   }
+  /* --- FIX: Адаптация отступов контактной формы для мобильных --- */
+
+  .contact-wrapper {
+    padding: var(--space-lg); /* Уменьшаем боковые отступы с 64px до 32px */
+  }
 }
 
+
 /* --- FIX FOR IPHONE SE & VERY NARROW SCREENS --- */
-@media (max-width: 400px) {
+@media (max-width: 390px) {
   /* ДОБАВЬТЕ ЭТО ПРАВИЛО */
   .logo span {
     display: none;
