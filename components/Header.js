@@ -7,10 +7,11 @@ export default function Header({ t, lang, setLang, activeSection }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langMenuOpen, setLangMenuOpen] = useState(false);
-  
+
   // --- НАЧАЛО ИЗМЕНЕНИЙ ---
   const langSwitcherRef = useRef(null); // Ref для всего контейнера меню
   const langGlobeBtnRef = useRef(null); // Ref для кнопки-глобуса
+
 
   // Новый хук для управления клавиатурой
   useEffect(() => {
@@ -59,9 +60,8 @@ export default function Header({ t, lang, setLang, activeSection }) {
     };
   }, [langMenuOpen]); // Зависимость от состояния меню
   // --- КОНЕЦ ИЗМЕНЕНИЙ ---
-  
-  // <<< Остальной код компонента остается без изменений >>>
 
+  // >>> magic line
   const navMenuRef = useRef(null);
   const updateUnderline = () => {
     const el = navMenuRef.current;
@@ -82,6 +82,7 @@ export default function Header({ t, lang, setLang, activeSection }) {
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
+  // <<< magic line
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -115,7 +116,11 @@ export default function Header({ t, lang, setLang, activeSection }) {
     <header className={`header ${scrolled ? 'scrolled' : ''}`}>
       <div className="container navbar">
         <a href="#home" className="logo">
-          {/* ... SVG логотипа ... */}
+          <svg className="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M2 7L12 12L22 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M12 12V22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
           <span>Sarkhan.dev</span>
         </a>
 
@@ -126,14 +131,27 @@ export default function Header({ t, lang, setLang, activeSection }) {
               ref={navMenuRef}
               className={`nav-menu ${mobileMenuOpen ? 'mobile-active' : ''}`}
             >
-              {/* ... navLinks.map ... */}
+              {navLinks.map(link => (
+                <li key={link.key}>
+                  <a
+                    href={link.href}
+                    className={`nav-link ${activeSection === link.href.substring(1) ? 'active' : ''}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.text}
+                  </a>
+                </li>
+              ))}
             </ul>
           </nav>
 
           <div className="lang-switcher-container" ref={langSwitcherRef}>
-            {/* --- ИЗМЕНЕНИЕ: Добавили ref на кнопку --- */}
-            <button ref={langGlobeBtnRef} className="lang-globe-btn" onClick={() => setLangMenuOpen(v => !v)} aria-label={t.langToggle}>
-              {/* ... SVG глобуса ... */}
+            <button className="lang-globe-btn" onClick={() => setLangMenuOpen(v => !v)} aria-label={t.langToggle}>
+              <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
             </button>
             <div className={`lang-options ${langMenuOpen ? 'active' : ''}`}>
               <button className={`lang-btn ${lang === 'az' ? 'active' : ''}`} onClick={() => { setLang('az'); setLangMenuOpen(false); }}>AZ</button>
@@ -145,7 +163,11 @@ export default function Header({ t, lang, setLang, activeSection }) {
           <button onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')} className="theme-toggle" aria-label={t.themeToggle}>🌓</button>
          
           <button className="mobile-menu-toggle" onClick={() => setMobileMenuOpen(v => !v)} aria-expanded={mobileMenuOpen} aria-controls="nav-menu" aria-label={t.navToggle}>
-            {/* ... SVG мобильного меню ... */}
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
           </button>
         </div>
       </div>
