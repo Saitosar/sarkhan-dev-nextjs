@@ -228,7 +228,13 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 .navbar { display: flex; justify-content: space-between; align-items: center; }
 .nav-right-cluster { display: flex; align-items: center; gap: var(--space-lg); }
 .logo { font-size: 1.8rem; font-weight: 700; color: var(--color-heading); text-decoration: none; display: flex; align-items: center; gap: var(--space-sm); }
-.logo-svg { width: 30px; height: 30px; color: var(--color-primary); transition: transform var(--duration-slow) var(--ease-in-out-quart); }
+.logo-svg {
+  /* Задаем размер иконки, чтобы он соответствовал тексту */
+  width: 5.0rem;
+  height: 5.0rem;
+  color: var(--color-primary); transition: transform var(--duration-slow) var(--ease-in-out-quart);
+  /* Старые свойства color и transition больше не нужны для новой иконки */
+}
 .logo:hover .logo-svg { transform: rotate(360deg); }
 .nav-menu { display: flex; align-items: center; list-style: none; gap: var(--space-xl); position: relative; }
 .nav-menu::after {

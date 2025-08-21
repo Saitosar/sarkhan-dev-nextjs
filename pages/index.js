@@ -254,7 +254,14 @@ useEffect(() => {
 
     return (
         <>
-            {/* ... ваша секция Head ... */}
+            {/* --- НАЧАЛО ИЗМЕНЕНИЙ --- */}
+            <Head>
+                <title>{t.docTitle}</title>
+                <meta name="description" content={t.docDesc} />
+                <link rel="icon" href="/leo-icon.svg" type="image/svg+xml" />
+                {/* Здесь могут быть и другие мета-теги */}
+            </Head>
+            {/* --- КОНЕЦ ИЗМЕНЕНИЙ --- */}
 
             <div id="background-animation"></div>
 

@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTheme } from 'next-themes';
 import Icon from './Icon';
+import Image from 'next/image'; // ИЗМЕНЕНИЕ: Добавлен импорт
 
 export default function Header({ t, lang, setLang, activeSection }) {
   const { theme, resolvedTheme, setTheme } = useTheme();
@@ -117,11 +118,7 @@ export default function Header({ t, lang, setLang, activeSection }) {
     <header className={`header ${scrolled ? 'scrolled' : ''}`}>
       <div className="container navbar">
         <a href="#home" className="logo">
-          <svg className="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M2 7L12 12L22 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M12 12V22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+          <img src="/leo-icon.svg" alt="Логотип Sarkhan.dev" className="logo-svg" />
           <span>Sarkhan.dev</span>
         </a>
 
