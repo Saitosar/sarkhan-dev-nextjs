@@ -190,11 +190,25 @@ export default function HomePage({ articles, siteUrl }) {
 
     const [activeSection, setActiveSection] = useState('home');
     const t = translations[locale] || translations['az'];
+    const scrollPosition = useRef(0);
 
     const handleLanguageChange = (newLang) => {
+        scrollPosition.current = window.scrollY;
         // Эта команда теперь правильно сменит язык и перезапросит данные
         router.push(router.pathname, router.asPath, { locale: newLang, scroll: false });
     };
+
+    // ... после функции handleLanguageChange
+
+useEffect(() => {
+    // Восстанавливаем позицию скролла после смены языка
+    if (scrollPosition.current > 0) {
+        window.scrollTo({
+            top: scrollPosition.current,
+            behavior: 'instant' // 'instant' для мгновенного перехода без анимации
+        });
+    }
+}, [locale]); // Этот хук сработает только при изменении языка
 
     useEffect(() => {
         document.documentElement.lang = locale;
