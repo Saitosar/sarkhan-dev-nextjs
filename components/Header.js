@@ -1,6 +1,7 @@
 // components/Header.js
 import { useEffect, useRef, useState } from 'react';
 import { useTheme } from 'next-themes';
+import Icon from './Icon';
 
 export default function Header({ t, lang, setLang, activeSection }) {
   const { theme, resolvedTheme, setTheme } = useTheme();
@@ -160,7 +161,7 @@ export default function Header({ t, lang, setLang, activeSection }) {
             </div>
           </div>
 
-          <button onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')} className="theme-toggle" aria-label={t.themeToggle}>🌓</button>
+          <button onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')} className="theme-toggle" aria-label={t.themeToggle}><Icon name="theme" /></button>
          
           <button className="mobile-menu-toggle" onClick={() => setMobileMenuOpen(v => !v)} aria-expanded={mobileMenuOpen} aria-controls="nav-menu" aria-label={t.navToggle}>
             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
