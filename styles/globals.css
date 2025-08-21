@@ -592,7 +592,7 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 
 
 /* --- FIX FOR IPHONE SE & VERY NARROW SCREENS --- */
-@media (max-width: 390px) {
+@media (max-width: 380px) {
   /* ДОБАВЬТЕ ЭТО ПРАВИЛО */
   .logo span {
     display: none;
