@@ -213,6 +213,7 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 ::selection { background-color: var(--color-primary); color: var(--color-bg); }
 
 /* HEADER & NAV */
+
 .header {
   position: fixed; top: 0; left: 0; right: 0; inset-inline-start: 0; width: 100%;
   z-index: var(--z-header); background-color: rgba(1, 4, 19, 0.95);
@@ -365,6 +366,12 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
   color:#000;
 }
 
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  list-style-type: none; /* Убираем маркер-точку у <li> */
+}
 /* SECTIONS & CARDS */
 .hero-content { max-width: 900px; text-align: center; }
 .hero-title { margin-block-end: var(--space-lg); }
@@ -597,19 +604,41 @@ footer p {
 @media (max-width: 992px) { .hero-panels { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 850px) {
   .nav-menu {
-    position: fixed; inset-block-start: 0; inset-inline-end: 0;
-    width: 300px; height: 100vh; background: var(--color-surface);
-    flex-direction: column; justify-content: center; gap: var(--space-xl);
-    border-inline-start: 1px solid var(--color-border);
-    transform: translateX(100%); transition: transform var(--duration-slow) var(--ease-in-out-quart);
-    visibility: hidden; z-index: var(--z-menu); pointer-events: none;
-  }
+  position: fixed; inset-block-start: 0; inset-inline-end: 0;
+  width: 300px; height: 100vh; background: var(--color-surface);
+  flex-direction: column; 
+  justify-content: flex-start; /* <<< ИЗМЕНЕНИЕ: Выравниваем по верху */
+  padding-top: var(--space-xl); /* <<< ИЗМЕНЕНИЕ: Добавляем отступ сверху */
+  gap: var(--space-xl);
+  border-inline-start: 1px solid var(--color-border);
+  transform: translateX(100%); transition: transform var(--duration-slow) var(--ease-in-out-quart);
+  visibility: hidden; z-index: var(--z-menu); pointer-events: none;
+}
   .nav-menu::after { display: none; }
   .nav-menu.mobile-active { transform: translateX(0); visibility: visible; pointer-events: auto; }
 
   .mobile-menu-toggle { display: flex; z-index: calc(var(--z-menu) + 1); order: 3; }
-  .lang-switcher-container { order: 2; }
-  .theme-toggle { order: 1; }
+
+
+
+/* styles/globals.css - ВНУТРИ @media (max-width: 850px) */
+
+/* Стилизуем наш контейнер для вертикального мобильного меню */
+.header-controls {
+  order: -1; /* Ставит этот элемент первым в списке */
+  width: 100%;
+  justify-content: center;
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-controls .lang-options {
+  top: calc(100% + 8px); /* Открывается вниз */
+  bottom: auto;
+  right: 50%;
+  transform: translateX(50%);
+}
 
   .hero-title { font-size: 2.8rem; }
   .about-content { flex-direction: column; }
