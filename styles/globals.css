@@ -531,7 +531,18 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
   }
 }
 
+/* FOOTER */
+footer {
+  border-block-start: 1px solid var(--color-border);
+  padding-block: var(--space-xl);
+  margin-top: var(--space-section);
+}
 
+footer p {
+  text-align: center; /* <-- Вот это свойство центрирует текст */
+  color: var(--color-text-secondary);
+  max-width: none; /* Убираем ограничение по ширине, чтобы центрирование работало корректно */
+}
 
 /* RESPONSIVE */
 @media (max-width: 1024px) { .hero-panels { grid-template-columns: repeat(3, 1fr); } }
