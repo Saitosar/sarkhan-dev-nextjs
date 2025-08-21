@@ -251,7 +251,8 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 .nav-link:hover { color: var(--color-primary); text-shadow: 0 0 10px var(--color-primary); }
 .nav-link.active { color: var(--color-heading); text-shadow: 0 0 10px var(--color-primary); }
 /* === Language dropdown (унификация со стилем сайта) === */
-.lang-switcher-container { position: relative; }
+.lang-switcher-container { position: relative; display: flex; align-items: center;
+}
 /* Кнопка-глобус — те же радиусы/бордеры, что и кнопки */
 .lang-globe-btn {
   display:inline-flex; align-items:center; justify-content:center;
@@ -280,7 +281,6 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
   transition:.2s; 
   backdrop-filter: blur(6px); 
   cursor: pointer;
-  font-size: 18px; /* Немного уменьшим эмодзи, чтобы он лучше вписывался */
 }
 
 .theme-toggle:hover {
@@ -595,7 +595,7 @@ footer p {
 /* RESPONSIVE */
 @media (max-width: 1024px) { .hero-panels { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 992px) { .hero-panels { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 768px) {
+@media (max-width: 850px) {
   .nav-menu {
     position: fixed; inset-block-start: 0; inset-inline-end: 0;
     width: 300px; height: 100vh; background: var(--color-surface);
@@ -616,7 +616,7 @@ footer p {
 
   .btn, .nav-link, .lang-globe-btn, .theme-toggle { min-height: 48px; min-width: 48px; }
 
-  section { min-height: auto; padding: 60px 0; justify-content: flex-start; }
+  section { min-height: auto; padding: 80px 0 60px; justify-content: flex-start; }
   .timeline::after { left: 15px; }
   .timeline-item { width: 100%; padding-left: 50px; padding-right: 10px; }
   .timeline-item.left, .timeline-item.right { left: 0%; }
@@ -636,8 +636,23 @@ footer p {
   }
 
   .logo {
-    font-size: 1.6rem; /* 2. Уменьшаем размер логотипа */
+    font-size: 1.3rem; /* 2. Уменьшаем размер логотипа */
   }
+
+    /* Уменьшаем все кнопки в правом блоке */
+  .lang-globe-btn, .theme-toggle, .mobile-menu-toggle {
+    width: 32px;
+    height: 32px;
+    min-width: 32px; /* <-- Важное правило! */
+    min-height: 32px; /* <-- И это тоже! */
+    padding: var(--space-xs);
+  }
+
+  .logo-svg {
+    width: 4.0rem;
+    height: 4.0rem;
+  }
+    
 
   .nav-right-cluster {
     gap: var(--space-sm); /* 3. Уменьшаем расстояние между иконками */
@@ -656,13 +671,12 @@ footer p {
   .logo span {
     display: none;
   }
-  .logo {
-    font-size: 1.4rem; /* Делаем лого еще компактнее */
-  }
 
   .logo-svg {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 4.0rem;
+    height: 4.0rem;
+    min-width: 32px; /* <-- Важное правило! */
+    min-height: 32px; /* <-- И это тоже! */
   }
 
   .nav-right-cluster {
