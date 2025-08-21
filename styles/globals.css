@@ -258,7 +258,49 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
   backdrop-filter: blur(6px); 
   cursor: pointer;
 }
-.theme-toggle, .mobile-menu-toggle { background: none; border: 1px solid transparent; color: var(--color-text-primary); cursor: pointer; padding: var(--space-sm); transition: color var(--duration-normal) ease; font-weight: 700; min-height: 44px; min-width: 44px; display: flex; align-items: center; justify-content: center; }
+/* --- ОБНОВЛЕННЫЙ КОД ДЛЯ КНОПОК ХЕДЕРА --- */
+
+/* Применяем стили к переключателю темы, как у кнопки с глобусом */
+.theme-toggle {
+  display:inline-flex; 
+  align-items:center; 
+  justify-content:center;
+  width:36px; 
+  height:36px; 
+  border-radius:var(--radius-md);
+  background: color-mix(in srgb, var(--color-surface) 75%, transparent);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary); 
+  transition:.2s; 
+  backdrop-filter: blur(6px); 
+  cursor: pointer;
+  font-size: 18px; /* Немного уменьшим эмодзи, чтобы он лучше вписывался */
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 24px rgba(77,195,255,.25);
+}
+
+/* Стили для кнопки мобильного меню (остаются как были) */
+.mobile-menu-toggle { 
+  background: none; 
+  border: 1px solid transparent; 
+  color: var(--color-text-primary); 
+  cursor: pointer; 
+  padding: var(--space-sm); 
+  transition: color var(--duration-normal) ease; 
+  font-weight: 700; 
+  min-height: 44px; 
+  min-width: 44px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+}
+
+.mobile-menu-toggle:hover {
+   color: var(--color-primary); 
+}
 .lang-globe-btn svg { width: 24px; height: 24px; stroke: currentColor; }
 .lang-globe-btn:hover { border-color: var(--color-primary);box-shadow: 0 0 24px rgba(77,195,255,.25); }
 /* Выпадающий контейнер — как карточки/панели */
@@ -831,4 +873,26 @@ footer p {
   border-radius: var(--radius-md);
   font-size: 0.85rem;
   font-weight: 500;
+}
+/* --- Стили для иконки переключения темы --- */
+.theme-toggle svg {
+  width: 20px; /* Размер иконки */
+  height: 20px;
+  fill: currentColor; /* Иконка будет брать цвет у родительской кнопки */
+}
+
+/* По умолчанию показываем СОЛНЦЕ (для темной темы) */
+.theme-toggle .sun {
+  display: block;
+}
+.theme-toggle .moon {
+  display: none;
+}
+
+/* Когда тема светлая, показываем ЛУНУ */
+[data-theme="light"] .theme-toggle .sun {
+  display: none;
+}
+[data-theme="light"] .theme-toggle .moon {
+  display: block;
 }
