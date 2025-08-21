@@ -197,9 +197,11 @@ export default function HomePage({ articles, initialLang, siteUrl }) {
 
     const handleLanguageChange = (newLang) => {
     setLanguageCookie(newLang);
-    router.replace(router.asPath, router.asPath, {
-      // Это не будет менять URL, но заставит Next.js
-      // заново выполнить getServerSideProps на сервере
+    // Этот метод правильно меняет язык и перезапрашивает данные с сервера,
+    // а `scroll: false` отключает прыжок на странице.
+    router.push(router.pathname, router.asPath, {
+      locale: newLang,
+      scroll: false,
     });
 };
 
