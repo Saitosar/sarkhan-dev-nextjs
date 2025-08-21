@@ -190,6 +190,7 @@ export default function HomePage({ articles, siteUrl }) {
 
     const [activeSection, setActiveSection] = useState('home');
     const t = translations[locale] || translations['az'];
+    const scrollPosition = useRef(0);
     const isInitialLoad = useRef(true);
 
     const handleLanguageChange = (newLang) => {
