@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTheme } from 'next-themes';
 import Icon from './Icon';
-import Image from 'next/image'; // ИЗМЕНЕНИЕ: Добавлен импорт
+import Image from 'next/image';
 
 export default function Header({ t, lang, setLang, activeSection }) {
   const { theme, resolvedTheme, setTheme } = useTheme();
@@ -10,12 +10,10 @@ export default function Header({ t, lang, setLang, activeSection }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langMenuOpen, setLangMenuOpen] = useState(false);
 
-  // --- НАЧАЛО ИЗМЕНЕНИЙ ---
-  const langSwitcherRef = useRef(null); // Ref для всего контейнера меню
-  const langGlobeBtnRef = useRef(null); // Ref для кнопки-глобуса
+  const langSwitcherRef = useRef(null);
+  const langGlobeBtnRef = useRef(null);
 
-
-  // Новый хук для управления клавиатурой
+  // Хук для управления клавиатурой
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!langMenuOpen) return;
@@ -47,21 +45,17 @@ export default function Header({ t, lang, setLang, activeSection }) {
 
     document.addEventListener('keydown', handleKeyDown);
     
-    // Управление фокусом при открытии/закрытии
     if (langMenuOpen) {
-      // При открытии фокус переходит на активный язык
       const activeLangButton = langSwitcherRef.current?.querySelector('button.lang-btn.active');
       activeLangButton?.focus();
     } else {
-      // При закрытии фокус возвращается на кнопку-глобус
       langGlobeBtnRef.current?.focus();
     }
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [langMenuOpen]); // Зависимость от состояния меню
-  // --- КОНЕЦ ИЗМЕНЕНИЙ ---
+  }, [langMenuOpen]);
 
   // >>> magic line
   const navMenuRef = useRef(null);
@@ -129,6 +123,26 @@ export default function Header({ t, lang, setLang, activeSection }) {
               ref={navMenuRef}
               className={`nav-menu ${mobileMenuOpen ? 'mobile-active' : ''}`}
             >
+              {/* ===== НАЧАЛО ИЗМЕНЕНИЙ: Блок управления ПЕРЕД ссылками ===== */}
+              <li className="header-controls">
+                <div className="lang-switcher-container" ref={langSwitcherRef}>
+                  <button ref={langGlobeBtnRef} className="lang-globe-btn" onClick={() => setLangMenuOpen(v => !v)} aria-label={t.langToggle}>
+                    <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                  </button>
+                  <div className={`lang-options ${langMenuOpen ? 'active' : ''}`}>
+                    <button className={`lang-btn ${lang === 'az' ? 'active' : ''}`} onClick={() => { setLang('az'); setLangMenuOpen(false); }}>AZ</button>
+                    <button className={`lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => { setLang('en'); setLangMenuOpen(false); }}>EN</button>
+                    <button className={`lang-btn ${lang === 'ru' ? 'active' : ''}`} onClick={() => { setLang('ru'); setLangMenuOpen(false); }}>RU</button>
+                  </div>
+                </div>
+                <button onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')} className="theme-toggle" aria-label={t.themeToggle}><Icon name="theme" /></button>
+              </li>
+              {/* ===== КОНЕЦ ИЗМЕНЕНИЙ ===== */}
+
               {navLinks.map(link => (
                 <li key={link.key}>
                   <a
@@ -142,24 +156,7 @@ export default function Header({ t, lang, setLang, activeSection }) {
               ))}
             </ul>
           </nav>
-
-          <div className="lang-switcher-container" ref={langSwitcherRef}>
-            <button className="lang-globe-btn" onClick={() => setLangMenuOpen(v => !v)} aria-label={t.langToggle}>
-              <svg viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-              </svg>
-            </button>
-            <div className={`lang-options ${langMenuOpen ? 'active' : ''}`}>
-              <button className={`lang-btn ${lang === 'az' ? 'active' : ''}`} onClick={() => { setLang('az'); setLangMenuOpen(false); }}>AZ</button>
-              <button className={`lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => { setLang('en'); setLangMenuOpen(false); }}>EN</button>
-              <button className={`lang-btn ${lang === 'ru' ? 'active' : ''}`} onClick={() => { setLang('ru'); setLangMenuOpen(false); }}>RU</button>
-            </div>
-          </div>
-
-          <button onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')} className="theme-toggle" aria-label={t.themeToggle}><Icon name="theme" /></button>
-         
+          
           <button className="mobile-menu-toggle" onClick={() => setMobileMenuOpen(v => !v)} aria-expanded={mobileMenuOpen} aria-controls="nav-menu" aria-label={t.navToggle}>
             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
               <line x1="3" y1="12" x2="21" y2="12"></line>
