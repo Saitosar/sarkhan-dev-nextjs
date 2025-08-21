@@ -190,7 +190,7 @@ export default function HomePage({ articles, siteUrl }) {
 
     const [activeSection, setActiveSection] = useState('home');
     const t = translations[locale] || translations['az'];
-    const scrollPosition = useRef(0);
+    const isInitialLoad = useRef(true);
 
     const handleLanguageChange = (newLang) => {
         scrollPosition.current = window.scrollY;
@@ -228,7 +228,7 @@ useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
+                    if (entry.isIntersecting && !isInitialLoad.current) {
                         setActiveSection(entry.target.id);
                     }
                 });
@@ -238,12 +238,16 @@ useEffect(() => {
 
         const sections = document.querySelectorAll('section');
         sections.forEach(section => observer.observe(section));
+// Устанавливаем таймер, чтобы после первой загрузки observer начал работать в обычном режиме
+        const timeoutId = setTimeout(() => {
+        isInitialLoad.current = false;
+    }, 500); // 500 мс - небольшая задержка
 
         return () => {
             window.removeEventListener('scroll', onScroll);
             sections.forEach(section => observer.unobserve(section));
         };
-    }, []);
+    }, [locale]);
 
     const jsonLd = { /* ... ваш jsonLd объект ... */ };
 
