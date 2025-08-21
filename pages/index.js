@@ -194,6 +194,7 @@ export default function HomePage({ articles, siteUrl }) {
     const isInitialLoad = useRef(true);
 
     const handleLanguageChange = (newLang) => {
+        isInitialLoad.current = true; // Сбрасываем флаг, чтобы IntersectionObserver не срабатывал сразу
         scrollPosition.current = window.scrollY;
         // Эта команда теперь правильно сменит язык и перезапросит данные
         router.push(router.pathname, router.asPath, { locale: newLang, scroll: false });
