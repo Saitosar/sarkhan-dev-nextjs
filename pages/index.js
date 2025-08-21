@@ -181,36 +181,26 @@ const Footer = () => (
     </footer>
 );
 
-// --- ГЛАВНАЯ СТРАНИЦА ---
+// --- ГЛАВНАЯ СТРАНИЦА (ИСПРАВЛЕННАЯ ВЕРСИЯ) ---
 
-export default function HomePage({ articles, initialLang, siteUrl }) {
-    const router = useRouter(); 
-    const [lang, setLang] = useState(initialLang);
-    useEffect(() => {
-
-  const saved = getLanguageFromCookies();
-  if (saved && saved !== lang) setLang(saved);
-}, [lang]); // <-- Добавили lang сюда - важно
+export default function HomePage({ articles, siteUrl }) {
+    const router = useRouter();
+    const { locale } = router; // Получаем текущий язык напрямую из роутера
 
     const [activeSection, setActiveSection] = useState('home');
-    const t = translations[lang] || translations['az'];
+    const t = translations[locale] || translations['az'];
 
     const handleLanguageChange = (newLang) => {
-    setLanguageCookie(newLang);
-    // Этот метод правильно меняет язык и перезапрашивает данные с сервера,
-    // а `scroll: false` отключает прыжок на странице.
-    router.push(router.pathname, router.asPath, {
-      locale: newLang,
-      scroll: false,
-    });
-};
+        // Эта команда теперь правильно сменит язык и перезапросит данные
+        router.push(router.pathname, router.asPath, { locale: newLang, scroll: false });
+    };
 
     useEffect(() => {
-        document.documentElement.lang = lang;
-    }, [lang]);
+        document.documentElement.lang = locale;
+    }, [locale]);
 
     useEffect(() => {
-        // 1. Следим за направлением скролла
+        // Этот хук остается без изменений
         let lastY = window.scrollY;
         const onScroll = () => {
             const dir = window.scrollY > lastY ? 'scrolling-down' : 'scrolling-up';
@@ -220,7 +210,6 @@ export default function HomePage({ articles, initialLang, siteUrl }) {
         };
         window.addEventListener('scroll', onScroll, { passive: true });
 
-        // 2. Следим за секциями для активного меню
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
@@ -235,49 +224,28 @@ export default function HomePage({ articles, initialLang, siteUrl }) {
         const sections = document.querySelectorAll('section');
         sections.forEach(section => observer.observe(section));
 
-        // Очистка при размонтировании
         return () => {
             window.removeEventListener('scroll', onScroll);
             sections.forEach(section => observer.unobserve(section));
         };
     }, []);
 
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'WebSite',
-        'url': siteUrl,
-        'name': t.docTitle,
-        'description': t.docDesc,
-    };
+    const jsonLd = { /* ... ваш jsonLd объект ... */ };
 
     return (
         <>
-            <Head>
-                <title>{t.docTitle}</title>
-                <meta name="description" content={t.docDesc} />
-                <link rel="canonical" href={siteUrl} />
-                <link rel="alternate" hrefLang="x-default" href={siteUrl} />
-                {Object.keys(translations).map(langCode => (
-                    <link key={langCode} rel="alternate" hrefLang={langCode} href={`${siteUrl}?lang=${langCode}`} />
-                ))}
-                <meta property="og:title" content={t.docTitle} />
-                <meta property="og:description" content={t.docDesc} />
-                <meta property="og:url" content={siteUrl} />
-                <meta property="og:type" content="website" />
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content={t.docTitle} />
-                <meta name="twitter:description" content={t.docDesc} />
-                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            </Head>
+            {/* ... ваша секция Head ... */}
 
             <div id="background-animation"></div>
 
-            <Header t={t} lang={lang} setLang={handleLanguageChange} activeSection={activeSection} />
+            {/* Передаем `locale` вместо `lang` */}
+            <Header t={t} lang={locale} setLang={handleLanguageChange} activeSection={activeSection} />
 
             <main>
                 <Hero t={t} />
                 <BlogSection t={t} articles={articles} />
-                <ResourcesSection t={t} lang={lang} />
+                {/* Передаем `locale` вместо `lang` */}
+                <ResourcesSection t={t} lang={locale} />
                 <AboutSection t={t} />
                 <ContactSection t={t} />
             </main>
@@ -287,22 +255,19 @@ export default function HomePage({ articles, initialLang, siteUrl }) {
     );
 }
 
-// --- ЗАГРУЗКА ДАННЫХ С СЕРВЕРА ---
-    export async function getServerSideProps(context) {
-      const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL; // ВАЖНО: именно эта переменная
-      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || '';
-
-  // читаем язык из cookies через nookies-обёртку
-      const initialLang = getLanguageFromCookies(context) || 'az';
+// --- ЗАГРУЗКА ДАННЫХ С СЕРВЕРА (ИСПРАВЛЕННАЯ ВЕРСИЯ) ---
+export async function getServerSideProps(context) {
+  const { locale } = context; // Получаем язык напрямую из контекста
+  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || '';
 
 try {
-    const res = await fetch(`${strapiUrl}/api/posts?locale=${initialLang}&populate=cover&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=3`);
+    const res = await fetch(`${strapiUrl}/api/posts?locale=${locale}&populate=cover&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=3`);
     if (!res.ok) throw new Error(`Failed to fetch: ${res.statusText}`);
     const response = await res.json();
 
     const markdownConverter = new showdown.Converter();
     const articles = (response.data || []).map((post) => {
-      // Strapi v5 — поля ПЛОСКИЕ (нет post.attributes)
       if (post.content) {
         const rawHtml = markdownConverter.makeHtml(post.content);
         post.sanitizedBody = DOMPurify.sanitize(rawHtml);
@@ -310,9 +275,9 @@ try {
       return post;
     });
 
-    return { props: { articles, initialLang, siteUrl } };
+    return { props: { articles, siteUrl } };
   } catch (error) {
     console.error("Failed to fetch articles from Strapi:", error);
-    return { props: { articles: [], initialLang, siteUrl } };
+    return { props: { articles: [], siteUrl } };
   }
 }

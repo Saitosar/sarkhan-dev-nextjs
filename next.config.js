@@ -22,6 +22,10 @@ const securityHeaders = [
 
 const nextConfig = {
   reactStrictMode: true,
+  i18n: {
+    locales: ['az', 'en', 'ru'],
+    defaultLocale: 'az',
+  },
   async headers() {
     return [{ source: '/(.*)', headers: securityHeaders }];
   },
