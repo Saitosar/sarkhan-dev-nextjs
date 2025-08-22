@@ -980,3 +980,10 @@ footer p {
 [data-theme="light"] .theme-toggle .moon {
   display: block;
 }
+
+
+/* Стили для кнопки "Посмотреть все" в секции блога*/
+.view-all-container {
+  text-align: center;
+  margin-top: var(--space-xxl);
+}
