@@ -1,6 +1,7 @@
 // components/BlogSection.js
 import { useState, useRef } from 'react';
 import FocusTrap from 'focus-trap-react';
+import Link from 'next/link'; // <<< 1. ИМПОРТИРУЕМ LINK
 
 const BlogSection = ({ t, articles }) => {
   const [selectedArticle, setSelectedArticle] = useState(null);
@@ -38,6 +39,15 @@ const BlogSection = ({ t, articles }) => {
             ))}
             {(!articles || articles.length === 0) && <p>Hələ yazı yoxdur.</p>}
           </div>
+
+          {/* ===== 2. НАЧАЛО ИЗМЕНЕНИЙ: ДОБАВЛЯЕМ КНОПКУ ===== */}
+          <div className="view-all-container">
+            <Link href="/blog" legacyBehavior>
+              <a className="btn">{t.viewAllArticles}</a>
+            </Link>
+          </div>
+          {/* ===== КОНЕЦ ИЗМЕНЕНИЙ ===== */}
+
         </div>
       </section>
 
