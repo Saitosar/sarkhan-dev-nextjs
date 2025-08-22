@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useTheme } from 'next-themes';
 import Icon from './Icon';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function Header({ t, lang, setLang, activeSection }) {
   const { theme, resolvedTheme, setTheme } = useTheme();
@@ -12,29 +14,25 @@ export default function Header({ t, lang, setLang, activeSection }) {
 
   const langSwitcherRef = useRef(null);
   const langGlobeBtnRef = useRef(null);
+  const router = useRouter(); // Получаем доступ к роутеру
 
-  // Хук для управления клавиатурой
+  // Все хуки useEffect остаются без изменений
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!langMenuOpen) return;
-
       const focusableElements = langSwitcherRef.current?.querySelectorAll('button.lang-btn');
       if (!focusableElements || focusableElements.length === 0) return;
-
       const firstElement = focusableElements[0];
       const lastElement = focusableElements[focusableElements.length - 1];
-
       if (e.key === 'Escape') {
         setLangMenuOpen(false);
       }
-
       if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
         e.preventDefault();
         const currentIndex = Array.from(focusableElements).indexOf(document.activeElement);
         const nextElement = focusableElements[currentIndex + 1] || firstElement;
         nextElement.focus();
       }
-
       if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
         e.preventDefault();
         const currentIndex = Array.from(focusableElements).indexOf(document.activeElement);
@@ -42,28 +40,29 @@ export default function Header({ t, lang, setLang, activeSection }) {
         prevElement.focus();
       }
     };
-
     document.addEventListener('keydown', handleKeyDown);
-    
     if (langMenuOpen) {
       const activeLangButton = langSwitcherRef.current?.querySelector('button.lang-btn.active');
       activeLangButton?.focus();
     } else {
       langGlobeBtnRef.current?.focus();
     }
-
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [langMenuOpen]);
 
-  // >>> magic line
   const navMenuRef = useRef(null);
   const updateUnderline = () => {
+    if (router.pathname !== '/') return; // Не показывать подчеркивание на других страницах
     const el = navMenuRef.current;
     if (!el) return;
     const active = el.querySelector('.nav-link.active');
-    if (!active) return;
+    if (!active) {
+        // Скрываем подчеркивание, если нет активной ссылки
+        el.style.setProperty('--underline-width', `0px`);
+        return;
+    };
     const parentRect = el.getBoundingClientRect();
     const rect = active.getBoundingClientRect();
     el.style.setProperty('--underline-left', `${rect.left - parentRect.left}px`);
@@ -72,13 +71,12 @@ export default function Header({ t, lang, setLang, activeSection }) {
   useEffect(() => {
     const id = requestAnimationFrame(updateUnderline);
     return () => cancelAnimationFrame(id);
-  }, [activeSection, lang, mobileMenuOpen]);
+  }, [activeSection, lang, mobileMenuOpen, router.pathname]);
   useEffect(() => {
     const onResize = () => updateUnderline();
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
-  // <<< magic line
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -111,10 +109,12 @@ export default function Header({ t, lang, setLang, activeSection }) {
   return (
     <header className={`header ${scrolled ? 'scrolled' : ''}`}>
       <div className="container navbar">
-        <a href="#home" className="logo">
-          <img src="/leo-icon.svg" alt="Логотип Sarkhan.dev" className="logo-svg" />
-          <span>Sarkhan.dev</span>
-        </a>
+        <Link href="/" legacyBehavior>
+            <a className="logo">
+                <img src="/leo-icon.svg" alt="Логотип Sarkhan.dev" className="logo-svg" />
+                <span>Sarkhan.dev</span>
+            </a>
+        </Link>
 
         <div className="nav-right-cluster">
           <nav>
@@ -123,19 +123,18 @@ export default function Header({ t, lang, setLang, activeSection }) {
               ref={navMenuRef}
               className={`nav-menu ${mobileMenuOpen ? 'mobile-active' : ''}`}
             >
-              {/* ===== НАЧАЛО ИЗМЕНЕНИЙ: Блок управления ПЕРЕД ссылками ===== */}
-              
-              {/* ===== КОНЕЦ ИЗМЕНЕНИЙ ===== */}
-
               {navLinks.map(link => (
                 <li key={link.key}>
-                  <a
-                    href={link.href}
-                    className={`nav-link ${activeSection === link.href.substring(1) ? 'active' : ''}`}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.text}
-                  </a>
+                  {/* ===== НАЧАЛО ИЗМЕНЕНИЙ: УМНЫЕ ССЫЛКИ ===== */}
+                  <Link href={router.pathname === '/' ? link.href : `/${link.href}`} legacyBehavior>
+                    <a
+                      className={`nav-link ${activeSection === link.href.substring(1) ? 'active' : ''}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {link.text}
+                    </a>
+                  </Link>
+                   {/* ===== КОНЕЦ ИЗМЕНЕНИЙ ===== */}
                 </li>
               ))}
               <li className="header-controls">
