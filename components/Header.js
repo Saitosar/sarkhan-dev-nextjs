@@ -124,6 +124,20 @@ export default function Header({ t, lang, setLang, activeSection }) {
               className={`nav-menu ${mobileMenuOpen ? 'mobile-active' : ''}`}
             >
               {/* ===== НАЧАЛО ИЗМЕНЕНИЙ: Блок управления ПЕРЕД ссылками ===== */}
+              
+              {/* ===== КОНЕЦ ИЗМЕНЕНИЙ ===== */}
+
+              {navLinks.map(link => (
+                <li key={link.key}>
+                  <a
+                    href={link.href}
+                    className={`nav-link ${activeSection === link.href.substring(1) ? 'active' : ''}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.text}
+                  </a>
+                </li>
+              ))}
               <li className="header-controls">
                 <div className="lang-switcher-container" ref={langSwitcherRef}>
                   <button ref={langGlobeBtnRef} className="lang-globe-btn" onClick={() => setLangMenuOpen(v => !v)} aria-label={t.langToggle}>
@@ -141,19 +155,6 @@ export default function Header({ t, lang, setLang, activeSection }) {
                 </div>
                 <button onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')} className="theme-toggle" aria-label={t.themeToggle}><Icon name="theme" /></button>
               </li>
-              {/* ===== КОНЕЦ ИЗМЕНЕНИЙ ===== */}
-
-              {navLinks.map(link => (
-                <li key={link.key}>
-                  <a
-                    href={link.href}
-                    className={`nav-link ${activeSection === link.href.substring(1) ? 'active' : ''}`}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.text}
-                  </a>
-                </li>
-              ))}
             </ul>
           </nav>
           
