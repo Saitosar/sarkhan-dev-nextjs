@@ -49,15 +49,15 @@
 
 /* THEMES - Light Theme & High Contrast Mode */
 [data-theme="light"] {
-  --color-bg: #f0f4f8;
-  --color-surface: #ffffff;
-  --color-primary: #0077cc;
-  --color-secondary: #d400a3;
-  --color-text-primary: #222222;
-  --color-text-secondary: #555555;
-  --color-heading: #000000;
-  --color-border: rgba(0, 119, 204, 0.2);
-  --color-shadow: rgba(0, 119, 204, 0.1);
+  --color-bg: #f5f7fa; /* Более нейтральный и светлый фон */
+  --color-surface: #ffffff; /* Поверхности остаются белыми для контраста */
+  --color-primary: #3b82f6; /* Более современный и дружелюбный синий */
+  --color-secondary: #8b5cf6; /* Глубокий фиолетовый вместо резкого розового */
+  --color-text-primary: #1f2937; /* Очень темный, но не чисто черный текст */
+  --color-text-secondary: #6b7280; /* Мягкий серый для второстепенного текста */
+  --color-heading: #111827; /* Самый темный оттенок для заголовков, но не #000 */
+  --color-border: rgba(59, 130, 246, 0.2); /* Рамка в тон новому синему */
+  --color-shadow: rgba(59, 130, 246, 0.1); /* Тень в тон новому синему */
 
   color-scheme: light;
 }
@@ -139,6 +139,9 @@ body.no-scroll { overflow: hidden; }
   }
 }
 
+[data-theme="light"] #background-animation {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><g fill="none" stroke="%233b82f6" stroke-opacity="0.1"><path d="M0 .5H100M.5 0V100"/></g></svg>');
+}
 /* LAYOUT & TYPOGRAPHY */
 .container {
   width: 98%; /* Задаем ширину в процентах от родительского элемента */
