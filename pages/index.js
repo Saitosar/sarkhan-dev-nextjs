@@ -15,6 +15,7 @@ import FocusTrap from 'focus-trap-react';
 import { getLanguageFromCookies, setLanguageCookie } from '@/utils/cookies';
 import { useRouter } from 'next/router';
 import { translations } from '@/utils/translations';
+import Footer from '@/components/Footer';
 
 
 const Hero = ({ t }) => (
@@ -50,15 +51,6 @@ const Hero = ({ t }) => (
             </div>
         </div>
     </section>
-);
-
-const Footer = () => (
-    <footer>
-        <div className="container">
-            <p>Powered by Next.js.</p>
-            <p>&copy; {new Date().getFullYear()} Sarkhan Hajiyev. All rights reserved.</p>
-        </div>
-    </footer>
 );
 
 // --- ГЛАВНАЯ СТРАНИЦА (ИСПРАВЛЕННАЯ ВЕРСИЯ) ---
