@@ -138,7 +138,7 @@ useEffect(() => {
             <div id="background-animation"></div>
 
             {/* Передаем `locale` вместо `lang` */}
-            <Header t={t} lang={locale} setLang={handleLanguageChange} activeSection={activeSection} />
+            <Header t={t} lang={locale} setLang={handleLanguageChange} activeSection={activeSection} pathname={router.pathname} />
 
             <main>
                 <Hero t={t} />
