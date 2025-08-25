@@ -12,6 +12,14 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
+   // --- НАЧАЛО ИЗМЕНЕНИЙ: ДИАГНОСТИКА ---
+  // 1. Проверяем, видит ли сервер ключ вообще
+  if (!process.env.GEMINI_API_KEY) {
+    console.error("GEMINI_API_KEY не найден. Убедитесь, что он добавлен в переменные окружения.");
+    return res.status(500).json({ error: 'API ключ не настроен на сервере.' });
+  }
+  // --- КОНЕЦ ИЗМЕНЕНИЙ ---
+
   const { articleText } = req.body;
 
   // Проверяем, что текст статьи был передан
@@ -47,7 +55,8 @@ export default async function handler(req, res) {
     res.status(200).json({ summary });
 
   } catch (error) {
-    console.error("Error calling Gemini API:", error);
+    console.error("ПОДРОБНАЯ ОШИБКА ОТ GEMINI API:", JSON.stringify(error, null, 2));
+    // --- КОНЕЦ ИЗМЕНЕНИЙ ---
     res.status(500).json({ error: 'Failed to generate summary' });
   }
 }
