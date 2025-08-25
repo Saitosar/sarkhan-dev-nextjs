@@ -997,16 +997,16 @@ footer p {
 
 /* Заголовок H2 (из ##) */
 .modal-content div h2 {
-  font-size: 1.75rem; /* Делаем его заметным, но меньше главного заголовка модального окна */
+  font-size: 1.2rem; /* Делаем его заметным, но меньше главного заголовка модального окна */
   color: var(--color-primary); /* Используем фирменный цвет */
-  margin-top: var(--space-xl);
-  margin-bottom: var(--space-md);
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xxl);
   padding-bottom: var(--space-sm);
 }
 
 /* Заголовок H3 (из ###) */
 .modal-content div h3 {
-  font-size: 1.4rem; /* Чуть меньше H2 */
+  font-size: 1.0rem; /* Чуть меньше H2 */
   color: var(--color-heading);
   margin-top: var(--space-lg);
   margin-bottom: var(--space-sm);
@@ -1014,7 +1014,7 @@ footer p {
 
 /* Заголовок H4 (из ####) */
 .modal-content div h4 {
-  font-size: 1.2rem; /* Чуть меньше H3, но все еще заметно больше основного текста */
+  font-size: 0.8rem; /* Чуть меньше H3, но все еще заметно больше основного текста */
   color: var(--color-text-secondary);
   text-transform: none; /* Убираем 'uppercase', чтобы он не был слишком кричащим */
   margin-top: var(--space-lg);
