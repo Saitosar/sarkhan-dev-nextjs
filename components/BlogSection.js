@@ -1,18 +1,19 @@
 // components/BlogSection.js
 import { useState, useRef } from 'react';
-import FocusTrap from 'focus-trap-react';
-import Link from 'next/link'; // <<< 1. ИМПОРТИРУЕМ LINK
+import Link from 'next/link';
+import PostModal from './PostModal'; // <-- 1. ИМПОРТ ИЗМЕНЕН
 
-const BlogSection = ({ t, articles }) => {
-  const [selectedArticle, setSelectedArticle] = useState(null);
+const BlogSection = ({ t, articles }) => { // Оставим articles здесь, т.к. это пропс
+  const [selectedPost, setSelectedPost] = useState(null); // <-- 2. ПЕРЕИМЕНОВАНО
   const triggerRef = useRef(null);
 
-  const openModal = (article, e) => {
+  const openModal = (post, e) => { // <-- 3. ПЕРЕИМЕНОВАНО
     triggerRef.current = e.currentTarget;
-    setSelectedArticle(article);
+    setSelectedPost(post);
   };
+
   const closeModal = () => {
-    setSelectedArticle(null);
+    setSelectedPost(null);
     triggerRef.current?.focus();
   };
 
@@ -22,17 +23,17 @@ const BlogSection = ({ t, articles }) => {
         <div className="container">
           <h2>{t.blogSectionTitle}</h2>
           <div className="blog-grid">
-            {Array.isArray(articles) && articles.map(article => (
-              article ? (
+            {Array.isArray(articles) && articles.map(post => ( // <-- 4. ПЕРЕИМЕНОВАНО
+              post ? (
                 <div
-                  key={article.id}
+                  key={post.id}
                   className="blog-card"
-                  onClick={(e) => openModal(article, e)}
+                  onClick={(e) => openModal(post, e)}
                   tabIndex="0"
-                  onKeyDown={(e) => e.key === 'Enter' && openModal(article, e)}
+                  onKeyDown={(e) => e.key === 'Enter' && openModal(post, e)}
                 >
-                  <h3>{article.title}</h3>
-                  <p>{article.excerpt}</p>
+                  <h3>{post.title}</h3>
+                  <p>{post.excerpt}</p>
                   <span className="btn">{t.readMore}</span>
                 </div>
               ) : null
@@ -40,30 +41,16 @@ const BlogSection = ({ t, articles }) => {
             {(!articles || articles.length === 0) && <p>Hələ yazı yoxdur.</p>}
           </div>
 
-          {/* ===== 2. НАЧАЛО ИЗМЕНЕНИЙ: ДОБАВЛЯЕМ КНОПКУ ===== */}
           <div className="view-all-container">
             <Link href="/blog" legacyBehavior>
               <a className="btn">{t.viewAllArticles}</a>
             </Link>
           </div>
-          {/* ===== КОНЕЦ ИЗМЕНЕНИЙ ===== */}
-
         </div>
       </section>
 
-      {selectedArticle && (
-        <FocusTrap active={!!selectedArticle} focusTrapOptions={{ onDeactivate: closeModal, initialFocus: false }}>
-          <div className="modal-overlay active" onClick={closeModal}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="modal-title">
-              <button className="modal-close-btn" onClick={closeModal}>&times;</button>
-              <h3 id="modal-title">{selectedArticle.title}</h3>
-              <div dangerouslySetInnerHTML={{ __html: selectedArticle.sanitizedBody || '' }} />
-              <br />
-              <button className="btn" onClick={closeModal}>{t.closeButton}</button>
-            </div>
-          </div>
-        </FocusTrap>
-      )}
+      {/* 5. ИСПОЛЬЗУЕМ PostModal */}
+      <PostModal post={selectedPost} onClose={closeModal} t={t} />
     </>
   );
 };

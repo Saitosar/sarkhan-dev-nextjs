@@ -16,6 +16,8 @@ import { getLanguageFromCookies, setLanguageCookie } from '@/utils/cookies';
 import { useRouter } from 'next/router';
 import { translations } from '@/utils/translations';
 import Footer from '@/components/Footer';
+import { getProcessedPosts } from '@/lib/strapi'; // <-- Импортируем нашу новую функцию
+
 
 
 const Hero = ({ t }) => (
@@ -156,27 +158,11 @@ useEffect(() => {
 
 // --- ЗАГРУЗКА ДАННЫХ С СЕРВЕРА (ИСПРАВЛЕННАЯ ВЕРСИЯ) ---
 export async function getServerSideProps(context) {
-  const { locale } = context; // Получаем язык напрямую из контекста
-  const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL;
+  const { locale } = context;
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || '';
 
-try {
-    const res = await fetch(`${strapiUrl}/api/posts?locale=${locale}&populate=cover&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=3`);
-    if (!res.ok) throw new Error(`Failed to fetch: ${res.statusText}`);
-    const response = await res.json();
+  // Просто вызываем нашу функцию, чтобы получить 3 поста
+  const { posts } = await getProcessedPosts({ locale, pageSize: 3 });
 
-    const markdownConverter = new showdown.Converter();
-    const articles = (response.data || []).map((post) => {
-      if (post.content) {
-        const rawHtml = markdownConverter.makeHtml(post.content);
-        post.sanitizedBody = DOMPurify.sanitize(rawHtml);
-      }
-      return post;
-    });
-
-    return { props: { articles, siteUrl } };
-  } catch (error) {
-    console.error("Failed to fetch articles from Strapi:", error);
-    return { props: { articles: [], siteUrl } };
-  }
+  return { props: { articles: posts, siteUrl } };
 }
