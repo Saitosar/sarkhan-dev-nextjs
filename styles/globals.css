@@ -1002,7 +1002,6 @@ footer p {
   margin-top: var(--space-xl);
   margin-bottom: var(--space-md);
   padding-bottom: var(--space-sm);
-  border-bottom: 1px solid var(--color-border);
 }
 
 /* Заголовок H3 (из ###) */
