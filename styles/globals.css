@@ -1044,3 +1044,8 @@ footer p {
     padding: var(--space-xl); /* Уменьшаем внутренний отступ на маленьких экранах */
   }
 }
+
+/* --- Выравнивание текста статьи по ширине в модальном окне --- */
+.modal-content div[dangerouslysetinnerhtml] p {
+  text-align: justify;
+}
