@@ -987,3 +987,37 @@ footer p {
   text-align: center;
   margin-top: var(--space-xxl);
 }
+
+/* --- Стили для контента внутри модального окна статьи --- */
+
+/* Контейнер для самого текста статьи */
+.modal-content div[dangerouslysetinnerhtml] {
+  line-height: 1.8; /* Немного увеличим межстрочный интервал для читаемости */
+}
+
+/* Заголовок H2 (из ##) */
+.modal-content div h2 {
+  font-size: 1.75rem; /* Делаем его заметным, но меньше главного заголовка модального окна */
+  color: var(--color-primary); /* Используем фирменный цвет */
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Заголовок H3 (из ###) */
+.modal-content div h3 {
+  font-size: 1.4rem; /* Чуть меньше H2 */
+  color: var(--color-heading);
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-sm);
+}
+
+/* Заголовок H4 (из ####) */
+.modal-content div h4 {
+  font-size: 1.2rem; /* Чуть меньше H3, но все еще заметно больше основного текста */
+  color: var(--color-text-secondary);
+  text-transform: none; /* Убираем 'uppercase', чтобы он не был слишком кричащим */
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-sm);
+}
