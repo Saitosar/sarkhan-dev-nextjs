@@ -1035,6 +1035,7 @@ footer p {
   .modal-content h3#modal-title,
   .fullscreen-content .modal-main-title {
     font-size: 1.6rem; /* Уменьшаем размер шрифта */
+    padding: var(--space-md); /* Добавляем отступы */
   }
 }
 
