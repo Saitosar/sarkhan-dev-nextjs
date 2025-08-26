@@ -2,6 +2,9 @@ import '@/styles/globals.css';
 import { ThemeProvider } from 'next-themes';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Jura, Tektur } from 'next/font/google';
+import AiAssistant from '@/components/AiAssistant'; // <-- 1. Импортируем компонент
+import { translations } from '@/utils/translations'; // <-- 2. Импортируем переводы
+import { useRouter } from 'next/router'; // <-- 3. Импортируем useRouter
 
 // body: Jura по умолчанию
 const jura = Jura({
@@ -21,12 +24,16 @@ function ErrorFallback({ error }) {
 }
 
 export default function App({ Component, pageProps }) {
+  // 4. Получаем текущий язык для передачи в ассистент
+  const { locale } = useRouter();
+  const t = translations[locale] || translations['az'];
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <ThemeProvider defaultTheme="system" attribute="data-theme">
         {/* Jura применяем классом, Tektur — переменной */}
         <main className={`${jura.className} ${tektur.variable}`}>
           <Component {...pageProps} />
+           <AiAssistant t={t} /> {/* <-- 5. Добавляем ассистента здесь */}
         </main>
       </ThemeProvider>
     </ErrorBoundary>
