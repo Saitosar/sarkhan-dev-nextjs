@@ -41,7 +41,7 @@ Texniki biliklərimi və insana yönümlü düşüncə tərzimi transformasiya t
         contactInfoTitle: "Əlaqə saxlayın",
         contactInfoText: "Formadan istifadə edərək və ya sosial şəbəkələrdə mənimlə əlaqə saxlaya bilərsiniz.",
         aiSummaryButton: "AI-Xülasə", // (или "AI Summary", "AI-Xülasə")
-        aiSummaryLoading: "АAnaliz edirəm...",
+        aiSummaryLoading: "Analiz edirəm...",
         aiSummaryError: "Xəta. Bir müddət sonra təkrar yoxlayın."
     },
     en: {
