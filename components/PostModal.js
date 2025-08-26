@@ -1,15 +1,13 @@
 // components/PostModal.js
 import { useState, useEffect } from 'react';
 import FocusTrap from 'focus-trap-react';
+import Icon from './Icon';
 
 const PostModal = ({ post, onClose, t }) => {
   const [summary, setSummary] = useState('');
   const [isLoadingSummary, setIsLoadingSummary] = useState(false);
 
-  // Сбрасываем саммари, когда открывается новый пост
-  useEffect(() => {
-    setSummary('');
-  }, [post]);
+  useEffect(() => { setSummary(''); }, [post]);
 
   const handleGetSummary = async () => {
     if (!post || !post.content) return;
@@ -26,33 +24,33 @@ const PostModal = ({ post, onClose, t }) => {
       setSummary(data.summary);
     } catch (error) {
       console.error(error);
-      setSummary("Не удалось получить краткое содержание. Попробуйте позже.");
+      setSummary(t.aiSummaryError || "Не удалось получить краткое содержание. Попробуйте позже.");
     } finally {
       setIsLoadingSummary(false);
     }
   };
 
-  if (!post) {
-    return null;
-  }
+  if (!post) return null;
 
   return (
     <FocusTrap active={!!post} focusTrapOptions={{ onDeactivate: onClose, initialFocus: false }}>
       <div className="modal-overlay active" onClick={onClose}>
         <div className="modal-content" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="modal-title">
           <button className="modal-close-btn" onClick={onClose}>&times;</button>
-          <h3 id="modal-title">{post.title}</h3>
-          
-          <div className="summary-section" style={{ marginBottom: '20px' }}>
-            <button className="btn btn-secondary" onClick={handleGetSummary} disabled={isLoadingSummary}>
-              {isLoadingSummary ? 'Анализирую...' : '💡 Получить AI-саммари'}
+
+          <div className="modal-header">
+            <h3 id="modal-title">{post.title}</h3>
+            <button className="btn-ai-summary" onClick={handleGetSummary} disabled={isLoadingSummary} title={t.aiSummaryButton}>
+              <Icon name="ai-sparkle" />
+              <span>{isLoadingSummary ? t.aiSummaryLoading : t.aiSummaryButton}</span>
             </button>
-            {summary && (
-              <div className="summary-result" style={{ marginTop: '15px', padding: '15px', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)' }}>
-                <p>{summary}</p>
-              </div>
-            )}
           </div>
+
+          {summary && (
+              <div className="summary-result">
+                  <p>{summary}</p>
+              </div>
+          )}
 
           <div dangerouslySetInnerHTML={{ __html: post.sanitizedBody || '' }} />
           <br />

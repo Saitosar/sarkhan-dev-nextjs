@@ -1,5 +1,4 @@
-
-// pages/index.js - правильные импорты
+// pages/index.js (ФИНАЛЬНАЯ ВЕРСИЯ)
 
 import Header from '@/components/Header';
 import Head from 'next/head';
@@ -7,18 +6,11 @@ import BlogSection from '@/components/BlogSection';
 import ResourcesSection from '@/components/Resources';
 import AboutSection from '@/components/AboutSection';
 import ContactSection from '@/components/ContactSection';
-import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
-import showdown from 'showdown';
-import DOMPurify from 'isomorphic-dompurify';
-import FocusTrap from 'focus-trap-react';
-import { getLanguageFromCookies, setLanguageCookie } from '@/utils/cookies';
 import { useRouter } from 'next/router';
 import { translations } from '@/utils/translations';
 import Footer from '@/components/Footer';
-import { getProcessedPosts } from '@/lib/strapi'; // <-- Импортируем нашу новую функцию
-
-
+import { getProcessedPosts } from '@/lib/strapi'; // <-- 1. Импортируем нашу новую функцию
 
 const Hero = ({ t }) => (
     <section id="home">
@@ -55,42 +47,31 @@ const Hero = ({ t }) => (
     </section>
 );
 
-// --- ГЛАВНАЯ СТРАНИЦА (ИСПРАВЛЕННАЯ ВЕРСИЯ) ---
-
-export default function HomePage({ articles, siteUrl }) {
+export default function HomePage({ articles, siteUrl }) { // `articles` - это теперь наши обработанные посты
     const router = useRouter();
-    const { locale } = router; // Получаем текущий язык напрямую из роутера
-
+    const { locale } = router;
     const [activeSection, setActiveSection] = useState('home');
     const t = translations[locale] || translations['az'];
     const scrollPosition = useRef(0);
     const isInitialLoad = useRef(true);
 
     const handleLanguageChange = (newLang) => {
-        isInitialLoad.current = true; // Сбрасываем флаг, чтобы IntersectionObserver не срабатывал сразу
+        isInitialLoad.current = true;
         scrollPosition.current = window.scrollY;
-        // Эта команда теперь правильно сменит язык и перезапросит данные
         router.push(router.pathname, router.asPath, { locale: newLang, scroll: false });
     };
 
-    // ... после функции handleLanguageChange
-
-useEffect(() => {
-    // Восстанавливаем позицию скролла после смены языка
-    if (scrollPosition.current > 0) {
-        window.scrollTo({
-            top: scrollPosition.current,
-            behavior: 'instant' // 'instant' для мгновенного перехода без анимации
-        });
-    }
-}, [locale]); // Этот хук сработает только при изменении языка
+    useEffect(() => {
+        if (scrollPosition.current > 0) {
+            window.scrollTo({ top: scrollPosition.current, behavior: 'instant' });
+        }
+    }, [locale]);
 
     useEffect(() => {
         document.documentElement.lang = locale;
     }, [locale]);
 
     useEffect(() => {
-        // Этот хук остается без изменений
         let lastY = window.scrollY;
         const onScroll = () => {
             const dir = window.scrollY > lastY ? 'scrolling-down' : 'scrolling-up';
@@ -99,7 +80,6 @@ useEffect(() => {
             lastY = window.scrollY;
         };
         window.addEventListener('scroll', onScroll, { passive: true });
-
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
@@ -110,59 +90,44 @@ useEffect(() => {
             },
             { rootMargin: '0px', threshold: 0.5 }
         );
-
         const sections = document.querySelectorAll('section');
         sections.forEach(section => observer.observe(section));
-// Устанавливаем таймер, чтобы после первой загрузки observer начал работать в обычном режиме
-        const timeoutId = setTimeout(() => {
-        isInitialLoad.current = false;
-    }, 500); // 500 мс - небольшая задержка
-
+        const timeoutId = setTimeout(() => { isInitialLoad.current = false; }, 500);
         return () => {
             window.removeEventListener('scroll', onScroll);
             sections.forEach(section => observer.unobserve(section));
         };
     }, [locale]);
 
-    const jsonLd = { /* ... ваш jsonLd объект ... */ };
-
     return (
         <>
-            {/* --- НАЧАЛО ИЗМЕНЕНИЙ --- */}
             <Head>
                 <title>{t.docTitle}</title>
                 <meta name="description" content={t.docDesc} />
                 <link rel="icon" href="/leo-icon.svg" type="image/svg+xml" />
-                {/* Здесь могут быть и другие мета-теги */}
             </Head>
-            {/* --- КОНЕЦ ИЗМЕНЕНИЙ --- */}
-
             <div id="background-animation"></div>
-
-            {/* Передаем `locale` вместо `lang` */}
             <Header t={t} lang={locale} setLang={handleLanguageChange} activeSection={activeSection} pathname={router.pathname} />
-
             <main>
                 <Hero t={t} />
                 <BlogSection t={t} articles={articles} />
-                {/* Передаем `locale` вместо `lang` */}
                 <ResourcesSection t={t} lang={locale} />
                 <AboutSection t={t} />
                 <ContactSection t={t} />
             </main>
-
             <Footer />
         </>
     );
 }
 
-// --- ЗАГРУЗКА ДАННЫХ С СЕРВЕРА (ИСПРАВЛЕННАЯ ВЕРСИЯ) ---
+// 2. Радикально упрощенная getServerSideProps
 export async function getServerSideProps(context) {
   const { locale } = context;
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || '';
 
-  // Просто вызываем нашу функцию, чтобы получить 3 поста
+  // Просто вызываем нашу централизованную функцию
   const { posts } = await getProcessedPosts({ locale, pageSize: 3 });
 
+  // Передаем посты в пропс `articles`, как и ожидает компонент HomePage
   return { props: { articles: posts, siteUrl } };
 }

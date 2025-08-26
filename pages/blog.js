@@ -1,24 +1,18 @@
-// pages/blog.js
+// pages/blog.js (ФИНАЛЬНАЯ ВЕРСИЯ)
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState, useRef } from 'react';
-import showdown from 'showdown';
-import DOMPurify from 'isomorphic-dompurify';
-import { getProcessedPosts } from '@/lib/strapi'; // <-- Импортируем нашу новую функцию
-
-
-// Импортируем компоненты
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { translations } from '@/utils/translations';
 import PostModal from '@/components/PostModal';
 import ClientOnly from '@/components/ClientOnly';
+import { getProcessedPosts } from '@/lib/strapi'; // <-- 1. Импортируем нашу новую функцию
 
-export default function BlogPage({ articles, pagination }) {
+export default function BlogPage({ articles, pagination }) { // `articles` - это теперь наши обработанные посты
     const router = useRouter();
     const { locale } = router;
     const t = translations[locale] || translations['az'];
-
     const [selectedPost, setSelectedPost] = useState(null);
     const triggerRef = useRef(null);
 
@@ -44,15 +38,12 @@ export default function BlogPage({ articles, pagination }) {
                 <meta name="description" content={t.docDesc} />
                 <link rel="icon" href="/leo-icon.svg" type="image/svg+xml" />
             </Head>
-
             <div id="background-animation"></div>
             <Header t={t} lang={locale} setLang={handleLanguageChange} activeSection="blog" pathname={router.pathname} />
-
             <main className="blog-page-main">
                 <section id="blog-archive">
                     <div className="container">
                         <h2>{t.blogSectionTitle}</h2>
-                        {/* --- ВОТ ВОССТАНОВЛЕННЫЙ БЛОК --- */}
                         <div className="blog-grid">
                             {Array.isArray(articles) && articles.map(post => (
                                  <div
@@ -68,8 +59,6 @@ export default function BlogPage({ articles, pagination }) {
                                 </div>
                             ))}
                         </div>
-                        {/* --- КОНЕЦ ВОССТАНОВЛЕННОГО БЛОКА --- */}
-
                         <div className="pagination">
                             {pagination.page > 1 && (
                                 <button onClick={() => router.push(`/blog?page=${pagination.page - 1}`)} className="btn">
@@ -85,23 +74,22 @@ export default function BlogPage({ articles, pagination }) {
                     </div>
                 </section>
             </main>
-
             <ClientOnly>
                 <PostModal post={selectedPost} onClose={closeModal} t={t} />
             </ClientOnly>
-
             <Footer />
         </>
     );
 }
 
-// ИСПРАВЛЕННАЯ ВЕРСИЯ getServerSideProps
+// 2. Радикально упрощенная getServerSideProps
 export async function getServerSideProps(context) {
   const { locale, query } = context;
   const page = query.page || 1;
 
-  // Просто вызываем нашу функцию, чтобы получить 9 постов для текущей страницы
+  // Просто вызываем нашу централизованную функцию
   const { posts, pagination } = await getProcessedPosts({ locale, page, pageSize: 9 });
 
+  // Передаем посты в пропс `articles`, как и ожидает компонент BlogPage
   return { props: { articles: posts, pagination } };
 }

@@ -39,7 +39,10 @@ Texniki biliklərimi və insana yönümlü düşüncə tərzimi transformasiya t
         langToggle: "Dili dəyişdir",
         validation: { nameRequired: "Ad tələb olunur", emailRequired: "E-mail tələb olunur", emailInvalid: "Yanlış e-mail formatı", messageRequired: "Mesaj tələb olunur", messageMin: "Mesaj ən azı 10 simvol olmalıdır" },
         contactInfoTitle: "Əlaqə saxlayın",
-        contactInfoText: "Formadan istifadə edərək və ya sosial şəbəkələrdə mənimlə əlaqə saxlaya bilərsiniz."
+        contactInfoText: "Formadan istifadə edərək və ya sosial şəbəkələrdə mənimlə əlaqə saxlaya bilərsiniz.",
+        aiSummaryButton: "AI-Xülasə", // (или "AI Summary", "AI-Xülasə")
+        aiSummaryLoading: "АAnaliz edirəm...",
+        aiSummaryError: "Xəta. Bir müddət sonra təkrar yoxlayın."
     },
     en: {
         docTitle: "Sarkhan.dev | Analytical Thinking. Practical Tools.",
@@ -76,7 +79,10 @@ Open to remote or hybrid opportunities with international teams where I can cont
         langToggle: "Change language",
         validation: { nameRequired: "Name is required", emailRequired: "Email is required", emailInvalid: "Invalid email format", messageRequired: "Message is required", messageMin: "Message must be at least 10 characters long" },
         contactInfoTitle: "Get in Touch",
-        contactInfoText: "Feel free to reach out using the form or connect with me on social media."
+        contactInfoText: "Feel free to reach out using the form or connect with me on social media.",
+        aiSummaryButton: "AI-summary", // (или "AI Summary", "AI-Xülasə")
+        aiSummaryLoading: "Analyzing...",
+        aiSummaryError: "Error. Please, try again later."
     },
     ru: {
         docTitle: "Sarkhan.dev | Аналитическое мышление. Практичные инструменты.",
@@ -113,7 +119,10 @@ Open to remote or hybrid opportunities with international teams where I can cont
         langToggle: "Сменить язык",
         validation: { nameRequired: "Имя обязательно", emailRequired: "Email обязателен", emailInvalid: "Неверный формат email", messageRequired: "Сообщение обязательно", messageMin: "Сообщение должно содержать не менее 10 символов" },
         contactInfoTitle: "Свяжитесь со мной",
-        contactInfoText: "Смело пишите мне через форму или свяжитесь со мной в социальных сетях."
+        contactInfoText: "Смело пишите мне через форму или свяжитесь со мной в социальных сетях.",
+        aiSummaryButton: "AI-Выжимка", // (или "AI Summary", "AI-Xülasə")
+        aiSummaryLoading: "Анализирую...",
+        aiSummaryError: "Ошибка. Попробуйте позже."
     }
 };
 

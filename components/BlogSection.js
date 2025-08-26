@@ -1,13 +1,14 @@
-// components/BlogSection.js
+// components/BlogSection.js (ФИНАЛЬНАЯ ВЕРСИЯ)
 import { useState, useRef } from 'react';
 import Link from 'next/link';
-import PostModal from './PostModal'; // <-- 1. ИМПОРТ ИЗМЕНЕН
+import PostModal from './PostModal';
+import ClientOnly from './ClientOnly';
 
-const BlogSection = ({ t, articles }) => { // Оставим articles здесь, т.к. это пропс
-  const [selectedPost, setSelectedPost] = useState(null); // <-- 2. ПЕРЕИМЕНОВАНО
+const BlogSection = ({ t, articles }) => {
+  const [selectedPost, setSelectedPost] = useState(null);
   const triggerRef = useRef(null);
 
-  const openModal = (post, e) => { // <-- 3. ПЕРЕИМЕНОВАНО
+  const openModal = (post, e) => {
     triggerRef.current = e.currentTarget;
     setSelectedPost(post);
   };
@@ -23,7 +24,7 @@ const BlogSection = ({ t, articles }) => { // Оставим articles здесь
         <div className="container">
           <h2>{t.blogSectionTitle}</h2>
           <div className="blog-grid">
-            {Array.isArray(articles) && articles.map(post => ( // <-- 4. ПЕРЕИМЕНОВАНО
+            {Array.isArray(articles) && articles.map(post => (
               post ? (
                 <div
                   key={post.id}
@@ -40,7 +41,6 @@ const BlogSection = ({ t, articles }) => { // Оставим articles здесь
             ))}
             {(!articles || articles.length === 0) && <p>Hələ yazı yoxdur.</p>}
           </div>
-
           <div className="view-all-container">
             <Link href="/blog" legacyBehavior>
               <a className="btn">{t.viewAllArticles}</a>
@@ -48,9 +48,9 @@ const BlogSection = ({ t, articles }) => { // Оставим articles здесь
           </div>
         </div>
       </section>
-
-      {/* 5. ИСПОЛЬЗУЕМ PostModal */}
-      <PostModal post={selectedPost} onClose={closeModal} t={t} />
+      <ClientOnly>
+        <PostModal post={selectedPost} onClose={closeModal} t={t} />
+      </ClientOnly>
     </>
   );
 };

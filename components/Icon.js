@@ -27,8 +27,10 @@ const icons = {
       {/* Иконка Луны для темной темы */}
       <path className="moon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
     </>
+  ),
+  'ai-sparkle': (
+    <path d="M12 3L14.5 9L21 11.5L14.5 14L12 20L9.5 14L3 11.5L9.5 9L12 3Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
   )
-  // ------------------------------------
 };
 
 const Icon = ({ name, className }) => {
