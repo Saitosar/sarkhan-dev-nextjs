@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import FocusTrap from 'focus-trap-react';
 import Icon from './Icon';
 
-const PostModal = ({ post, onClose, t }) => {
+const PostModal = ({ post, onClose, t, locale }) => {
   const [summary, setSummary] = useState('');
   const [isLoadingSummary, setIsLoadingSummary] = useState(false);
 
@@ -17,7 +17,7 @@ const PostModal = ({ post, onClose, t }) => {
       const response = await fetch('/api/summarize', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ articleText: post.content }),
+        body: JSON.stringify({ articleText: post.content, locale: locale }),
       });
       if (!response.ok) throw new Error('Failed to fetch summary');
       const data = await response.json();

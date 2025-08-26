@@ -4,7 +4,7 @@ import Link from 'next/link';
 import PostModal from './PostModal';
 import ClientOnly from './ClientOnly';
 
-const BlogSection = ({ t, articles }) => {
+const BlogSection = ({ t, articles, locale }) => {
   const [selectedPost, setSelectedPost] = useState(null);
   const triggerRef = useRef(null);
 
@@ -49,7 +49,7 @@ const BlogSection = ({ t, articles }) => {
         </div>
       </section>
       <ClientOnly>
-        <PostModal post={selectedPost} onClose={closeModal} t={t} />
+        <PostModal post={selectedPost} onClose={closeModal} t={t} locale={locale} />
       </ClientOnly>
     </>
   );

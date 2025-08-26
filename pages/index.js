@@ -110,7 +110,7 @@ export default function HomePage({ articles, siteUrl }) { // `articles` - это
             <Header t={t} lang={locale} setLang={handleLanguageChange} activeSection={activeSection} pathname={router.pathname} />
             <main>
                 <Hero t={t} />
-                <BlogSection t={t} articles={articles} />
+                <BlogSection t={t} articles={articles} locale={locale} />
                 <ResourcesSection t={t} lang={locale} />
                 <AboutSection t={t} />
                 <ContactSection t={t} />
