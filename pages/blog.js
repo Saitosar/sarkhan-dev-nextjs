@@ -75,7 +75,7 @@ export default function BlogPage({ articles, pagination }) { // `articles` - —ç—
                 </section>
             </main>
             <ClientOnly>
-                <PostModal post={selectedPost} onClose={closeModal} t={t} />
+                <PostModal post={selectedPost} onClose={closeModal} t={t} locale={locale} />
             </ClientOnly>
             <Footer />
         </>
