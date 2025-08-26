@@ -42,7 +42,10 @@ Texniki biliklərimi və insana yönümlü düşüncə tərzimi transformasiya t
         contactInfoText: "Formadan istifadə edərək və ya sosial şəbəkələrdə mənimlə əlaqə saxlaya bilərsiniz.",
         aiSummaryButton: "AI-Xülasə", // (или "AI Summary", "AI-Xülasə")
         aiSummaryLoading: "Analiz edirəm...",
-        aiSummaryError: "Xəta. Bir müddət sonra təkrar yoxlayın."
+        aiSummaryError: "Xəta. Bir müddət sonra təkrar yoxlayın.",
+        aiAssistantWelcome: "Salam! Bu gün sizə necə kömək edə bilərəm?",
+        aiAssistantPlaceholder: "Bir şey soruşun...",
+        aiAssistantSend: "Göndər"
     },
     en: {
         docTitle: "Sarkhan.dev | Analytical Thinking. Practical Tools.",
@@ -82,7 +85,10 @@ Open to remote or hybrid opportunities with international teams where I can cont
         contactInfoText: "Feel free to reach out using the form or connect with me on social media.",
         aiSummaryButton: "AI-summary", // (или "AI Summary", "AI-Xülasə")
         aiSummaryLoading: "Analyzing...",
-        aiSummaryError: "Error. Please, try again later."
+        aiSummaryError: "Error. Please, try again later.",
+        aiAssistantWelcome: "Hello! How can I help you today?",
+        aiAssistantPlaceholder: "Ask something...",
+        aiAssistantSend: "Send"
     },
     ru: {
         docTitle: "Sarkhan.dev | Аналитическое мышление. Практичные инструменты.",
@@ -122,7 +128,10 @@ Open to remote or hybrid opportunities with international teams where I can cont
         contactInfoText: "Смело пишите мне через форму или свяжитесь со мной в социальных сетях.",
         aiSummaryButton: "AI-Выжимка", // (или "AI Summary", "AI-Xülasə")
         aiSummaryLoading: "Анализирую...",
-        aiSummaryError: "Ошибка. Попробуйте позже."
+        aiSummaryError: "Ошибка. Попробуйте позже.",
+        aiAssistantWelcome: "Здравствуйте! Чем могу помочь вам сегодня?",
+        aiAssistantPlaceholder: "Спросите что-нибудь...",
+        aiAssistantSend: "Отправить"
     }
 };
 
