@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import Icon from './Icon';
+import Image from 'next/image';
 
 const AiAssistant = ({ t }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,49 +8,54 @@ const AiAssistant = ({ t }) => {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [cpuLoad, setCpuLoad] = useState(25); // Для HUD
   const chatBodyRef = useRef(null);
   const textareaRef = useRef(null);
 
-  // --- УЛУЧШЕННАЯ ЛОГИКА ЭФФЕКТОВ ---
-
-  // Эффект, который срабатывает только при открытии/закрытии чата
+  // Эффект "нагрузки" на CPU во время ответа
   useEffect(() => {
-    if (isOpen) {
-      // Устанавливаем приветственное сообщение, только если чат пуст
-      if (messages.length === 0) {
-        setMessages([
-          { role: 'model', parts: [{ text: t?.aiAssistantWelcome || "Здравствуйте! Чем могу помочь?" }] }
-        ]);
-      }
-      // Фокусируемся на поле ввода
-      setTimeout(() => textareaRef.current?.focus(), 100);
+    let interval;
+    if (isLoading) {
+      interval = setInterval(() => {
+        setCpuLoad(Math.floor(Math.random() * (95 - 60 + 1) + 60));
+      }, 500);
+    } else {
+      setCpuLoad(Math.floor(Math.random() * (35 - 15 + 1) + 15));
     }
-  }, [isOpen]);
+    return () => clearInterval(interval);
+  }, [isLoading]);
 
-  // Эффект для авто-прокрутки при появлении новых сообщений
+
+  useEffect(() => {
+    const conversationLength = messages.filter(m => m.role === 'user' || m.role === 'model').length;
+    if (conversationLength > 3 && !isExpanded) {
+      setIsExpanded(true);
+    }
+  }, [messages, isExpanded]);
+
+  useEffect(() => {
+    if (isOpen && messages.length === 0) {
+      setMessages([
+        { role: 'model', parts: [{ text: t.aiAssistantWelcome || "Здравствуйте! Чем могу помочь вам сегодня?" }] }
+      ]);
+    }
+  }, [isOpen, messages.length, t.aiAssistantWelcome]);
+
   useEffect(() => {
     if (chatBodyRef.current) {
       chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
     }
   }, [messages]);
-
-  // Эффект для авто-изменения размера поля ввода
+  
   useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => textareaRef.current?.focus(), 100);
+    }
     if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+        textareaRef.current.style.height = 'auto';
+        textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
-  }, [userInput]);
-
-  // Эффект для автоматического расширения окна
-  useEffect(() => {
-    // Считаем только реальные сообщения (не приветствие)
-    const realMessagesCount = messages.filter(m => !(m.role === 'model' && messages.indexOf(m) === 0)).length;
-    if (realMessagesCount >= 2 && !isExpanded) {
-      setIsExpanded(true);
-    }
-  }, [messages, isExpanded]);
-
+  }, [isOpen, userInput]);
 
   const toggleChat = () => setIsOpen(!isOpen);
   const toggleExpand = () => setIsExpanded(!isExpanded);
@@ -59,24 +65,23 @@ const AiAssistant = ({ t }) => {
     if (!userInput.trim() || isLoading) return;
 
     const userMessage = { role: 'user', parts: [{ text: userInput }] };
-    const updatedMessages = [...messages, userMessage];
+    const newMessagesForUI = [...messages, userMessage];
     
-    setMessages(updatedMessages);
+    setMessages(newMessagesForUI);
     setUserInput('');
     setIsLoading(true);
 
     try {
-      const historyForAPI = updatedMessages.slice();
+      const historyForAPI = newMessagesForUI.slice();
       if (historyForAPI.length > 0 && historyForAPI[0].role === 'model') {
           historyForAPI.shift();
       }
-      
       const payloadHistory = historyForAPI.length > 0 ? historyForAPI : [userMessage];
 
       const response = await fetch('/api/assistant', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ history: payloadHistory, locale: t?.locale }), 
+        body: JSON.stringify({ history: payloadHistory, locale: t.locale }), 
       });
 
       if (!response.ok) {
@@ -88,7 +93,7 @@ const AiAssistant = ({ t }) => {
       setMessages(prev => [...prev, { role: 'model', parts: [{ text: data.response }] }]);
     } catch (error) {
       console.error("Error in handleSendMessage:", error);
-      setMessages(prev => [...prev, { role: 'model', parts: [{ text: t?.aiSummaryError || "Произошла ошибка. Попробуйте позже." }] }]);
+      setMessages(prev => [...prev, { role: 'model', parts: [{ text: t.aiSummaryError || "Произошла ошибка. Попробуйте позже." }] }]);
     } finally {
       setIsLoading(false);
       setTimeout(() => textareaRef.current?.focus(), 0);
@@ -105,14 +110,27 @@ const AiAssistant = ({ t }) => {
   return (
     <>
       <button className={`chat-fab ${isOpen ? 'hidden' : ''}`} onClick={toggleChat} title="AI Assistant">
-        <Icon name="ai-sparkle" />
+        <img src="/assets/itbai-core.png" alt="Open AI Assistant" />
       </button>
 
       <div className={`chat-overlay ${isExpanded && isOpen ? 'expanded' : ''}`} onClick={toggleExpand}></div>
 
       <div className={`chat-window ${!isOpen ? 'closed' : ''} ${isExpanded ? 'expanded' : 'compact'}`}>
         <div className="chat-header">
-          <h3>ITBAI Assistant</h3>
+          <div className="chat-header-title">
+            <img 
+                src="/assets/itbai-core.png" 
+                alt="ITBAI AI Core" 
+                className={`chat-header-avatar ${isLoading ? 'thinking' : ''}`} 
+            />
+            <h3>ITBAI Assistant</h3>
+          </div>
+
+          <div className="chat-status-indicators">
+            <span><span className="status-light"></span>ACTIVE</span>
+            <span>CPU: {cpuLoad}%</span>
+          </div>
+
           <div className="header-controls">
             <button className="chat-control-btn" onClick={toggleExpand} title={isExpanded ? 'Свернуть' : 'Развернуть'}>
                 <Icon name={isExpanded ? 'minimize' : 'expand'} />
@@ -135,7 +153,7 @@ const AiAssistant = ({ t }) => {
         <form className="chat-footer" onSubmit={handleSendMessage}>
           <textarea
             ref={textareaRef}
-            placeholder={t?.aiAssistantPlaceholder || "Спросите что-нибудь..."}
+            placeholder={t.aiAssistantPlaceholder || "Введите команду..."}
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             onKeyDown={handleKeyDown}
@@ -143,7 +161,7 @@ const AiAssistant = ({ t }) => {
             rows={1}
           />
           <button type="submit" disabled={isLoading || !userInput.trim()}>
-            {t?.aiAssistantSend || "Отправить"}
+            {t.aiAssistantSend || "Enter"}
           </button>
         </form>
       </div>
