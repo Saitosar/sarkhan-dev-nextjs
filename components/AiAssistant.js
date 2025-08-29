@@ -87,10 +87,20 @@ const AiAssistant = ({ t }) => {
         body: JSON.stringify({ history: payloadHistory, locale: t.locale }), 
       });
 
+      // --- НАЧАЛО ИСПРАВЛЕНИЯ ---
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Network response was not ok');
+        let errorMessage = 'Network response was not ok';
+        try {
+          // Пытаемся прочитать ошибку как JSON
+          const errorData = await response.json();
+          errorMessage = errorData.error || JSON.stringify(errorData);
+        } catch (jsonError) {
+          // Если не получилось, читаем как текст
+          errorMessage = await response.text();
+        }
+        throw new Error(errorMessage);
       }
+      // --- КОНЕЦ ИСПРАВЛЕНИЯ ---
 
       const data = await response.json();
       setMessages(prev => [...prev, { role: 'model', parts: [{ text: data.response }] }]);

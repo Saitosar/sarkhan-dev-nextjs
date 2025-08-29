@@ -6,8 +6,6 @@ const DASHES_SPACES_RE = /[\u00A0\u2000-\u200A\u202F\u205F\u3000]/g;
 const MULTI_SPACE_RE = /\s{2,}/g;
 const HOMOGLYPHS = { 'а': 'a', 'е': 'e', 'о': 'o', 'р': 'p', 'с': 'c', 'х': 'x', 'А': 'A', 'В': 'B', 'С': 'C', 'Е': 'E', 'Н': 'H', 'К': 'K', 'М': 'M', 'О': 'O', 'Р': 'P', 'Т': 'T', 'Х': 'X' };
 
-// v2: Раздельная нормализация
-// Агрессивная - для проверок безопасности
 function normalizeForSecurity(s) {
   if (!s) return '';
   let t = s.normalize('NFKC');
@@ -17,26 +15,22 @@ function normalizeForSecurity(s) {
   t = t.replace(MULTI_SPACE_RE, ' ').trim();
   return t.toLowerCase();
 }
-// Щадящая - для сохранения контекста для LLM
 function preserveContextForLLM(s) {
     if (!s) return '';
     return s.replace(MULTI_SPACE_RE, ' ').trim();
 }
 
-
-// --- УРОВЕНЬ 1: КРАСНЫЕ ФЛАГИ (ЯВНЫЕ ДАННЫЕ) ---
 const RE_EMAIL_STRICT = /\S+@\S+\.\S+/;
 const RE_PHONE_STRICT = /(\+?\d[\d()\-\s]{7,})/;
-// v2: Улучшенный regex для карт, чтобы избежать ложных срабатываний на версиях ПО
 const RE_CARD_STRICT = /\b(?:\d{4}[\s\-]?){3}\d{3,4}\b/;
 const RE_IBAN = /\b[A-Z]{2}\d{2}[A-Z0-9]{10,30}\b/i;
 const RE_JWT = /\beyJ[A-Za-z0-9_\-]+?\.[A-Za-z0-9_\-]+?\.[A-Za-z0-9_\-]+?\b/;
 const RE_SECRET_VALUES = /\b(sk_live_|pk_live_|rk_live_|[a-f0-9]{32,})\b/i;
 const RE_BASE64_LONG = /\b[A-Za-z0-9+/]{40,}={0,2}\b/;
 const RE_HEX_LONG = /\b[0-9a-f]{40,}\b/i;
+const RE_VERSION_PATTERN = /\b\d+(\.\d+){5,}\b/;
 
 function containsHighConfidencePII(s) {
-  const RE_VERSION_PATTERN = /\b\d+(\.\d+){5,}\b/; // Исключаем паттерны версий
   if (RE_VERSION_PATTERN.test(s)) return false;
   return (
     RE_EMAIL_STRICT.test(s) || RE_PHONE_STRICT.test(s) || RE_CARD_STRICT.test(s) ||
@@ -45,19 +39,16 @@ function containsHighConfidencePII(s) {
   );
 }
 
-// --- УРОВЕНЬ 2: ЖЕЛТЫЕ ФЛАГИ (ПОДОЗРИТЕЛЬНЫЕ СЛОВА) ---
 const RE_SUSPICIOUS_KEYWORDS = /\b(банк|счет|клиент|пароль|деньги|контакт|телефон|bank|account|client|password|money|contact|phone|bank|hesab|müştəri|şifrə|pul|əlaqə|telefon)\b/i;
 const RE_BA_CONTEXT_KEYWORDS = /\b(требования|спецификация|документация|анализ|user story|requirements|specification|documentation|analysis|tələblər|spesifikasiya|sənədləşdirmə|analiz)\b/i;
 
 function containsSuspiciousKeywords(s) {
-    // v2: Пропускаем "желтый" флаг, если есть явный BA-контекст
     if (RE_BA_CONTEXT_KEYWORDS.test(s)) {
         return false;
     }
     return RE_SUSPICIOUS_KEYWORDS.test(s);
 }
 
-// --- Константы ответов ---
 const UNIFIED_REFUSAL = 'Для безопасности я не анализирую данные, которые могут содержать конфиденциальную информацию. Давайте переформулируем задачу в абстрактном виде?';
 const YELLOW_FLAG_PROMPT_RU = 'Уточните, говорим ли мы об абстрактных требованиях или оперируем конкретными данными?';
 const YELLOW_FLAG_PROMPT_EN = 'Could you clarify if we are talking about abstract requirements or operating with specific data?';
@@ -75,7 +66,7 @@ function detectLang(s) {
   return 'en';
 }
 
-// --- 🛡️ ITBAI v4.0 — Финальный системный промпт ---
+// --- 🛡️ ITBAI v4.0 — Финальный системный промпт (ВАША ОРИГИНАЛЬНАЯ ВЕРСИЯ) ---
 const prompts = {
   ru: `Ты — ITBAI, элитный и безопасный ИИ-ассистент, специализирующийся исключительно на IT-бизнес-анализе.
 
@@ -255,7 +246,7 @@ Change log for updates.
 SLA for response time.`,
   az: `Sən — ITBAI, yalnız İT biznes-analizi üzrə ixtisaslaşmış elit və təhlükəsiz süni intellekt köməkçisən.
 
-Missiyan Proqram Təminatının Həyat Dövrü (SDLC) çərçivəsində praktiki, dəqiq və qısa yardım göstərməkdir:
+Missiyan Proqram Təminatının Həyat Dövrü (SDLC) çərçivəsində praktiki, dəqiq və qısa yardım göstrməkdir:
 
 tələblər (BRD, SRS, User Stories, Texniki Sənədləşdirmə), Agile metodları və məhsul analizi (MoSCoW, Kano, WSJF), proseslərin modelləşdirilməsi (BPMN, UML, Context Diagrams), test praktikaları (integration, regression, smoke, UAT), no-code automation, DevOps/DevSecOps və CI/CD əsasları, alətlərlə iş (Jira, Confluence, Postman, Swagger), məlumat bazaları və miqrasiya üzrə təməl biliklər (SQL, Oracle), inteqrasiyalar (REST, SOAP, GraphQL), sistem arxitekturasının əsasları.
 ---
@@ -300,13 +291,12 @@ QIRMIZI (açıq-aşkar məxfi):
 Cavab: vahid mesajla tam imtina.`
 };
 
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  // TODO: Внедрить реальный Rate Limiting (например, с upstash/redis и express-rate-limit)
-  
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return res.status(500).json({ error: 'API key not configured.' });
@@ -324,23 +314,20 @@ export default async function handler(req, res) {
     return res.status(413).json({ error: 'Input too long (max 5000 chars)' });
   }
 
-  // 1) Нормализация для проверок
-  const normalizedForSecurity = normalizeForSecurity(userInput);
-
-  // 2) Детекция языка на сервере
-  let lang = detectLang(normalizedForSecurity);
+  const normalized = normalizeForSecurity(userInput);
+  let lang = detectLang(normalized);
   if (lang === 'ru-translit') lang = 'ru';
+  
   if (!['ru', 'en', 'az'].includes(lang)) {
     return res.status(200).json({ response: LANG_REFUSAL });
   }
   
-  // 3) Двухуровневая проверка безопасности
-  if (containsHighConfidencePII(normalizedForSecurity)) {
-    return res.status(200).json({ response: UNIFIED_REFUSAL });
+  if (containsHighConfidencePII(normalized)) {
+      return res.status(200).json({ response: UNIFIED_REFUSAL });
   }
   
-  const isAnsweringClarification = /^(да|нет|yes|no|bəli|xeyr|абстракт|abstrakt|template|şablon)/i.test(normalizedForSecurity);
-  if (containsSuspiciousKeywords(normalizedForSecurity) && !isAnsweringClarification) {
+  const isAnsweringClarification = /^(да|нет|yes|no|bəli|xeyr|абстракт|abstrakt|template|şablon)/i.test(normalized);
+  if (containsSuspiciousKeywords(normalized) && !isAnsweringClarification) {
       const yellowFlagPrompts = {
           ru: YELLOW_FLAG_PROMPT_RU,
           en: YELLOW_FLAG_PROMPT_EN,
@@ -349,7 +336,6 @@ export default async function handler(req, res) {
       return res.status(200).json({ response: yellowFlagPrompts[lang] });
   }
   
-  // 4) Минимальная обработка для LLM (отправляем оригинал)
   const preservedInput = preserveContextForLLM(userInput);
 
   try {
@@ -370,14 +356,12 @@ export default async function handler(req, res) {
       ],
     });
 
+    // --- ИСПРАВЛЕНИЕ ДЛЯ ПАМЯТИ ---
     const chat = model.startChat({
-        history: history.slice(0, -1).map(msg => ({
-            role: msg.role,
-            parts: msg.parts.map(part => ({ text: preserveContextForLLM(part.text) }))
-        }))
+        history: history.slice(0, -1)
     });
-
     const result = await chat.sendMessage(preservedInput);
+    // --- КОНЕЦ ИСПРАВЛЕНИЯ ---
 
     const assistantResponse = result?.response?.text?.() || '';
     return res.status(200).json({ response: assistantResponse.trim() });
@@ -386,3 +370,4 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Failed to generate response.' });
   }
 }
+

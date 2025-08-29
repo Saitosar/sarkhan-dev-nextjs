@@ -1347,6 +1347,17 @@ footer p {
 .chat-footer button:hover:not(:disabled) { background: var(--color-primary); color: var(--color-bg); box-shadow: 0 0 15px var(--color-primary); }
 .chat-footer button:disabled { opacity: 0.4; cursor: not-allowed; }
 
+.chat-footer input {
+  flex-grow: 1;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  caret-color: transparent; /* <-- Просто добавьте эту строку */
+}
+
 /* Адаптация для мобильных */
 @media (max-width: 576px) {
   .chat-window.compact, .chat-window.expanded {
@@ -1356,6 +1367,8 @@ footer p {
   }
   .chat-status-indicators { display: none; } /* Скрываем HUD на мобильных */
 }
+
+
 
 /* --- Light Theme Fixes --- */
 [data-theme="light"] .chat-overlay { background: rgba(245, 247, 250, 0.5); }
