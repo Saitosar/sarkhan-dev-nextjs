@@ -1,6 +1,7 @@
 
 const translations = {
     az: {
+        locale: "az",
         docTitle: "Sarkhan.dev | Analitik Düşüncə. Praktiki Alətlər.",
         docDesc: "IT Biznes Analitiklər üçün faydalı məqalələr, resurslar və alətlər toplusu.",
         viewAllArticles: "Bütün məqalələrə bax",
@@ -48,6 +49,7 @@ Texniki biliklərimi və insana yönümlü düşüncə tərzimi transformasiya t
         aiAssistantSend: "Göndər"
     },
     en: {
+        locale: "en",
         docTitle: "Sarkhan.dev | Analytical Thinking. Practical Tools.",
         docDesc: "A collection of useful articles, resources, and tools for IT Business Analysts.",
         viewAllArticles: "View all articles",
@@ -91,6 +93,7 @@ Open to remote or hybrid opportunities with international teams where I can cont
         aiAssistantSend: "Send"
     },
     ru: {
+        locale: "ru",
         docTitle: "Sarkhan.dev | Аналитическое мышление. Практичные инструменты.",
         docDesc: "Полезные статьи, ресурсы и инструменты для IT бизнес-аналитиков.",
         viewAllArticles: "Посмотреть все статьи",
