@@ -1332,7 +1332,7 @@ footer p {
 }
 .chat-footer textarea:focus {
     border-bottom-color: var(--color-primary);
-    animation: pulse-line 2s infinite; /* Анимация только для линии */
+   /* animation: pulse-line 2s infinite; /* Анимация только для линии */
 }
 
 .chat-footer button {
