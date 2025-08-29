@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import Icon from './Icon';
-import Image from 'next/image';
 
 const AiAssistant = ({ t }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -87,20 +86,16 @@ const AiAssistant = ({ t }) => {
         body: JSON.stringify({ history: payloadHistory, locale: t.locale }), 
       });
 
-      // --- НАЧАЛО ИСПРАВЛЕНИЯ ---
       if (!response.ok) {
         let errorMessage = 'Network response was not ok';
         try {
-          // Пытаемся прочитать ошибку как JSON
           const errorData = await response.json();
           errorMessage = errorData.error || JSON.stringify(errorData);
         } catch (jsonError) {
-          // Если не получилось, читаем как текст
           errorMessage = await response.text();
         }
         throw new Error(errorMessage);
       }
-      // --- КОНЕЦ ИСПРАВЛЕНИЯ ---
 
       const data = await response.json();
       setMessages(prev => [...prev, { role: 'model', parts: [{ text: data.response }] }]);
@@ -123,7 +118,8 @@ const AiAssistant = ({ t }) => {
   return (
     <>
       <button className={`chat-fab ${isOpen ? 'hidden' : ''}`} onClick={toggleChat} title="AI Assistant">
-        <img src="/assets/itbai-core.png" alt="Open AI Assistant" />
+        {/* ИЗМЕНЕНИЕ №1: Заменили <img> на <Icon> */}
+        <Icon name="ai-sparkle" />
       </button>
 
       <div className={`chat-overlay ${isExpanded && isOpen ? 'expanded' : ''}`} onClick={toggleExpand}></div>
@@ -131,11 +127,10 @@ const AiAssistant = ({ t }) => {
       <div className={`chat-window ${!isOpen ? 'closed' : ''} ${isExpanded ? 'expanded' : 'compact'}`}>
         <div className="chat-header">
           <div className="chat-header-title">
-            <img 
-                src="/assets/itbai-core.png" 
-                alt="ITBAI AI Core" 
-                className={`chat-header-avatar ${isLoading ? 'thinking' : ''}`} 
-            />
+             {/* ИЗМЕНЕНИЕ №2: Заменили <img> на <Icon> и добавили классы */}
+            <div className={`chat-header-avatar ${isLoading ? 'thinking' : ''}`}>
+                <Icon name="ai-sparkle" />
+            </div>
             <h3>ITBAI Assistant</h3>
           </div>
 
@@ -157,7 +152,7 @@ const AiAssistant = ({ t }) => {
               <p>{msg.parts[0].text}</p>
             </div>
           ))}
-           {isLoading && (
+            {isLoading && (
             <div className="message assistant-message">
               <p>...</p>
             </div>
@@ -183,3 +178,5 @@ const AiAssistant = ({ t }) => {
 };
 
 export default AiAssistant;
+
+// ИЗМЕНЕНИЕ №3: Добавлен компонент Icon
