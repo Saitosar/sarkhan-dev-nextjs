@@ -3,77 +3,80 @@ import Icon from './Icon';
 
 const AiAssistant = ({ t }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false); // Новое состояние для режима окна
+  const [isExpanded, setIsExpanded] = useState(false);
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const chatBodyRef = useRef(null);
   const textareaRef = useRef(null);
 
-  // Автоматическое расширение окна после 3 сообщений
-  useEffect(() => {
-    if (messages.length > 3 && !isExpanded) {
-      setIsExpanded(true);
-    }
-  }, [messages, isExpanded]);
+  // --- УЛУЧШЕННАЯ ЛОГИКА ЭФФЕКТОВ ---
 
-  // Приветственное сообщение при первом открытии
+  // Эффект, который срабатывает только при открытии/закрытии чата
   useEffect(() => {
-    if (isOpen && messages.length === 0) {
-      setMessages([
-        { role: 'model', parts: [{ text: t.aiAssistantWelcome || "Здравствуйте! Чем могу помочь вам сегодня?" }] }
-      ]);
+    if (isOpen) {
+      // Устанавливаем приветственное сообщение, только если чат пуст
+      if (messages.length === 0) {
+        setMessages([
+          { role: 'model', parts: [{ text: t?.aiAssistantWelcome || "Здравствуйте! Чем могу помочь?" }] }
+        ]);
+      }
+      // Фокусируемся на поле ввода
+      setTimeout(() => textareaRef.current?.focus(), 100);
     }
-  }, [isOpen, messages.length, t.aiAssistantWelcome]);
+  }, [isOpen]);
 
-  // Авто-прокрутка
+  // Эффект для авто-прокрутки при появлении новых сообщений
   useEffect(() => {
     if (chatBodyRef.current) {
       chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
     }
   }, [messages]);
-  
-  // Фокус и авто-изменение размера textarea
+
+  // Эффект для авто-изменения размера поля ввода
   useEffect(() => {
-    if (isOpen) {
-      setTimeout(() => textareaRef.current?.focus(), 100);
-    }
     if (textareaRef.current) {
-        textareaRef.current.style.height = 'auto';
-        textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
-  }, [isOpen, userInput]);
+  }, [userInput]);
+
+  // Эффект для автоматического расширения окна
+  useEffect(() => {
+    // Считаем только реальные сообщения (не приветствие)
+    const realMessagesCount = messages.filter(m => !(m.role === 'model' && messages.indexOf(m) === 0)).length;
+    if (realMessagesCount >= 2 && !isExpanded) {
+      setIsExpanded(true);
+    }
+  }, [messages, isExpanded]);
+
 
   const toggleChat = () => setIsOpen(!isOpen);
+  const toggleExpand = () => setIsExpanded(!isExpanded);
 
   const handleSendMessage = async (e) => {
     if (e) e.preventDefault();
     if (!userInput.trim() || isLoading) return;
 
     const userMessage = { role: 'user', parts: [{ text: userInput }] };
-    const newMessagesForUI = [...messages, userMessage];
+    const updatedMessages = [...messages, userMessage];
     
-    setMessages(newMessagesForUI);
+    setMessages(updatedMessages);
     setUserInput('');
     setIsLoading(true);
 
     try {
-      // --- НАДЕЖНОЕ ИСПРАВЛЕНИЕ ЗДЕСЬ ---
-      // Создаем чистую историю для API.
-      // Просто отбрасываем самое первое сообщение, если оно от модели.
-      const historyForAPI = newMessagesForUI.slice(); // Копируем массив
+      const historyForAPI = updatedMessages.slice();
       if (historyForAPI.length > 0 && historyForAPI[0].role === 'model') {
-          historyForAPI.shift(); // Удаляем первый элемент
+          historyForAPI.shift();
       }
       
-      // Если после фильтрации история пуста (например, только что отправили первое сообщение),
-      // то отправляем массив только с этим сообщением.
       const payloadHistory = historyForAPI.length > 0 ? historyForAPI : [userMessage];
 
       const response = await fetch('/api/assistant', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ history: payloadHistory, locale: t.locale }), 
+        body: JSON.stringify({ history: payloadHistory, locale: t?.locale }), 
       });
 
       if (!response.ok) {
@@ -85,7 +88,7 @@ const AiAssistant = ({ t }) => {
       setMessages(prev => [...prev, { role: 'model', parts: [{ text: data.response }] }]);
     } catch (error) {
       console.error("Error in handleSendMessage:", error);
-      setMessages(prev => [...prev, { role: 'model', parts: [{ text: t.aiSummaryError || "Произошла ошибка. Попробуйте позже." }] }]);
+      setMessages(prev => [...prev, { role: 'model', parts: [{ text: t?.aiSummaryError || "Произошла ошибка. Попробуйте позже." }] }]);
     } finally {
       setIsLoading(false);
       setTimeout(() => textareaRef.current?.focus(), 0);
@@ -101,14 +104,21 @@ const AiAssistant = ({ t }) => {
 
   return (
     <>
-      <button className="chat-fab" onClick={toggleChat} title="AI Assistant">
+      <button className={`chat-fab ${isOpen ? 'hidden' : ''}`} onClick={toggleChat} title="AI Assistant">
         <Icon name="ai-sparkle" />
       </button>
 
-      <div className={`chat-window ${!isOpen ? 'closed' : ''}`}>
+      <div className={`chat-overlay ${isExpanded && isOpen ? 'expanded' : ''}`} onClick={toggleExpand}></div>
+
+      <div className={`chat-window ${!isOpen ? 'closed' : ''} ${isExpanded ? 'expanded' : 'compact'}`}>
         <div className="chat-header">
           <h3>ITBAI Assistant</h3>
-          <button className="chat-close-btn" onClick={toggleChat}>&times;</button>
+          <div className="header-controls">
+            <button className="chat-control-btn" onClick={toggleExpand} title={isExpanded ? 'Свернуть' : 'Развернуть'}>
+                <Icon name={isExpanded ? 'minimize' : 'expand'} />
+            </button>
+            <button className="chat-control-btn chat-close-btn" onClick={toggleChat} title="Закрыть">&times;</button>
+          </div>
         </div>
         <div className="chat-body" ref={chatBodyRef}>
           {messages.map((msg, index) => (
@@ -125,7 +135,7 @@ const AiAssistant = ({ t }) => {
         <form className="chat-footer" onSubmit={handleSendMessage}>
           <textarea
             ref={textareaRef}
-            placeholder={t.aiAssistantPlaceholder || "Спросите что-нибудь..."}
+            placeholder={t?.aiAssistantPlaceholder || "Спросите что-нибудь..."}
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             onKeyDown={handleKeyDown}
@@ -133,7 +143,7 @@ const AiAssistant = ({ t }) => {
             rows={1}
           />
           <button type="submit" disabled={isLoading || !userInput.trim()}>
-            {t.aiAssistantSend || "Отправить"}
+            {t?.aiAssistantSend || "Отправить"}
           </button>
         </form>
       </div>
