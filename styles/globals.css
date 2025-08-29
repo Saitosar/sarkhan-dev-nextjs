@@ -1176,6 +1176,7 @@ footer p {
   box-shadow: var(--shadow-md);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: bottom right;
+  /* Эффект стекла */
   background: color-mix(in srgb, var(--color-surface) 85%, transparent);
   backdrop-filter: blur(12px);
 }
@@ -1234,8 +1235,8 @@ footer p {
 
 .chat-header h3 {
   font-size: 1.2rem;
-  color: var(--color-heading);
-  text-shadow: none;
+  color: var(--color-heading); /* Используем цвет заголовков темы */
+  text-shadow: none; /* Убираем свечение */
 }
 
 /* --- Новые HUD элементы --- */
@@ -1281,6 +1282,7 @@ footer p {
   max-width: 85%;
   animation: fadeIn 0.5s ease-out;
   border-radius: var(--radius-md);
+  /* Эффект полупрозрачной карточки */
   background: color-mix(in srgb, var(--color-surface) 50%, transparent);
   border: 1px solid var(--color-border);
 }
@@ -1293,7 +1295,7 @@ footer p {
 }
 
 .user-message {
-  align-self: flex-end;
+  align-self: flex-end; /* Пользователь справа */
   background: color-mix(in srgb, var(--color-primary) 10%, transparent);
 }
 
@@ -1322,10 +1324,11 @@ footer p {
   outline: none;
   border-bottom: 2px solid transparent;
   transition: border-color 0.3s ease;
+  caret-color: var(--color-primary); /* Цвет курсора */
 }
 .chat-footer textarea:focus {
     border-bottom-color: var(--color-primary);
-    animation: pulse-line 2s infinite;
+    animation: pulse-line 2s infinite; /* Анимация только для линии */
 }
 
 .chat-footer button {

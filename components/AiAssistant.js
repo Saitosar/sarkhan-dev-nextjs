@@ -20,7 +20,10 @@ const AiAssistant = ({ t }) => {
         setCpuLoad(Math.floor(Math.random() * (95 - 60 + 1) + 60));
       }, 500);
     } else {
-      setCpuLoad(Math.floor(Math.random() * (35 - 15 + 1) + 15));
+      // Плавное "остывание"
+      interval = setInterval(() => {
+        setCpuLoad(prev => Math.max(15, prev - 5));
+      }, 200);
     }
     return () => clearInterval(interval);
   }, [isLoading]);
