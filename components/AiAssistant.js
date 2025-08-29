@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import Icon from './Icon';
-import Image from 'next/image';
 
 const AiAssistant = ({ t }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,11 +7,10 @@ const AiAssistant = ({ t }) => {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [cpuLoad, setCpuLoad] = useState(25); // Для HUD
+  const [cpuLoad, setCpuLoad] = useState(25);
   const chatBodyRef = useRef(null);
   const textareaRef = useRef(null);
 
-  // Эффект "нагрузки" на CPU во время ответа
   useEffect(() => {
     let interval;
     if (isLoading) {
@@ -20,14 +18,12 @@ const AiAssistant = ({ t }) => {
         setCpuLoad(Math.floor(Math.random() * (95 - 60 + 1) + 60));
       }, 500);
     } else {
-      // Плавное "остывание"
       interval = setInterval(() => {
         setCpuLoad(prev => Math.max(15, prev - 5));
       }, 200);
     }
     return () => clearInterval(interval);
   }, [isLoading]);
-
 
   useEffect(() => {
     const conversationLength = messages.filter(m => m.role === 'user' || m.role === 'model').length;
@@ -49,19 +45,23 @@ const AiAssistant = ({ t }) => {
       chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
     }
   }, [messages]);
-  
+
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => textareaRef.current?.focus(), 100);
     }
     if (textareaRef.current) {
-        textareaRef.current.style.height = 'auto';
-        textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   }, [isOpen, userInput]);
 
   const toggleChat = () => setIsOpen(!isOpen);
-  const toggleExpand = () => setIsExpanded(!isExpanded);
+
+  const handleToggleExpand = (e) => {
+    e.stopPropagation();
+    setIsExpanded(prev => !prev);
+  };
 
   const handleSendMessage = async (e) => {
     if (e) e.preventDefault();
@@ -69,7 +69,7 @@ const AiAssistant = ({ t }) => {
 
     const userMessage = { role: 'user', parts: [{ text: userInput }] };
     const newMessagesForUI = [...messages, userMessage];
-    
+
     setMessages(newMessagesForUI);
     setUserInput('');
     setIsLoading(true);
@@ -77,30 +77,26 @@ const AiAssistant = ({ t }) => {
     try {
       const historyForAPI = newMessagesForUI.slice();
       if (historyForAPI.length > 0 && historyForAPI[0].role === 'model') {
-          historyForAPI.shift();
+        historyForAPI.shift();
       }
       const payloadHistory = historyForAPI.length > 0 ? historyForAPI : [userMessage];
 
       const response = await fetch('/api/assistant', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ history: payloadHistory, locale: t.locale }), 
+        body: JSON.stringify({ history: payloadHistory, locale: t.locale }),
       });
 
-      // --- НАЧАЛО ИСПРАВЛЕНИЯ ---
       if (!response.ok) {
         let errorMessage = 'Network response was not ok';
         try {
-          // Пытаемся прочитать ошибку как JSON
           const errorData = await response.json();
           errorMessage = errorData.error || JSON.stringify(errorData);
         } catch (jsonError) {
-          // Если не получилось, читаем как текст
           errorMessage = await response.text();
         }
         throw new Error(errorMessage);
       }
-      // --- КОНЕЦ ИСПРАВЛЕНИЯ ---
 
       const data = await response.json();
       setMessages(prev => [...prev, { role: 'model', parts: [{ text: data.response }] }]);
@@ -123,18 +119,18 @@ const AiAssistant = ({ t }) => {
   return (
     <>
       <button className={`chat-fab ${isOpen ? 'hidden' : ''}`} onClick={toggleChat} title="AI Assistant">
-        <img src="/assets/itbai-core.png" alt="Open AI Assistant" />
+        <Icon name="ai-sparkle" />
       </button>
 
-      <div className={`chat-overlay ${isExpanded && isOpen ? 'expanded' : ''}`} onClick={toggleExpand}></div>
+      {/* Используем isExpanded только для `chat-window`, а `chat-overlay` зависит только от isOpen */}
+      <div className={`chat-overlay ${isOpen ? 'expanded' : ''}`} onClick={toggleChat}></div>
 
       <div className={`chat-window ${!isOpen ? 'closed' : ''} ${isExpanded ? 'expanded' : 'compact'}`}>
         <div className="chat-header">
           <div className="chat-header-title">
-            <img 
-                src="/assets/itbai-core.png" 
-                alt="ITBAI AI Core" 
-                className={`chat-header-avatar ${isLoading ? 'thinking' : ''}`} 
+            <Icon
+              name="ai-sparkle"
+              className={`chat-header-avatar ${isLoading ? 'thinking' : ''}`}
             />
             <h3>ITBAI Assistant</h3>
           </div>
@@ -145,8 +141,13 @@ const AiAssistant = ({ t }) => {
           </div>
 
           <div className="header-controls">
-            <button className="chat-control-btn" onClick={toggleExpand} title={isExpanded ? 'Свернуть' : 'Развернуть'}>
-                <Icon name={isExpanded ? 'minimize' : 'expand'} />
+            {/* Используем новый обработчик handleToggleExpand */}
+            <button
+              className="chat-control-btn"
+              onClick={handleToggleExpand}
+              title={isExpanded ? 'Свернуть' : 'Развернуть'}
+            >
+              <Icon name={isExpanded ? 'minimize' : 'expand'} />
             </button>
             <button className="chat-control-btn chat-close-btn" onClick={toggleChat} title="Закрыть">&times;</button>
           </div>
@@ -157,7 +158,7 @@ const AiAssistant = ({ t }) => {
               <p>{msg.parts[0].text}</p>
             </div>
           ))}
-           {isLoading && (
+          {isLoading && (
             <div className="message assistant-message">
               <p>...</p>
             </div>
@@ -183,3 +184,4 @@ const AiAssistant = ({ t }) => {
 };
 
 export default AiAssistant;
+
