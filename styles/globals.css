@@ -1362,17 +1362,109 @@ footer p {
   caret-color: transparent; /* <-- Просто добавьте эту строку */
 }
 
-/* Адаптация для мобильных */
-@media (max-width: 576px) {
-  .chat-window.compact, .chat-window.expanded {
-    width: 100%; height: 100%; max-width: 100vw; max-height: 100vh;
-    bottom: 0; right: 0; top: auto; left: auto;
-    border-radius: 0; border: none; transform: none;
-  }
-  .chat-status-indicators { display: none; } /* Скрываем HUD на мобильных */
-.chat-fab { width: 56px; height: 56px; }
-  .chat-fab svg { width:100%; height: 100%; }
+/* --- Адаптация AI Ассистента для мобильных --- */
+@media (max-width: 850px) {
+  h2 { font-size: 2rem; }
+  .hero-title { font-size: 2.2rem; }
+  .hero-cta-buttons { flex-direction: column; }
+  .hero-panels { grid-template-columns: 1fr; }
 
+  .header .container {
+    padding-inline: var(--space-md);
+  }
+
+  .header-controls {
+    order: -1; 
+    height: 113px;
+    border-bottom: 1px solid var(--color-border);
+    width: 100%;
+    padding-block: var(--space-lg);  
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  .lang-globe-btn, .theme-toggle, .mobile-menu-toggle {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    padding: var(--space-xs);
+  }
+
+  .logo-svg {
+    width: 4.0rem;
+    height: 4.0rem;
+  }
+    
+  .nav-right-cluster {
+    gap: var(--space-sm);
+  }
+  
+  .contact-wrapper {
+    padding: var(--space-lg);
+  }
+
+  /* --- Стили для AI Ассистента на мобильных --- */
+  .chat-fab {
+    width: 50px;
+    height: 50px;
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+  }
+  
+  .chat-fab svg {
+    width: 95%;
+    height: 95%;
+  }
+
+  /* Возвращаем полноэкранный режим для компактного и расширенного вида */
+  .chat-window.compact,
+  .chat-window.expanded {
+    width: 100%;
+    height: 100%;
+    max-width: 100vw;
+    max-height: 100vh;
+    bottom: 0;
+    right: 0;
+    border-radius: 0;
+    border: none;
+  }
+  
+  .chat-header {
+    padding-inline: var(--space-md);
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+  }
+
+  .chat-header-title {
+    order: 1;
+  }
+  
+  /* Скрываем ненужные элементы */
+  .chat-status-indicators,
+  .header-controls .chat-control-btn:not(.chat-close-btn) {
+    display: none; 
+  }
+
+  /* Делаем селектор более конкретным, чтобы переопределить глобальные стили */
+  .chat-window .header-controls {
+    order: 2;
+    height: auto;
+    border-bottom: none;
+    width: auto;
+    padding-block: 0;
+    justify-content: flex-end; /* Прижимаем кнопку вправо */
+  }
+
+  .chat-header-avatar {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 
