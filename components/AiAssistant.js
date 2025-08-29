@@ -58,8 +58,8 @@ const AiAssistant = ({ t }) => {
 
   const toggleChat = () => setIsOpen(!isOpen);
 
-  const handleToggleExpand = (e) => {
-    e.stopPropagation();
+  // Новая, единая функция для сворачивания/разворачивания
+  const toggleExpand = () => {
     setIsExpanded(prev => !prev);
   };
 
@@ -122,8 +122,12 @@ const AiAssistant = ({ t }) => {
         <Icon name="ai-sparkle" />
       </button>
 
-      {/* Используем isExpanded только для `chat-window`, а `chat-overlay` зависит только от isOpen */}
-      <div className={`chat-overlay ${isOpen ? 'expanded' : ''}`} onClick={toggleChat}></div>
+      {/* --- ИЗМЕНЕННАЯ ЛОГИКА ЗДЕСЬ --- */}
+      {/* Фон появляется только когда чат открыт И развернут */}
+      <div 
+        className={`chat-overlay ${isOpen && isExpanded ? 'expanded' : ''}`} 
+        onClick={toggleExpand} // При клике на фон, он сворачивает окно
+      ></div>
 
       <div className={`chat-window ${!isOpen ? 'closed' : ''} ${isExpanded ? 'expanded' : 'compact'}`}>
         <div className="chat-header">
@@ -141,10 +145,10 @@ const AiAssistant = ({ t }) => {
           </div>
 
           <div className="header-controls">
-            {/* Используем новый обработчик handleToggleExpand */}
+            {/* Кнопка теперь тоже использует toggleExpand, без всяких e.stopPropagation() */}
             <button
               className="chat-control-btn"
-              onClick={handleToggleExpand}
+              onClick={toggleExpand}
               title={isExpanded ? 'Свернуть' : 'Развернуть'}
             >
               <Icon name={isExpanded ? 'minimize' : 'expand'} />
