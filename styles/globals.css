@@ -1474,3 +1474,53 @@ footer p {
 [data-theme="light"] .chat-window { background: color-mix(in srgb, var(--color-surface) 90%, transparent); }
 [data-theme="light"] .assistant-message { background: color-mix(in srgb, var(--color-secondary) 10%, transparent); }
 [data-theme="light"] .user-message { background: color-mix(in srgb, var(--color-primary) 10%, transparent); }
+
+/* === Стили для Блока-Манифеста Блога === */
+.blog-manifest {
+  max-width: 750px; /* Ограничиваем ширину для лучшей читаемости */
+  margin: 0 auto; /* Центрируем блок */
+  text-align: center; /* Центрируем весь текст внутри */
+  padding: var(--space-xl);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.blog-manifest h3 {
+  font-size: 1.8rem;
+  color: var(--color-primary);
+  margin-bottom: var(--space-md);
+}
+
+.blog-manifest p {
+  margin-bottom: var(--space-xl);
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+}
+
+.blog-manifest-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xxl);
+}
+
+/* Используем те же стили, что и для тегов навыков */
+.blog-manifest-tags .skill-tag {
+    cursor: default; /* Делаем теги некликабельными на вид */
+}
+
+/* === УЛУЧШЕНИЕ: Адаптация для мобильных === */
+@media (max-width: 576px) {
+  .blog-manifest {
+    padding: var(--space-lg); /* Уменьшаем внутренние отступы на маленьких экранах */
+  }
+  .blog-manifest h3 {
+    font-size: 1.6rem; /* Немного уменьшаем заголовок */
+  }
+  .blog-manifest p {
+    font-size: 1rem; /* Немного уменьшаем основной текст */
+  }
+}
