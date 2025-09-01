@@ -47,7 +47,7 @@ const Hero = ({ t }) => (
     </section>
 );
 
-export default function HomePage({ articles, siteUrl }) { // `articles` - это теперь наши обработанные посты
+export default function HomePage({ siteUrl }) { 
     const router = useRouter();
     const { locale } = router;
     const [activeSection, setActiveSection] = useState('home');
@@ -110,7 +110,7 @@ export default function HomePage({ articles, siteUrl }) { // `articles` - это
             <Header t={t} lang={locale} setLang={handleLanguageChange} activeSection={activeSection} pathname={router.pathname} />
             <main>
                 <Hero t={t} />
-                <BlogSection t={t} articles={articles} locale={locale} />
+                <BlogSection t={t} />
                 <ResourcesSection t={t} lang={locale} />
                 <AboutSection t={t} />
                 <ContactSection t={t} />
@@ -125,9 +125,7 @@ export async function getServerSideProps(context) {
   const { locale } = context;
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || '';
 
-  // Просто вызываем нашу централизованную функцию
-  const { posts } = await getProcessedPosts({ locale, pageSize: 3 });
 
   // Передаем посты в пропс `articles`, как и ожидает компонент HomePage
-  return { props: { articles: posts, siteUrl } };
+  return { props: { siteUrl } };
 }
