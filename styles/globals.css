@@ -389,7 +389,26 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 .hero-cta-buttons { display: flex; justify-content: center; gap: var(--space-lg); }
 .blog-grid, .resources-grid, .hero-panels { display: grid; gap: var(--space-xl); }
 .hero-panels { grid-template-columns: repeat(4, 1fr); margin-block-start: var(--space-xxl); }
-.blog-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.blog-grid {
+  display: grid;
+  gap: var(--space-xl);
+  /* По умолчанию 1 колонка для мобильных */
+  grid-template-columns: 1fr;
+}
+
+/* 2 колонки для планшетов */
+@media (min-width: 600px) {
+  .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 3 колонки для десктопов */
+@media (min-width: 992px) {
+  .blog-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 .resources-grid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
 .panel, .blog-card, .resource-card {
   background: var(--color-surface); border: 1px solid var(--color-border);
@@ -1572,4 +1591,12 @@ footer p {
 a.blog-card, a.blog-card:hover {
   text-decoration: none;
   color: inherit; /* Карточка будет наследовать цвет текста, а не использовать цвет ссылок */
+}
+
+/* Стили для кнопок пагинации */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  margin-top: var(--space-xxl);
 }
