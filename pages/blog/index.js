@@ -1,7 +1,7 @@
-// pages/blog.js (ОБНОВЛЕННАЯ ВЕРСЯ)
+// pages/blog/index.js (ОБНОВЛЕННАЯ ВЕРСИЯ С ПАГИНАЦИЕЙ)
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Link from 'next/link'; // Импортируем Link
+import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { translations } from '@/utils/translations';
@@ -42,18 +42,22 @@ export default function BlogPage({ articles, pagination }) {
                                 </Link>
                             ))}
                         </div>
+
+                        {/* === НАЧАЛО: НОВЫЙ БЛОК ПАГИНАЦИИ === */}
                         <div className="pagination">
-                            {pagination.page > 1 && (
+                            {pagination && pagination.page > 1 && (
                                 <button onClick={() => router.push(`/blog?page=${pagination.page - 1}`)} className="btn">
-                                    &larr; {t.prevButton || 'Previous'}
+                                    &larr; {t.prevButton}
                                 </button>
                             )}
-                            {pagination.page < pagination.pageCount && (
+                            {pagination && pagination.page < pagination.pageCount && (
                                 <button onClick={() => router.push(`/blog?page=${pagination.page + 1}`)} className="btn">
-                                    {t.nextButton || 'Next'} &rarr;
+                                    {t.nextButton} &rarr;
                                 </button>
                             )}
                         </div>
+                        {/* === КОНЕЦ: НОВЫЙ БЛОК ПАГИНАЦИИ === */}
+
                     </div>
                 </section>
             </main>
@@ -64,7 +68,9 @@ export default function BlogPage({ articles, pagination }) {
 
 export async function getServerSideProps(context) {
     const { locale, query } = context;
-    const page = query.page || 1;
+    const page = query.page || 1; // Получаем номер страницы из URL, по умолчанию 1
+
+    // Запрашиваем 9 статей для текущей страницы
     const { posts, pagination } = await getProcessedPosts({ locale, page, pageSize: 9 });
 
     return { props: { articles: posts, pagination } };
