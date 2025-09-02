@@ -1549,6 +1549,9 @@ footer p {
   max-width: 800px;
   margin: 0 auto;
   padding: var(--space-xxl) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .post-title {
@@ -1559,6 +1562,10 @@ footer p {
 
 .post-body {
   line-height: 1.8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .post-body h2 {
@@ -1600,3 +1607,19 @@ a.blog-card, a.blog-card:hover {
   gap: var(--space-lg);
   margin-top: var(--space-xxl);
 }
+
+/* FIX: Правильное выравнивание списков внутри статьи */
+.post-body ul,
+.post-body ol {
+  /* Убираем стандартный левый отступ, который ломает верстку */
+  padding-left: 0;
+  /* Располагаем маркеры внутри текстового блока, а не снаружи */
+  list-style-position: inside;
+}
+
+.post-body li {
+  /* Добавляем небольшой отступ снизу для лучшей читаемости */
+  margin-bottom: var(--space-sm);
+  padding-left: 10%; /* Отступ слева для текста */
+}
+
