@@ -66,12 +66,24 @@ export default function BlogPage({ articles, pagination }) {
     );
 }
 
-export async function getServerSideProps(context) {
-    const { locale, query } = context;
-    const page = query.page || 1; // Получаем номер страницы из URL, по умолчанию 1
+// ЗАМЕНИТЬ ВЕСЬ БЛОК getServerSideProps НА ЭТОТ БЛОК getStaticProps
 
-    // Запрашиваем 9 статей для текущей страницы
-    const { posts, pagination } = await getProcessedPosts({ locale, page, pageSize: 9 });
+export async function getStaticProps(context) {
+    const { locale } = context;
 
-    return { props: { articles: posts, pagination } };
+    // Мы по-прежнему запрашиваем 9 статей для первой страницы.
+    // Next.js сам сгенерирует остальные страницы пагинации по мере необходимости.
+    const { posts, pagination } = await getProcessedPosts({ locale, page: 1, pageSize: 9 });
+
+    return { 
+        props: { 
+            articles: posts, 
+            pagination 
+        },
+        // Эта строка — ключ к решению:
+        // Next.js будет пытаться пересобрать эту страницу в фоне
+        // не чаще, чем раз в 60 секунд, если на сайт придут новые запросы
+        // и если вы обновили статьи в CMS.
+        revalidate: 60, 
+    };
 }
