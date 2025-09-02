@@ -15,7 +15,7 @@ const BlogSection = ({ t }) => {
             ))}
           </div>
           <div className="view-all-container">
-            <Link href="/blog" legacyBehavior>
+            <Link href="/blog/page/1" legacyBehavior>
               <a className="btn">{t.blogManifestButton}</a>
             </Link>
           </div>
