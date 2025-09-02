@@ -53,7 +53,7 @@ const PostContent = ({ post, t, locale }) => {
                 <div className="post-body" dangerouslySetInnerHTML={{ __html: post.sanitizedBody || '' }} />
 
                 <div className="view-all-container">
-                    <Link href="/blog" legacyBehavior>
+                    <Link href="/blog/page/1" legacyBehavior>
                       <a className="btn">{t.backToBlog}</a>
                     </Link>
                 </div>
