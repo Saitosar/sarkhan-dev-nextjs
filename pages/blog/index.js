@@ -1,89 +1,10 @@
-// pages/blog/index.js (ОБНОВЛЕННАЯ ВЕРСИЯ С ПАГИНАЦИЕЙ)
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import { translations } from '@/utils/translations';
-import { getProcessedPosts } from '@/lib/strapi';
+// pages/blog/index.js (НОВЫЙ ФАЙЛ ДЛЯ РЕДИРЕКТА)
+const BlogIndex = () => null;
 
-export default function BlogPage({ articles, pagination }) {
-    const router = useRouter();
-    const { locale } = router;
-    const t = translations[locale] || translations['az'];
+export const getServerSideProps = async ({ res }) => {
+  res.writeHead(301, { Location: '/blog/page/1' });
+  res.end();
+  return { props: {} };
+};
 
-    const handleLanguageChange = (newLang) => {
-        const { page } = router.query;
-        const newPath = page ? `/blog?page=${page}` : '/blog';
-        router.push(newPath, newPath, { locale: newLang });
-    };
-
-    return (
-        <>
-            <Head>
-                <title>{t.navBlog} | Sarkhan.dev</title>
-                <meta name="description" content={t.docDesc} />
-                <link rel="icon" href="/leo-icon.svg" type="image/svg+xml" />
-            </Head>
-            <div id="background-animation"></div>
-            <Header t={t} lang={locale} setLang={handleLanguageChange} activeSection="blog" pathname={router.pathname} />
-            <main className="blog-page-main">
-                <section id="blog-archive">
-                    <div className="container">
-                        <h2>{t.blogSectionTitle}</h2>
-                        <div className="blog-grid">
-                            {Array.isArray(articles) && articles.map(post => (
-                                <Link key={post.id} href={`/blog/${post.slug}`} legacyBehavior>
-                                    <a className="blog-card">
-                                        <h3>{post.title}</h3>
-                                        <p>{post.excerpt}</p>
-                                        <span className="btn">{t.readMore}</span>
-                                    </a>
-                                </Link>
-                            ))}
-                        </div>
-
-                        {/* === НАЧАЛО: НОВЫЙ БЛОК ПАГИНАЦИИ === */}
-                        <div className="pagination">
-                            {pagination && pagination.page > 1 && (
-                                <button onClick={() => router.push(`/blog?page=${pagination.page - 1}`)} className="btn">
-                                    &larr; {t.prevButton}
-                                </button>
-                            )}
-                            {pagination && pagination.page < pagination.pageCount && (
-                                <button onClick={() => router.push(`/blog?page=${pagination.page + 1}`)} className="btn">
-                                    {t.nextButton} &rarr;
-                                </button>
-                            )}
-                        </div>
-                        {/* === КОНЕЦ: НОВЫЙ БЛОК ПАГИНАЦИИ === */}
-
-                    </div>
-                </section>
-            </main>
-            <Footer />
-        </>
-    );
-}
-
-// ЗАМЕНИТЬ ВЕСЬ БЛОК getServerSideProps НА ЭТОТ БЛОК getStaticProps
-
-export async function getStaticProps(context) {
-    const { locale } = context;
-
-    // Мы по-прежнему запрашиваем 9 статей для первой страницы.
-    // Next.js сам сгенерирует остальные страницы пагинации по мере необходимости.
-    const { posts, pagination } = await getProcessedPosts({ locale, page: 1, pageSize: 9 });
-
-    return { 
-        props: { 
-            articles: posts, 
-            pagination 
-        },
-        // Эта строка — ключ к решению:
-        // Next.js будет пытаться пересобрать эту страницу в фоне
-        // не чаще, чем раз в 60 секунд, если на сайт придут новые запросы
-        // и если вы обновили статьи в CMS.
-        revalidate: 60, 
-    };
-}
+export default BlogIndex;
