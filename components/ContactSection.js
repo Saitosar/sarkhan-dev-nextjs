@@ -1,9 +1,13 @@
-// components/ContactSection.js
+// components/ContactSection.js (ОБНОВЛЕННАЯ ВЕРСЯ)
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { useState } from 'react'; // <-- Импортируем useState
 
 const ContactSection = ({ t }) => {
+    // Состояние для отслеживания статуса отправки
+    const [formStatus, setFormStatus] = useState({ submitted: false, error: false });
+
     const formSchema = z.object({
         name: z.string().min(1, { message: t.validation.nameRequired }),
         email: z.string().email({ message: t.validation.emailInvalid }).min(1, { message: t.validation.emailRequired }),
@@ -14,11 +18,27 @@ const ContactSection = ({ t }) => {
         resolver: zodResolver(formSchema),
     });
 
+    // === ОБНОВЛЕННАЯ ФУНКЦИЯ ОТПРАВКИ ===
     const onSubmit = async (data) => {
-        console.log("Form submitted:", data);
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        alert("Thank you for your message!");
-        reset();
+        setFormStatus({ submitted: false, error: false });
+        try {
+            const response = await fetch('/api/submit-form', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                throw new Error('Server error');
+            }
+            
+            setFormStatus({ submitted: true, error: false });
+            reset(); // Очищаем форму только при успехе
+
+        } catch (error) {
+            console.error("Form submission error:", error);
+            setFormStatus({ submitted: false, error: true });
+        }
     };
 
     return (
@@ -47,6 +67,9 @@ const ContactSection = ({ t }) => {
                             <div className="form-footer">
                                 <button type="submit" className="btn" disabled={isSubmitting}>{isSubmitting ? t.formSubmitting : t.formSubmitButton}</button>
                             </div>
+                             {/* Сообщения о статусе отправки */}
+                            {formStatus.submitted && <p className="form-success">Спасибо, ваше сообщение отправлено!</p>}
+                            {formStatus.error && <p className="form-error">Произошла ошибка. Попробуйте позже.</p>}
                         </form>
                         
                         {/* Правая колонка: Информация */}
