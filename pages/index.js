@@ -13,6 +13,7 @@ import Footer from '@/components/Footer';
 import { getProcessedPosts } from '@/lib/strapi'; // <-- 1. Импортируем нашу новую функцию
 import Link from 'next/link';
 import Icon from '@/components/Icon';
+import ServicesSection from '@/components/ServicesSection';
 
 const Hero = ({ t }) => (
     <section id="home">
@@ -116,6 +117,7 @@ export default function HomePage({ siteUrl }) {
                 <Hero t={t} />
                 <BlogSection t={t} />
                 <ResourcesSection t={t} lang={locale} />
+                <ServicesSection t={t} /> {/* <-- ДОБАВЛЕНО */}
                 <AboutSection t={t} />
                 <ContactSection t={t} />
             </main>

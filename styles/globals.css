@@ -1642,3 +1642,60 @@ a.blog-card, a.blog-card:hover {
   margin-inline: auto; /* Центрируем иконку */
   margin-bottom: var(--space-xl); /* Добавляем отступ до кнопки */
 }
+
+/* === Стили для секции "Услуги" === */
+.service-card {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-xxl);
+  text-align: center;
+}
+
+.service-content h3 {
+  font-size: 1.8rem;
+  color: var(--color-primary);
+  margin-bottom: var(--space-md);
+}
+
+.service-content p {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-xl);
+}
+
+.service-content h4 {
+  font-size: 1.2rem;
+  color: var(--color-heading);
+  margin-bottom: var(--space-lg);
+  text-transform: uppercase;
+}
+
+.service-content ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: var(--space-xxl);
+  display: inline-block;
+  text-align: left;
+}
+
+.service-content ul li {
+  position: relative;
+  padding-left: var(--space-xl);
+  margin-bottom: var(--space-md);
+}
+
+.service-content ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.service-cta {
+  margin-top: var(--space-xl);
+}
