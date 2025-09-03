@@ -28,25 +28,25 @@ const Hero = ({ t }) => (
                 <a href="#blog" className="btn btn-secondary">{t.ctaSecondary}</a>
             </div>
              <div className="hero-panels">
-                <a href="#blog" className="panel">
-                    <svg className="panel-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h16M4 12h16M4 18h10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    <h3 className="panel-title">{t.panelBlog}</h3>
-                </a>
-                <Link href="/resources" legacyBehavior>
-                    <a className="panel">
-                        <Icon name="resources" className="panel-icon" />
-                        <h3 className="panel-title">{t.panelResources}</h3>
-                    </a>
-                </Link>
-                <a href="#about" className="panel">
-                    <svg className="panel-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="12" cy="7" r="4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    <h3 className="panel-title">{t.panelAbout}</h3>
-                </a>
-                <a href="#contact" className="panel">
-                    <svg className="panel-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><polyline points="22,6 12,13 2,6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    <h3 className="panel-title">{t.panelContact}</h3>
-                </a>
-            </div>
+    <a href="#blog" className="panel">
+        <Icon name="blog" className="panel-icon" />
+        <h3 className="panel-title">{t.panelBlog}</h3>
+    </a>
+    <Link href="/resources" legacyBehavior>
+        <a className="panel">
+            <Icon name="resources" className="panel-icon" />
+            <h3 className="panel-title">{t.panelResources}</h3>
+        </a>
+    </Link>
+    <a href="#about" className="panel">
+        <Icon name="about" className="panel-icon" />
+        <h3 className="panel-title">{t.panelAbout}</h3>
+    </a>
+    <a href="#contact" className="panel">
+        <Icon name="contact" className="panel-icon" />
+        <h3 className="panel-title">{t.panelContact}</h3>
+    </a>
+</div>
         </div>
     </section>
 );

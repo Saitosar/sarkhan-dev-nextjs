@@ -417,8 +417,16 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 }
 .panel:hover, .blog-card:hover { transform: translateY(-5px); border-color: var(--color-primary); }
 .panel { padding: var(--space-lg); text-decoration: none; text-align: center; }
-.panel-icon { width: 48px; height: 48px; margin-block-end: var(--space-md); stroke: var(--color-primary); transition: stroke var(--duration-normal) ease; }
-.panel:hover .panel-icon { stroke: var(--color-heading); }
+.panel-icon {
+  width: 48px;
+  height: 48px;
+  margin-block-end: var(--space-md);
+  color: var(--color-primary); /* Заменили 'stroke' на 'color' */
+  transition: color var(--duration-normal) ease; /* Заменили 'stroke' на 'color' */
+}
+.panel:hover .panel-icon {
+  color: var(--color-heading); /* Заменили 'stroke' на 'color' */
+}
 .panel-title { font-size: 1.2rem; color: var(--color-heading); font-weight: 700; }
 .blog-card { display: flex; flex-direction: column; cursor: pointer; padding: var(--space-xl); }
 .blog-card h3 { font-size: 1.4rem; margin-block-end: var(--space-md); color: var(--color-primary); }
