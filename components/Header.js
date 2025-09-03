@@ -1,8 +1,8 @@
-// components/Header.js
-import { useEffect, useRef, useState } from 'react';
+// components/Header.js (ИСПРАВЛЕННАЯ ВЕРСИЯ)
+import { useEffect, useRef, useState, useCallback } from 'react'; // 1. Добавлен useCallback
 import { useTheme } from 'next-themes';
 import Icon from './Icon';
-import Image from 'next/image';
+import Image from 'next/image'; // 2. Импортирован Image
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -14,9 +14,25 @@ export default function Header({ t, lang, setLang, activeSection }) {
 
   const langSwitcherRef = useRef(null);
   const langGlobeBtnRef = useRef(null);
-  const router = useRouter(); // Получаем доступ к роутеру
+  const router = useRouter(); 
+  const navMenuRef = useRef(null);
 
-  // Все хуки useEffect остаются без изменений
+  // 3. Оборачиваем updateUnderline в useCallback
+  const updateUnderline = useCallback(() => {
+    if (router.pathname !== '/') return; 
+    const el = navMenuRef.current;
+    if (!el) return;
+    const active = el.querySelector('.nav-link.active');
+    if (!active) {
+        el.style.setProperty('--underline-width', `0px`);
+        return;
+    };
+    const parentRect = el.getBoundingClientRect();
+    const rect = active.getBoundingClientRect();
+    el.style.setProperty('--underline-left', `${rect.left - parentRect.left}px`);
+    el.style.setProperty('--underline-width', `${rect.width}px`);
+  }, [router.pathname]); // Зависимость - путь
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!langMenuOpen) return;
@@ -52,31 +68,19 @@ export default function Header({ t, lang, setLang, activeSection }) {
     };
   }, [langMenuOpen]);
 
-  const navMenuRef = useRef(null);
-  const updateUnderline = () => {
-    if (router.pathname !== '/') return; // Не показывать подчеркивание на других страницах
-    const el = navMenuRef.current;
-    if (!el) return;
-    const active = el.querySelector('.nav-link.active');
-    if (!active) {
-        // Скрываем подчеркивание, если нет активной ссылки
-        el.style.setProperty('--underline-width', `0px`);
-        return;
-    };
-    const parentRect = el.getBoundingClientRect();
-    const rect = active.getBoundingClientRect();
-    el.style.setProperty('--underline-left', `${rect.left - parentRect.left}px`);
-    el.style.setProperty('--underline-width', `${rect.width}px`);
-  };
+  
   useEffect(() => {
     const id = requestAnimationFrame(updateUnderline);
     return () => cancelAnimationFrame(id);
-  }, [activeSection, lang, mobileMenuOpen, router.pathname]);
+    // 4. Добавляем updateUnderline в зависимости
+  }, [activeSection, lang, mobileMenuOpen, router.pathname, updateUnderline]); 
+  
   useEffect(() => {
     const onResize = () => updateUnderline();
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
-  }, []);
+    // 5. И здесь тоже
+  }, [updateUnderline]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -111,7 +115,8 @@ export default function Header({ t, lang, setLang, activeSection }) {
       <div className="container navbar">
         <Link href="/" legacyBehavior>
             <a className="logo">
-                <img src="/leo-icon.svg" alt="Логотип Sarkhan.dev" className="logo-svg" />
+                {/* 6. Заменяем img на Image */}
+                <Image src="/leo-icon.svg" alt="Логотип Sarkhan.dev" className="logo-svg" width={50} height={50} />
                 <span>Sarkhan.dev</span>
             </a>
         </Link>
@@ -125,7 +130,6 @@ export default function Header({ t, lang, setLang, activeSection }) {
             >
               {navLinks.map(link => (
                 <li key={link.key}>
-                  {/* ===== НАЧАЛО ИЗМЕНЕНИЙ: УМНЫЕ ССЫЛКИ ===== */}
                   <Link href={router.pathname === '/' ? link.href : `/${link.href}`} legacyBehavior>
                     <a
                       className={`nav-link ${activeSection === link.href.substring(1) ? 'active' : ''}`}
@@ -134,7 +138,6 @@ export default function Header({ t, lang, setLang, activeSection }) {
                       {link.text}
                     </a>
                   </Link>
-                   {/* ===== КОНЕЦ ИЗМЕНЕНИЙ ===== */}
                 </li>
               ))}
               <li className="header-controls">
