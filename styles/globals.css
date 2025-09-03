@@ -1626,3 +1626,11 @@ a.blog-card, a.blog-card:hover {
   padding-left: 10%; /* Отступ слева для текста */
 }
 
+/* === Стили для иконки в анонсе ресурсов === */
+.resource-manifest-icon {
+  color: var(--color-primary);
+  width: 75px;
+  height: 75px;
+  margin-inline: auto; /* Центрируем иконку */
+  margin-bottom: var(--space-xl); /* Добавляем отступ до кнопки */
+}

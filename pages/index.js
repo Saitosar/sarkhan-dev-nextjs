@@ -11,6 +11,8 @@ import { useRouter } from 'next/router';
 import { translations } from '@/utils/translations';
 import Footer from '@/components/Footer';
 import { getProcessedPosts } from '@/lib/strapi'; // <-- 1. Импортируем нашу новую функцию
+import Link from 'next/link';
+import Icon from '@/components/Icon';
 
 const Hero = ({ t }) => (
     <section id="home">
@@ -30,10 +32,12 @@ const Hero = ({ t }) => (
                     <svg className="panel-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h16M4 12h16M4 18h10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                     <h3 className="panel-title">{t.panelBlog}</h3>
                 </a>
-                <a href="/resources" className="panel">
-                    <svg className="panel-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    <h3 className="panel-title">{t.panelResources}</h3>
-                </a>
+                <Link href="/resources" legacyBehavior>
+                    <a className="panel">
+                        <Icon name="resources" className="panel-icon" />
+                        <h3 className="panel-title">{t.panelResources}</h3>
+                    </a>
+                </Link>
                 <a href="#about" className="panel">
                     <svg className="panel-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="12" cy="7" r="4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                     <h3 className="panel-title">{t.panelAbout}</h3>
