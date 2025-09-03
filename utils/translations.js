@@ -57,7 +57,19 @@ Texniki biliklərimi və insana yönümlü düşüncə tərzimi transformasiya t
         aiSummaryError: "Xəta. Bir müddət sonra təkrar yoxlayın.",
         aiAssistantWelcome: "Salam! Bu gün sizə necə kömək edə bilərəm?",
         aiAssistantPlaceholder: "Bir şey soruşun...",
-        aiAssistantSend: "Göndər"
+        aiAssistantSend: "Göndər",
+        navServices: "Xidmətlər",
+        servicesSectionTitle: "Xidmətlər",
+        mentorshipTitle: "Mentorluq Proqramı",
+        mentorshipDescription: "Karyeran inkişafınızı sürətləndirmək və IT biznes analiz sahəsində əsas bacarıqları inkişaf etdirmək üçün fərdi dəstək.",
+        mentorshipIncludesTitle: "Proqrama daxildir:",
+        mentorshipIncludesList: [
+                                    "Fərdi karyera planının hazırlanması",
+                                    "Praktiki tapşırıqlar və real keyslərin təhlili",
+                                    "Rezyumenin və müsahibəyə hazırlığın yoxlanılması",
+                                    "Daimi əlaqə və suallara cavablar"
+],
+        mentorshipCtaButton: "Müraciət et"
     },
     en: {
         locale: "en",
@@ -112,7 +124,19 @@ Open to remote or hybrid opportunities with international teams where I can cont
         aiSummaryError: "Error. Please, try again later.",
         aiAssistantWelcome: "Hello! How can I help you today?",
         aiAssistantPlaceholder: "Ask something...",
-        aiAssistantSend: "Send"
+        aiAssistantSend: "Send",
+        navServices: "Services",
+        servicesSectionTitle: "Services",
+        mentorshipTitle: "Mentorship Program",
+        mentorshipDescription: "Personalized support to accelerate your career and master key skills in IT business analysis.",
+        mentorshipIncludesTitle: "What you'll get:",
+        mentorshipIncludesList: [
+                                    "Personal career plan development",
+                                    "Practical tasks and real-world case studies",
+                                    "Resume review and interview preparation",
+                                    "Regular feedback and Q&A sessions"
+],
+        mentorshipCtaButton: "Apply Now"
     },
     ru: {
         locale: "ru",
@@ -167,7 +191,19 @@ Open to remote or hybrid opportunities with international teams where I can cont
         aiSummaryError: "Ошибка. Попробуйте позже.",
         aiAssistantWelcome: "Здравствуйте! Чем могу помочь вам сегодня?",
         aiAssistantPlaceholder: "Спросите что-нибудь...",
-        aiAssistantSend: "Отправить"
+        aiAssistantSend: "Отправить",
+        navServices: "Услуги",
+        servicesSectionTitle: "Услуги",
+        mentorshipTitle: "Программа Менторства",
+        mentorshipDescription: "Персональная поддержка, чтобы ускорить вашу карьеру и освоить ключевые навыки в IT-бизнес-анализе.",
+        mentorshipIncludesTitle: "Что вы получите:",
+        mentorshipIncludesList: [
+                                    "Разработка личного карьерного плана",
+                                    "Практические задания и разбор реальных кейсов",
+                                    "Ревью резюме и подготовка к собеседованию",
+                                    "Регулярная обратная связь и ответы на вопросы"
+],
+        mentorshipCtaButton: "Оставить заявку" 
     }
 };
 
