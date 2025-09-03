@@ -19,6 +19,10 @@ const translations = {
         prevButton: "Əvvəlki",
         nextButton: "Növbəti",
         resourcesSectionTitle: "Faydalı Resurslar", viewButton: "Bax", downloadButton: "Yüklə",
+        resourcesManifestTitle: "Praktiki Resurslar Kitabxanası",
+        resourcesManifestText: "Burada siz işinizi asanlaşdırmaq üçün hazır şablonlar, faydalı linklər, yoxlama siyahıları və digər praktiki materialları tapa bilərsiniz.",
+        resourcesManifestButton: "Bütün Resurslara Bax",
+        backToHome: "Əsas Səhifəyə Qayıt",
         aboutSectionTitle: "Haqqımda", aboutName: "Sərxan Hacıyev",
         aboutShortBio: "10 ildən artıq bank sistemləri sahəsində təcrübəyə malik IT Biznes Analitik.",
         aboutLongBio: `Mən Oracle Flexcube, məlumatların miqrasiyası və sistem inteqrasiyaları ilə praktiki təcrübə də daxil olmaqla, rəqəmsal bankçılıq və korporativ sistemlər sahəsində on ildən artıq təcrübəyə malik Baş IT Biznes Analitikəm. Karyeram 2013-cü ildə bankın pərakəndə satış xəttində başlamışdır — kreditlərin verilməsi, müştəri ehtiyaclarını anlamaq və pozulmuş proseslərin real təsirini görməklə.
@@ -74,6 +78,10 @@ Texniki biliklərimi və insana yönümlü düşüncə tərzimi transformasiya t
         prevButton: "Previous",
         nextButton: "Next",
         resourcesSectionTitle: "Useful Resources", viewButton: "View", downloadButton: "Download",
+        resourcesManifestTitle: "Library of Practical Resources",
+        resourcesManifestText: "Here you can find ready-to-use templates, useful links, checklists, and other practical materials to make your work easier.",
+        resourcesManifestButton: "View All Resources",
+        backToHome: "Back to Home",
         aboutSectionTitle: "About", aboutName: "Sarkhan Hajiyev",
         aboutShortBio: "IT Business Analyst with over 10 years of experience in banking systems.",
         aboutLongBio: `I’m a Senior IT Business Analyst with over a decade of experience in digital banking and enterprise systems, including hands-on expertise with Oracle Flexcube, data migration, and system integrations. My career began in 2013, working on the retail frontlines of banking — issuing loans, understanding client needs, and seeing the real impact of broken processes.
@@ -125,6 +133,10 @@ Open to remote or hybrid opportunities with international teams where I can cont
         prevButton: "Назад",
         nextButton: "Вперед",
         resourcesSectionTitle: "Полезные ресурсы", viewButton: "Открыть", downloadButton: "Скачать",
+        resourcesManifestTitle: "Библиотека практических ресурсов",
+        resourcesManifestText: "Здесь вы найдете готовые шаблоны, полезные ссылки, чек-листы и другие практические материалы, которые облегчат вашу работу.",
+        resourcesManifestButton: "Перейти ко всем ресурсам",
+        backToHome: "Вернуться на Главную",
         aboutSectionTitle: "Обо мне", aboutName: "Сархан Гаджиев",
         aboutShortBio: "IT бизнес-аналитик с более чем 10-летним опытом работы в банковских системах.",
         aboutLongBio: `Я — старший IT-бизнес-аналитик с более чем десятилетним опытом в сфере цифрового банкинга и корпоративных систем, включая практический опыт работы с Oracle Flexcube, миграцией данных и системными интеграциями. Моя карьера началась в 2013 году на передовой розничного банкинга — я выдавал кредиты, разбирался в потребностях клиентов и видел реальные последствия неэффективных процессов.
