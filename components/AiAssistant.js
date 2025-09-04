@@ -139,20 +139,8 @@ const AiAssistant = ({ t }) => {
             <h3>ITBAI Assistant</h3>
           </div>
 
-          <div className="chat-status-indicators">
-            <span><span className="status-light"></span>ACTIVE</span>
-            <span>CPU: {cpuLoad}%</span>
-          </div>
-
           <div className="header-controls">
             {/* Кнопка теперь тоже использует toggleExpand, без всяких e.stopPropagation() */}
-            <button
-              className="chat-control-btn"
-              onClick={toggleExpand}
-              title={isExpanded ? 'Свернуть' : 'Развернуть'}
-            >
-              <Icon name={isExpanded ? 'minimize' : 'expand'} />
-            </button>
             <button className="chat-control-btn chat-close-btn" onClick={toggleChat} title="Закрыть">&times;</button>
           </div>
         </div>

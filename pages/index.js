@@ -16,7 +16,7 @@ import Icon from '@/components/Icon';
 import ServicesSection from '@/components/ServicesSection';
 import ToolsSection from '@/components/ToolsSection';
 
-const Hero = ({ t }) => (
+const Hero = ({ t, locale }) => (
     <section id="home">
         <div className="container hero-content">
             <h1 className="hero-title">
@@ -26,8 +26,13 @@ const Hero = ({ t }) => (
             </h1>
             <p className="hero-subtitle">{t.heroSubtitle}</p>
             <div className="hero-cta-buttons">
-                <a href="#resources" className="btn">{t.ctaPrimary}</a>
-                <a href="#blog" className="btn btn-secondary">{t.ctaSecondary}</a>
+    <a href="#tools" className="btn btn-primary-cta">
+        {/* Логика для правильного порядка слов в разных языках */}
+        {locale !== 'az' && `${t.ctaPrimaryAction} `}
+        {t.ctaPrimaryBrand.slice(0, 3)}<span className="cta-highlight">{t.ctaPrimaryBrand.slice(3)}</span>
+        {locale === 'az' && ` ${t.ctaPrimaryAction}`}
+    </a>
+    <a href="#services" className="btn btn-secondary">{t.ctaSecondary}</a>
             </div>
              <div className="hero-panels">
     <a href="#blog" className="panel">
@@ -40,16 +45,16 @@ const Hero = ({ t }) => (
             <h3 className="panel-title">{t.panelResources}</h3>
         </a>
     </Link>
-    <a href="#about" className="panel">
-        <Icon name="about" className="panel-icon" />
-        <h3 className="panel-title">{t.panelAbout}</h3>
+    <a href="#tools" className="panel">
+        <Icon name="tools" className="panel-icon" />
+        <h3 className="panel-title">{t.navTools}</h3>
     </a>
-    <a href="#contact" className="panel">
-        <Icon name="contact" className="panel-icon" />
-        <h3 className="panel-title">{t.panelContact}</h3>
+    <a href="#services" className="panel">
+        <Icon name="services" className="panel-icon" />
+        <h3 className="panel-title">{t.navServices}</h3>
     </a>
 </div>
-        </div>
+            </div>
     </section>
 );
 
@@ -115,7 +120,7 @@ export default function HomePage({ siteUrl }) {
             <div id="background-animation"></div>
             <Header t={t} lang={locale} setLang={handleLanguageChange} activeSection={activeSection} pathname={router.pathname} />
             <main>
-                <Hero t={t} />
+                <Hero t={t} locale={locale} />
                 <BlogSection t={t} />
                 <ResourcesSection t={t} lang={locale} />
                 <ToolsSection t={t} /> {/* <-- ДОБАВЛЕНО */}
