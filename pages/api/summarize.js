@@ -48,7 +48,7 @@ export default async function handler(req, res) {
 
   try {
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
     
     // Выбираем нужный промпт по locale и вставляем в него текст статьи
     const promptTemplate = prompts[locale] || prompts['ru'];
