@@ -15,10 +15,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name, email, message } = req.body;
+    const { name, email, message, inquiry } = req.body;
 
     // Валидация на сервере
-    if (!name || !email || !message) {
+    if (!name || !email || !message || !inquiry) {
       return res.status(400).json({ message: 'All fields are required.' });
     }
 
@@ -26,6 +26,7 @@ export default async function handler(req, res) {
         name,
         email,
         message,
+        inquiry,
         receivedAt: new Date().toISOString(),
         source: 'sarkhan.dev-contact-form'
     };

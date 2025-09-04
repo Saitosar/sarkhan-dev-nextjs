@@ -8,14 +8,20 @@ const ContactSection = ({ t }) => {
     // Состояние для отслеживания статуса отправки
     const [formStatus, setFormStatus] = useState({ submitted: false, error: false });
 
+    // === НАЧАЛО ИЗМЕНЕНИЙ: ОБНОВЛЕНА СХЕМА ВАЛИДАЦИИ ===
     const formSchema = z.object({
         name: z.string().min(1, { message: t.validation.nameRequired }),
         email: z.string().email({ message: t.validation.emailInvalid }).min(1, { message: t.validation.emailRequired }),
+        inquiry: z.string().min(1, { message: t.validation.inquiryRequired }),
         message: z.string().min(10, { message: t.validation.messageMin }),
     });
+    // === КОНЕЦ ИЗМЕНЕНИЙ ===
 
     const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm({
         resolver: zodResolver(formSchema),
+        defaultValues: { // Устанавливаем значение по умолчанию для выпадающего списка
+            inquiry: ""
+        }
     });
 
     // === ОБНОВЛЕННАЯ ФУНКЦИЯ ОТПРАВКИ ===
@@ -59,6 +65,18 @@ const ContactSection = ({ t }) => {
                                 <input id="email-input" {...register("email")} type="email" placeholder={t.formEmailPlaceholder} />
                                 {errors.email && <p className="form-error">{errors.email.message}</p>}
                             </div>
+                            {/* === НАЧАЛО ИЗМЕНЕНИЙ: ДОБАВЛЕНО НОВОЕ ПОЛЕ === */}
+                            <div className="form-group">
+                                <label htmlFor="inquiry-input">{t.formInquiryLabel}</label>
+                                <select id="inquiry-input" {...register("inquiry")}>
+                                    <option value="" disabled>{t.formInquiryPlaceholder}</option>
+                                    <option value="mentorship">{t.formInquiryOptionMentoring}</option>
+                                    <option value="feedback">{t.formInquiryOptionFeedback}</option>
+                                    <option value="other">{t.formInquiryOptionOther}</option>
+                                </select>
+                                {errors.inquiry && <p className="form-error">{errors.inquiry.message}</p>}
+                            </div>
+                            {/* === КОНЕЦ ИЗМЕНЕНИЙ === */}
                             <div className="form-group">
                                 <label htmlFor="message-input">{t.formMessagePlaceholder}</label>
                                 <textarea id="message-input" {...register("message")} placeholder={t.formMessagePlaceholder}></textarea>
