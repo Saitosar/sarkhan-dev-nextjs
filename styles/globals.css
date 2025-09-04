@@ -1749,3 +1749,12 @@ a.blog-card, a.blog-card:hover {
 .contact-form select option {
   color: var(--color-text-primary);
 }
+
+/* === Стили для иконки в манифест-блоках (Blog, Resources, Tools) === */
+.tools-manifest-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: var(--space-xs);
+  margin-inline: auto; /* Центрируем иконку */
+  color: var(--color-primary); /* Используем основной синий цвет */
+}

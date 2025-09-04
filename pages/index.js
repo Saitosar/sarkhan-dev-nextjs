@@ -26,9 +26,11 @@ const Hero = ({ t }) => (
             </h1>
             <p className="hero-subtitle">{t.heroSubtitle}</p>
             <div className="hero-cta-buttons">
-                <a href="#resources" className="btn">{t.ctaPrimary}</a>
-                <a href="#blog" className="btn btn-secondary">{t.ctaSecondary}</a>
-            </div>
+    <a href="#tools" className="btn btn-primary-cta">
+        Попробовать ITB<span className="cta-highlight">AI</span>
+    </a>
+    <a href="#services" className="btn btn-secondary">{t.ctaSecondary}</a>
+</div>
              <div className="hero-panels">
     <a href="#blog" className="panel">
         <Icon name="blog" className="panel-icon" />
@@ -40,16 +42,16 @@ const Hero = ({ t }) => (
             <h3 className="panel-title">{t.panelResources}</h3>
         </a>
     </Link>
-    <a href="#about" className="panel">
-        <Icon name="about" className="panel-icon" />
-        <h3 className="panel-title">{t.panelAbout}</h3>
+    <a href="#tools" className="panel">
+        <Icon name="tools" className="panel-icon" />
+        <h3 className="panel-title">{t.navTools}</h3>
     </a>
-    <a href="#contact" className="panel">
-        <Icon name="contact" className="panel-icon" />
-        <h3 className="panel-title">{t.panelContact}</h3>
+    <a href="#services" className="panel">
+        <Icon name="services" className="panel-icon" />
+        <h3 className="panel-title">{t.navServices}</h3>
     </a>
 </div>
-        </div>
+            </div>
     </section>
 );
 
