@@ -1758,3 +1758,9 @@ a.blog-card, a.blog-card:hover {
   margin-inline: auto; /* Центрируем иконку */
   color: var(--color-primary); /* Используем основной синий цвет */
 }
+
+/* === Стили для акцента в CTA кнопке === */
+.btn-primary-cta .cta-highlight {
+  color: var(--color-secondary); /* Используем ваш фирменный розовый цвет */
+  margin-left: 2px; /* Небольшой отступ для красоты */
+}
