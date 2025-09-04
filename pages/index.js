@@ -14,6 +14,7 @@ import { getProcessedPosts } from '@/lib/strapi'; // <-- 1. Импортируе
 import Link from 'next/link';
 import Icon from '@/components/Icon';
 import ServicesSection from '@/components/ServicesSection';
+import ToolsSection from '@/components/ToolsSection';
 
 const Hero = ({ t }) => (
     <section id="home">
@@ -117,6 +118,7 @@ export default function HomePage({ siteUrl }) {
                 <Hero t={t} />
                 <BlogSection t={t} />
                 <ResourcesSection t={t} lang={locale} />
+                <ToolsSection t={t} /> {/* <-- ДОБАВЛЕНО */}
                 <ServicesSection t={t} /> {/* <-- ДОБАВЛЕНО */}
                 <AboutSection t={t} />
                 <ContactSection t={t} />
