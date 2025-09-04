@@ -106,6 +106,7 @@ export default function Header({ t, lang, setLang, activeSection }) {
     { href: "#home", key: "navHome", text: t.navHome },
     { href: "#blog", key: "navBlog", text: t.navBlog },
     { href: "#resources", key: "navResources", text: t.navResources },
+    { href: "#tools", key: "navTools", text: t.navTools }, // <-- ДОБАВЛЕНО
     { href: "#services", key: "navServices", text: t.navServices }, // <-- ДОБАВЛЕНО
     { href: "#about", key: "navAbout", text: t.navAbout },
     { href: "#contact", key: "navContact", text: t.navContact },
