@@ -1887,3 +1887,44 @@ a.blog-card, a.blog-card:hover {
   width: 16px;
   height: 16px;
 }
+
+/* styles/globals.css */
+
+/* ... (все ваши существующие стили) ... */
+
+/* === Стили для кнопок под заголовком статьи === */
+.post-meta-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-lg); /* Расстояние между кнопками */
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap; /* Перенос на новую строку на маленьких экранах */
+}
+
+.like-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 8px 16px;
+  border-radius: 9999px; /* Делаем кнопку круглой */
+  border: 1px solid var(--color-primary);
+  background: transparent;
+  color: var(--color-primary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.like-button:disabled {
+  background: var(--color-primary);
+  color: var(--color-bg);
+  cursor: default;
+  transform: scale(1) !important; /* Убираем эффект нажатия для заблокированной кнопки */
+}
+
+.like-button:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px var(--color-shadow);
+}
