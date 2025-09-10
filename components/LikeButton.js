@@ -1,9 +1,12 @@
+// components/LikeButton.js
 import { useEffect, useRef, useState } from 'react';
+import Icon from './Icon';
 
 export default function LikeButton({ postId, initialLikes = 0 }) {
   const [likes, setLikes] = useState(Number(initialLikes) || 0);
   const [liked, setLiked] = useState(false);
   const busy = useRef(false);
+  
 
   // читаем локальную отметку, лайкал ли этот пост в этом браузере
   useEffect(() => {
@@ -14,7 +17,13 @@ export default function LikeButton({ postId, initialLikes = 0 }) {
   }, [postId]);
 
   async function handleLike() {
-    if (busy.current || liked) return;
+    // Если кнопка уже лайкнута или занята, предотвращаем действие
+    if (busy.current) return; // Busy предотвращает параллельные запросы
+    if (liked) {
+      // Это сообщение будет показано в tooltip'е благодаря title пропсу
+      return; 
+    }
+
     busy.current = true;
 
     // мгновенная реакция UI
@@ -31,7 +40,7 @@ export default function LikeButton({ postId, initialLikes = 0 }) {
       // откат при ошибке
       setLiked(false);
       setLikes((n) => Math.max(0, n - 1));
-      alert('Не удалось поставить лайк. Попробуйте позже.');
+      alert('Не удалось поставить лайк. Попробуйте позже.'); // Оставляем alert для ошибок
       console.error('Like error:', e);
     } finally {
       busy.current = false;
@@ -41,21 +50,15 @@ export default function LikeButton({ postId, initialLikes = 0 }) {
   return (
     <button
       onClick={handleLike}
-      disabled={liked || busy.current}
+      disabled={liked || busy.current} // Кнопка блокируется, если уже лайкнута или выполняется запрос
       aria-label="Like"
-      title={liked ? 'Уже понравилось' : 'Нравится'}
-      style={{
-        padding: '8px 12px',
-        borderRadius: '9999px',
-        border: '1px solid var(--color-primary, #e2e8f0)',
-        background: liked ? 'var(--color-primary, #e2e8f0)' : 'transparent',
-        transition: 'transform .1s ease',
-        cursor: liked ? 'default' : 'pointer',
-      }}
-      onMouseDown={(e) => !liked && (e.currentTarget.style.transform = 'scale(0.98)')}
-      onMouseUp={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+      title={liked ? 'Уже понравилось' : 'Нравится'} // Здесь устанавливается текст для tooltip
+      className="like-button" 
+      // Вместо inline-стилей, будем использовать CSS классы для состояний
     >
-      ❤️ {likes}
+      {/* 2. Заменяем эмодзи на компонент Icon */}
+      <Icon name="heart" className="like-icon" />
+      <span>{likes}</span>
     </button>
   );
 }
