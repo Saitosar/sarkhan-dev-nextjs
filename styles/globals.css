@@ -1902,29 +1902,54 @@ a.blog-card, a.blog-card:hover {
   flex-wrap: wrap; /* Перенос на новую строку на маленьких экранах */
 }
 
+/* styles/globals.css */
+
+/* ... (удалите старые стили для .like-button и вставьте эти) ... */
+
+/* === Обновленные стили для кнопки "Лайк" === */
 .like-button {
   display: inline-flex;
   align-items: center;
   gap: var(--space-sm);
   padding: 8px 16px;
-  border-radius: 9999px; /* Делаем кнопку круглой */
-  border: 1px solid var(--color-primary);
+  /* 1. Делаем кнопку прямоугольной с закругленными углами */
+  border-radius: var(--radius-md); 
+  /* 2. Делаем рамку такой же, как у соседней кнопки */
+  border: 1px solid var(--color-border);
   background: transparent;
-  color: var(--color-primary);
+  color: var(--color-text-secondary); /* Изначально текст серый */
   font-family: inherit;
   font-size: 0.9rem;
   transition: all 0.2s ease;
   cursor: pointer;
 }
 
-.like-button:disabled {
-  background: var(--color-primary);
-  color: var(--color-bg);
-  cursor: default;
-  transform: scale(1) !important; /* Убираем эффект нажатия для заблокированной кнопки */
+/* Иконка сердца внутри кнопки */
+.like-button .like-icon {
+  width: 18px;
+  height: 18px;
+  /* 3. Изначально сердце тоже серое, как и рамка */
+  color: var(--color-text-secondary); 
+  transition: all 0.2s ease;
 }
 
+/* Эффект при наведении для АКТИВНОЙ кнопки */
 .like-button:not(:disabled):hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px var(--color-shadow);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+.like-button:not(:disabled):hover .like-icon {
+  color: var(--color-primary);
+}
+
+/* Стиль для ЗАБЛОКИРОВАННОЙ кнопки (после лайка) */
+.like-button:disabled {
+  border-color: var(--color-primary); /* Рамка становится яркой */
+  color: var(--color-primary);       /* Текст (цифра) становится ярким */
+  cursor: default;
+}
+
+/* Сердце в заблокированной кнопке становится ярким */
+.like-button:disabled .like-icon {
+  color: var(--color-primary); 
 }
