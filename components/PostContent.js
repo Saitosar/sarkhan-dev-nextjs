@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Icon from './Icon';
 import Link from 'next/link';
 import LikeButton from './LikeButton';
+import Comments from './Comments';
 
 const PostContent = ({ post, t, locale }) => {
     const [summary, setSummary] = useState('');
@@ -61,6 +62,10 @@ const PostContent = ({ post, t, locale }) => {
                   <a className="btn">{t.backToBlog}</a>
                 </Link>
             </div>
+            {/* 2. Добавляем компонент комментариев здесь */}
+                <div className="comments-wrapper">
+                  <Comments />
+                </div>
         </div>
     </div>
 );
