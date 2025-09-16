@@ -1,10 +1,10 @@
-// pages/blog/[slug].js (НОВЫЙ ФАЙЛ)
+// pages/blog/[slug].js
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { translations } from '@/utils/translations';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import PostContent from '@/components/PostContent'; // Мы создадим этот компонент на следующем шаге
+import PostContent from '@/components/PostContent';
 import { getProcessedPosts } from '@/lib/strapi';
 
 export default function PostPage({ post }) {
@@ -12,7 +12,6 @@ export default function PostPage({ post }) {
     const { locale } = router;
     const t = translations[locale] || translations['az'];
 
-    // Обработка случая, если пост не найден
     if (router.isFallback) {
         return <div>Loading...</div>;
     }
@@ -41,36 +40,55 @@ export default function PostPage({ post }) {
     );
 }
 
+// --- НАЧАЛО ИСПРАВЛЕНИЙ ---
+async function fetchAllPostsForPaths(locale) {
+    let allPosts = [];
+    let page = 1;
+    let totalPages = 1;
+    const pageSize = 100; // Запрашиваем по 100 за раз для эффективности
+
+    while (page <= totalPages) {
+        const { posts, pagination } = await getProcessedPosts({ locale, page, pageSize });
+        if (posts && posts.length > 0) {
+            allPosts = allPosts.concat(posts);
+            totalPages = pagination.pageCount || 1;
+        }
+        page++;
+    }
+    return allPosts;
+}
+
 export async function getStaticPaths({ locales }) {
     const paths = [];
 
-    // Проходим по каждому языку, чтобы получить правильные сслыки для каждого
     for (const locale of locales) {
-        const { posts } = await getProcessedPosts({ locale, pageSize: 100 }); // Запрашиваем посты для конкретного языка
+        const posts = await fetchAllPostsForPaths(locale);
         posts.forEach(post => {
-            paths.push({
-                params: { slug: post.slug },
-                locale: locale, // Четко связываем ссылку с ее языком
-            });
+            if (post && post.slug) { // Добавлена проверка на наличие slug
+                paths.push({
+                    params: { slug: post.slug },
+                    locale: locale,
+                });
+            }
         });
     }
 
-    return { paths, fallback: 'blocking' }; // fallback: 'blocking' лучше для SEO
+    return { paths, fallback: 'blocking' };
 }
+// --- КОНЕЦ ИСПРАВЛЕНИЙ ---
 
 export async function getStaticProps(context) {
     const { locale, params } = context;
     // Нам нужна функция, которая найдет один пост по slug
-    const { posts } = await getProcessedPosts({ locale });
+    const { posts } = await getProcessedPosts({ locale, pageSize: 200 }); // Увеличим лимит для поиска
     const post = posts.find(p => p.slug === params.slug) || null;
 
-    // Если пост не найден, возвращаем 404
     if (!post) {
         return { notFound: true };
     }
 
     return { 
         props: { post },
-        revalidate: 60, // Пересобирать страницу раз в минуту, если контент изменился
+        revalidate: 60,
     };
 }
