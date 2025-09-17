@@ -1492,6 +1492,7 @@ footer p {
     width: 40px;
     height: 40px;
   }
+  
 }
 
 
@@ -1832,12 +1833,47 @@ a.blog-card, a.blog-card:hover {
   padding: var(--space-lg);
 }
 
-/* Стили для карточки с User Story */
-.story-card .tool-result-content {
-    font-weight: 500;
-    line-height: 1.7;
-    font-size: 1.05rem;
+/* === Стили для Генератора (Вводный текст + Комбинированные карточки) === */
+
+/* 1. Вводный текст (Решение Проблемы 1: Отступы) */
+.tool-intro-text {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  max-width: 70ch;
+  line-height: 1.6;
+  /* Добавляем отступы СВЕРХУ (чтобы отлепить от кнопки) и СНИЗУ (чтобы отлепить от результатов) */
+  margin: var(--space-xl) auto var(--space-lg) auto;
 }
+
+/* 2. Разделитель ВНУТРИ комбинированной карты */
+.story-divider {
+  border: none;
+  height: 1px;
+  background: var(--color-border);
+  margin: var(--space-lg) 0;
+}
+
+/* 3. Стиль для текста User Story (внутри <p>) */
+.story-text {
+  font-weight: 500;
+  line-height: 1.7;
+  font-size: 1.05rem;
+  white-space: pre-wrap;   /* Гарантирует перенос, если US длинная */
+  word-wrap: break-word;   /* Гарантирует перенос */
+}
+
+/* 4. Стиль для текста AC (внутри <pre>) (Решение Проблемы 2: Переполнение) */
+.criteria-pre {
+  white-space: pre-wrap;   /* Обязательно для переноса строк в <pre> */
+  word-wrap: break-word;   /* Обязательно для переноса длинных слов/строк, чтобы избежать переполнения */
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+}
+
+/* === КОНЕЦ БЛОКА ЗАМЕНЫ === */
 
 /* Стили для карточки с Критериями */
 .criteria-card .tool-result-content {

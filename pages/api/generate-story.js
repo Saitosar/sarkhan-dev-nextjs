@@ -1,4 +1,4 @@
-// pages/api/generate-story.js (ВЕРСИЯ С УЛУЧШЕННЫМ ЛОГИРОВАНИЕМ)
+// pages/api/generate-story.js (YENİLƏNMİŞ VƏ TƏKMİLLƏŞDİRİLMİŞ VERSİYA)
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const prompts = {
@@ -6,28 +6,31 @@ const prompts = {
 
 **АЛГОРИТМ ДЕЙСТВИЙ:**
 
-1.  **ДЕКОМПОЗИЦИЯ:** Внимательно прочитай запрос. Определи в нем от 2 до 4 атомарных, независимых бизнес-возможностей. Это основа для будущих User Stories. Не создавай одну гигантскую историю (Epic).
+1.  **АНАЛИЗ И ДЕКОМПОЗИЦИЯ:** Внимательно проанализируй запрос. Определи, представляет ли он единую, четкую возможность (capability) или это сложный Epic, требующий декомпозиции.
+    * Если это **единая возможность**, напиши ОДНУ User Story.
+    * Если это **Epic**, декомпозируй его на 2-4 атомарные, независимые User Stories.
 
-2.  **ГЕНЕРАЦИЯ USER STORIES (US):** Для каждой выделенной возможности, напиши ОДНУ четкую User Story в строгом формате: "Как <Роль>, я хочу <Действие>, чтобы <Ценность>".
+2.  **ГЕНЕРАЦИЯ USER STORIES (US):** Для каждой выделенной возможности, напиши четкую User Story в строгом формате: "Как <Роль>, я хочу <Действие>, чтобы <Ценность>".
 
 3.  **ГЕНЕРАЦИЯ ACCEPTANCE CRITERIA (AC):** Для КАЖДОЙ User Story, напиши полный набор критериев приемки в формате Gherkin. Этот набор ОБЯЗАТЕЛЬНО должен включать:
-    - Один "Happy Path" (успешный сценарий).
-    - Минимум два негативных сценария (ошибки, неверные данные).
-    - Хотя бы один граничный случай (пустые значения, максимальные значения и т.д.), если это применимо.
+    * Один "Happy Path" (успешный сценарий).
+    * Минимум два негативных сценария (ошибки, неверные данные).
+    * Хотя бы один граничный случай (пустые значения, максимальные значения и т.д.), если это применимо.
 
-4.  **ФОРМАТИРОВАНИЕ ВЫВОДА:** Весь ответ должен быть одной строкой. Используй следующие разделители:
-    - \`---STORY_START---\` перед каждой новой User Story.
-    - \`---AC_START---\` перед блоком критериев приемки для этой User Story.
-    - Каждый сценарий в AC должен начинаться с новой строки.
+4.  **ФОРМАТИРОВАНИЕ ВЫВОДА:**
+    * Твой ответ ДОЛЖЕН начинаться *НЕМЕДЛЕННО* с \`---STORY_START---\`.
+    * ЗАПРЕЩЕНО добавлять любое вступление, приветствие, рассуждение или текст "Okay, I understand..." перед первым разделителем \`---STORY_START---\`.
+    * Используй \`---AC_START---\` перед блоком критериев приемки для этой User Story.
+    * Каждый сценарий в AC должен начинаться с новой строки.
 
-**ЗАПРОС ПОЛЬЗОВАТЕЛЯ:** "{userInput}"
-
-**ТВОЙ АНАЛИЗ И РЕЗУЛЬТАТ:**`,
+**ЗАПРОС ПОЛЬЗОВАТЕЛЯ:** "{userInput}"`,
   en: `You are an elite IT Business Analyst with 10 years of experience. Your task is not just to generate text, but to conduct a full analysis of the user's request.
 
 **ALGORITHM:**
 
-1.  **DECOMPOSITION:** Read the request carefully. Identify 2 to 4 atomic, independent business capabilities. This is the basis for the User Stories. Do not create one giant story (Epic).
+1.  **ANALYSIS & DECOMPOSITION:** Carefully analyze the request. Determine if it represents a single, clear capability, or if it is a complex Epic that needs decomposition.
+    * If it is a **single capability**, write ONE User Story.
+    * If it is an **Epic**, decompose it into 2-4 atomic, independent User Stories.
 
 2.  **USER STORIES (US) GENERATION:** For each identified capability, write ONE clear User Story in the strict format: "As a <Role>, I want <Action>, so that <Value>".
 
@@ -36,19 +39,20 @@ const prompts = {
     - At least two negative scenarios (errors, invalid data).
     - At least one boundary case (empty values, max values, etc.), if applicable.
 
-4.  **OUTPUT FORMATTING:** The entire response must be a single string. Use the following delimiters:
-    - \`---STORY_START---\` before each new User Story.
-    - \`---AC_START---\` before the block of acceptance criteria for that User Story.
-    - Each AC scenario must start on a new line.
+4.  **OUTPUT FORMATTING:**
+    * Your response MUST start *IMMEDIATELY* with \`---STORY_START---\`.
+    * It is FORBIDDEN to add any preamble, greeting, reasoning, or text like "Okay, I understand..." before the very first \`---STORY_START---\` delimiter.
+    * Use \`---AC_START---\` before the block of acceptance criteria for that User Story.
+    * Each AC scenario must start on a new line.
 
-**USER REQUEST:** "{userInput}"
-
-**YOUR ANALYSIS AND RESULT:**`,
+**USER REQUEST:** "{userInput}"`,
   az: `Sən 10 illik təcrübəyə malik elit IT Biznes Analitiksən. Vəzifən sadəcə mətn yaratmaq deyil, istifadəçi sorğusunun tam təhlilini aparmaqdır.
 
 **HƏRƏKƏT ALQORİTMİ:**
 
-1.  **DEKOMPOZİSİYA:** Sorğunu diqqətlə oxu. Orada 2-dən 4-ə qədər atomar, müstəqil biznes imkanı müyyən et. Bu, gələcək User Story-lər üçün əsasdır. Bir nəhəng hekayə (Epic) yaratma.
+1.  **TƏHLİL VƏ DEKOMPOZİSİYA:** Sorğunu diqqətlə təhlil et. Onun vahid, aydın bir imkanı (capability) təmsil etdiyini və ya dekompozisiya tələb edən mürəkkəb bir Epic olduğunu müəyyən et.
+    * Əgər bu, **vahid bir imkandırsa**, BİR User Story yaz.
+    * Əgər bu, **Epic-dirsə**, onu 2-4 arası atomar, müstəqil User Story-yə dekompozisiya et.
 
 2.  **USER STORY (US) YARADILMASI:** Müəyyən edilmiş hər bir imkan üçün, ciddi formatda BİR aydın User Story yaz: "Bir <Rol> olqaraq, <Hərəkət> etmək istəyirəm ki, <Dəyər> əldə edim".
 
@@ -57,14 +61,13 @@ const prompts = {
     - Ən azı iki neqativ ssenari (səhvlər, yanlış məlumatlar).
     - Mümkünsə, ən azı bir sərhəd vəziyyəti (boş dəyərlər, maksimum dəyərlər və s.).
 
-4.  **ÇIXIŞIN FORMATLANMASI:** Bütün cavab tək bir sətir olmalıdır. Aşağıdakı ayırıcılardan istifadə et:
-    - \`---STORY_START---\` hər yeni User Story-dən əvvəl.
-    - \`---AC_START---\` həmin User Story üçün qəbul meyarları blokundan əvvəl.
-    - AC-dəki hər bir ssenari yeni bir sətirdən başlamalıdır.
+4.  **ÇIXIŞIN FORMATLANMASI:**
+    * Sənin cavabın *DƏRHAL* \`---STORY_START---\` ilə başlamalıdır.
+    * İlk \`---STORY_START---\` ayırıcısından əvvəl hər hansı bir giriş, salam, mühakimə və ya "Yaxşı, başa düşdüm..." kimi mətn əlavə etmək QADAĞANDIR.
+    * Həmin User Story üçün qəbul meyarları blokundan əvvəl \`---AC_START---\` istifadə et.
+    * AC-dəki hər bir ssenari yeni bir sətirdən başlamalıdır.
 
-**İSTİFADƏÇİ SORĞUSU:** "{userInput}"
-
-**SƏNİN TƏHLİLİN VƏ NƏTİCƏ:**`
+**İSTİFADƏÇİ SORĞUSU:** "{userInput}"`
 };
 
 export default async function handler(req, res) {
@@ -85,7 +88,7 @@ export default async function handler(req, res) {
 
   try {
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" }); // Modelin adını yoxladım, düzgündür
 
     const promptTemplate = prompts[locale] || prompts['ru'];
     const prompt = promptTemplate.replace('{userInput}', userInput);
@@ -102,9 +105,7 @@ export default async function handler(req, res) {
 
     res.status(200).json({ stories });
   } catch (error) {
-    // === УЛУЧШЕННОЕ ЛОГИРОВАНИЕ ОШИБКИ ===
     console.error('Detailed API Error:', error); 
-    // =======================================
     res.status(500).json({ error: 'Failed to generate response from AI.' });
   }
 }

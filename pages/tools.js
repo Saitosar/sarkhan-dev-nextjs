@@ -1,7 +1,7 @@
-// pages/tools.js (ВЕРСИЯ С ДЕКОМПОЗИЦИЕЙ)
+// pages/tools.js (YENİLƏNMİŞ VƏ BİRLƏŞDİRİLMİŞ KARTLARLA VERSİYA)
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useState, Fragment } from 'react';
+import { useState } from 'react'; // Fragment-i sildik, çünki artıq lazım deyil
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Icon from '@/components/Icon';
@@ -17,6 +17,7 @@ export default function ToolsPage() {
     const [error, setError] = useState(null);
     const [result, setResult] = useState(null);
     const [copySuccess, setCopySuccess] = useState('');
+    const [introText, setIntroText] = useState(''); // <-- PROBLEM 3: Giriş mətni üçün yeni state
 
     const handleLanguageChange = (newLang) => {
         router.push('/tools', '/tools', { locale: newLang });
@@ -29,6 +30,7 @@ export default function ToolsPage() {
         setIsLoading(true);
         setError(null);
         setResult(null);
+        setIntroText(''); // <-- Giriş mətnini təmizləyirik
 
         try {
             const response = await fetch('/api/generate-story', {
@@ -42,8 +44,18 @@ export default function ToolsPage() {
             }
 
             const data = await response.json();
-            console.log('Ответ от AI:', data); // <--- ВОТ ЭТА СТРОКА
             setResult(data);
+
+            // === PROBLEM 3 HƏLLİ: Nəticəyə əsasən giriş mətnini təyin edirik ===
+            if (data.stories && data.stories.length > 0) {
+              if (data.stories.length === 1) {
+                setIntroText(t.toolsGeneratorIntroSingle);
+              } else {
+                setIntroText(t.toolsGeneratorIntroMultiple.replace('{n}', data.stories.length));
+              }
+            }
+            // ==========================================================
+
         } catch (err) {
             setError(t.toolsGeneratorError);
         } finally {
@@ -90,32 +102,44 @@ export default function ToolsPage() {
                             
                             {error && <p className="form-error" style={{textAlign: 'center', marginTop: '1rem'}}>{error}</p>}
 
+                            {/* === PROBLEM 3 HƏLLİ: Giriş mətni burada göstərilir === */}
+                            {introText && <p className="tool-intro-text">{introText}</p>}
+
                             {result && result.stories && (
                                 <div className="tool-results-container">
+                                
+                                    {/* === PROBLEM 4 HƏLLİ: BİRLƏŞDİRİLMİŞ KART === */}
                                     {result.stories.map((story, index) => (
-                                        <Fragment key={index}>
-                                            <div className="tool-result-card story-card">
-                                                <div className="tool-result-header">
-                                                    <h3>{`${t.toolsGeneratorUserStoryTitle} ${index + 1}`}</h3>
-                                                     <button type="button" className="btn-copy" onClick={() => handleCopy(story.userStory, `us-${index}`)}>
-                                                        <Icon name="contact" />
-                                                        <span>{copySuccess === `us-${index}` ? t.toolsGeneratorCopySuccess : t.toolsGeneratorCopyButton}</span>
-                                                    </button>
-                                                </div>
-                                                <p className="tool-result-content">{story.userStory}</p>
+                                        <div key={index} className="tool-result-card combined-story-card">
+                                            
+                                            {/* Story Hissəsi */}
+                                            <div className="tool-result-header">
+                                                <h3>{`${t.toolsGeneratorUserStoryTitle} ${index + 1}`}</h3>
+                                                 <button type="button" className="btn-copy" onClick={() => handleCopy(story.userStory, `us-${index}`)}>
+                                                    <Icon name="contact" />
+                                                    <span>{copySuccess === `us-${index}` ? t.toolsGeneratorCopySuccess : t.toolsGeneratorCopyButton}</span>
+                                                </button>
                                             </div>
-                                            <div className="tool-result-card criteria-card">
-                                                 <div className="tool-result-header">
-                                                    <h3>{t.toolsGeneratorACTitle}</h3>
-                                                     <button type="button" className="btn-copy" onClick={() => handleCopy(story.acceptanceCriteria, `ac-${index}`)}>
-                                                        <Icon name="contact" />
-                                                        <span>{copySuccess === `ac-${index}` ? t.toolsGeneratorCopySuccess : t.toolsGeneratorCopyButton}</span>
-                                                    </button>
-                                                </div>
-                                                <pre className="tool-result-content">{story.acceptanceCriteria}</pre>
+                                            {/* Yeni ".story-text" klassı əlavə edildi */}
+                                            <p className="tool-result-content story-text">{story.userStory}</p>
+
+                                            {/* Vizual ayırıcı */}
+                                            <hr className="story-divider" />
+
+                                            {/* AC Hissəsi */}
+                                            <div className="tool-result-header">
+                                                <h3>{t.toolsGeneratorACTitle}</h3>
+                                                 <button type="button" className="btn-copy" onClick={() => handleCopy(story.acceptanceCriteria, `ac-${index}`)}>
+                                                    <Icon name="contact" />
+                                                    <span>{copySuccess === `ac-${index}` ? t.toolsGeneratorCopySuccess : t.toolsGeneratorCopyButton}</span>
+                                                </button>
                                             </div>
-                                        </Fragment>
+                                            {/* Yeni ".criteria-pre" klassı əlavə edildi */}
+                                            <pre className="tool-result-content criteria-pre">{story.acceptanceCriteria}</pre>
+                                        </div>
                                     ))}
+                                    {/* === DƏYİŞİKLİKLƏRİN SONU === */}
+
                                 </div>
                             )}
                         </div>
