@@ -5,6 +5,7 @@ import { Jura, Tektur } from 'next/font/google';
 import AiAssistant from '@/components/AiAssistant'; // <-- 1. Импортируем компонент
 import { translations } from '@/utils/translations'; // <-- 2. Импортируем переводы
 import { useRouter } from 'next/router'; // <-- 3. Импортируем useRouter
+import { Analytics } from '@vercel/analytics/react';
 
 // body: Jura по умолчанию
 const jura = Jura({
@@ -33,6 +34,7 @@ export default function App({ Component, pageProps }) {
         {/* Jura применяем классом, Tektur — переменной */}
         <main className={`${jura.className} ${tektur.variable}`}>
           <Component {...pageProps} />
+          <Analytics />
            <AiAssistant t={t} /> {/* <-- 5. Добавляем ассистента здесь */}
         </main>
       </ThemeProvider>
