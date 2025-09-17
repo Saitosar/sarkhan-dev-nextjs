@@ -2029,3 +2029,42 @@ a.blog-card, a.blog-card:hover {
 .like-button:disabled .like-icon {
   color: var(--color-primary); 
 }
+
+/* === МОБИЛЬНАЯ АДАПТАЦИЯ ДЛЯ ПЛАНШЕТОВ И ТЕЛЕФОНОВ === */
+/* Эти правила применяются ко всему, что УЖЕ 768px */
+
+@media (max-width: 768px) {
+
+  /* === Адаптация страницы Tools (Генератор) для мобильных === */
+
+  /* Решение 2: Уменьшаем "рамку" (padding) всей карточки */
+  .tool-card {
+    padding: var(--space-lg); /* Было: --space-xxl (64px). Стало: 24px */
+  }
+
+  /* Решение 4: Уменьшаем гигантский заголовок */
+  .tool-card-header h2 {
+    font-size: 1.6rem; /* Было: 2rem */
+    margin-bottom: var(--space-md); /* Уменьшаем отступ под ним */
+  }
+
+  /* Решение 3: Уплотняем вертикальные отступы */
+  .tool-card-header {
+     margin-bottom: var(--space-lg); /* Было: --space-xl */
+  }
+  
+  .tool-results-container {
+    margin-top: var(--space-xl); /* Было: --space-xxl */
+  }
+  
+  .tool-intro-text {
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-lg);
+  }
+  
+  /* Решение 1: Увеличиваем высоту textarea */
+  .tool-card form textarea {
+      min-height: 170px; /* Было: 150px */
+  }
+  
+}
