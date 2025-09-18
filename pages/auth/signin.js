@@ -12,7 +12,7 @@ export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const email = event.currentTarget.email.value;
-    signIn("resend", { email, redirect: true, callbackUrl: '/' });
+    signIn("email", { email, redirect: true, callbackUrl: '/' });
   };
 
   return (

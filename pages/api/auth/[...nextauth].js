@@ -4,34 +4,29 @@ import { Pool } from "pg"
 import { drizzle } from "drizzle-orm/node-postgres"
 import * as schema from "../../../db/schema"
 import EmailProvider from "next-auth/providers/email"
-import { Resend } from "resend" // 1. Импортируем Resend
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
 });
 
 const db = drizzle(pool, { schema });
-const resend = new Resend(process.env.RESEND_API_KEY); // 2. Создаем клиент Resend
 
+// Этот код полностью соответствует официальным рекомендациям
 export default NextAuth({
   adapter: DrizzleAdapter(db),
   providers: [
     EmailProvider({
-      // 3. Создаем свою функцию отправки, используя логику из вашего примера
-      async sendVerificationRequest({ identifier: email, url, provider }) {
-        try {
-          await resend.emails.send({
-            from: provider.from,
-            to: email,
-            subject: "Sign in to Sarkhan.dev",
-            html: `<p>Click the magic link below to sign in to your account.</p><p><a href="${url}">Sign In</a></p>`,
-          });
-          console.log("Verification email sent to", email);
-        } catch (error) {
-          console.error("Failed to send verification email:", error);
-          throw new Error("Failed to send verification email");
-        }
+      // Конфигурация для отправки через SMTP-сервер Resend
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: process.env.EMAIL_SERVER_PORT,
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.RESEND_API_KEY, // Используем API ключ как пароль
+        },
       },
+      // Адрес, с которого будут отправляться письма
+      from: process.env.EMAIL_FROM,
     }),
   ],
   secret: process.env.AUTH_SECRET,

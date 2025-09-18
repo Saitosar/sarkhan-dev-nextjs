@@ -23,12 +23,14 @@ function ErrorFallback({ error }) {
   </div>;
 }
 
-// 2. ОБНОВЛЯЕМ КОМПОНЕНТ APP
+// 2. ОБНОВЛЯЕМ КОМПОНЕНТ APP, ЧТОБЫ ОН ПРИНИМАЛ СЕССИЮ
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
   const { locale } = useRouter();
   const t = translations[locale] || translations['az'];
+
   return (
-    <SessionProvider session={session}> {/* <-- 3. ОБЕРАЧИВАЕМ ВСЕ */}
+    // 3. ОБЕРАЧИВАЕМ ВСЕ ПРИЛОЖЕНИЕ В SessionProvider
+    <SessionProvider session={session}>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <ThemeProvider defaultTheme="system" attribute="data-theme">
           <main className={`${jura.className} ${tektur.variable}`}>

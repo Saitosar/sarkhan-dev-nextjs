@@ -163,16 +163,28 @@ export default function Header({ t, lang, setLang, activeSection }) {
                 </div>
                 <button onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')} className="theme-toggle" aria-label={t.themeToggle}><Icon name="theme" /></button>
               </li>
+              <li className="auth-controls-mobile">
+                {session ? (
+                    <button className="btn btn-secondary btn-auth" onClick={() => signOut()}>
+                        {t.signOutButton || "Выйти"}
+                    </button>
+                ) : (
+                    <button className="btn btn-auth" onClick={() => signIn()}>
+                        {t.signInButton || "Войти"}
+                    </button>
+                )}
+              </li>
             </ul>
           </nav>
-          <div className="auth-controls" style={{ marginLeft: '1rem' }}>
+
+          <div className="auth-controls-desktop">
             {session ? (
-                <button className="btn btn-secondary" onClick={() => signOut()}>
-                    {t.signOutButton || "Sign Out"}
+                <button className="btn btn-secondary btn-auth" onClick={() => signOut()}>
+                    {t.signOutButton || "Выйти"}
                 </button>
             ) : (
-                <button className="btn" onClick={() => signIn()}>
-                    {t.signInButton || "Sign In"}
+                <button className="btn btn-auth" onClick={() => signIn()}>
+                    {t.signInButton || "Войти"}
                 </button>
             )}
           </div>
