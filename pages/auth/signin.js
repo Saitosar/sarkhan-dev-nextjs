@@ -6,8 +6,14 @@ import Header from '@/components/Header'; // Подключаем компоне
 import Footer from '@/components/Footer';
 
 export default function SignIn() {
-  const { locale, query } = useRouter();
+  const router = useRouter();
+  const { locale} = router;
   const t = translations[locale] || translations['az'];
+
+  const handleLanguageChange = (newLang) => {
+    // Перенаправляем пользователя на ту же страницу, но с новой локалью
+    router.push('/auth/signin', '/auth/signin', { locale: newLang });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,7 +23,7 @@ export default function SignIn() {
 
   return (
     <>
-        <Header t={t} lang={locale} setLang={() => {}} />
+        <Header t={t} lang={locale} setLang={handleLanguageChange} />
         <main>
             <section style={{ textAlign: 'center', paddingTop: '100px', minHeight: 'calc(100vh - 200px)' }}>
                 <div className="container">
