@@ -7,25 +7,25 @@ import EmailProvider from "next-auth/providers/email"
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
 });
 
 const db = drizzle(pool, { schema });
 
-// Этот код полностью соответствует официальным рекомендациям
 export default NextAuth({
   adapter: DrizzleAdapter(db),
   providers: [
     EmailProvider({
-      // Конфигурация для отправки через SMTP-сервер Resend
       server: {
         host: process.env.EMAIL_SERVER_HOST,
         port: process.env.EMAIL_SERVER_PORT,
         auth: {
           user: process.env.EMAIL_SERVER_USER,
-          pass: process.env.RESEND_API_KEY, // Используем API ключ как пароль
+          pass: process.env.RESEND_API_KEY,
         },
       },
-      // Адрес, с которого будут отправляться письма
       from: process.env.EMAIL_FROM,
     }),
   ],
