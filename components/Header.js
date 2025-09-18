@@ -5,8 +5,12 @@ import Icon from './Icon';
 import Image from 'next/image'; // 2. Импортирован Image
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useSession } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
+
 
 export default function Header({ t, lang, setLang, activeSection }) {
+  const { data: session } = useSession();
   const { theme, resolvedTheme, setTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -161,6 +165,17 @@ export default function Header({ t, lang, setLang, activeSection }) {
               </li>
             </ul>
           </nav>
+          <div className="auth-controls" style={{ marginLeft: '1rem' }}>
+            {session ? (
+                <button className="btn btn-secondary" onClick={() => signOut()}>
+                    {t.signOutButton || "Sign Out"}
+                </button>
+            ) : (
+                <button className="btn" onClick={() => signIn()}>
+                    {t.signInButton || "Sign In"}
+                </button>
+            )}
+          </div>
           
           <button className="mobile-menu-toggle" onClick={() => setMobileMenuOpen(v => !v)} aria-expanded={mobileMenuOpen} aria-controls="nav-menu" aria-label={t.navToggle}>
             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
