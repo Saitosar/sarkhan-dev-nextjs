@@ -15,7 +15,9 @@ export default function VerifyRequest() {
                 <section style={{ textAlign: 'center', paddingTop: '100px', minHeight: 'calc(100vh - 200px)' }}>
                     <div className="container">
                         <h1>{t.verifyTitle || "Check your email"}</h1>
-                        <p>{t.verifySubtitle || "A sign in link has been sent to your email address."}</p>
+                        <p style={{ margin: '0 auto', color: 'var(--color-text-secondary)' }}>
+                        {t.verifySubtitle}
+                        </p>
                     </div>
                 </section>
             </main>
