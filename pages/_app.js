@@ -2,19 +2,18 @@ import '@/styles/globals.css';
 import { ThemeProvider } from 'next-themes';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Jura, Tektur } from 'next/font/google';
-import AiAssistant from '@/components/AiAssistant'; // <-- 1. Импортируем компонент
-import { translations } from '@/utils/translations'; // <-- 2. Импортируем переводы
-import { useRouter } from 'next/router'; // <-- 3. Импортируем useRouter
+import AiAssistant from '@/components/AiAssistant';
+import { translations } from '@/utils/translations';
+import { useRouter } from 'next/router';
 import { Analytics } from '@vercel/analytics/react';
+import { SessionProvider } from "next-auth/react"; // <-- 1. ИМПОРТИРУЕМ ПРОВАЙДЕР
 
-// body: Jura по умолчанию
 const jura = Jura({
-  subsets: ['latin', 'latin-ext', 'cyrillic'], // без weight
+  subsets: ['latin', 'latin-ext', 'cyrillic'],
 });
 
-// headings: Tektur через CSS-переменную
 const tektur = Tektur({
-  subsets: ['latin', 'latin-ext', 'cyrillic'], // без weight
+  subsets: ['latin', 'latin-ext', 'cyrillic'],
   variable: '--font-heading',
 });
 
@@ -24,20 +23,23 @@ function ErrorFallback({ error }) {
   </div>;
 }
 
-export default function App({ Component, pageProps }) {
-  // 4. Получаем текущий язык для передачи в ассистент
+// 2. ОБНОВЛЯЕМ КОМПОНЕНТ APP, ЧТОБЫ ОН ПРИНИМАЛ СЕССИЮ
+export default function App({ Component, pageProps: { session, ...pageProps } }) {
   const { locale } = useRouter();
   const t = translations[locale] || translations['az'];
+
   return (
-    <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <ThemeProvider defaultTheme="system" attribute="data-theme">
-        {/* Jura применяем классом, Tektur — переменной */}
-        <main className={`${jura.className} ${tektur.variable}`}>
-          <Component {...pageProps} />
-          <Analytics />
-           <AiAssistant t={t} /> {/* <-- 5. Добавляем ассистента здесь */}
-        </main>
-      </ThemeProvider>
-    </ErrorBoundary>
+    // 3. ОБЕРАЧИВАЕМ ВСЕ ПРИЛОЖЕНИЕ В SessionProvider
+    <SessionProvider session={session}>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <ThemeProvider defaultTheme="system" attribute="data-theme">
+          <main className={`${jura.className} ${tektur.variable}`}>
+            <Component {...pageProps} />
+            <Analytics />
+            <AiAssistant t={t} />
+          </main>
+        </ThemeProvider>
+      </ErrorBoundary>
+    </SessionProvider>
   );
 }

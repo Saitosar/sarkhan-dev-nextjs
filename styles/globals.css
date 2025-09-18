@@ -635,7 +635,7 @@ footer p {
   }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1190px) {
   .nav-menu {
   position: fixed; inset-block-start: 0; inset-inline-end: 0;
   width: 250px; height: 100vh; background: var(--color-bg);
@@ -2067,4 +2067,36 @@ a.blog-card, a.blog-card:hover {
       min-height: 170px; /* Было: 150px */
   }
   
+}
+/* === Стили для кнопки авторизации в шапке === */
+
+/* 1. Уменьшаем размер кнопки */
+.btn-auth {
+  padding: var(--space-sm) var(--space-lg); /* 8px 24px вместо 16px 32px */
+  font-size: 0.9rem; /* Немного уменьшаем шрифт */
+}
+
+/* 2. Показываем/скрываем кнопки в зависимости от экрана */
+
+/* По умолчанию, мобильная кнопка (внутри меню) скрыта */
+.auth-controls-mobile {
+  display: none;
+}
+
+/* На мобильных устройствах (меньше 576px) */
+@media (max-width: 576px) {
+  /* Прячем десктопную кнопку */
+  .auth-controls-desktop {
+    display: none;
+  }
+  /* Показываем мобильную кнопку */
+  .auth-controls-mobile {
+    display: block;
+    margin-top: var(--space-xl); /* Добавляем отступ сверху в меню */
+    width: 100%;
+    padding: 0 var(--space-lg);
+  }
+  .auth-controls-mobile .btn-auth {
+    width: 100%; /* Растягиваем кнопку на всю ширину меню */
+  }
 }

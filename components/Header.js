@@ -5,8 +5,12 @@ import Icon from './Icon';
 import Image from 'next/image'; // 2. Импортирован Image
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useSession } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
+
 
 export default function Header({ t, lang, setLang, activeSection }) {
+  const { data: session } = useSession();
   const { theme, resolvedTheme, setTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -159,8 +163,31 @@ export default function Header({ t, lang, setLang, activeSection }) {
                 </div>
                 <button onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')} className="theme-toggle" aria-label={t.themeToggle}><Icon name="theme" /></button>
               </li>
+              <li className="auth-controls-mobile">
+                {session ? (
+                    <button className="btn btn-secondary btn-auth" onClick={() => signOut()}>
+                        {t.signOutButton || "Выйти"}
+                    </button>
+                ) : (
+                    <button className="btn btn-auth" onClick={() => signIn()}>
+                        {t.signInButton || "Войти"}
+                    </button>
+                )}
+              </li>
             </ul>
           </nav>
+
+          <div className="auth-controls-desktop">
+            {session ? (
+                <button className="btn btn-secondary btn-auth" onClick={() => signOut()}>
+                    {t.signOutButton || "Выйти"}
+                </button>
+            ) : (
+                <button className="btn btn-auth" onClick={() => signIn()}>
+                    {t.signInButton || "Войти"}
+                </button>
+            )}
+          </div>
           
           <button className="mobile-menu-toggle" onClick={() => setMobileMenuOpen(v => !v)} aria-expanded={mobileMenuOpen} aria-controls="nav-menu" aria-label={t.navToggle}>
             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
