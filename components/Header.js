@@ -169,7 +169,7 @@ export default function Header({ t, lang, setLang, activeSection }) {
                         {t.signOutButton || "Выйти"}
                     </button>
                 ) : (
-                    <button className="btn btn-auth" onClick={() => signIn()}>
+                    <button className="btn btn-auth" onClick={() => router.push('/auth/signin')}>
                         {t.signInButton || "Войти"}
                     </button>
                 )}
@@ -183,7 +183,7 @@ export default function Header({ t, lang, setLang, activeSection }) {
                     {t.signOutButton || "Выйти"}
                 </button>
             ) : (
-                <button className="btn btn-auth" onClick={() => signIn()}>
+                <button className="btn btn-auth" onClick={() => router.push('/auth/signin')}>
                     {t.signInButton || "Войти"}
                 </button>
             )}
