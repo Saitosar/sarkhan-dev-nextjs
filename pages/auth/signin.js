@@ -2,23 +2,36 @@
 import { signIn } from "next-auth/react";
 import { useRouter } from 'next/router';
 import { translations } from '@/utils/translations';
-import Header from '@/components/Header'; // Подключаем компоненты для единого стиля
+import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { useState } from 'react'; // <-- 1. Импортируем useState
 
 export default function SignIn() {
   const router = useRouter();
-  const { locale} = router;
+  const { locale } = router;
   const t = translations[locale] || translations['az'];
+  const [error, setError] = useState(''); // <-- 2. Добавляем состояние для ошибок
 
   const handleLanguageChange = (newLang) => {
-    // Перенаправляем пользователя на ту же страницу, но с новой локалью
     router.push('/auth/signin', '/auth/signin', { locale: newLang });
   };
 
-  const handleSubmit = (event) => {
+  // ↓↓↓ 3. ПОЛНОСТЬЮ ЗАМЕНЯЕМ ФУНКЦИЮ handleSubmit ↓↓↓
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setError(''); // Сбрасываем ошибку
     const email = event.currentTarget.email.value;
-    signIn("email", { email, redirect: true, callbackUrl: '/' });
+
+    // Отправляем письмо, НО отключаем автоматический редирект
+    const result = await signIn("email", { email, redirect: false, callbackUrl: '/' });
+
+    // Если next-auth вернул URL (значит, всё хорошо), делаем редирект вручную
+    if (result.ok && result.url) {
+      router.push('/auth/verify-request');
+    } else {
+      // Если возникла ошибка, показываем её
+      setError(result.error || "Произошла неизвестная ошибка.");
+    }
   };
 
   return (
@@ -46,6 +59,8 @@ export default function SignIn() {
                         <button type="submit" className="btn" style={{ width: '100%' }}>
                             {t.signInButton || "Send Magic Link"}
                         </button>
+                        {/* 4. Отображаем ошибку, если она есть */}
+                        {error && <p style={{color: 'var(--color-secondary)', marginTop: '1rem'}}>{error}</p>}
                     </form>
                 </div>
             </section>
