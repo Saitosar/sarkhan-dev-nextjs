@@ -7,6 +7,7 @@ import {
   pgEnum,
   uuid,
   boolean,
+  jsonb, // Импортируем jsonb для нового поля
 } from "drizzle-orm/pg-core"
 import type { AdapterAccount } from "@auth/core/adapters"
 
@@ -17,6 +18,10 @@ export const planEnum = pgEnum('plan', ['free', 'pro', 'expert', 'enterprise']);
 export const statusEnum = pgEnum('status', ['active', 'invited', 'inactive']);
 export const ownerTypeEnum = pgEnum('owner_type', ['user', 'organization']);
 export const visibilityEnum = pgEnum('visibility', ['private', 'link', 'public', 'org']);
+
+// --- НОВЫЕ ENUMS ДЛЯ ДОКУМЕНТОВ ---
+export const documentTypeEnum = pgEnum('document_type', ['SRD', 'general']);
+export const documentStatusEnum = pgEnum('document_status', ['draft', 'published']);
 
 
 // --- CORE AUTH TABLES (для NextAuth.js) ---
@@ -83,7 +88,6 @@ export const organizations = pgTable("organization", {
     plan: planEnum('plan').default('free'),
     status: statusEnum('status').default('active'),
     createdAt: timestamp('createdAt').defaultNow(),
-    // Политики организации
     disablePublicLinks: boolean('disablePublicLinks').default(false),
 });
 
@@ -94,12 +98,21 @@ export const memberships = pgTable("membership", {
     role: userRoleEnum('role').default('viewer'),
 });
 
-// --- Documents Table ---
+// --- Documents Table (ОБНОВЛЕННАЯ ВЕРСИЯ) ---
 
 export const documents = pgTable("document", {
     id: uuid('id').defaultRandom().primaryKey(),
     title: text('title').notNull(),
-    content: text('content'), // JSON or text content
+    
+    // СТАРОЕ ПОЛЕ content ОСТАЕТСЯ ДЛЯ ОБРАТНОЙ СОВМЕСТИМОСТИ, НО МЫ БУДЕМ ИСПОЛЬЗОВАТЬ НОВЫЕ
+    content: text('content'),
+
+    // НОВЫЕ ПОЛЯ ДЛЯ SRD
+    type: documentTypeEnum('type').default('general'),
+    status: documentStatusEnum('status').default('draft'),
+    content_json: jsonb('content_json'), // Для структурированных данных
+    content_md: text('content_md'), // Для Markdown
+    version: integer('version').default(1),
 
     // Владелец (может быть пользователь ИЛИ организация)
     ownerType: ownerTypeEnum('ownerType').notNull(),
