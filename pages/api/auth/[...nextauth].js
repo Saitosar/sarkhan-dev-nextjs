@@ -1,10 +1,10 @@
 // pages/api/auth/[...nextauth].js
-import NextAuth from "next-auth"
-import { DrizzleAdapter } from "@auth/drizzle-adapter"
-import { Pool } from "pg"
-import { drizzle } from "drizzle-orm/node-postgres"
-import * as schema from "../../../db/schema"
-import EmailProvider from "next-auth/providers/email"
+import NextAuth from "next-auth";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import { Pool } from "pg";
+import { drizzle } from "drizzle-orm/node-postgres";
+import * as schema from "../../../db/schema";
+import EmailProvider from "next-auth/providers/email";
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
@@ -15,7 +15,7 @@ const pool = new Pool({
 
 const db = drizzle(pool, { schema });
 
-// Это экспортируемая конфигурация, которую мы используем в других местах
+// Создаем и ЭКСПОРТИРУЕМ конфигурацию, чтобы ее можно было использовать в других API
 export const authOptions = {
   adapter: DrizzleAdapter(db),
   providers: [
@@ -39,5 +39,5 @@ export const authOptions = {
   },
 };
 
-// А это стандартный экспорт по умолчанию, который нужен для работы next-auth
+// Экспортируем NextAuth с этой конфигурацией для обработки стандартных запросов
 export default NextAuth(authOptions);
