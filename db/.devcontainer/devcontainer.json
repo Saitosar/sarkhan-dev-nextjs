@@ -1,0 +1,9 @@
+{
+  "name": "Default Node.js",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:0-22",
+  "remoteEnv": {
+    "NODE_EXTRA_CA_CERTS": "${containerWorkspaceFolder}/certs/supabase.crt"
+  },
+  "forwardPorts": [3000],
+  "postCreateCommand": "npm install"
+}
