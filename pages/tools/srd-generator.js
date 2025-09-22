@@ -21,33 +21,39 @@ export default function SrdGeneratorPage() {
     };
 
     const handleGenerate = async (e) => {
+        // Шаг 1: Предотвращаем стандартную отправку формы (которая делает GET)
         e.preventDefault();
         if (!userInput.trim() || isLoading) return;
 
         setIsLoading(true);
-setError(null);
-setResult(null);
+        setError(null);
+        setResult(null);
 
-try {
-const response = await fetch('/api/srd/generate', {
-method: 'POST',
-headers: { 'Content-Type': 'application/json' },
-body: JSON.stringify({ promptText: userInput }),
-});
+        try {
+            // Шаг 1: Явно отправляем POST-запрос с помощью fetch
+            const response = await fetch('/api/srd/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ promptText: userInput }), // Используем правильное имя поля
+            });
 
-const data = await response.json();
+            // Шаг 4: Улучшенная обработка ошибок
+            if (!response.ok) {
+                // Пытаемся получить текст ошибки, даже если это не JSON
+                const errorText = await response.text();
+                // Создаем осмысленное сообщение об ошибке
+                throw new Error(`Server responded with status ${response.status}: ${errorText}`);
+            }
 
-if (!response.ok) {
-throw new Error(data.error || 'An unknown server error occurred.');
-}
+            const data = await response.json();
+            setResult(data);
 
-setResult(data);
-
-} catch (err) {
-setError(err.message);
-} finally {
-setIsLoading(false);
-}
+        } catch (err) {
+            // Отображаем любую ошибку, включая сетевые и серверные
+            setError(err.message);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -66,6 +72,7 @@ setIsLoading(false);
                                 <h2>{t.toolsGeneratorSrdTitle}</h2>
                                 <p>{t.toolsGeneratorSrdDescription}</p>
                             </div>
+                            {/* Форма теперь только вызывает наш JS-обработчик */}
                             <form onSubmit={handleGenerate}>
                                 <textarea
                                     value={userInput}
