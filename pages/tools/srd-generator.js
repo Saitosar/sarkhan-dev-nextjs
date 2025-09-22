@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Icon from '@/components/Icon';
 import { translations } from '@/utils/translations';
 
 export default function SrdGeneratorPage() {
@@ -22,34 +21,33 @@ export default function SrdGeneratorPage() {
     };
 
     const handleGenerate = async (e) => {
-        // Эта функция предотвращает стандартную отправку формы
         e.preventDefault();
         if (!userInput.trim() || isLoading) return;
 
         setIsLoading(true);
-        setError(null);
-        setResult(null);
+setError(null);
+setResult(null);
 
-        try {
-            const response = await fetch('/api/srd/generate', {
-                method: 'POST', // Мы явно указываем метод POST
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ promptText: userInput }),
-            });
+try {
+const response = await fetch('/api/srd/generate', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ promptText: userInput }),
+});
 
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({ error: 'An unknown server error occurred.' }));
-                throw new Error(errorData.error || `Server responded with status: ${response.status}`);
-            }
+const data = await response.json();
 
-            const data = await response.json();
-            setResult(data);
+if (!response.ok) {
+throw new Error(data.error || 'An unknown server error occurred.');
+}
 
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setIsLoading(false);
-        }
+setResult(data);
+
+} catch (err) {
+setError(err.message);
+} finally {
+setIsLoading(false);
+}
     };
 
     return (
@@ -68,8 +66,7 @@ export default function SrdGeneratorPage() {
                                 <h2>{t.toolsGeneratorSrdTitle}</h2>
                                 <p>{t.toolsGeneratorSrdDescription}</p>
                             </div>
-                            {/* ---> ИЗМЕНЕНИЕ: Добавляем method="POST" для надежности <--- */}
-                            <form onSubmit={handleGenerate} method="POST">
+                            <form onSubmit={handleGenerate}>
                                 <textarea
                                     value={userInput}
                                     onChange={(e) => setUserInput(e.target.value)}
@@ -90,10 +87,11 @@ export default function SrdGeneratorPage() {
                                 <div className="tool-results-container">
                                     <div className="tool-result-card">
                                         <div className="tool-result-header">
-                                            <h3>Документ создан</h3>
+                                            <h3>Документ успешно создан!</h3>
                                         </div>
-                                        <p>SRD успешно создан с ID: <strong>{result.docId}</strong></p>
-                                        <p>Использование в этом месяце: {result.usage}</p>
+                                        <p>SRD был успешно сгенерирован и сохранен в вашей учетной записи.</p>
+                                        <p><strong>ID Документа:</strong> {result.docId}</p>
+                                        <p><strong>Использование квоты в этом месяце:</strong> {result.usage}</p>
                                     </div>
                                 </div>
                             )}
