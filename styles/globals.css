@@ -2100,3 +2100,54 @@ a.blog-card, a.blog-card:hover {
     width: 100%; /* Растягиваем кнопку на всю ширину меню */
   }
 }
+
+/* styles/globals.css */
+/* ... (в самый конец файла добавьте эти стили) ... */
+
+/* === Стили для секции Инструментов на главной странице === */
+.tools-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Одна колонка на мобильных */
+  gap: var(--space-xl);
+  max-width: 1000px;
+  margin-inline: auto;
+}
+
+/* Две колонки на планшетах и десктопах */
+@media (min-width: 768px) {
+  .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.tool-card-promo {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-xl);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Заставляем карточки быть одной высоты */
+}
+
+.tool-card-promo h3 {
+  font-size: 1.6rem;
+  color: var(--color-primary);
+  margin-bottom: var(--space-md);
+}
+
+.tool-card-promo p {
+  color: var(--color-text-secondary);
+  flex-grow: 1; /* Растягиваем параграф, чтобы кнопка была внизу */
+  margin-bottom: var(--space-sm);
+}
+
+.tool-card-promo-icon {
+  width: 64px;
+  height: 64px;
+  margin-inline: auto;
+  margin-bottom: var(--space-xl);
+  color: var(--color-primary);
+}
