@@ -22,6 +22,7 @@ export default function SrdGeneratorPage() {
     };
 
     const handleGenerate = async (e) => {
+        // Эта функция предотвращает стандартную отправку формы
         e.preventDefault();
         if (!userInput.trim() || isLoading) return;
 
@@ -30,25 +31,22 @@ export default function SrdGeneratorPage() {
         setResult(null);
 
         try {
-            // ---> НАЧАЛО ИСПРАВЛЕНИЯ <---
             const response = await fetch('/api/srd/generate', {
-                method: 'POST', // Явно указываем метод POST
+                method: 'POST', // Мы явно указываем метод POST
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ promptText: userInput }), // Используем promptText, как ожидает API
+                body: JSON.stringify({ promptText: userInput }),
             });
-            // ---> КОНЕЦ ИСПРАВЛЕНИЯ <---
 
             if (!response.ok) {
-                // Попытаемся прочитать текст ошибки с сервера
-                const errorData = await response.json().catch(() => ({ error: 'An unknown error occurred.' }));
-                throw new Error(errorData.error || `Server error: ${response.statusText}`);
+                const errorData = await response.json().catch(() => ({ error: 'An unknown server error occurred.' }));
+                throw new Error(errorData.error || `Server responded with status: ${response.status}`);
             }
 
             const data = await response.json();
             setResult(data);
 
         } catch (err) {
-            setError(err.message || t.toolsGeneratorError);
+            setError(err.message);
         } finally {
             setIsLoading(false);
         }
@@ -70,11 +68,12 @@ export default function SrdGeneratorPage() {
                                 <h2>{t.toolsGeneratorSrdTitle}</h2>
                                 <p>{t.toolsGeneratorSrdDescription}</p>
                             </div>
-                            <form onSubmit={handleGenerate}>
+                            {/* ---> ИЗМЕНЕНИЕ: Добавляем method="POST" для надежности <--- */}
+                            <form onSubmit={handleGenerate} method="POST">
                                 <textarea
                                     value={userInput}
                                     onChange={(e) => setUserInput(e.target.value)}
-                                    placeholder={t.toolsGeneratorPlaceholder} // Можно будет добавить отдельный плейсхолдер для SRD
+                                    placeholder={t.toolsGeneratorPlaceholder}
                                     disabled={isLoading}
                                     rows={5}
                                 />
