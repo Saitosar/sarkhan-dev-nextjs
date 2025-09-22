@@ -33,14 +33,17 @@ const translations = {
         navTools: "Alətlər",
         toolsSectionTitle: "AI Alətlər",
         toolsManifestTitle: "Praktiki Artefakt Generatorları",
-        toolsManifestText: "Rutin tapşırıqları avtomatlaşdırmaq üçün ixtisaslaşdırılmış alətlər: User Story yaratmaqdan test məlumatlarının generasiyasına qədər.",
-        toolsManifestButton: "Alətlərə Keçid",
+        toolsManifestText: "Rutin tapşırıqları avtomatlaşdırmaq üçün ixtisaslaşdırılmış alətlər: User Story yaratmaqdan SRD sənədlərinin hazırlanmasına qədər.",
+        toolsManifestButton: "Bütün Alətlərə Bax",
         comingSoon: "Tezliklə...",
-        toolsGeneratorTitle: "User Story və Qəbul Kriteriyaları Generatoru",
+        toolsGeneratorTitle: "User Story & AC Generatoru",
         toolsGeneratorDescription: "Tələbinizi sərbəst formada təsvir edin, və süni intellekt onu standart artefaktlara çevirəcək.",
         toolsGeneratorPlaceholder: "Nümunə: İstifadəçi məhsulları qiymətə və kateqoriyaya görə filtrləyə bilməlidir...",
-        toolsGeneratorButton: "Generasiya et",
+        toolsGeneratorButton: "Generatora Keçid",
         toolsGeneratorButtonLoading: "Generasiya edilir...",
+        toolsGeneratorSrdTitle: "SRD Generatoru", // <-- YENİ
+        toolsGeneratorSrdDescription: "İdeyanızı təsvir edin, və süni intellekt sizin üçün Proqram Təminatı Tələbləri Sənədini (SRD) hazırlayacaq.", // <-- YENİ
+        toolsGeneratorSrdButton: "Generatora Keçid", // <-- YENİ
         toolsGeneratorUserStoryTitle: "User Story",
         toolsGeneratorACTitle: "Qəbul Kriteriyaları (AC)",
         toolsGeneratorCopyButton: "Kopyala",
@@ -135,14 +138,17 @@ Texniki biliklərimi və insana yönümlü düşüncə tərzimi transformasiya t
         navTools: "Tools",
         toolsSectionTitle: "AI Tools",
         toolsManifestTitle: "Practical Artifact Generators",
-        toolsManifestText: "Specialized tools to automate routine tasks: from creating User Stories to generating test data.",
+        toolsManifestText: "Specialized tools to automate routine tasks: from creating User Stories to generating SRD documents.",
         toolsManifestButton: "Go to Tools",
         comingSoon: "Coming soon...",
-         toolsGeneratorTitle: "User Story & Acceptance Criteria Generator",
+        toolsGeneratorTitle: "User Story & AC Generator",
         toolsGeneratorDescription: "Describe your requirement in free-form text, and the AI will formulate it into standard artifacts.",
         toolsGeneratorPlaceholder: "Example: The user should be able to filter products by price and category...",
-        toolsGeneratorButton: "Generate",
+        toolsGeneratorButton: "Go to Generator",
         toolsGeneratorButtonLoading: "Generating...",
+        toolsGeneratorSrdTitle: "SRD Generator", // <-- NEW
+        toolsGeneratorSrdDescription: "Describe your idea, and the AI will generate a Software Requirements Document (SRD) for you.", // <-- NEW
+        toolsGeneratorSrdButton: "Go to Generator", // <-- NEW
         toolsGeneratorUserStoryTitle: "User Story",
         toolsGeneratorACTitle: "Acceptance Criteria (AC)",
         toolsGeneratorCopyButton: "Copy",
@@ -233,14 +239,17 @@ Open to remote or hybrid opportunities with international teams where I can cont
         navTools: "Инструменты",
         toolsSectionTitle: "AI Инструменты",
         toolsManifestTitle: "Генераторы практических артефактов",
-        toolsManifestText: "Специализированные инструменты для автоматизации рутинных задач: от создания User Story до генерации тестовых данных.",
+        toolsManifestText: "Специализированные инструменты для автоматизации рутинных задач: от создания User Story до генерации SRD документов.",
         toolsManifestButton: "Перейти к Инструментам",
         comingSoon: "Скоро...",
-        toolsGeneratorTitle: "Генератор User Story и Критериев Приемки",
+        toolsGeneratorTitle: "Генератор User Story и AC",
         toolsGeneratorDescription: "Опишите ваше требование в свободной форме, и ИИ сформулирует его в виде стандартных артефактов.",
         toolsGeneratorPlaceholder: "Пример: Пользователь должен иметь возможность фильтровать товары по цене и категории...",
-        toolsGeneratorButton: "Сгенерировать",
+        toolsGeneratorButton: "Перейти к Генератору",
         toolsGeneratorButtonLoading: "Генерация...",
+        toolsGeneratorSrdTitle: "Генератор SRD", // <-- НОВЫЙ
+        toolsGeneratorSrdDescription: "Опишите вашу идею, и ИИ сгенерирует для вас документ с требованиями к ПО (Software Requirements Document).", // <-- НОВЫЙ
+        toolsGeneratorSrdButton: "Перейти к Генератору", // <-- НОВЫЙ
         toolsGeneratorUserStoryTitle: "User Story",
         toolsGeneratorACTitle: "Критерии Приемки (AC)",
         toolsGeneratorCopyButton: "Копировать",

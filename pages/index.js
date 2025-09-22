@@ -45,10 +45,12 @@ const Hero = ({ t, locale }) => (
             <h3 className="panel-title">{t.panelResources}</h3>
         </a>
     </Link>
-    <a href="#tools" className="panel">
+    <Link href="/tools" legacyBehavior>
+    <a className="panel">
         <Icon name="tools" className="panel-icon" />
         <h3 className="panel-title">{t.navTools}</h3>
     </a>
+</Link>
     <a href="#services" className="panel">
         <Icon name="services" className="panel-icon" />
         <h3 className="panel-title">{t.navServices}</h3>
