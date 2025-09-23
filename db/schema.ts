@@ -115,11 +115,11 @@ export const documents = pgTable("document", {
     version: integer('version').default(1),
 
     // Владелец (может быть пользователь ИЛИ организация)
-    ownerType: ownerTypeEnum('ownerType').notNull(),
-    ownerId: text('ownerId').notNull(), // Ссылается на users.id или organizations.id
+    ownerType: ownerTypeEnum('ownerType'),
+    ownerId: text('ownerId'), // Ссылается на users.id или organizations.id
 
     // Автор документа
-    createdBy: text('createdBy').notNull().references(() => users.id),
+    createdBy: text('createdBy'),
 
     // Настройки доступа
     visibility: visibilityEnum('visibility').default('private'),
