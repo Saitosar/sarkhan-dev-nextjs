@@ -13,6 +13,15 @@ import path from 'path';
 function convertJsonToMarkdown(jsonData) {
     let md = '';
     const data = jsonData;
+    
+    // Определяем строгий порядок секций
+    const sectionOrder = [
+        'titlePurpose', 'stakeholders', 'scopeContext', 'businessRequirement', 
+        'functionalRequirements', 'acceptanceCriteria', 'nonFunctionalConstraints', 
+        'dataAndFields', 'businessRules', 'interfacesApiContract', 'dependenciesAndRisks', 
+        'rolloutFeatureFlag', 'edgeCasesErrorHandling', 'notesOpenPoints'
+    ];
+
     const sectionHandlers = {
         titlePurpose: d => `# ${d.title || 'Untitled SRD'}\n\n**Purpose:** ${d.purpose || 'Not specified'}\n\n`,
         stakeholders: d => `## Stakeholders\n- **Requester:** ${d.requester || 'N/A'}\n- **End Users:** ${d.endUsers || 'N/A'}\n\n`,
@@ -20,12 +29,16 @@ function convertJsonToMarkdown(jsonData) {
         businessRequirement: d => `## Business Requirement\n**Current State:**\n${d.currentState || 'N/A'}\n\n**Future State:**\n${d.futureState || 'N/A'}\n\n**Value:**\n${d.value || 'N/A'}\n\n`,
         functionalRequirements: d => `## Functional Requirements\n${(d || []).map(item => `- **${item.id}:** ${item.text}`).join('\n')}\n\n`,
         acceptanceCriteria: d => `## Acceptance Criteria\n${(d || []).map(item => `- [ ] ${item.text}`).join('\n')}\n\n`,
+        // ... (остальные обработчики)
     };
-    for (const key in data) {
-        if (sectionHandlers[key]) {
+
+    // Проходим по секциям в правильном порядке
+    sectionOrder.forEach(key => {
+        if (data[key] && sectionHandlers[key]) {
             md += sectionHandlers[key](data[key]);
         }
-    }
+    });
+
     return md;
 }
 
@@ -35,13 +48,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { promptText } = req.body;
+    const { promptText, locale } = req.body;
     if (!promptText) {
       return res.status(400).json({ error: 'promptText is required.' });
     }
 
     const sectionsToGenerate = PLANS['free'].srdTemplate;
-    const prompt = buildDynamicSrdPrompt(promptText, sectionsToGenerate);
+    const prompt = buildDynamicSrdPrompt(promptText, sectionsToGenerate, locale);
     
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });

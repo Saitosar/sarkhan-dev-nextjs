@@ -2156,8 +2156,8 @@ a.blog-card, a.blog-card:hover {
 
 /* Основной контейнер, имитирующий лист бумаги */
 .srd-document-view {
-  max-width: 900px; /* Ограничиваем ширину для читаемости */
-  margin: var(--space-xxl) auto; /* Отступы сверху/снизу и центрирование */
+  max-width: 1400px; /* Ограничиваем ширину для читаемости */
+  margin: var(--space-lg) auto; /* Отступы сверху/снизу и центрирование */
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
