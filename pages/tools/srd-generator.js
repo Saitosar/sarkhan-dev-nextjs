@@ -23,48 +23,49 @@ export default function SrdGeneratorPage() {
     };
 
     const handleGenerate = async (e) => {
-        // Шаг 1: Предотвращаем стандартную отправку формы (которая делает GET)
-        e.preventDefault();
-        if (!userInput.trim() || isLoading) return;
-         if (status !== 'authenticated') {
-        signIn(); // Если нет, отправляем на страницу входа
+    e.preventDefault();
+    if (!userInput.trim() || isLoading) return;
+
+    if (status !== 'authenticated') {
+        signIn();
         return;
     }
 
-        setIsLoading(true);
-        setError(null);
-        setResult(null);
+    setIsLoading(true);
+    setError(null);
+    setResult(null);
 
-        try {
-            // Шаг 1: Явно отправляем POST-запрос с помощью fetch
-            const response = await fetch('/api/srd/generate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ promptText: userInput }), // Используем правильное имя поля
-            });
+    try {
+        const response = await fetch('/api/srd/generate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ promptText: userInput }),
+        });
 
-            const data = await response.json();
+        // --- НАЧАЛО ИСПРАВЛЕНИЙ ---
 
-            // Шаг 4: Улучшенная обработка ошибок
-            if (!response.ok) {
-                // Пытаемся получить текст ошибки, даже если это не JSON
-                const errorText = await response.text();
-                // Создаем осмысленное сообщение об ошибке
-                throw new Error(`Server responded with status ${response.status}: ${errorText}`);
-            }
-
-            
-            setResult(data);
-
-             router.push(`/tools/srd/${data.docId}`);
-
-        } catch (err) {
-            // Отображаем любую ошибку, включая сетевые и серверные
-            setError(err.message);
-        } finally {
-            setIsLoading(false);
+        // Сначала проверяем, успешен ли ответ
+        if (!response.ok) {
+            // Если НЕТ, читаем тело ОДИН РАЗ как текст, чтобы получить ошибку
+            const errorData = await response.json();
+            // И выбрасываем ошибку с текстом от сервера
+            throw new Error(errorData.error || `Server responded with status ${response.status}`);
         }
-    };
+
+        // Если ДА, читаем тело ОДИН РАЗ как JSON
+        const data = await response.json();
+
+        // И выполняем успешное действие
+        router.push(`/tools/srd/${data.docId}`);
+
+        // --- КОНЕЦ ИСПРАВЛЕНИЙ ---
+
+    } catch (err) {
+        setError(err.message);
+    } finally {
+        setIsLoading(false);
+    }
+};
 
     return (
         <>
