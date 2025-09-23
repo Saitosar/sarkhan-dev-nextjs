@@ -66,7 +66,7 @@ export default async function handler(req, res) {
   }
   */
 
-  const userId = "test-user-for-srd-generator";
+  const userId = "83f3e6c2-2d83-4b3d-abbd-98a1a8ef67fd";
 
   // Получаем текст от пользователя из тела запроса
   const { promptText } = req.body;
