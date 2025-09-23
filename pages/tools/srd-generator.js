@@ -30,10 +30,10 @@ export default function SrdGeneratorPage() {
         setResultText('');
 
         try {
-            const response = await fetch('/api/srd/generate', {
+            const response = await fetch('/api/srd/generate.js', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ promptText: userInput }),
+                body: JSON.stringify({ promptText: userInput, locale: locale }),
             });
             if (!response.ok) {
             // Если нет, получаем текст ошибки с сервера

@@ -1,10 +1,9 @@
-// pages/tools/srd/[docId].js (ФИНАЛЬНАЯ ВЕРСИЯ С КНОПКАМИ)
+// pages/tools/srd/[docId].js (ФИНАЛЬНАЯ ВЕРСИЯ)
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Icon from '@/components/Icon'; // Убедитесь, что Icon импортирован
 import { translations } from '@/utils/translations';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
@@ -14,14 +13,12 @@ import showdown from 'showdown';
 import DOMPurify from 'isomorphic-dompurify';
 import { promises as fs } from 'fs';
 import path from 'path';
-import { useState } from 'react'; // Импортируем useState
-
-// Импорты для генерации PDF
+import { useState } from 'react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
 export async function getServerSideProps(context) {
-    // ... (Ваша функция getServerSideProps остается без изменений)
+    // ... (эта функция остается без изменений)
     const { docId } = context.params;
     try {
         const certPath = path.resolve(process.cwd(), 'certs', 'supabase.crt');
@@ -52,7 +49,7 @@ export default function SrdDocumentPage({ document }) {
     const router = useRouter();
     const { locale } = router;
     const t = translations[locale] || translations['az'];
-    const [copyStatus, setCopyStatus] = useState('Копировать Markdown');
+    const [copyStatus, setCopyStatus] = useState(t.srdCopyMarkdown);
     const [isDownloading, setIsDownloading] = useState(false);
 
     const handleLanguageChange = (newLang) => {
@@ -62,24 +59,30 @@ export default function SrdDocumentPage({ document }) {
 
     const handleCopyMarkdown = () => {
         navigator.clipboard.writeText(document.content_md).then(() => {
-            setCopyStatus('Скопировано!');
-            setTimeout(() => setCopyStatus('Копировать Markdown'), 2000);
+            setCopyStatus(t.srdCopySuccess);
+            setTimeout(() => setCopyStatus(t.srdCopyMarkdown), 2000);
         });
     };
 
     const handleDownloadPdf = async () => {
         setIsDownloading(true);
-        const contentElement = document.getElementById('srd-content');
-        if (contentElement) {
-            const canvas = await html2canvas(contentElement, { scale: 2 });
+        try {
+            const contentElement = document.getElementById('srd-content');
+            if (!contentElement) throw new Error("Content element not found");
+
+            const canvas = await html2canvas(contentElement, { scale: 2, useCORS: true });
             const imgData = canvas.toDataURL('image/png');
             const pdf = new jsPDF('p', 'mm', 'a4');
             const pdfWidth = pdf.internal.pageSize.getWidth();
             const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
             pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
             pdf.save(`${document.title.replace(/ /g, '_')}.pdf`);
+        } catch (error) {
+            console.error("PDF Generation Error:", error);
+            alert("Не удалось сгенерировать PDF. Попробуйте снова.");
+        } finally {
+            setIsDownloading(false);
         }
-        setIsDownloading(false);
     };
 
     return (
@@ -91,19 +94,18 @@ export default function SrdDocumentPage({ document }) {
             <Header t={t} lang={locale} setLang={handleLanguageChange} activeSection="tools" pathname={router.pathname} />
             <main className="post-content-wrapper" style={{ paddingTop: '2rem' }}>
                 <div className="container">
-                    {/* Контейнер для кнопок действий */}
-                    <div className="srd-actions">
+                    <div id="srd-content" className="srd-document-view"> 
+                        <div dangerouslySetInnerHTML={{ __html: document.content_html }} />
+                    </div>
+
+                    {/* Кнопки теперь внизу */}
+                    <div className="srd-actions" style={{marginTop: '2rem', borderTop: '1px dashed var(--color-border)', borderBottom: 'none'}}>
                         <button onClick={handleCopyMarkdown} className="btn btn-secondary">
                            {copyStatus}
                         </button>
                         <button onClick={handleDownloadPdf} className="btn" disabled={isDownloading}>
-                            {isDownloading ? 'Генерация...' : 'Скачать PDF'}
+                            {isDownloading ? t.srdDownloading : t.srdDownloadPdf}
                         </button>
-                    </div>
-
-                    {/* Контейнер-документ */}
-                    <div id="srd-content" className="srd-document-view"> 
-                        <div dangerouslySetInnerHTML={{ __html: document.content_html }} />
                     </div>
                 </div>
             </main>
