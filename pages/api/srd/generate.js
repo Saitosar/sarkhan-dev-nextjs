@@ -1,8 +1,6 @@
 // pages/api/srd/generate.js
 
 import { getServerSession } from "next-auth/next";
-//import NextAuth from "@/pages/api/auth/[...nextauth]";
-// Изменено: импортируем authOptions вместо NextAuth
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
@@ -24,22 +22,34 @@ const db = drizzle(pool, { schema });
 // --- НОВАЯ ФУНКЦИЯ-ПОМОЩНИК ---
 // Эта функция будет преобразовывать JSON от ИИ в красивый Markdown
 function convertJsonToMarkdown(jsonData) {
-  let md = '';
-  const data = JSON.parse(jsonData);
+    let md = '';
+    // Нет необходимости парсить jsonData, так как contentJson уже является объектом
+    const data = jsonData; 
 
-  for (const key in data) {
-    const section = data[key];
-    if (key === 'titlePurpose') {
-      md += `# ${section.title || 'Untitled'}\n\n**Purpose:** ${section.purpose || 'N/A'}\n\n`;
+    const sectionHandlers = {
+        titlePurpose: d => `# ${d.title || 'Untitled SRD'}\n\n**Purpose:** ${d.purpose || 'Not specified'}\n\n`,
+        stakeholders: d => `## Stakeholders\n- **Requester:** ${d.requester || 'N/A'}\n- **End Users:** ${d.endUsers || 'N/A'}\n\n`,
+        scopeContext: d => `## Scope / Context\n**In Scope:**\n${(d.inScope || []).map(item => `- ${item}`).join('\n')}\n\n**Out of Scope:**\n${(d.outOfScope || []).map(item => `- ${item}`).join('\n')}\n\n`,
+        businessRequirement: d => `## Business Requirement\n**Current State:**\n${d.currentState || 'N/A'}\n\n**Future State:**\n${d.futureState || 'N/A'}\n\n**Value:**\n${d.value || 'N/A'}\n\n`,
+        functionalRequirements: d => `## Functional Requirements\n${(d || []).map(item => `- **${item.id}:** ${item.text}`).join('\n')}\n\n`,
+        acceptanceCriteria: d => `## Acceptance Criteria\n${(d || []).map(item => `- [ ] ${item.text}`).join('\n')}\n\n`,
+        nonFunctionalConstraints: d => `## Non-Functional Constraints\n${(d || []).map(item => `- **${item.category}:** ${item.requirement}`).join('\n')}\n\n`,
+        dataAndFields: d => `## Data & Fields\n| Field Name | Type | Validation |\n|------------|------|------------|\n${(d || []).map(item => `| ${item.fieldName} | ${item.type} | ${item.validation} |`).join('\n')}\n\n`,
+        businessRules: d => `## Business Rules\n${(d || []).map(item => `- **${item.ruleId}:** ${item.description}`).join('\n')}\n\n`,
+        interfacesApiContract: d => `## Interfaces / API Contract\n**Endpoint:** \`${d.endpoint || 'N/A'}\`\n**Method:** \`${d.method || 'N/A'}\`\n\n`,
+        dependenciesAndRisks: d => `## Dependencies & Risks\n**Dependencies:**\n${(d.dependencies || []).map(item => `- ${item}`).join('\n')}\n\n**Risks:**\n${(d.risks || []).map(item => `- ${item}`).join('\n')}\n\n`,
+        rolloutFeatureFlag: d => `## Rollout / Feature Flag\n**Strategy:** ${d.strategy || 'N/A'}\n**Monitoring:** ${d.monitoring || 'N/A'}\n\n`,
+        edgeCasesErrorHandling: d => `## Edge Cases & Error Handling\n${(d || []).map(item => `**Scenario:** ${item.scenario}\n**Expected Behavior:** ${item.expectedBehavior}\n`).join('\n')}\n\n`,
+        notesOpenPoints: d => `## Notes & Open Points\n${(d.points || []).map(item => `- ${item}`).join('\n')}\n\n`
+    };
+
+    for (const key in data) {
+        if (sectionHandlers[key]) {
+            md += sectionHandlers[key](data[key]);
+        }
     }
-    if (key === 'stakeholders') {
-      md += `## Stakeholders\n- **Requester:** ${section.requester || 'N/A'}\n- **End Users:** ${section.endUsers || 'N/A'}\n\n`;
-    }
-    // ... здесь будет логика для всех 14 секций
-  }
-  return md;
+    return md;
 }
-
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -54,7 +64,7 @@ export default async function handler(req, res) {
   }
   
   // Получаем текст от пользователя из тела запроса
-  const { promptText, sectionKeys } = req.body;
+  const { promptText } = req.body;
   if (!promptText) {
     return res.status(400).json({ error: 'promptText is required.' });
   }
@@ -84,14 +94,7 @@ export default async function handler(req, res) {
     // --- НАЧАЛО ИНТЕГРАЦИИ С ИИ ---
 
     // 3. Определяем, какой шаблон использовать
-    let sectionsToGenerate = [];
-    if (planConfig.isCustom && sectionKeys && sectionKeys.length > 0) {
-        // Логика для Expert-плана (используем то, что прислал клиент)
-        sectionsToGenerate = sectionKeys;
-    } else {
-        // Логика для Free/Pro (используем предопределенный шаблон)
-        sectionsToGenerate = planConfig.srdTemplate;
-    }
+    const sectionsToGenerate = planConfig.srdTemplate;
 
     // 4. Собираем промпт с помощью нашего конструктора
     const prompt = buildDynamicSrdPrompt(promptText, sectionsToGenerate);
@@ -108,7 +111,7 @@ export default async function handler(req, res) {
 
     // 6. Парсим JSON и создаем Markdown
     const contentJson = JSON.parse(cleanedJsonString);
-    const contentMd = convertJsonToMarkdown(cleanedJsonString);
+    const contentMd = convertJsonToMarkdown(contentJson);
 
     // 7. Сохраняем новый документ в базу данных
     const [newDocument] = await db.insert(schema.documents).values({

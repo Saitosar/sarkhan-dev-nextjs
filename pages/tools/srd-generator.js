@@ -1,4 +1,5 @@
 // pages/tools/srd-generator.js
+import { useSession, signIn } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -10,6 +11,7 @@ export default function SrdGeneratorPage() {
     const router = useRouter();
     const { locale } = router;
     const t = translations[locale] || translations['az'];
+    const { data: session, status } = useSession();
 
     const [userInput, setUserInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -21,40 +23,49 @@ export default function SrdGeneratorPage() {
     };
 
     const handleGenerate = async (e) => {
-        // Шаг 1: Предотвращаем стандартную отправку формы (которая делает GET)
-        e.preventDefault();
-        if (!userInput.trim() || isLoading) return;
+    e.preventDefault();
+    if (!userInput.trim() || isLoading) return;
 
-        setIsLoading(true);
-        setError(null);
-        setResult(null);
+    if (status !== 'authenticated') {
+        signIn();
+        return;
+    }
 
-        try {
-            // Шаг 1: Явно отправляем POST-запрос с помощью fetch
-            const response = await fetch('/api/srd/generate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ promptText: userInput }), // Используем правильное имя поля
-            });
+    setIsLoading(true);
+    setError(null);
+    setResult(null);
 
-            // Шаг 4: Улучшенная обработка ошибок
-            if (!response.ok) {
-                // Пытаемся получить текст ошибки, даже если это не JSON
-                const errorText = await response.text();
-                // Создаем осмысленное сообщение об ошибке
-                throw new Error(`Server responded with status ${response.status}: ${errorText}`);
-            }
+    try {
+        const response = await fetch('/api/srd/generate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ promptText: userInput }),
+        });
 
-            const data = await response.json();
-            setResult(data);
+        // --- НАЧАЛО ИСПРАВЛЕНИЙ ---
 
-        } catch (err) {
-            // Отображаем любую ошибку, включая сетевые и серверные
-            setError(err.message);
-        } finally {
-            setIsLoading(false);
+        // Сначала проверяем, успешен ли ответ
+        if (!response.ok) {
+            // Если НЕТ, читаем тело ОДИН РАЗ как текст, чтобы получить ошибку
+            const errorData = await response.json();
+            // И выбрасываем ошибку с текстом от сервера
+            throw new Error(errorData.error || `Server responded with status ${response.status}`);
         }
-    };
+
+        // Если ДА, читаем тело ОДИН РАЗ как JSON
+        const data = await response.json();
+
+        // И выполняем успешное действие
+        router.push(`/tools/srd/${data.docId}`);
+
+        // --- КОНЕЦ ИСПРАВЛЕНИЙ ---
+
+    } catch (err) {
+        setError(err.message);
+    } finally {
+        setIsLoading(false);
+    }
+};
 
     return (
         <>
@@ -83,7 +94,7 @@ export default function SrdGeneratorPage() {
                                 />
                                 <div className="view-all-container">
                                      <button type="submit" className="btn" disabled={isLoading || !userInput.trim()}>
-                                        {isLoading ? t.toolsGeneratorButtonLoading : t.toolsGeneratorButton}
+                                        {isLoading ? t.toolsGeneratorButtonLoading : (status === 'authenticated' ? 'Generate Document' : 'Sign In to Generate')}
                                     </button>
                                 </div>
                             </form>

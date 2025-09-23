@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import Icon from '@/components/Icon';
 import { translations } from '@/utils/translations';
 
-export default function ToolsPage() {
+export default function StoryGeneratorPage() {
     const router = useRouter();
     const { locale } = router;
     const t = translations[locale] || translations['az'];
@@ -20,7 +20,7 @@ export default function ToolsPage() {
     const [introText, setIntroText] = useState(''); // <-- PROBLEM 3: Giriş mətni üçün yeni state
 
     const handleLanguageChange = (newLang) => {
-        router.push('/tools', '/tools', { locale: newLang });
+    router.push('/tools/story-generator', '/tools/story-generator', { locale: newLang });
     };
 
     const handleGenerate = async (e) => {
