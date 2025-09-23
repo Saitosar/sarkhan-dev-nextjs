@@ -26,11 +26,12 @@ export default function SrdGeneratorPage() {
     e.preventDefault();
     if (!userInput.trim() || isLoading) return;
 
+    /*
     if (status !== 'authenticated') {
         signIn();
         return;
     }
-
+*/
     setIsLoading(true);
     setError(null);
     setResult(null);
