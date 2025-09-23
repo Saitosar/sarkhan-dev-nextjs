@@ -8,6 +8,8 @@ import { buildDynamicSrdPrompt } from "../../../lib/srd-prompt-builder";
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { promises as fs } from 'fs';
 import path from 'path';
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../auth/[...nextauth]";
 
 // Функция для конвертации JSON в Markdown
 function convertJsonToMarkdown(jsonData) {
@@ -47,6 +49,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
+  const session = await getServerSession(req, res, authOptions);
+
   try {
     const { promptText, locale } = req.body;
     if (!promptText) {
@@ -83,15 +87,26 @@ export default async function handler(req, res) {
     });
     const db = drizzle(pool, { schema });
 
+     const ownerData = session?.user
+        ? {
+            ownerType: 'user',
+            ownerId: session.user.id,
+            createdBy: session.user.id,
+            visibility: 'private',
+        }
+        : {
+            ownerType: 'user',
+            ownerId: '00000000-0000-0000-0000-000000000000',
+            createdBy: 'anonymous',
+            visibility: 'public',
+        };
+
     const [newDocument] = await db.insert(schema.documents).values({
         title: contentJson.titlePurpose?.title || 'Untitled SRD',
         type: 'SRD',
         content_json: contentJson,
         content_md: contentMd,
-        ownerType: 'user',
-        ownerId: '00000000-0000-0000-0000-000000000000',
-        createdBy: 'anonymous',
-        visibility: 'public',
+        ...ownerData // Используем определенные выше данные
     }).returning({ id: schema.documents.id });
 
     if (!newDocument || !newDocument.id) {
