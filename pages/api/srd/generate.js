@@ -61,7 +61,7 @@ export default async function handler(req, res) {
     const prompt = buildDynamicSrdPrompt(promptText, sectionsToGenerate, locale);
     
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+    const model = genAI.getGenerativeModel({ model: "ggemini-2.0-flash" });
     
     const result = await model.generateContent(prompt);
     const rawResponse = result.response.text();
