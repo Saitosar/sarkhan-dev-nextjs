@@ -37,7 +37,6 @@ export const authOptions = {
     verifyRequest: '/auth/verify-request',
     error: '/auth/error',
   },
-}
+};
 
-// 2. ИСПОЛЬЗУЕМ КОНФИГУРАЦИЮ
-export default NextAuth(authOptions)
+export default NextAuth(authOptions);

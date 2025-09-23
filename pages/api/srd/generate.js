@@ -94,14 +94,7 @@ export default async function handler(req, res) {
     // --- НАЧАЛО ИНТЕГРАЦИИ С ИИ ---
 
     // 3. Определяем, какой шаблон использовать
-    let sectionsToGenerate = [];
-    if (planConfig.isCustom && sectionKeys && sectionKeys.length > 0) {
-        // Логика для Expert-плана (используем то, что прислал клиент)
-        sectionsToGenerate = sectionKeys;
-    } else {
-        // Логика для Free/Pro (используем предопределенный шаблон)
-        sectionsToGenerate = planConfig.srdTemplate;
-    }
+    const sectionsToGenerate = planConfig.srdTemplate;
 
     // 4. Собираем промпт с помощью нашего конструктора
     const prompt = buildDynamicSrdPrompt(promptText, sectionsToGenerate);
