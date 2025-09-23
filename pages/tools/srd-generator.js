@@ -1,5 +1,5 @@
-// pages/tools/srd-generator.js
-import { useSession, signIn } from 'next-auth/react';
+// pages/tools/srd-generator.js (МАКСИМАЛЬНО УПРОЩЕННАЯ ВЕРСИЯ)
+
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -11,68 +11,52 @@ export default function SrdGeneratorPage() {
     const router = useRouter();
     const { locale } = router;
     const t = translations[locale] || translations['az'];
-    const { data: session, status } = useSession();
 
     const [userInput, setUserInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [result, setResult] = useState(null);
+    const [resultText, setResultText] = useState(''); // Стейт для хранения результата
 
     const handleLanguageChange = (newLang) => {
         router.push('/tools/srd-generator', '/tools/srd-generator', { locale: newLang });
     };
 
     const handleGenerate = async (e) => {
-    e.preventDefault();
-    if (!userInput.trim() || isLoading) return;
+        e.preventDefault();
+        if (!userInput.trim() || isLoading) return;
 
-    /*
-    if (status !== 'authenticated') {
-        signIn();
-        return;
-    }
-*/
-    setIsLoading(true);
-    setError(null);
-    setResult(null);
+        setIsLoading(true);
+        setError(null);
+        setResultText('');
 
-    try {
-        const response = await fetch('/api/srd/generate', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ promptText: userInput }),
-        });
+        try {
+            const response = await fetch('/api/srd/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ promptText: userInput }),
+            });
 
-        // --- НАЧАЛО ИСПРАВЛЕНИЙ ---
+            const data = await response.json();
 
-        // Сначала проверяем, успешен ли ответ
-        if (!response.ok) {
-            // Если НЕТ, читаем тело ОДИН РАЗ как текст, чтобы получить ошибку
-            const errorData = await response.json();
-            // И выбрасываем ошибку с текстом от сервера
-            throw new Error(errorData.error || `Server responded with status ${response.status}`);
+            if (!response.ok) {
+                throw new Error(data.error || `Server error: ${response.status}`);
+            }
+
+            // Отображаем результат прямо на странице
+            setResultText(data.generatedSrd);
+
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setIsLoading(false);
         }
-
-        // Если ДА, читаем тело ОДИН РАЗ как JSON
-        const data = await response.json();
-
-        // И выполняем успешное действие
-        router.push(`/tools/srd/${data.docId}`);
-
-        // --- КОНЕЦ ИСПРАВЛЕНИЙ ---
-
-    } catch (err) {
-        setError(err.message);
-    } finally {
-        setIsLoading(false);
-    }
-};
+    };
 
     return (
         <>
             <Head>
-                <title>{`${t.toolsGeneratorSrdTitle} | Sarkhan.dev`}</title>
-                <meta name="description" content={t.toolsGeneratorSrdDescription} />
+                <title>{`${t.toolsGeneratorSrdTitle || 'SRD Generator'} | Sarkhan.dev`}</title>
+                <meta name="description" content={t.toolsGeneratorSrdDescription || 'Generate SRD documents.'} />
             </Head>
             <div id="background-animation"></div>
             <Header t={t} lang={locale} setLang={handleLanguageChange} activeSection="tools" pathname={router.pathname} />
@@ -81,37 +65,40 @@ export default function SrdGeneratorPage() {
                     <div className="container">
                         <div className="tool-card">
                             <div className="tool-card-header">
-                                <h2>{t.toolsGeneratorSrdTitle}</h2>
-                                <p>{t.toolsGeneratorSrdDescription}</p>
+                                <h2>{t.toolsGeneratorSrdTitle || 'SRD Generator'}</h2>
+                                <p>{t.toolsGeneratorSrdDescription || 'Describe your idea to generate a document.'}</p>
                             </div>
-                            {/* Форма теперь только вызывает наш JS-обработчик */}
                             <form onSubmit={handleGenerate}>
                                 <textarea
                                     value={userInput}
                                     onChange={(e) => setUserInput(e.target.value)}
-                                    placeholder={t.toolsGeneratorPlaceholder}
+                                    placeholder={t.toolsGeneratorPlaceholder || 'Example: A user should be able to reset their password...'}
                                     disabled={isLoading}
                                     rows={5}
                                 />
                                 <div className="view-all-container">
                                      <button type="submit" className="btn" disabled={isLoading || !userInput.trim()}>
-                                        {isLoading ? t.toolsGeneratorButtonLoading : (status === 'authenticated' ? 'Generate Document' : 'Sign In to Generate')}
+                                        {isLoading ? 'Generating...' : 'Generate Document'}
                                     </button>
                                 </div>
                             </form>
-                            
+
                             {error && <p className="form-error" style={{textAlign: 'center', marginTop: '1rem'}}>{error}</p>}
 
-                            {result && (
-                                <div className="tool-results-container">
-                                    <div className="tool-result-card">
-                                        <div className="tool-result-header">
-                                            <h3>Документ успешно создан!</h3>
-                                        </div>
-                                        <p>SRD был успешно сгенерирован и сохранен в вашей учетной записи.</p>
-                                        <p><strong>ID Документа:</strong> {result.docId}</p>
-                                        <p><strong>Использование квоты в этом месяце:</strong> {result.usage}</p>
-                                    </div>
+                            {/* Блок для отображения результата */}
+                            {resultText && (
+                                <div className="tool-results-container" style={{marginTop: '2rem'}}>
+                                    <h3>Generated SRD:</h3>
+                                    <pre style={{
+                                        whiteSpace: 'pre-wrap',
+                                        wordWrap: 'break-word',
+                                        background: 'var(--color-bg)',
+                                        padding: '1rem',
+                                        borderRadius: 'var(--radius-sm)',
+                                        border: '1px solid var(--color-border)'
+                                    }}>
+                                        {resultText}
+                                    </pre>
                                 </div>
                             )}
                         </div>
