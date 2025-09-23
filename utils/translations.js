@@ -43,7 +43,7 @@ const translations = {
         toolsGeneratorButtonLoading: "Generasiya edilir...",
         toolsGeneratorSrdTitle: "SRD Generatoru", // <-- YENİ
         toolsGeneratorSrdDescription: "İdeyanızı təsvir edin, və süni intellekt sizin üçün Proqram Təminatı Tələbləri Sənədini (SRD) hazırlayacaq.", // <-- YENİ
-        toolsGeneratorSrdButton: "Generatora Keçid", // <-- YENİ
+        toolsGeneratorSrdButton: "Generasiya et", // <-- YENİ
         toolsGeneratorUserStoryTitle: "User Story",
         toolsGeneratorACTitle: "Qəbul Kriteriyaları (AC)",
         toolsGeneratorCopyButton: "Kopyala",
@@ -148,7 +148,7 @@ Texniki biliklərimi və insana yönümlü düşüncə tərzimi transformasiya t
         toolsGeneratorButtonLoading: "Generating...",
         toolsGeneratorSrdTitle: "SRD Generator", // <-- NEW
         toolsGeneratorSrdDescription: "Describe your idea, and the AI will generate a Software Requirements Document (SRD) for you.", // <-- NEW
-        toolsGeneratorSrdButton: "Go to Generator", // <-- NEW
+        toolsGeneratorSrdButton: "Generate", // <-- NEW
         toolsGeneratorUserStoryTitle: "User Story",
         toolsGeneratorACTitle: "Acceptance Criteria (AC)",
         toolsGeneratorCopyButton: "Copy",
@@ -249,7 +249,7 @@ Open to remote or hybrid opportunities with international teams where I can cont
         toolsGeneratorButtonLoading: "Генерация...",
         toolsGeneratorSrdTitle: "Генератор SRD", // <-- НОВЫЙ
         toolsGeneratorSrdDescription: "Опишите вашу идею, и ИИ сгенерирует для вас документ с требованиями к ПО (Software Requirements Document).", // <-- НОВЫЙ
-        toolsGeneratorSrdButton: "Перейти к Генератору", // <-- НОВЫЙ
+        toolsGeneratorSrdButton: "Сгенерируй", // <-- НОВЫЙ
         toolsGeneratorUserStoryTitle: "User Story",
         toolsGeneratorACTitle: "Критерии Приемки (AC)",
         toolsGeneratorCopyButton: "Копировать",

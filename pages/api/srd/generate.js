@@ -1,7 +1,9 @@
 // pages/api/srd/generate.js
 
 import { getServerSession } from "next-auth/next";
-import NextAuth from "@/pages/api/auth/[...nextauth]";
+//import NextAuth from "@/pages/api/auth/[...nextauth]";
+// Изменено: импортируем authOptions вместо NextAuth
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 import * as schema from "../../../db/schema";
@@ -45,7 +47,7 @@ export default async function handler(req, res) {
     return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
-  const session = await getServerSession(req, res, NextAuth);
+  const session = await getServerSession(req, res, authOptions);
 
   if (!session || !session.user || !session.user.id) {
     return res.status(401).json({ error: 'Unauthorized' });
@@ -96,7 +98,7 @@ export default async function handler(req, res) {
     
     // 5. Вызываем Gemini API
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" }); // Используем быструю модель
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-001" }); // Используем быструю модель
     
     const result = await model.generateContent(prompt);
     const rawResponse = result.response.text();
