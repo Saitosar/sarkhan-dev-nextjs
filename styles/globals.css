@@ -2151,3 +2151,101 @@ a.blog-card, a.blog-card:hover {
   margin-bottom: var(--space-xl);
   color: var(--color-primary);
 }
+
+/* === Стили для страницы SRD-документа === */
+
+/* Основной контейнер, имитирующий лист бумаги */
+.srd-document-view {
+  max-width: 900px; /* Ограничиваем ширину для читаемости */
+  margin: var(--space-xxl) auto; /* Отступы сверху/снизу и центрирование */
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: var(--space-xxl);
+}
+
+/* Стили для светлой темы */
+[data-theme="light"] .srd-document-view {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+}
+
+/* Заголовок документа (H1) */
+.srd-document-view h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: var(--space-sm);
+  color: var(--color-heading);
+}
+
+/* Purpose под заголовком */
+.srd-document-view h1 + p {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-xxl);
+}
+
+/* Заголовки секций (H2) */
+.srd-document-view h2 {
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-primary);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-sm);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-lg);
+}
+/* Убираем глобальный стиль подчеркивания для h2 внутри документа */
+.srd-document-view h2::after {
+  display: none;
+}
+
+
+/* Списки (In Scope, Out of Scope, FRs, ACs) */
+.srd-document-view ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.srd-document-view li {
+  position: relative;
+  padding-left: var(--space-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.srd-document-view li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+/* Контейнер для кнопок действий */
+.srd-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px dashed var(--color-border);
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+  .srd-document-view {
+    padding: var(--space-xl);
+    margin: var(--space-lg) auto;
+  }
+  .srd-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .srd-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
