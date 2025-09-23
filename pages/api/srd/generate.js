@@ -1,8 +1,6 @@
 // pages/api/srd/generate.js
 
 import { getServerSession } from "next-auth/next";
-//import NextAuth from "@/pages/api/auth/[...nextauth]";
-// Изменено: импортируем authOptions вместо NextAuth
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
