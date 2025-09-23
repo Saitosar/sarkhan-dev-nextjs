@@ -10,39 +10,47 @@ import * as schema from '../../../db/schema';
 import { eq } from 'drizzle-orm';
 import showdown from 'showdown';
 import DOMPurify from 'isomorphic-dompurify';
+import { promises as fs } from 'fs';
+import path from 'path';
 
 // Этот код выполняется на сервере для загрузки данных документа
 export async function getServerSideProps(context) {
-  const { docId } = context.params;
+    const { docId } = context.params;
 
-  try {
-    const pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-      ssl: { rejectUnauthorized: false }
-    });
-    const db = drizzle(pool, { schema });
+    try {
+        // --- ПРАВИЛЬНОЕ ПОДКЛЮЧЕНИЕ К БД С СЕРТИФИКАТОМ ---
+        const certPath = path.resolve(process.cwd(), 'certs', 'supabase.crt');
+        const caCert = await fs.readFile(certPath, 'utf-8');
 
-    const document = await db.query.documents.findFirst({
-      where: eq(schema.documents.id, docId),
-    });
+        const pool = new Pool({
+            connectionString: process.env.DATABASE_URL,
+            ssl: {
+                rejectUnauthorized: true,
+                ca: caCert,
+            }
+        });
+        const db = drizzle(pool, { schema });
 
-    if (!document) {
-      return { notFound: true };
+        const document = await db.query.documents.findFirst({
+            where: eq(schema.documents.id, docId),
+        });
+
+        if (!document) {
+            return { notFound: true };
+        }
+
+        const converter = new showdown.Converter({ tables: true });
+        const rawHtml = converter.makeHtml(document.content_md || '');
+        const sanitizedHtml = DOMPurify.sanitize(rawHtml);
+
+        const docWithHtml = { ...document, content_html: sanitizedHtml };
+
+        return { props: { document: JSON.parse(JSON.stringify(docWithHtml)) } };
+
+    } catch (error) {
+        console.error("Failed to fetch document:", error);
+        return { notFound: true };
     }
-
-    // Преобразуем Markdown в HTML на сервере
-    const converter = new showdown.Converter({ tables: true });
-    const rawHtml = converter.makeHtml(document.content_md || '');
-    const sanitizedHtml = DOMPurify.sanitize(rawHtml);
-
-    const docWithHtml = { ...document, content_html: sanitizedHtml };
-
-    return { props: { document: JSON.parse(JSON.stringify(docWithHtml)) } };
-
-  } catch (error) {
-    console.error("Failed to fetch document:", error);
-    return { notFound: true };
-  }
 }
 
 // Это компонент, который отображает страницу

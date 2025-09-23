@@ -1,21 +1,35 @@
-// pages/api/auth/[...nextauth].js (ИСПРАВЛЕННАЯ ВЕРСИЯ)
-import NextAuth from "next-auth"
-import { DrizzleAdapter } from "@auth/drizzle-adapter"
-import { Pool } from "pg"
-import { drizzle } from "drizzle-orm/node-postgres"
-import * as schema from "../../../db/schema"
-import EmailProvider from "next-auth/providers/email"
+// pages/api/auth/[...nextauth].js (ФИНАЛЬНАЯ ИСПРАВЛЕННАЯ ВЕРСИЯ)
+import NextAuth from "next-auth";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import { Pool } from "pg";
+import { drizzle } from "drizzle-orm/node-postgres";
+import * as schema from "../../../db/schema";
+import EmailProvider from "next-auth/providers/email";
 
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false
-    }
-});
+// --- НАЧАЛО ИСПРАВЛЕНИЙ ---
+import { promises as fs } from 'fs';
+import path from 'path';
 
-const db = drizzle(pool, { schema });
+// Эта функция асинхронная, чтобы мы могли прочитать сертификат
+async function getDb() {
+    const certPath = path.resolve(process.cwd(), 'certs', 'supabase.crt');
+    const caCert = await fs.readFile(certPath, 'utf-8');
 
-// 1. ЭКСПОРТИРУЕМ КОНФИГУРАЦИЮ
+    const pool = new Pool({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: true,
+            ca: caCert,
+        }
+    });
+
+    return drizzle(pool, { schema });
+}
+
+const db = await getDb();
+// --- КОНЕЦ ИСПРАВЛЕНИЙ ---
+
+
 export const authOptions = {
   adapter: DrizzleAdapter(db),
   providers: [

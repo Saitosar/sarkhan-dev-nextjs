@@ -35,15 +35,18 @@ export default function SrdGeneratorPage() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ promptText: userInput }),
             });
-
+            if (!response.ok) {
+            // Если нет, получаем текст ошибки с сервера
+            const errorData = await response.json();
+            throw new Error(errorData.error || `Server responded with status ${response.status}`);
+        }
             const data = await response.json();
 
             if (!response.ok) {
                 throw new Error(data.error || `Server error: ${response.status}`);
             }
 
-            // Отображаем результат прямо на странице
-            setResultText(data.generatedSrd);
+           router.push(`/tools/srd/${data.docId}`);
 
         } catch (err) {
             setError(err.message);
