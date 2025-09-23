@@ -1,4 +1,5 @@
 // pages/tools/srd-generator.js
+import { useSession, signIn } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -10,6 +11,7 @@ export default function SrdGeneratorPage() {
     const router = useRouter();
     const { locale } = router;
     const t = translations[locale] || translations['az'];
+    const { data: session, status } = useSession();
 
     const [userInput, setUserInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +26,10 @@ export default function SrdGeneratorPage() {
         // Шаг 1: Предотвращаем стандартную отправку формы (которая делает GET)
         e.preventDefault();
         if (!userInput.trim() || isLoading) return;
+         if (status !== 'authenticated') {
+        signIn(); // Если нет, отправляем на страницу входа
+        return;
+    }
 
         setIsLoading(true);
         setError(null);
@@ -37,6 +43,8 @@ export default function SrdGeneratorPage() {
                 body: JSON.stringify({ promptText: userInput }), // Используем правильное имя поля
             });
 
+            const data = await response.json();
+
             // Шаг 4: Улучшенная обработка ошибок
             if (!response.ok) {
                 // Пытаемся получить текст ошибки, даже если это не JSON
@@ -45,8 +53,10 @@ export default function SrdGeneratorPage() {
                 throw new Error(`Server responded with status ${response.status}: ${errorText}`);
             }
 
-            const data = await response.json();
+            
             setResult(data);
+
+             router.push(`/tools/srd/${data.docId}`);
 
         } catch (err) {
             // Отображаем любую ошибку, включая сетевые и серверные
@@ -83,7 +93,7 @@ export default function SrdGeneratorPage() {
                                 />
                                 <div className="view-all-container">
                                      <button type="submit" className="btn" disabled={isLoading || !userInput.trim()}>
-                                        {isLoading ? t.toolsGeneratorButtonLoading : t.toolsGeneratorButton}
+                                        {isLoading ? t.toolsGeneratorButtonLoading : (status === 'authenticated' ? 'Generate Document' : 'Sign In to Generate')}
                                     </button>
                                 </div>
                             </form>
