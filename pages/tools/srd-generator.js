@@ -11,25 +11,28 @@ import { getSession } from 'next-auth/react';
 export async function getServerSideProps(context) {
     const session = await getSession(context);
     const { locale, query } = context;
-    const initialPrompt = query.prompt || ''; // Always define initialPrompt here
 
     if (!session) {
-        // Correctly handle language persistence on redirect
-        const callbackUrl = `/${locale}/tools/srd-generator` + (initialPrompt ? `?prompt=${encodeURIComponent(initialPrompt)}` : '');
+        // --- НАЧАЛО ИЗМЕНЕНИЙ: Упрощаем callbackUrl ---
+        // Создаем чистый URL без параметра prompt для надежной аутентификации
+        const callbackUrl = `/${locale}/tools/srd-generator`; 
         return {
             redirect: {
                 destination: `/${locale}/auth/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`,
                 permanent: false,
             },
         };
+        // --- КОНЕЦ ИЗМЕНЕНИЙ ---
     }
 
+    const initialPrompt = query.prompt || '';
     let quota = { hasQuota: false, error: "Could not verify quota.", used: 0, limit: 0, plan: 'free' };
+    
     try {
         const protocol = context.req.headers['x-forwarded-proto'] || 'http';
         const host = context.req.headers.host;
         const absoluteUrl = `${protocol}://${host}/api/srd/check-quota`;
-
+        
         const res = await fetch(absoluteUrl, {
             headers: { cookie: context.req.headers.cookie },
         });
@@ -41,8 +44,7 @@ export async function getServerSideProps(context) {
         console.error("Error fetching quota in getServerSideProps:", error);
     }
     
-    // Always return props with both quota and initialPrompt defined
-    return { props: { quota, initialPrompt, session } };
+    return { props: { quota, initialPrompt, session: JSON.parse(JSON.stringify(session)) } };
 }
 
 
