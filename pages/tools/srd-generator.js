@@ -11,12 +11,13 @@ import { getSession } from 'next-auth/react';
 // Эта функция будет выполняться на сервере перед загрузкой страницы
 export async function getServerSideProps(context) {
     const session = await getSession(context);
-
+    const { locale } = context; 
+    const callbackUrl = `/${locale}/tools/srd-generator`;
     // Если пользователь не вошел, отправляем его на страницу логина
     if (!session) {
         return {
             redirect: {
-                destination: '/auth/signin',
+                destination: `/${locale}/auth/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`,
                 permanent: false,
             },
         };
@@ -41,7 +42,7 @@ export async function getServerSideProps(context) {
     // Получаем результат и передаем его на страницу
     const quota = await res.json();
     const initialPrompt = context.query.prompt || '';
-    return { props: { quota } };
+    return { props: { quota, initialPrompt, session } };
 }
 
 
