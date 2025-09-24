@@ -15,6 +15,7 @@ import Link from 'next/link';
 import Icon from '@/components/Icon';
 import ServicesSection from '@/components/ServicesSection';
 import ToolsSection from '@/components/ToolsSection';
+import { setLanguageCookie } from '@/utils/cookies';
 
 const Hero = ({ t, locale }) => (
     <section id="home">
@@ -69,6 +70,7 @@ export default function HomePage({ siteUrl }) {
     const isInitialLoad = useRef(true);
 
     const handleLanguageChange = (newLang) => {
+        setLanguageCookie(newLang);
         isInitialLoad.current = true;
         scrollPosition.current = window.scrollY;
         router.push(router.pathname, router.asPath, { locale: newLang, scroll: false });

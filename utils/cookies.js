@@ -1,14 +1,11 @@
-import { parseCookies, setCookie } from 'nookies';
+// utils/cookies.js (ОБНОВЛЕННАЯ ВЕРСИЯ)
+import { setCookie } from 'nookies';
 
-export const getLanguageFromCookies = (ctx = null) => {
-  const cookies = parseCookies(ctx);
-  return cookies.lang || 'az'; // 'az' по умолчанию
-};
-
-export const setLanguageCookie = (lang) => {
-  setCookie(null, 'lang', lang, {
+// Эта функция будет устанавливать cookie, который Next.js понимает по умолчанию
+export const setLanguageCookie = (lang, ctx = null) => {
+  setCookie(ctx, 'NEXT_LOCALE', lang, {
     maxAge: 30 * 24 * 60 * 60, // 30 дней
     path: '/',
-    sameSite: 'strict',
+    sameSite: 'lax', // 'lax' лучше подходит для редиректов после логина
   });
 };
