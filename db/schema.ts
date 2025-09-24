@@ -103,6 +103,8 @@ export const memberships = pgTable("membership", {
 export const documents = pgTable("document", {
     id: uuid('id').defaultRandom().primaryKey(),
     title: text('title').notNull(),
+
+     promptText: text('prompt_text'),
     
     // СТАРОЕ ПОЛЕ content ОСТАЕТСЯ ДЛЯ ОБРАТНОЙ СОВМЕСТИМОСТИ, НО МЫ БУДЕМ ИСПОЛЬЗОВАТЬ НОВЫЕ
     content: text('content'),
