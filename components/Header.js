@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSession } from "next-auth/react";
 import { signIn, signOut } from "next-auth/react";
+import { setLanguageCookie } from '@/utils/cookies'; 
 
 
 export default function Header({ t, lang, setLang, activeSection }) {
@@ -20,6 +21,12 @@ export default function Header({ t, lang, setLang, activeSection }) {
   const langGlobeBtnRef = useRef(null);
   const router = useRouter(); 
   const navMenuRef = useRef(null);
+
+  const handleLanguageSelect = (newLang) => {
+    setLanguageCookie(newLang); // Устанавливаем cookie
+    setLang(newLang);           // Вызываем функцию смены URL со страницы
+    setLangMenuOpen(false);     // Закрываем меню
+  };
 
   // 3. Оборачиваем updateUnderline в useCallback
   const updateUnderline = useCallback(() => {
@@ -156,9 +163,11 @@ export default function Header({ t, lang, setLang, activeSection }) {
                     </svg>
                   </button>
                   <div className={`lang-options ${langMenuOpen ? 'active' : ''}`}>
-                    <button className={`lang-btn ${lang === 'az' ? 'active' : ''}`} onClick={() => { setLang('az'); setLangMenuOpen(false); }}>AZ</button>
-                    <button className={`lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => { setLang('en'); setLangMenuOpen(false); }}>EN</button>
-                    <button className={`lang-btn ${lang === 'ru' ? 'active' : ''}`} onClick={() => { setLang('ru'); setLangMenuOpen(false); }}>RU</button>
+                    {/* --- НАЧАЛО ИЗМЕНЕНИЙ: Используем новую функцию --- */}
+                    <button className={`lang-btn ${lang === 'az' ? 'active' : ''}`} onClick={() => handleLanguageSelect('az')}>AZ</button>
+                    <button className={`lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => handleLanguageSelect('en')}>EN</button>
+                    <button className={`lang-btn ${lang === 'ru' ? 'active' : ''}`} onClick={() => handleLanguageSelect('ru')}>RU</button>
+                    {/* --- КОНЕЦ ИЗМЕНЕНИЙ --- */}
                   </div>
                 </div>
                 <button onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')} className="theme-toggle" aria-label={t.themeToggle}><Icon name="theme" /></button>
