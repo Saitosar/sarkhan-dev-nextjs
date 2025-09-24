@@ -2256,3 +2256,17 @@ a.tool-card-promo, a.tool-card-promo:hover {
     justify-content: center;
   }
 }
+
+/* styles/globals.css -> Добавьте этот код в конец файла */
+
+/* FIX: Убираем подчеркивание в карточках-ссылках на страницах /resources и /tools */
+a.resource-card, a.resource-card:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* FIX: Ограничиваем ширину сетки на страницах /resources и /tools */
+.resources-grid {
+  max-width: 1000px;
+  margin-inline: auto;
+}
