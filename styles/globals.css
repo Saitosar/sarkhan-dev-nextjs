@@ -1652,6 +1652,13 @@ a.blog-card, a.blog-card:hover {
   color: inherit; /* Карточка будет наследовать цвет текста, а не использовать цвет ссылок */
 }
 
+/* FIX: Убираем подчеркивание в карточках-ссылках инструментов */
+a.tool-card-promo, a.tool-card-promo:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+
 /* Стили для кнопок пагинации */
 .pagination {
   display: flex;
