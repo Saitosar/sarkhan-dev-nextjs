@@ -111,7 +111,7 @@ export default function SrdDocumentPage({ document }) {
                             pathname: '/tools/srd-generator',
                             query: { prompt: document.promptText }
                         }} passHref legacyBehavior>
-                            <a className="btn btn-secondary">Улучшить запрос</a>
+                            <a className="btn btn-secondary">{t.srdImproveQuery}</a>
                         </Link>
                         <button onClick={handleCopyMarkdown} className="btn btn-secondary">
                            {copyStatus}
