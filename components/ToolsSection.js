@@ -1,21 +1,27 @@
-// components/ToolsSection.js
+// components/ToolsSection.js (ФИНАЛЬНАЯ ИСПРАВЛЕННАЯ ВЕРСИЯ)
 import Link from 'next/link';
 import Icon from './Icon';
-import { useSession, signIn } from 'next-auth/react'; // <-- Импортируем хуки для сессии
-import { useRouter } from 'next/router'; // <-- Импортируем роутер
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 const ToolsSection = ({ t }) => {
-  const { data: session, status } = useSession(); // Получаем статус сессии
-  const router = useRouter(); // Получаем доступ к роутеру
+  const { status } = useSession();
+  const router = useRouter();
+  const { locale } = router; // Получаем текущий язык из роутера
 
-  // Функция для обработки клика на карточку SRD
+  // Единый обработчик клика для карточки SRD
   const handleSrdCardClick = (e) => {
-    // Если пользователь не авторизован
-    if (status !== 'authenticated') {
-      e.preventDefault(); // Отменяем стандартный переход по ссылке
-      signIn(null, { callbackUrl: '/tools/srd-generator' }); // Отправляем на страницу входа
+    e.preventDefault();
+    const targetUrl = `/${locale}/tools/srd-generator`;
+
+    // Если пользователь авторизован, просто переходим на страницу генератора
+    if (status === 'authenticated') {
+      router.push(targetUrl);
+    } else {
+      // Если не авторизован, перенаправляем на страницу входа,
+      // сохраняя язык и адрес для возврата
+      router.push(`/${locale}/auth/signin?callbackUrl=${encodeURIComponent(targetUrl)}`);
     }
-    // Если пользователь авторизован, ничего не делаем, и Link сработает как обычно
   };
 
   return (
@@ -38,19 +44,18 @@ const ToolsSection = ({ t }) => {
             </a>
           </Link>
 
-          {/* Карточка 2: Генератор SRD (с новой логикой) */}
-          <Link href="/tools/srd-generator" passHref legacyBehavior>
-            <a className="tool-card-promo" onClick={handleSrdCardClick}>
-              <div className="tool-card-promo-icon">
-                <Icon name="srd" />
-              </div>
-              <h3>{t.toolsGeneratorSrdTitle}</h3>
-              <p>{t.toolsGeneratorSrdDescription}</p>
-              <div className="view-all-container">
-                <span className="btn">{t.toolsGeneratorButton}</span>
-              </div>
-            </a>
-          </Link>
+          {/* Карточка 2: Генератор SRD (с новой, надежной логикой) */}
+          {/* Убрали Link, используем простой a тег с onClick */}
+          <a href={`/${locale}/tools/srd-generator`} onClick={handleSrdCardClick} className="tool-card-promo">
+            <div className="tool-card-promo-icon">
+              <Icon name="srd" />
+            </div>
+            <h3>{t.toolsGeneratorSrdTitle}</h3>
+            <p>{t.toolsGeneratorSrdDescription}</p>
+            <div className="view-all-container">
+              <span className="btn">{t.toolsGeneratorButton}</span>
+            </div>
+          </a>
 
         </div>
       </div>
