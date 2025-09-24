@@ -95,7 +95,7 @@ export default function StoryGeneratorPage() {
                                 />
                                 <div className="view-all-container">
                                      <button type="submit" className="btn" disabled={isLoading || !userInput.trim()}>
-                                        {isLoading ? t.toolsGeneratorButtonLoading : t.toolsGeneratorButton}
+                                        {isLoading ? t.toolsGeneratorButtonLoading : t.toolsGeneratorSrdButton}
                                     </button>
                                 </div>
                             </form>

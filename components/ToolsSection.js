@@ -47,7 +47,7 @@ const ToolsSection = ({ t }) => {
               <h3>{t.toolsGeneratorSrdTitle}</h3>
               <p>{t.toolsGeneratorSrdDescription}</p>
               <div className="view-all-container">
-                <span className="btn">{t.toolsGeneratorSrdButton}</span>
+                <span className="btn">{t.toolsGeneratorButton}</span>
               </div>
             </a>
           </Link>
