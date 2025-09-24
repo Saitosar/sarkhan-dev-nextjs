@@ -1,22 +1,21 @@
-// pages/tools/srd-generator.js
+// pages/tools/srd-generator.js (FINAL CORRECTED VERSION)
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { translations } from '@/utils/translations';
 import { getSession } from 'next-auth/react';
 
-// Эта функция будет выполняться на сервере перед загрузкой страницы
 export async function getServerSideProps(context) {
     const session = await getSession(context);
-    const { locale, query } = context; 
-    
-   
-    // Если пользователь не вошел, отправляем его на страницу логина
+    const { locale, query } = context;
+    const initialPrompt = query.prompt || ''; // Always define initialPrompt here
+
     if (!session) {
-        const callbackUrl = `/${locale}/tools/srd-generator`;
+        // Correctly handle language persistence on redirect
+        const callbackUrl = `/${locale}/tools/srd-generator` + (initialPrompt ? `?prompt=${encodeURIComponent(initialPrompt)}` : '');
         return {
             redirect: {
                 destination: `/${locale}/auth/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`,
@@ -25,40 +24,29 @@ export async function getServerSideProps(context) {
         };
     }
 
-    // Формируем полный URL к нашему API
-    const protocol = context.req.headers['x-forwarded-proto'] || 'http';
-    const host = context.req.headers.host;
-    const absoluteUrl = `${protocol}://${host}/api/srd/check-quota`;
-
-    // Делаем запрос к нашему "Охраннику" от имени пользователя
-    let quota;
+    let quota = { hasQuota: false, error: "Could not verify quota.", used: 0, limit: 0, plan: 'free' };
     try {
+        const protocol = context.req.headers['x-forwarded-proto'] || 'http';
+        const host = context.req.headers.host;
+        const absoluteUrl = `${protocol}://${host}/api/srd/check-quota`;
+
         const res = await fetch(absoluteUrl, {
             headers: { cookie: context.req.headers.cookie },
         });
 
-        if (!res.ok) {
-            throw new Error('Quota check failed');
+        if (res.ok) {
+            quota = await res.json();
         }
-        quota = await res.json();
     } catch (error) {
-        // В случае ошибки проверки квоты, все равно передаем initialPrompt
-        return { 
-            props: { 
-                quota: { hasQuota: false, error: "Could not verify quota." }, 
-                initialPrompt 
-            } 
-        };
+        console.error("Error fetching quota in getServerSideProps:", error);
     }
     
-    // В случае успеха передаем и квоту, и initialPrompt
-    return { props: { quota, initialPrompt } };
+    // Always return props with both quota and initialPrompt defined
+    return { props: { quota, initialPrompt, session } };
 }
 
 
-
-// Это компонент вашей страницы
-export default function SrdGeneratorPage({ quota }) {
+export default function SrdGeneratorPage({ quota, initialPrompt }) {
     const router = useRouter();
     const { locale } = router;
     const t = translations[locale] || translations['az'];
@@ -68,7 +56,10 @@ export default function SrdGeneratorPage({ quota }) {
     const [error, setError] = useState(null);
 
     const handleLanguageChange = (newLang) => {
-        router.push('/tools/srd-generator', '/tools/srd-generator', { locale: newLang });
+        router.push({
+            pathname: '/tools/srd-generator',
+            query: router.query,
+        }, undefined, { locale: newLang });
     };
 
     const handleGenerate = async (e) => {
@@ -87,7 +78,7 @@ export default function SrdGeneratorPage({ quota }) {
 
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({ error: 'Server responded with an error' }));
-                throw new Error(errorData.error || `Server error: ${response.status}`);
+                throw new Error(errorData.details || errorData.error || `Server error: ${response.status}`);
             }
 
             const data = await response.json();
@@ -116,8 +107,7 @@ export default function SrdGeneratorPage({ quota }) {
                                 <p>{t.toolsGeneratorSrdDescription}</p>
                             </div>
 
-                            {/* Условие: показываем форму ИЛИ сообщение о лимите */}
-                            {quota.hasQuota ? (
+                            {quota && quota.hasQuota ? (
                                 <form onSubmit={handleGenerate}>
                                     <textarea
                                         value={userInput}
@@ -139,9 +129,8 @@ export default function SrdGeneratorPage({ quota }) {
                                     <p>Please upgrade your plan to continue or wait until next month.</p>
                                 </div>
                             )}
-
+                            
                             {error && <p className="form-error" style={{textAlign: 'center', marginTop: '1rem'}}>{error}</p>}
-
                         </div>
                     </div>
                 </section>
