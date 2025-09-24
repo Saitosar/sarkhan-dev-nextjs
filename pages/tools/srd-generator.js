@@ -2,7 +2,7 @@
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { translations } from '@/utils/translations';
@@ -40,6 +40,7 @@ export async function getServerSideProps(context) {
 
     // Получаем результат и передаем его на страницу
     const quota = await res.json();
+    const initialPrompt = context.query.prompt || '';
     return { props: { quota } };
 }
 
@@ -50,7 +51,7 @@ export default function SrdGeneratorPage({ quota }) {
     const { locale } = router;
     const t = translations[locale] || translations['az'];
 
-    const [userInput, setUserInput] = useState('');
+    const [userInput, setUserInput] = useState(initialPrompt);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 

@@ -104,6 +104,7 @@ export default async function handler(req, res) {
     const [newDocument] = await db.insert(schema.documents).values({
         title: contentJson.titlePurpose?.title || 'Untitled SRD',
         type: 'SRD',
+        promptText: promptText,
         content_json: contentJson,
         content_md: contentMd,
         ...ownerData // Используем определенные выше данные

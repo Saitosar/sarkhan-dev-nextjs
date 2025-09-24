@@ -16,6 +16,7 @@ import path from 'path';
 import { useState } from 'react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import Link from 'next/link';
 
 export async function getServerSideProps(context) {
     // ... (эта функция остается без изменений)
@@ -30,6 +31,12 @@ export async function getServerSideProps(context) {
         const db = drizzle(pool, { schema });
         const document = await db.query.documents.findFirst({
             where: eq(schema.documents.id, docId),
+            columns: {
+                id: true,
+                title: true,
+                content_md: true,
+                promptText: true // <-- Добавляем это поле
+            }
         });
         if (!document) { return { notFound: true }; }
 
@@ -100,6 +107,12 @@ export default function SrdDocumentPage({ document }) {
 
                     {/* Кнопки теперь внизу */}
                     <div className="srd-actions" style={{marginTop: '2rem', borderTop: '1px dashed var(--color-border)', borderBottom: 'none'}}>
+                        <Link href={{
+                            pathname: '/tools/srd-generator',
+                            query: { prompt: document.promptText }
+                        }} passHref legacyBehavior>
+                            <a className="btn btn-secondary">Улучшить запрос</a>
+                        </Link>
                         <button onClick={handleCopyMarkdown} className="btn btn-secondary">
                            {copyStatus}
                         </button>
