@@ -11,10 +11,12 @@ import { getSession } from 'next-auth/react';
 // Эта функция будет выполняться на сервере перед загрузкой страницы
 export async function getServerSideProps(context) {
     const session = await getSession(context);
-    const { locale } = context; 
-    const callbackUrl = `/${locale}/tools/srd-generator`;
+    const { locale, query } = context; 
+    
+   
     // Если пользователь не вошел, отправляем его на страницу логина
     if (!session) {
+        const callbackUrl = `/${locale}/tools/srd-generator`;
         return {
             redirect: {
                 destination: `/${locale}/auth/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`,
@@ -29,21 +31,30 @@ export async function getServerSideProps(context) {
     const absoluteUrl = `${protocol}://${host}/api/srd/check-quota`;
 
     // Делаем запрос к нашему "Охраннику" от имени пользователя
-    const res = await fetch(absoluteUrl, {
-        headers: {
-            cookie: context.req.headers.cookie,
-        },
-    });
+    let quota;
+    try {
+        const res = await fetch(absoluteUrl, {
+            headers: { cookie: context.req.headers.cookie },
+        });
 
-    if (!res.ok) {
-       return { props: { quota: { hasQuota: false, error: "Could not verify quota." } } };
+        if (!res.ok) {
+            throw new Error('Quota check failed');
+        }
+        quota = await res.json();
+    } catch (error) {
+        // В случае ошибки проверки квоты, все равно передаем initialPrompt
+        return { 
+            props: { 
+                quota: { hasQuota: false, error: "Could not verify quota." }, 
+                initialPrompt 
+            } 
+        };
     }
-
-    // Получаем результат и передаем его на страницу
-    const quota = await res.json();
-    const initialPrompt = context.query.prompt || '';
-    return { props: { quota, initialPrompt, session } };
+    
+    // В случае успеха передаем и квоту, и initialPrompt
+    return { props: { quota, initialPrompt } };
 }
+
 
 
 // Это компонент вашей страницы
