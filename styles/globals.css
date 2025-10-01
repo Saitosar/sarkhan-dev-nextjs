@@ -2171,7 +2171,7 @@ a.resource-card, a.resource-card:hover {
 
 /* Основной контейнер, имитирующий лист бумаги */
 .srd-document-view {
-  max-width: 1400px; /* Ограничиваем ширину для читаемости */
+  max-width: 1200px; /* Ограничиваем ширину для читаемости */
   margin: var(--space-lg) auto; /* Отступы сверху/снизу и центрирование */
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -2181,6 +2181,10 @@ a.resource-card, a.resource-card:hover {
   line-height: 1.7; /* Улучшаем читаемость основного текста */
 }
 
+.srd-document-view p {
+  max-width: none;
+  text-align: justify;
+}
 /* Стили для светлой темы */
 [data-theme="light"] .srd-document-view {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
@@ -2188,7 +2192,7 @@ a.resource-card, a.resource-card:hover {
 
 /* Заголовок документа (H1) */
 .srd-document-view h1 {
-  text-align: left; /* Меняем выравнивание на классическое для документов */
+  text-align: center; /* Меняем выравнивание на классическое для документов */
   font-size: 2.2rem;
   margin-bottom: var(--space-sm);
   color: var(--color-heading);
