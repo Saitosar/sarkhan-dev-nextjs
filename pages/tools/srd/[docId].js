@@ -93,36 +93,39 @@ export default function SrdDocumentPage({ document }) {
     };
 
     return (
-        <>
-            <Head>
-                <title>{`${document.title} | Sarkhan.dev`}</title>
-            </Head>
-            <div id="background-animation"></div>
-            <Header t={t} lang={locale} setLang={handleLanguageChange} activeSection="tools" pathname={router.pathname} />
-            <main className="post-content-wrapper" style={{ paddingTop: '2rem' }}>
-                <div className="container">
-                    <div id="srd-content" className="srd-document-view"> 
-                        <div dangerouslySetInnerHTML={{ __html: document.content_html }} />
-                    </div>
-
-                    {/* Кнопки теперь внизу */}
-                    <div className="srd-actions" style={{marginTop: '2rem', borderTop: '1px dashed var(--color-border)', borderBottom: 'none'}}>
-                        <Link href={{
-                            pathname: '/tools/srd-generator',
-                            query: { prompt: document.promptText }
-                        }} passHref legacyBehavior>
-                            <a className="btn btn-secondary">{t.srdImproveQuery}</a>
-                        </Link>
-                        <button onClick={handleCopyMarkdown} className="btn btn-secondary">
-                           {copyStatus}
-                        </button>
-                        <button onClick={handleDownloadPdf} className="btn" disabled={isDownloading}>
-                            {isDownloading ? t.srdDownloading : t.srdDownloadPdf}
-                        </button>
-                    </div>
+    <>
+        <Head>
+            <title>{`${document.title} | Sarkhan.dev`}</title>
+        </Head>
+        <div id="background-animation"></div>
+        <Header t={t} lang={locale} setLang={handleLanguageChange} activeSection="tools" pathname={router.pathname} />
+        
+        {/* ИЗМЕНЕНИЕ ЗДЕСЬ: убрали класс post-content-wrapper */}
+        <main style={{ paddingTop: '2rem' }}>
+            <div className="container">
+                <div id="srd-content" className="srd-document-view"> 
+                    <div dangerouslySetInnerHTML={{ __html: document.content_html }} />
                 </div>
-            </main>
-            <Footer />
-        </>
+
+                {/* Кнопки теперь внизу */}
+                <div className="srd-actions" style={{marginTop: '2rem', borderTop: '1px dashed var(--color-border)', borderBottom: 'none'}}>
+                    <Link href={{
+                        pathname: '/tools/srd-generator',
+                        query: { prompt: document.promptText }
+                    }} passHref legacyBehavior>
+                        <a className="btn btn-secondary">{t.srdImproveQuery}</a>
+                    </Link>
+                    <button onClick={handleCopyMarkdown} className="btn btn-secondary">
+                        {copyStatus}
+                    </button>
+                    <button onClick={handleDownloadPdf} className="btn" disabled={isDownloading}>
+                        {isDownloading ? t.srdDownloading : t.srdDownloadPdf}
+                    </button>
+                </div>
+            </div>
+        </main>
+        
+        <Footer />
+    </>
     );
 }
