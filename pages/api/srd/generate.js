@@ -1,4 +1,4 @@
-// pages/api/srd/generate.js (ФИНАЛЬНАЯ ВЕРСЯ ДЛЯ АНОНИМНЫХ ПОЛЬЗОВАТЕЛЕЙ)
+// pages/api/srd/generate.js
 
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
@@ -11,7 +11,7 @@ import path from 'path';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 
-// Функция для конвертации JSON в Markdown
+// Функция для конвертации JSON в Markdown (ВЕРСИЯ 2.0)
 function convertJsonToMarkdown(jsonData) {
     let md = '';
     const data = jsonData;
@@ -26,16 +26,24 @@ function convertJsonToMarkdown(jsonData) {
 
     const sectionHandlers = {
         titlePurpose: d => `# ${d.title || 'Untitled SRD'}\n\n**Purpose:** ${d.purpose || 'Not specified'}\n\n`,
-        stakeholders: d => `## Stakeholders\n- **Requester:** ${d.requester || 'N/A'}\n- **End Users:** ${d.endUsers || 'N/A'}\n\n`,
-        scopeContext: d => `## Scope / Context\n**In Scope:**\n${(d.inScope || []).map(item => `- ${item}`).join('\n')}\n\n**Out of Scope:**\n${(d.outOfScope || []).map(item => `- ${item}`).join('\n')}\n\n`,
-        businessRequirement: d => `## Business Requirement\n**Current State:**\n${d.currentState || 'N/A'}\n\n**Future State:**\n${d.futureState || 'N/A'}\n\n**Value:**\n${d.value || 'N/A'}\n\n`,
-        functionalRequirements: d => `## Functional Requirements\n${(d || []).map(item => `- **${item.id}:** ${item.text}`).join('\n')}\n\n`,
-        acceptanceCriteria: d => `## Acceptance Criteria\n${(d || []).map(item => `- [ ] ${item.text}`).join('\n')}\n\n`,
-        // ... (остальные обработчики)
+        stakeholders: d => `## 2. Stakeholders & Roles\n- **Requester:** ${d.requester || 'N/A'}\n- **End Users:** ${d.endUsers || 'N/A'}\n\n`,
+        scopeContext: d => `## 3. Scope / Context\n**In Scope:**\n${(d.inScope || []).map(item => `- ${item}`).join('\n')}\n\n**Out of Scope:**\n${(d.outOfScope || []).map(item => `- ${item}`).join('\n')}\n\n**Related Systems:**\n${(d.relatedSystems || []).map(item => `- ${item}`).join('\n')}\n\n`,
+        businessRequirement: d => `## 4. Business Requirement\n**Current State (AS-IS):**\n${d.currentState || 'N/A'}\n\n**Future State (TO-BE):**\n${d.futureState || 'N/A'}\n\n**Value:**\n${d.value || 'N/A'}\n\n`,
+        functionalRequirements: d => `## 5. Functional Requirements (FR)\n${(d || []).map(item => `- **${item.id}:** ${item.text}`).join('\n')}\n\n`,
+        acceptanceCriteria: d => `## 6. Acceptance Criteria (AC)\n${(d || []).map(item => `- **For ${item.for_fr}:** (${item.type}) ${item.text}`).join('\n')}\n\n`,
+        nonFunctionalConstraints: d => `## 7. Non-Functional Constraints\n${(d || []).map(item => `- **${item.category}:** ${item.requirement}`).join('\n')}\n\n`,
+        dataAndFields: d => `## 8. Data & Fields\n| Field Name | Type | Validation | Note |\n|---|---|---|---|\n${(d || []).map(item => `| ${item.fieldName} | ${item.type} | ${item.validation} | ${item.integrationNote} |`).join('\n')}\n\n`,
+        businessRules: d => `## 9. Business Rules\n${(d || []).map(item => `- **${item.ruleId}:** ${item.description}`).join('\n')}\n\n`,
+        interfacesApiContract: d => `## 10. Interfaces / API Contract\n- **Endpoint:** \`${d.endpoint}\`\n- **Method:** \`${d.method}\`\n- **Request:** \`\`\`json\n${JSON.stringify(d.request, null, 2)}\n\`\`\`\n- **Response:** \`\`\`json\n${JSON.stringify(d.response, null, 2)}\n\`\`\`\n\n`,
+        dependenciesAndRisks: d => `## 11. Dependencies & Risks\n**Dependencies:**\n${(d.dependencies || []).map(item => `- ${item.item} (Mitigation: ${item.mitigation})`).join('\n')}\n\n**Risks:**\n${(d.risks || []).map(item => `- ${item.item} (Mitigation: ${item.mitigation})`).join('\n')}\n\n`,
+        rolloutFeatureFlag: d => `## 12. Rollout / Feature Flag\n- **Strategy:** ${d.strategy || 'N/A'}\n- **Feature Flag:** \`${d.featureFlag || 'N/A'}\`\n- **Monitoring:** ${d.monitoring || 'N/A'}\n\n`,
+        edgeCasesErrorHandling: d => `## 13. Edge Cases & Error Handling\n${(d || []).map(item => `- **Scenario:** ${item.scenario}\n  - **Expected Behavior:** ${item.expectedBehavior}`).join('\n')}\n\n`,
+        notesOpenPoints: d => `## 14. Notes & Open Points\n${(d.points || []).map(item => `- ${item}`).join('\n')}\n\n`
     };
 
-    // Проходим по секциям в правильном порядке
-    sectionOrder.forEach(key => {
+    md += sectionHandlers.titlePurpose(data.titlePurpose || {});
+
+    sectionOrder.slice(1).forEach(key => {
         if (data[key] && sectionHandlers[key]) {
             md += sectionHandlers[key](data[key]);
         }
@@ -43,6 +51,7 @@ function convertJsonToMarkdown(jsonData) {
 
     return md;
 }
+
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -57,24 +66,26 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'promptText is required.' });
     }
 
-    const sectionsToGenerate = PLANS['free'].srdTemplate;
+    // Вне зависимости от пользователя, всегда берем полный шаблон
+    const sectionsToGenerate = PLANS['free'].srdTemplate; 
     const prompt = buildDynamicSrdPrompt(promptText, sectionsToGenerate, locale);
     
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-001" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); // Используем новую модель
     
     const result = await model.generateContent(prompt);
     const rawResponse = result.response.text();
     
-    const jsonMatch = rawResponse.match(/```json\s*([\s\S]*?)\s*```/);
-    if (!jsonMatch || !jsonMatch[1]) {
-        throw new Error("AI did not return a valid JSON block.");
+    // Улучшенный парсинг JSON, который более устойчив к "мусору" до и после
+    const jsonMatch = rawResponse.match(/\{[\s\S]*\}/);
+    if (!jsonMatch || !jsonMatch[0]) {
+        console.error("AI Response (raw):", rawResponse);
+        throw new Error("AI did not return a valid JSON object.");
     }
-    const cleanedJsonString = jsonMatch[1].trim();
+    const cleanedJsonString = jsonMatch[0];
     const contentJson = JSON.parse(cleanedJsonString);
     const contentMd = convertJsonToMarkdown(contentJson);
     
-    // --- ПРАВИЛЬНОЕ ПОДКЛЮЧЕНИЕ К БД С СЕРТИФИКАТОМ ---
     const certPath = path.resolve(process.cwd(), 'certs', 'supabase.crt');
     const caCert = await fs.readFile(certPath, 'utf-8');
 
@@ -87,7 +98,7 @@ export default async function handler(req, res) {
     });
     const db = drizzle(pool, { schema });
 
-     const ownerData = session?.user
+    const ownerData = session?.user
         ? {
             ownerType: 'user',
             ownerId: session.user.id,
@@ -96,7 +107,7 @@ export default async function handler(req, res) {
         }
         : {
             ownerType: 'user',
-            ownerId: '00000000-0000-0000-0000-000000000000',
+            ownerId: '00000000-0000-0000-0000-000000000000', // Анонимный UUID
             createdBy: 'anonymous',
             visibility: 'public',
         };
@@ -107,7 +118,7 @@ export default async function handler(req, res) {
         promptText: promptText,
         content_json: contentJson,
         content_md: contentMd,
-        ...ownerData // Используем определенные выше данные
+        ...ownerData
     }).returning({ id: schema.documents.id });
 
     if (!newDocument || !newDocument.id) {
