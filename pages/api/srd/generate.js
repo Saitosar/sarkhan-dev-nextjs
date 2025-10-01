@@ -11,12 +11,11 @@ import path from 'path';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 
-// Функция для конвертации JSON в Markdown (ВЕРСИЯ 2.0)
+// Функция для конвертации JSON в Markdown (ВЕРСИЯ 2.1 - Улучшенное форматирование)
 function convertJsonToMarkdown(jsonData) {
     let md = '';
     const data = jsonData;
     
-    // Определяем строгий порядок секций
     const sectionOrder = [
         'titlePurpose', 'stakeholders', 'scopeContext', 'businessRequirement', 
         'functionalRequirements', 'acceptanceCriteria', 'nonFunctionalConstraints', 
@@ -28,13 +27,15 @@ function convertJsonToMarkdown(jsonData) {
         titlePurpose: d => `# ${d.title || 'Untitled SRD'}\n\n**Purpose:** ${d.purpose || 'Not specified'}\n\n`,
         stakeholders: d => `## 2. Stakeholders & Roles\n- **Requester:** ${d.requester || 'N/A'}\n- **End Users:** ${d.endUsers || 'N/A'}\n\n`,
         scopeContext: d => `## 3. Scope / Context\n**In Scope:**\n${(d.inScope || []).map(item => `- ${item}`).join('\n')}\n\n**Out of Scope:**\n${(d.outOfScope || []).map(item => `- ${item}`).join('\n')}\n\n**Related Systems:**\n${(d.relatedSystems || []).map(item => `- ${item}`).join('\n')}\n\n`,
+        // --- ИЗМЕНЕНИЕ ЗДЕСЬ: Добавлены двойные переносы строки (\n\n) для отступов ---
         businessRequirement: d => `## 4. Business Requirement\n**Current State (AS-IS):**\n${d.currentState || 'N/A'}\n\n**Future State (TO-BE):**\n${d.futureState || 'N/A'}\n\n**Value:**\n${d.value || 'N/A'}\n\n`,
         functionalRequirements: d => `## 5. Functional Requirements (FR)\n${(d || []).map(item => `- **${item.id}:** ${item.text}`).join('\n')}\n\n`,
         acceptanceCriteria: d => `## 6. Acceptance Criteria (AC)\n${(d || []).map(item => `- **For ${item.for_fr}:** (${item.type}) ${item.text}`).join('\n')}\n\n`,
         nonFunctionalConstraints: d => `## 7. Non-Functional Constraints\n${(d || []).map(item => `- **${item.category}:** ${item.requirement}`).join('\n')}\n\n`,
         dataAndFields: d => `## 8. Data & Fields\n| Field Name | Type | Validation | Note |\n|---|---|---|---|\n${(d || []).map(item => `| ${item.fieldName} | ${item.type} | ${item.validation} | ${item.integrationNote} |`).join('\n')}\n\n`,
         businessRules: d => `## 9. Business Rules\n${(d || []).map(item => `- **${item.ruleId}:** ${item.description}`).join('\n')}\n\n`,
-        interfacesApiContract: d => `## 10. Interfaces / API Contract\n- **Endpoint:** \`${d.endpoint}\`\n- **Method:** \`${d.method}\`\n- **Request:** \`\`\`json\n${JSON.stringify(d.request, null, 2)}\n\`\`\`\n- **Response:** \`\`\`json\n${JSON.stringify(d.response, null, 2)}\n\`\`\`\n\n`,
+        // --- ИЗМЕНЕНИЕ ЗДЕСЬ: JSON обернут в блоки кода ```json ... ``` ---
+        interfacesApiContract: d => `## 10. Interfaces / API Contract\n- **Endpoint:** \`${d.endpoint}\`\n- **Method:** \`${d.method}\`\n- **Request:**\n\`\`\`json\n${JSON.stringify(d.request, null, 2)}\n\`\`\`\n- **Response:**\n\`\`\`json\n${JSON.stringify(d.response, null, 2)}\n\`\`\`\n\n`,
         dependenciesAndRisks: d => `## 11. Dependencies & Risks\n**Dependencies:**\n${(d.dependencies || []).map(item => `- ${item.item} (Mitigation: ${item.mitigation})`).join('\n')}\n\n**Risks:**\n${(d.risks || []).map(item => `- ${item.item} (Mitigation: ${item.mitigation})`).join('\n')}\n\n`,
         rolloutFeatureFlag: d => `## 12. Rollout / Feature Flag\n- **Strategy:** ${d.strategy || 'N/A'}\n- **Feature Flag:** \`${d.featureFlag || 'N/A'}\`\n- **Monitoring:** ${d.monitoring || 'N/A'}\n\n`,
         edgeCasesErrorHandling: d => `## 13. Edge Cases & Error Handling\n${(d || []).map(item => `- **Scenario:** ${item.scenario}\n  - **Expected Behavior:** ${item.expectedBehavior}`).join('\n')}\n\n`,
@@ -66,17 +67,15 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'promptText is required.' });
     }
 
-    // Вне зависимости от пользователя, всегда берем полный шаблон
     const sectionsToGenerate = PLANS['free'].srdTemplate; 
     const prompt = buildDynamicSrdPrompt(promptText, sectionsToGenerate, locale);
     
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" }); // Используем новую модель
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     
     const result = await model.generateContent(prompt);
     const rawResponse = result.response.text();
     
-    // Улучшенный парсинг JSON, который более устойчив к "мусору" до и после
     const jsonMatch = rawResponse.match(/\{[\s\S]*\}/);
     if (!jsonMatch || !jsonMatch[0]) {
         console.error("AI Response (raw):", rawResponse);
@@ -107,7 +106,7 @@ export default async function handler(req, res) {
         }
         : {
             ownerType: 'user',
-            ownerId: '00000000-0000-0000-0000-000000000000', // Анонимный UUID
+            ownerId: '00000000-0000-0000-0000-000000000000',
             createdBy: 'anonymous',
             visibility: 'public',
         };

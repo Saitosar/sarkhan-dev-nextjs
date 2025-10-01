@@ -2270,3 +2270,82 @@ a.resource-card, a.resource-card:hover {
   max-width: 1000px;
   margin-inline: auto;
 }
+/* === НАЧАЛО: НОВЫЕ СТИЛИ ДЛЯ ОТОБРАЖЕНИЯ SRD ДОКУМЕНТА === */
+
+/* 1. Стили для контейнера документа */
+.srd-document-view {
+  max-width: 1400px; /* Увеличиваем ширину, как и хотели */
+  margin: 2rem auto; /* Центрируем и добавляем вертикальные отступы */
+  padding: calc(var(--spacing-unit) * 4);
+  background-color: var(--background);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  line-height: 1.7; /* Улучшаем читаемость текста */
+}
+
+.srd-document-view h1 {
+  font-size: 2.5em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5em;
+}
+
+.srd-document-view h2 {
+  font-size: 1.8em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.3em;
+}
+
+.srd-document-view ul, .srd-document-view ol {
+  padding-left: 20px;
+  margin-bottom: 1em;
+}
+
+/* 2. Стили для таблиц (Data & Fields) */
+.srd-document-view table {
+  width: 100%;
+  border-collapse: collapse; /* Объединяем границы ячеек */
+  margin-bottom: 1.5em;
+  font-size: 0.95em;
+}
+
+.srd-document-view th, .srd-document-view td {
+  border: 1px solid var(--border-color); /* Добавляем границы */
+  padding: calc(var(--spacing-unit) * 1.5); /* Добавляем внутренние отступы */
+  text-align: left;
+  vertical-align: top;
+}
+
+.srd-document-view th {
+  background-color: var(--border-color); /* Легкий фон для заголовков */
+  font-weight: 600;
+}
+
+/* 3. Стили для блоков кода (Interfaces / API Contract) */
+.srd-document-view pre {
+  background-color: var(--border-color);
+  border-radius: var(--border-radius);
+  padding: calc(var(--spacing-unit) * 2);
+  margin: 1em 0;
+  overflow-x: auto; /* Добавляем горизонтальную прокрутку, если код длинный */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.srd-document-view code {
+  font-family: var(--font-mono); /* Используем моноширинный шрифт */
+  font-size: 0.9em;
+}
+
+/* Стили для inline-кода (например, `Endpoint`) */
+.srd-document-view p code, .srd-document-view li code {
+    background-color: var(--border-color);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+/* === КОНЕЦ: НОВЫЕ СТИЛИ ДЛЯ ОТОБРАЖЕНИЯ SRD ДОКУМЕНТА === */
