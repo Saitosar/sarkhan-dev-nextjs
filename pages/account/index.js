@@ -1,6 +1,6 @@
-// pages/account/index.js (ФИНАЛЬНАЯ ВЕРСИЯ MVP С КНОПКОЙ ВЫХОДА)
+// pages/account/index.js (ФИНАЛЬНАЯ МУЛЬТИЯЗЫЧНАЯ ВЕРСИЯ)
 
-import { getSession, useSession, signOut } from 'next-auth/react'; // <-- Импортируем signOut
+import { getSession, useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
@@ -10,7 +10,6 @@ import { translations } from '@/utils/translations';
 import Icon from '@/components/Icon';
 import Link from 'next/link';
 
-// getServerSideProps остается без изменений
 export async function getServerSideProps(context) {
     const session = await getSession(context);
     if (!session) {
@@ -46,21 +45,24 @@ export default function AccountPage({ userSession }) {
                     fetch('/api/account'),
                     fetch('/api/srd/check-quota')
                 ]);
+
                 if (!accountRes.ok || !quotaRes.ok) throw new Error('Failed to fetch data');
+                
                 const accountData = await accountRes.json();
                 const quotaData = await quotaRes.json();
+                
                 setName(accountData.user.name || '');
                 setEmail(accountData.user.email || '');
                 setDocuments(accountData.documents || []);
                 setQuota(quotaData);
             } catch (err) {
-                setError('Не удалось загрузить данные.');
+                setError(t.accountLoadError);
             } finally {
                 setIsLoading(false);
             }
         };
         fetchAccountData();
-    }, []);
+    }, [t.accountLoadError]);
     
     const handleSaveProfile = async (e) => {
         e.preventDefault();
@@ -73,10 +75,10 @@ export default function AccountPage({ userSession }) {
                 body: JSON.stringify({ name }),
             });
             if (!response.ok) throw new Error('Failed to update profile');
-            setSuccessMessage('Имя успешно сохранено!');
+            setSuccessMessage(t.profileSaveSuccess);
             setTimeout(() => setSuccessMessage(''), 3000);
         } catch (err) {
-            setError('Не удалось сохранить имя.');
+            setError(t.profileSaveError);
         }
     };
 
@@ -94,8 +96,9 @@ export default function AccountPage({ userSession }) {
     return (
         <>
             <Head>
-                <title>Личный кабинет | Sarkhan.dev</title>
+                <title>{`${t.accountTitle} | Sarkhan.dev`}</title>
                 <style jsx>{`
+                    /* Стили остаются без изменений */
                     .account-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-xxl); }
                     @media (min-width: 992px) { .account-grid { grid-template-columns: 350px 1fr; align-items: start; } }
                     .card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-xl); }
@@ -132,8 +135,8 @@ export default function AccountPage({ userSession }) {
             <main className="account-page-main" style={{ padding: 'var(--space-xxl) 0' }}>
                 <section id="account-dashboard">
                     <div className="container">
-                        <h2 style={{ textAlign: 'center' }}>Личный кабинет</h2>
-                        {isLoading ? ( <p style={{ textAlign: 'center' }}>Загрузка данных...</p> ) 
+                        <h2 style={{ textAlign: 'center' }}>{t.accountTitle}</h2>
+                        {isLoading ? ( <p style={{ textAlign: 'center' }}>{t.aiSummaryLoading}</p> ) 
                         : error ? ( <p style={{ textAlign: 'center' }} className="form-message error">{error}</p> ) 
                         : (
                             <div className="account-grid">
@@ -142,31 +145,29 @@ export default function AccountPage({ userSession }) {
                                         <div className="avatar-placeholder"><Icon name={getAvatarIcon()} /></div>
                                         <form className="profile-form" onSubmit={handleSaveProfile}>
                                             <div className="form-group"><label htmlFor="email">Email</label><input id="email" type="email" value={email} disabled /></div>
-                                            <div className="form-group"><label htmlFor="name">Имя</label><input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Как к вам обращаться?" /></div>
-                                            <button type="submit" className="btn">Сохранить</button>
+                                            <div className="form-group"><label htmlFor="name">{t.profileNameLabel}</label><input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder={t.profileNamePlaceholder} /></div>
+                                            <button type="submit" className="btn">{t.profileSaveButton}</button>
                                             {successMessage && <p className="form-message success">{successMessage}</p>}
                                         </form>
-                                        {/* --- ДОБАВЛЕНА КНОПКА ВЫХОДА --- */}
                                         <button onClick={() => signOut({ callbackUrl: '/' })} className="btn btn-secondary" style={{ width: '100%', marginTop: 'auto' }}>
-                                            Выйти
+                                            {t.signOutButton}
                                         </button>
                                     </div>
-
                                     {quota && (
                                         <div className="card plan-card">
-                                            <h3>Тарифный план</h3>
+                                            <h3>{t.planCardTitle}</h3>
                                             <div className="plan-info">
-                                                <p>Ваш текущий план:</p>
+                                                <p>{t.planCurrent}</p>
                                                 <p className="plan-name">{quota.plan}</p>
-                                                <p className="usage-text">Использовано SRD: {quota.used} из {quota.limit}</p>
+                                                <p className="usage-text">{t.planUsage.replace('{used}', quota.used).replace('{limit}', quota.limit)}</p>
                                                 <div className="usage-bar"><div className="usage-bar-fill" style={{ width: `${(quota.used / quota.limit) * 100}%` }}></div></div>
-                                                <button className="btn btn-secondary" disabled>Сменить тариф</button>
+                                                <button className="btn btn-secondary" disabled>{t.planChangeButton}</button>
                                             </div>
                                         </div>
                                     )}
                                 </div>
                                 <div className="card documents-card">
-                                    <h3>Мои документы</h3>
+                                    <h3>{t.documentsCardTitle}</h3>
                                     {documents.length > 0 ? (
                                         <ul className="document-list">
                                             {documents.map(doc => (
@@ -178,8 +179,8 @@ export default function AccountPage({ userSession }) {
                                         </ul>
                                     ) : (
                                         <div className="no-documents">
-                                            <p>Вы еще не создали ни одного SRD документа.</p>
-                                            <Link href="/tools/srd-generator" className="btn">Создать новый</Link>
+                                            <p>{t.documentsNone}</p>
+                                            <Link href="/tools/srd-generator" className="btn">{t.documentsCreateNew}</Link>
                                         </div>
                                     )}
                                 </div>

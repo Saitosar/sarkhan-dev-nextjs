@@ -108,7 +108,23 @@ Texniki biliklərimi və insana yönümlü düşüncə tərzimi transformasiya t
                                     "Rezyumenin və müsahibəyə hazırlığın yoxlanılması",
                                     "Daimi əlaqə və suallara cavablar"
 ],
-        mentorshipCtaButton: "Müraciət et"
+        mentorshipCtaButton: "Müraciət et",
+        accountTitle: "Şəxsi kabinet",
+        accountLoadError: "Məlumatları yükləmək mümkün olmadı.",
+        profileCardTitle: "Profil",
+        profileNameLabel: "Ad",
+        profileNamePlaceholder: "Sizə necə müraciət edək?",
+        profileSaveButton: "Yadda saxla",
+        profileSaveSuccess: "Ad uğurla yadda saxlandı!",
+        profileSaveError: "Adı yadda saxlamaq mümkün olmadı.",
+        signOutButton: "Çıxış",
+        planCardTitle: "Tarif planı",
+        planCurrent: "Sizin cari plan:",
+        planUsage: "SRD istifadə edilib: {used} / {limit}",
+        planChangeButton: "Tariqi dəyişmək",
+        documentsCardTitle: "Mənim sənədlərim",
+        documentsNone: "Siz hələ heç bir SRD sənədi yaratmamısınız.",
+        documentsCreateNew: "Yenisini yarat"
     },
     en: {
         locale: "en",
@@ -214,7 +230,23 @@ Open to remote or hybrid opportunities with international teams where I can cont
                                     "Resume review and interview preparation",
                                     "Regular feedback and Q&A sessions"
 ],
-        mentorshipCtaButton: "Apply Now"
+        mentorshipCtaButton: "Apply Now",
+        accountTitle: "My Account",
+        accountLoadError: "Failed to load data.",
+        profileCardTitle: "Profile",
+        profileNameLabel: "Name",
+        profileNamePlaceholder: "How should we call you?",
+        profileSaveButton: "Save",
+        profileSaveSuccess: "Name saved successfully!",
+        profileSaveError: "Failed to save name.",
+        signOutButton: "Sign Out",
+        planCardTitle: "Subscription Plan",
+        planCurrent: "Your current plan:",
+        planUsage: "SRDs used: {used} of {limit}",
+        planChangeButton: "Change Plan",
+        documentsCardTitle: "My Documents",
+        documentsNone: "You haven't created any SRD documents yet.",
+        documentsCreateNew: "Create a new one"
     },
     ru: {
         locale: "ru",
@@ -320,7 +352,23 @@ Open to remote or hybrid opportunities with international teams where I can cont
                                     "Ревью резюме и подготовка к собеседованию",
                                     "Регулярная обратная связь и ответы на вопросы"
 ],
-        mentorshipCtaButton: "Оставить заявку" 
+        mentorshipCtaButton: "Оставить заявку",
+        accountTitle: "Личный кабинет",
+        accountLoadError: "Не удалось загрузить данные.",
+        profileCardTitle: "Профиль",
+        profileNameLabel: "Имя",
+        profileNamePlaceholder: "Как к вам обращаться?",
+        profileSaveButton: "Сохранить",
+        profileSaveSuccess: "Имя успешно сохранено!",
+        profileSaveError: "Не удалось сохранить имя.",
+        signOutButton: "Выйти",
+        planCardTitle: "Тарифный план",
+        planCurrent: "Ваш текущий план:",
+        planUsage: "Использовано SRD: {used} из {limit}",
+        planChangeButton: "Сменить тариф",
+        documentsCardTitle: "Мои документы",
+        documentsNone: "Вы еще не создали ни одного SRD документа.",
+        documentsCreateNew: "Создать новый"
     }
 };
 
