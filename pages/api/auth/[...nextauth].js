@@ -57,6 +57,7 @@ export const authOptions = {
       // Добавляем ID пользователя в объект сессии
       if (session.user) {
         session.user.id = user.id;
+        session.user.name = user.name;
       }
       return session;
     },
