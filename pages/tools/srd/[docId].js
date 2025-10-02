@@ -67,11 +67,6 @@ export default function SrdDocumentPage({ document }) {
         });
     };
 
-    // --- НАЧАЛО ИЗМЕНЕНИЙ ---
-    // Вся сложная логика с html2canvas и jsPDF удалена.
-    // Осталась только простая и понятная JSX-разметка.
-    // --- КОНЕЦ ИЗМЕНЕНИЙ ---
-
     return (
     <>
         <Head>
@@ -96,19 +91,13 @@ export default function SrdDocumentPage({ document }) {
                     <button onClick={handleCopyMarkdown} className="btn btn-secondary">
                         {copyStatus}
                     </button>
-
-                    {/* --- ИЗМЕНЕНИЕ ЗДЕСЬ --- */}
-                    {/* Теперь это простая ссылка на наш новый API, которая скачает файл */}
                     <a 
                         href={`/api/srd/download?docId=${query.docId}`} 
                         className="btn"
-                        // `download` атрибут не обязателен, т.к. сервер сам отдаст правильные заголовки,
-                        // но он может помочь для лучшей совместимости
                         download={`${document.title.replace(/ /g, '_')}.pdf`}
                     >
                         {t.srdDownloadPdf}
                     </a>
-                    {/* --- КОНЕЦ ИЗМЕНЕНИЯ --- */}
                 </div>
             </div>
         </main>

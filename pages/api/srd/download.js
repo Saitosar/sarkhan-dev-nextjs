@@ -1,5 +1,7 @@
-// pages/api/srd/download.js
-import puppeteer from 'puppeteer';
+// pages/api/srd/download.js (ВЕРСИЯ 2.0 - С @sparticuz/chromium)
+
+import chromium from '@sparticuz/chromium';
+import puppeteer from 'puppeteer-core';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
@@ -7,9 +9,17 @@ import * as schema from '../../../db/schema';
 import { eq } from 'drizzle-orm';
 import { promises as fs } from 'fs';
 import path from 'path';
-import SrdPrintLayout from '../../../components/SrdPrintLayout'; // Мы создадим этот компонент на следующем шаге
+import SrdPrintLayout from '../../../components/SrdPrintLayout';
 
-// Функция для получения подключения к БД
+// Увеличиваем лимит на размер тела запроса, это хорошая практика для API, работающих с файлами.
+export const config = {
+    api: {
+        bodyParser: {
+            sizeLimit: '10mb',
+        },
+    },
+};
+
 async function getDb() {
     const certPath = path.resolve(process.cwd(), 'certs', 'supabase.crt');
     const caCert = await fs.readFile(certPath, 'utf-8');
@@ -33,6 +43,8 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'docId is required' });
     }
 
+    let browser = null;
+
     try {
         // 1. Получаем данные документа из БД
         const db = await getDb();
@@ -44,23 +56,23 @@ export default async function handler(req, res) {
             return res.status(404).json({ error: 'Document not found' });
         }
 
-        // 2. Генерируем чистый HTML для печати с помощью React-компонента
+        // 2. Генерируем HTML для печати
         const printHtml = renderToStaticMarkup(
             <SrdPrintLayout document={document} />
         );
 
-        // 3. Запускаем Puppeteer (наш "невидимый" браузер)
-        // Важные опции '--no-sandbox' и '--disable-setuid-sandbox' для работы в Vercel/CodeSpace
-        const browser = await puppeteer.launch({
-            headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        // 3. Запускаем Puppeteer с использованием @sparticuz/chromium
+        browser = await puppeteer.launch({
+            args: chromium.args,
+            defaultViewport: chromium.defaultViewport,
+            executablePath: await chromium.executablePath(),
+            headless: chromium.headless,
+            ignoreHTTPSErrors: true,
         });
+        
         const page = await browser.newPage();
-
-        // 4. "Открываем" наш сгенерированный HTML в невидимом браузере
         await page.setContent(printHtml, { waitUntil: 'networkidle0' });
 
-        // 5. Создаем PDF из этой страницы
         const pdfBuffer = await page.pdf({
             format: 'A4',
             printBackground: true,
@@ -71,11 +83,8 @@ export default async function handler(req, res) {
                 left: '20px',
             },
         });
-
-        // 6. Закрываем браузер, чтобы освободить ресурсы
-        await browser.close();
-
-        // 7. Отправляем готовый PDF-файл пользователю
+        
+        // 4. Отправляем PDF пользователю
         const safeFileName = (document.title || 'srd-document').replace(/[^a-z0-9]/gi, '_').toLowerCase();
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Disposition', `attachment; filename="${safeFileName}.pdf"`);
@@ -84,5 +93,9 @@ export default async function handler(req, res) {
     } catch (error) {
         console.error('PDF Generation Error:', error);
         res.status(500).json({ error: 'Failed to generate PDF.', details: error.message });
+    } finally {
+        if (browser !== null) {
+            await browser.close();
+        }
     }
 }
