@@ -1,4 +1,4 @@
-// pages/api/srd/download.js (ВЕРСИЯ 2.0 - С @sparticuz/chromium)
+// pages/api/srd/download.js (ВЕРСИЯ 3.0 - ФИНАЛЬНОЕ ИСПРАВЛЕНИЕ ОТПРАВКИ)
 
 import chromium from '@sparticuz/chromium';
 import puppeteer from 'puppeteer-core';
@@ -11,12 +11,14 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import SrdPrintLayout from '../../../components/SrdPrintLayout';
 
-// Увеличиваем лимит на размер тела запроса, это хорошая практика для API, работающих с файлами.
+// --- ИЗМЕНЕНИЕ 1: Гарантируем, что этот код будет работать в среде Node.js на Vercel ---
+export const runtime = 'nodejs';
+
+// --- ИЗМЕНЕНИЕ 2 (Опционально, но рекомендуется): Отключаем автоматический парсинг тела запроса, так как он нам не нужен для GET ---
 export const config = {
     api: {
-        bodyParser: {
-            sizeLimit: '10mb',
-        },
+        bodyParser: false,
+        responseLimit: false, // Снимаем ограничение на размер ответа для больших PDF
     },
 };
 
@@ -46,7 +48,6 @@ export default async function handler(req, res) {
     let browser = null;
 
     try {
-        // 1. Получаем данные документа из БД
         const db = await getDb();
         const document = await db.query.documents.findFirst({
             where: eq(schema.documents.id, docId),
@@ -56,12 +57,10 @@ export default async function handler(req, res) {
             return res.status(404).json({ error: 'Document not found' });
         }
 
-        // 2. Генерируем HTML для печати
         const printHtml = renderToStaticMarkup(
             <SrdPrintLayout document={document} />
         );
 
-        // 3. Запускаем Puppeteer с использованием @sparticuz/chromium
         browser = await puppeteer.launch({
             args: chromium.args,
             defaultViewport: chromium.defaultViewport,
@@ -76,19 +75,16 @@ export default async function handler(req, res) {
         const pdfBuffer = await page.pdf({
             format: 'A4',
             printBackground: true,
-            margin: {
-                top: '20px',
-                right: '20px',
-                bottom: '20px',
-                left: '20px',
-            },
+            margin: { top: '20px', right: '20px', bottom: '20px', left: '20px' },
         });
         
-        // 4. Отправляем PDF пользователю
         const safeFileName = (document.title || 'srd-document').replace(/[^a-z0-9]/gi, '_').toLowerCase();
+        
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Disposition', `attachment; filename="${safeFileName}.pdf"`);
-        res.send(pdfBuffer);
+        
+        // --- ИЗМЕНЕНИЕ 3: Используем res.end() для прямой отправки бинарного буфера ---
+        res.status(200).end(pdfBuffer);
 
     } catch (error) {
         console.error('PDF Generation Error:', error);
