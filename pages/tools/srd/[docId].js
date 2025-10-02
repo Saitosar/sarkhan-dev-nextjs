@@ -1,4 +1,4 @@
-// pages/tools/srd/[docId].js (ФИНАЛЬНАЯ ВЕРСИЯ)
+// pages/tools/srd/[docId].js (ФИНАЛЬНАЯ ВЕРСИЯ С СЕРВЕРНОЙ ВЫГРУЗКОЙ)
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -14,12 +14,9 @@ import DOMPurify from 'isomorphic-dompurify';
 import { promises as fs } from 'fs';
 import path from 'path';
 import { useState } from 'react';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import Link from 'next/link';
 
 export async function getServerSideProps(context) {
-    // ... (эта функция остается без изменений)
     const { docId } = context.params;
     try {
         const certPath = path.resolve(process.cwd(), 'certs', 'supabase.crt');
@@ -35,7 +32,7 @@ export async function getServerSideProps(context) {
                 id: true,
                 title: true,
                 content_md: true,
-                promptText: true // <-- Добавляем это поле
+                promptText: true
             }
         });
         if (!document) { return { notFound: true }; }
@@ -54,10 +51,9 @@ export async function getServerSideProps(context) {
 
 export default function SrdDocumentPage({ document }) {
     const router = useRouter();
-    const { locale } = router;
+    const { locale, query } = router;
     const t = translations[locale] || translations['az'];
     const [copyStatus, setCopyStatus] = useState(t.srdCopyMarkdown);
-    const [isDownloading, setIsDownloading] = useState(false);
 
     const handleLanguageChange = (newLang) => {
         const { docId } = router.query;
@@ -71,27 +67,6 @@ export default function SrdDocumentPage({ document }) {
         });
     };
 
-    const handleDownloadPdf = async () => {
-        setIsDownloading(true);
-        try {
-            const contentElement = document.getElementById('srd-content');
-            if (!contentElement) throw new Error("Content element not found");
-
-            const canvas = await html2canvas(contentElement, { scale: 2, useCORS: true });
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-            pdf.save(`${document.title.replace(/ /g, '_')}.pdf`);
-        } catch (error) {
-            console.error("PDF Generation Error:", error);
-            alert("Не удалось сгенерировать PDF. Попробуйте снова.");
-        } finally {
-            setIsDownloading(false);
-        }
-    };
-
     return (
     <>
         <Head>
@@ -100,14 +75,12 @@ export default function SrdDocumentPage({ document }) {
         <div id="background-animation"></div>
         <Header t={t} lang={locale} setLang={handleLanguageChange} activeSection="tools" pathname={router.pathname} />
         
-        {/* ИЗМЕНЕНИЕ ЗДЕСЬ: убрали класс post-content-wrapper */}
         <main style={{ paddingTop: '2rem' }}>
             <div className="container">
                 <div id="srd-content" className="srd-document-view"> 
                     <div dangerouslySetInnerHTML={{ __html: document.content_html }} />
                 </div>
 
-                {/* Кнопки теперь внизу */}
                 <div className="srd-actions" style={{marginTop: '2rem', borderTop: '1px dashed var(--color-border)', borderBottom: 'none'}}>
                     <Link href={{
                         pathname: '/tools/srd-generator',
@@ -118,9 +91,13 @@ export default function SrdDocumentPage({ document }) {
                     <button onClick={handleCopyMarkdown} className="btn btn-secondary">
                         {copyStatus}
                     </button>
-                    <button onClick={handleDownloadPdf} className="btn" disabled={isDownloading}>
-                        {isDownloading ? t.srdDownloading : t.srdDownloadPdf}
-                    </button>
+                    <a 
+                        href={`/api/srd/download?docId=${query.docId}`} 
+                        className="btn"
+                        download={`${document.title.replace(/ /g, '_')}.pdf`}
+                    >
+                        {t.srdDownloadPdf}
+                    </a>
                 </div>
             </div>
         </main>
