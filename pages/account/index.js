@@ -1,4 +1,4 @@
-// pages/account/index.js (ФИНАЛЬНАЯ МУЛЬТИЯЗЫЧНАЯ ВЕРСИЯ)
+// pages/account/index.js (ВЕРСИЯ С ПАНЕЛЬЮ УПРАВЛЕНИЯ)
 
 import { getSession, useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -98,10 +98,29 @@ export default function AccountPage({ userSession }) {
             <Head>
                 <title>{`${t.accountTitle} | Sarkhan.dev`}</title>
                 <style jsx>{`
-                    /* Стили остаются без изменений */
+                    /* === НАЧАЛО ИЗМЕНЕНИЙ: СТИЛИ ДЛЯ ПАНЕЛИ === */
+                    .dashboard-panel {
+                        background: var(--color-surface);
+                        border: 1px solid var(--color-border);
+                        border-radius: var(--radius-md);
+                        padding: var(--space-xl);
+                        box-shadow: var(--shadow-md);
+                    }
+                    .dashboard-title {
+                        text-align: center;
+                        margin-top: 0;
+                        margin-bottom: var(--space-xxl);
+                    }
+                    @media (min-width: 768px) {
+                        .dashboard-panel {
+                            padding: var(--space-xxl);
+                        }
+                    }
+                    /* === КОНЕЦ ИЗМЕНЕНИЙ === */
+
                     .account-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-xxl); }
                     @media (min-width: 992px) { .account-grid { grid-template-columns: 350px 1fr; align-items: start; } }
-                    .card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-xl); }
+                    .card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-xl); }
                     .profile-card, .documents-card, .plan-card { height: 100%; }
                     .profile-card { display: flex; flex-direction: column; align-items: center; gap: var(--space-lg); }
                     .avatar-placeholder { width: 100px; height: 100px; border-radius: 50%; background: var(--color-bg); border: 2px solid var(--color-primary); display: flex; align-items: center; justify-content: center; color: var(--color-primary); }
@@ -135,57 +154,61 @@ export default function AccountPage({ userSession }) {
             <main className="account-page-main" style={{ padding: 'var(--space-xxl) 0' }}>
                 <section id="account-dashboard">
                     <div className="container">
-                        <h2 style={{ textAlign: 'center' }}>{t.accountTitle}</h2>
-                        {isLoading ? ( <p style={{ textAlign: 'center' }}>{t.aiSummaryLoading}</p> ) 
-                        : error ? ( <p style={{ textAlign: 'center' }} className="form-message error">{error}</p> ) 
-                        : (
-                            <div className="account-grid">
-                                <div className="profile-and-plan-stack" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xxl)'}}>
-                                    <div className="card profile-card">
-                                        <div className="avatar-placeholder"><Icon name={getAvatarIcon()} /></div>
-                                        <form className="profile-form" onSubmit={handleSaveProfile}>
-                                            <div className="form-group"><label htmlFor="email">Email</label><input id="email" type="email" value={email} disabled /></div>
-                                            <div className="form-group"><label htmlFor="name">{t.profileNameLabel}</label><input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder={t.profileNamePlaceholder} /></div>
-                                            <button type="submit" className="btn">{t.profileSaveButton}</button>
-                                            {successMessage && <p className="form-message success">{successMessage}</p>}
-                                        </form>
-                                        <button onClick={() => signOut({ callbackUrl: '/' })} className="btn btn-secondary" style={{ width: '100%', marginTop: 'auto' }}>
-                                            {t.signOutButton}
-                                        </button>
-                                    </div>
-                                    {quota && (
-                                        <div className="card plan-card">
-                                            <h3>{t.planCardTitle}</h3>
-                                            <div className="plan-info">
-                                                <p>{t.planCurrent}</p>
-                                                <p className="plan-name">{quota.plan}</p>
-                                                <p className="usage-text">{t.planUsage.replace('{used}', quota.used).replace('{limit}', quota.limit)}</p>
-                                                <div className="usage-bar"><div className="usage-bar-fill" style={{ width: `${(quota.used / quota.limit) * 100}%` }}></div></div>
-                                                <button className="btn btn-secondary" disabled>{t.planChangeButton}</button>
+                        {/* === НАЧАЛО ИЗМЕНЕНИЙ: Новый контейнер-панель === */}
+                        <div className="dashboard-panel">
+                            <h2 className="dashboard-title">{t.accountTitle}</h2>
+                            {isLoading ? ( <p style={{ textAlign: 'center' }}>{t.aiSummaryLoading}</p> ) 
+                            : error ? ( <p style={{ textAlign: 'center' }} className="form-message error">{error}</p> ) 
+                            : (
+                                <div className="account-grid">
+                                    <div className="profile-and-plan-stack" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xxl)'}}>
+                                        <div className="card profile-card">
+                                            <div className="avatar-placeholder"><Icon name={getAvatarIcon()} /></div>
+                                            <form className="profile-form" onSubmit={handleSaveProfile}>
+                                                <div className="form-group"><label htmlFor="email">Email</label><input id="email" type="email" value={email} disabled /></div>
+                                                <div className="form-group"><label htmlFor="name">{t.profileNameLabel}</label><input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder={t.profileNamePlaceholder} /></div>
+                                                <button type="submit" className="btn">{t.profileSaveButton}</button>
+                                                {successMessage && <p className="form-message success">{successMessage}</p>}
+                                            </form>
+                                            <button onClick={() => signOut({ callbackUrl: '/' })} className="btn btn-secondary" style={{ width: '100%', marginTop: 'auto' }}>
+                                                {t.signOutButton}
+                                            </button>
+                                        </div>
+                                        {quota && (
+                                            <div className="card plan-card">
+                                                <h3>{t.planCardTitle}</h3>
+                                                <div className="plan-info">
+                                                    <p>{t.planCurrent}</p>
+                                                    <p className="plan-name">{quota.plan}</p>
+                                                    <p className="usage-text">{t.planUsage.replace('{used}', quota.used).replace('{limit}', quota.limit)}</p>
+                                                    <div className="usage-bar"><div className="usage-bar-fill" style={{ width: `${(quota.used / quota.limit) * 100}%` }}></div></div>
+                                                    <button className="btn btn-secondary" disabled>{t.planChangeButton}</button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    )}
+                                        )}
+                                    </div>
+                                    <div className="card documents-card">
+                                        <h3>{t.documentsCardTitle}</h3>
+                                        {documents.length > 0 ? (
+                                            <ul className="document-list">
+                                                {documents.map(doc => (
+                                                    <li key={doc.id} className="document-item">
+                                                        <Link href={`/tools/srd/${doc.id}`}>{doc.title}</Link>
+                                                        <span className="document-date">{new Date(doc.createdAt).toLocaleDateString(locale, { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        ) : (
+                                            <div className="no-documents">
+                                                <p>{t.documentsNone}</p>
+                                                <Link href="/tools/srd-generator" className="btn">{t.documentsCreateNew}</Link>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
-                                <div className="card documents-card">
-                                    <h3>{t.documentsCardTitle}</h3>
-                                    {documents.length > 0 ? (
-                                        <ul className="document-list">
-                                            {documents.map(doc => (
-                                                <li key={doc.id} className="document-item">
-                                                    <Link href={`/tools/srd/${doc.id}`}>{doc.title}</Link>
-                                                    <span className="document-date">{new Date(doc.createdAt).toLocaleDateString(locale, { day: '2-digit', month: 'short', year: 'numeric' })}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    ) : (
-                                        <div className="no-documents">
-                                            <p>{t.documentsNone}</p>
-                                            <Link href="/tools/srd-generator" className="btn">{t.documentsCreateNew}</Link>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        )}
+                            )}
+                        </div>
+                        {/* === КОНЕЦ ИЗМЕНЕНИЙ === */}
                     </div>
                 </section>
             </main>
