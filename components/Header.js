@@ -47,7 +47,6 @@ export default function Header({ t, lang, setLang, activeSection }) {
                 <div className="avatar-placeholder-small">
                     <Icon name={getAvatarIcon()} />
                 </div>
-                <span>{session.user.name || session.user.email}</span>
             </Link>
         );
     };
