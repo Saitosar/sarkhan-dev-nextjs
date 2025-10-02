@@ -1,4 +1,4 @@
-// components/Header.js (ФИНАЛЬНАЯ ВЕРСИЯ)
+// components/Header.js (ФИНАЛЬНАЯ ВЕРСИЯ С DICEBEAR)
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useTheme } from 'next-themes';
@@ -19,20 +19,11 @@ export default function Header({ t, lang, setLang, activeSection }) {
     const langSwitcherRef = useRef(null);
     const langGlobeBtnRef = useRef(null);
     const router = useRouter();
-    const { locale } = router; // locale нужен для UserProfile
+    const { locale } = router;
     const navMenuRef = useRef(null);
-
-    // --- НАЧАЛО: Вспомогательные компоненты и функции ---
     
-    // Функция для выбора иконки аватара
-    const getAvatarIcon = () => {
-        if (!session?.user?.id) return "about"; // Иконка по умолчанию
-        const icons = ["userStory", "srd", "methodology", "specialization", "tools"];
-        const hash = session.user.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-        return icons[hash % icons.length];
-    };
-
-    // Компонент для отображения либо кнопки входа, либо профиля
+    // === НАЧАЛО ИЗМЕНЕНИЙ ===
+    // Компонент для отображения либо кнопки входа, либо профиля с аватаром
     const UserProfile = () => {
         if (!session) {
             return (
@@ -42,16 +33,25 @@ export default function Header({ t, lang, setLang, activeSection }) {
             );
         }
 
+        // Генерируем URL для аватара из DiceBear в стиле bottts-neutral
+        const avatarUrl = `https://api.dicebear.com/8.x/bottts-neutral/svg?seed=${session.user.id}`;
+
         return (
             <Link href="/account" className="user-profile-link">
                 <div className="avatar-placeholder-small">
-                    <Icon name={getAvatarIcon()} />
+                     {/* Вместо Icon, используем Image с URL от DiceBear */}
+                     <Image 
+                        src={avatarUrl} 
+                        alt="User Avatar" 
+                        width={36} 
+                        height={36} 
+                        style={{ borderRadius: '50%', background: 'var(--color-surface)' }} 
+                     />
                 </div>
             </Link>
         );
     };
-
-    // --- КОНЕЦ: Вспомогательные компоненты и функции ---
+    // === КОНЕЦ ИЗМЕНЕНИЙ ===
 
 
     const handleLanguageSelect = (newLang) => {

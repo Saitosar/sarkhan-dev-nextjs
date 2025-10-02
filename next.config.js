@@ -35,6 +35,10 @@ const nextConfig = {
       protocol: 'https',
       hostname: 'placehold.co',
     },
+    {
+      protocol: 'https',
+      hostname: 'api.dicebear.com',
+    }, 
   ],
   dangerouslyAllowSVG: true,
   contentSecurityPolicy: "image-src 'self' https://placehold.co;",
