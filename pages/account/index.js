@@ -1,4 +1,4 @@
-// pages/account/index.js (ВЕРСИЯ С ЕДИНОЙ АВАТАРКОЙ DICEBEAR)
+// pages/account/index.js (ВЕРСИЯ С ИСПРАВЛЕННЫМ ИНТЕРФЕЙСОМ)
 
 import { getSession, useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -9,7 +9,7 @@ import Footer from '@/components/Footer';
 import { translations } from '@/utils/translations';
 import Icon from '@/components/Icon';
 import Link from 'next/link';
-import Image from 'next/image'; // <-- 1. Импортируем компонент Image
+import Image from 'next/image';
 
 export async function getServerSideProps(context) {
     const session = await getSession(context);
@@ -83,10 +83,9 @@ export default function AccountPage({ userSession }) {
         }
     };
 
-    // 2. Генерируем URL для аватара прямо здесь
     const avatarUrl = session?.user?.id 
         ? `https://api.dicebear.com/8.x/bottts-neutral/svg?seed=${session.user.id}`
-        : '/default-avatar.svg'; // Можно добавить заглушку на случай отсутствия сессии
+        : '/default-avatar.svg';
 
     const handleLanguageChange = (newLang) => {
         router.push('/account', '/account', { locale: newLang });
@@ -141,8 +140,7 @@ export default function AccountPage({ userSession }) {
                     }
 
                     .card { 
-                        border-radius: var(--radius-md); 
-                        padding: 0; 
+                        border-radius: var(--radius-md);
                     }
                     .profile-card, .documents-card, .plan-card { 
                         height: 100%; 
@@ -157,7 +155,7 @@ export default function AccountPage({ userSession }) {
                         border: 1px solid var(--color-border);
                         padding: var(--space-xl);
                     }
-
+                    
                     .avatar-placeholder { 
                         width: 100px; 
                         height: 100px; 
@@ -167,8 +165,7 @@ export default function AccountPage({ userSession }) {
                         display: flex; 
                         align-items: center; 
                         justify-content: center; 
-                        color: var(--color-primary); 
-                        overflow: hidden; /* Добавляем, чтобы скруглить картинку */
+                        overflow: hidden;
                     }
                     
                     .profile-form { 
@@ -275,7 +272,6 @@ export default function AccountPage({ userSession }) {
                                 <div className="account-grid">
                                     <div className="profile-and-plan-stack" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xxl)'}}>
                                         <div className="card profile-card">
-                                            {/* === НАЧАЛО ИЗМЕНЕНИЙ: Замена Icon на Image === */}
                                             <div className="avatar-placeholder">
                                                 <Image 
                                                     src={avatarUrl}
@@ -284,7 +280,6 @@ export default function AccountPage({ userSession }) {
                                                     height={100}
                                                 />
                                             </div>
-                                            {/* === КОНЕЦ ИЗМЕНЕНИЙ === */}
                                             <form className="profile-form" onSubmit={handleSaveProfile}>
                                                 <div className="form-group"><label htmlFor="email">Email</label><input id="email" type="email" value={email} disabled /></div>
                                                 <div className="form-group"><label htmlFor="name">{t.profileNameLabel}</label><input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder={t.profileNamePlaceholder} /></div>
