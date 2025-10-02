@@ -1,0 +1,195 @@
+/* === Стили для страницы Личного Кабинета === */
+
+.dashboardPanel {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.dashboardTitle {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: var(--space-xxl);
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    position: relative;
+}
+
+.dashboardTitle::after {
+    content: '';
+    position: absolute;
+    inset-block-end: calc(-1 * var(--space-lg));
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+}
+
+.accountGrid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: var(--space-xxl); 
+}
+
+.profileAndPlanStack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xxl);
+}
+
+.profileCard { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: var(--space-lg); 
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: var(--space-xl);
+    border-radius: var(--radius-md);
+}
+
+.avatarPlaceholder { 
+    width: 100px; 
+    height: 100px; 
+    border-radius: 50%; 
+    background: var(--color-surface); 
+    border: 2px solid var(--color-primary); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    overflow: hidden;
+}
+
+.profileForm { 
+    width: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    gap: var(--space-lg); 
+}
+
+.formGroup { 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.formGroup label { 
+    margin-bottom: var(--space-sm); 
+    font-weight: 500; 
+    color: var(--color-text-secondary); 
+}
+
+.formGroup input { 
+    padding: var(--space-md); 
+    background: var(--color-bg); 
+    border: 1px solid var(--color-border); 
+    color: var(--color-text-primary); 
+    border-radius: var(--radius-sm); 
+}
+
+.formGroup input:disabled { 
+    opacity: 0.7; 
+}
+
+.formMessage { 
+    text-align: center; 
+    margin-top: var(--space-md); 
+}
+
+.formMessage.success { color: var(--color-primary); }
+.formMessage.error { color: var(--color-secondary); }
+
+.planCard, .documentsCard {
+    height: 100%;
+}
+
+.cardTitle { 
+    margin-top: 0; 
+    margin-bottom: var(--space-lg); 
+    color: var(--color-primary); 
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.documentList { list-style: none; padding: 0; margin: 0; }
+
+.documentItem { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: var(--space-md) 0; 
+    border-bottom: 1px solid var(--color-border); 
+}
+
+.documentItem:last-child { border-bottom: none; }
+
+.documentItem a { 
+    color: var(--color-text-primary); 
+    text-decoration: none; 
+    font-weight: 500; 
+    transition: color 0.2s ease;
+}
+
+.documentItem a:hover { color: var(--color-primary); }
+
+.documentDate { 
+    font-size: 0.9rem; 
+    color: var(--color-text-secondary); 
+    flex-shrink: 0;
+    margin-left: var(--space-md);
+}
+
+.noDocuments { 
+    text-align: center; 
+    color: var(--color-text-secondary); 
+    padding: var(--space-xl);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+.planInfo { text-align: left; }
+
+.planInfo p { 
+    margin: 0 0 var(--space-sm) 0; 
+    color: var(--color-text-secondary); 
+}
+
+.planName { 
+    font-size: 1.2rem; 
+    font-weight: bold; 
+    color: var(--color-heading); 
+    text-transform: capitalize; 
+}
+
+.usageBar { 
+    width: 100%; 
+    background-color: var(--color-bg); 
+    border: 1px solid var(--color-border); 
+    border-radius: var(--radius-sm); 
+    height: 20px; 
+    margin: var(--space-md) 0; 
+    overflow: hidden; 
+}
+
+.usageBarFill { 
+    height: 100%; 
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)); 
+    transition: width 0.5s ease-in-out; 
+}
+
+.usageText { font-weight: 500; }
+
+/* Адаптивность */
+@media (min-width: 768px) {
+    .dashboardPanel {
+        padding: var(--space-xxl);
+    }
+}
+
+@media (min-width: 992px) { 
+    .accountGrid { 
+        grid-template-columns: 350px 1fr; 
+        align-items: start; 
+    } 
+}
