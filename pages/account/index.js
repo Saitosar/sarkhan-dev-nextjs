@@ -1,4 +1,4 @@
-// pages/account/index.js (ВЕРСИЯ С ПАНЕЛЬЮ УПРАВЛЕНИЯ)
+// pages/account/index.js (ВЕРСИЯ С ЕДИНОЙ АВАТАРКОЙ DICEBEAR)
 
 import { getSession, useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -9,6 +9,7 @@ import Footer from '@/components/Footer';
 import { translations } from '@/utils/translations';
 import Icon from '@/components/Icon';
 import Link from 'next/link';
+import Image from 'next/image'; // <-- 1. Импортируем компонент Image
 
 export async function getServerSideProps(context) {
     const session = await getSession(context);
@@ -82,12 +83,10 @@ export default function AccountPage({ userSession }) {
         }
     };
 
-    const getAvatarIcon = () => {
-        if (!session?.user?.id) return "user";
-        const icons = ["userStory", "srd", "methodology", "specialization", "tools"];
-        const hash = session.user.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-        return icons[hash % icons.length];
-    };
+    // 2. Генерируем URL для аватара прямо здесь
+    const avatarUrl = session?.user?.id 
+        ? `https://api.dicebear.com/8.x/bottts-neutral/svg?seed=${session.user.id}`
+        : '/default-avatar.svg'; // Можно добавить заглушку на случай отсутствия сессии
 
     const handleLanguageChange = (newLang) => {
         router.push('/account', '/account', { locale: newLang });
@@ -98,7 +97,6 @@ export default function AccountPage({ userSession }) {
             <Head>
                 <title>{`${t.accountTitle} | Sarkhan.dev`}</title>
                 <style jsx>{`
-                    /* === НАЧАЛО ИЗМЕНЕНИЙ: СТИЛИ ДЛЯ ПАНЕЛИ === */
                     .dashboard-panel {
                         background: var(--color-surface);
                         border: 1px solid var(--color-border);
@@ -110,42 +108,157 @@ export default function AccountPage({ userSession }) {
                         text-align: center;
                         margin-top: 0;
                         margin-bottom: var(--space-xxl);
+                        font-size: clamp(2rem, 4vw, 2.5rem);
+                        position: relative;
                     }
+                     .dashboard-title::after {
+                        content: '';
+                        position: absolute;
+                        inset-block-end: calc(-1 * var(--space-lg));
+                        inset-inline-start: 50%;
+                        transform: translateX(-50%);
+                        width: 80px;
+                        height: 3px;
+                        background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+                    }
+
                     @media (min-width: 768px) {
                         .dashboard-panel {
                             padding: var(--space-xxl);
                         }
                     }
-                    /* === КОНЕЦ ИЗМЕНЕНИЙ === */
 
-                    .account-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-xxl); }
-                    @media (min-width: 992px) { .account-grid { grid-template-columns: 350px 1fr; align-items: start; } }
-                    .card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-xl); }
-                    .profile-card, .documents-card, .plan-card { height: 100%; }
-                    .profile-card { display: flex; flex-direction: column; align-items: center; gap: var(--space-lg); }
-                    .avatar-placeholder { width: 100px; height: 100px; border-radius: 50%; background: var(--color-bg); border: 2px solid var(--color-primary); display: flex; align-items: center; justify-content: center; color: var(--color-primary); }
-                    .avatar-placeholder :global(svg) { width: 50px; height: 50px; }
-                    .profile-form { width: 100%; display: flex; flex-direction: column; gap: var(--space-lg); }
-                    .form-group { display: flex; flex-direction: column; }
-                    label { margin-bottom: var(--space-sm); font-weight: 500; color: var(--color-text-secondary); }
-                    input { padding: var(--space-md); background: var(--color-bg); border: 1px solid var(--color-border); color: var(--color-text-primary); border-radius: var(--radius-sm); }
+                    .account-grid { 
+                        display: grid; 
+                        grid-template-columns: 1fr; 
+                        gap: var(--space-xxl); 
+                    }
+                    @media (min-width: 992px) { 
+                        .account-grid { 
+                            grid-template-columns: 350px 1fr; 
+                            align-items: start; 
+                        } 
+                    }
+
+                    .card { 
+                        border-radius: var(--radius-md); 
+                        padding: 0; 
+                    }
+                    .profile-card, .documents-card, .plan-card { 
+                        height: 100%; 
+                    }
+
+                    .profile-card { 
+                        display: flex; 
+                        flex-direction: column; 
+                        align-items: center; 
+                        gap: var(--space-lg); 
+                        background: var(--color-bg);
+                        border: 1px solid var(--color-border);
+                        padding: var(--space-xl);
+                    }
+
+                    .avatar-placeholder { 
+                        width: 100px; 
+                        height: 100px; 
+                        border-radius: 50%; 
+                        background: var(--color-surface); 
+                        border: 2px solid var(--color-primary); 
+                        display: flex; 
+                        align-items: center; 
+                        justify-content: center; 
+                        color: var(--color-primary); 
+                        overflow: hidden; /* Добавляем, чтобы скруглить картинку */
+                    }
+                    
+                    .profile-form { 
+                        width: 100%; 
+                        display: flex; 
+                        flex-direction: column; 
+                        gap: var(--space-lg); 
+                    }
+                    .form-group { 
+                        display: flex; 
+                        flex-direction: column; 
+                    }
+                    label { 
+                        margin-bottom: var(--space-sm); 
+                        font-weight: 500; 
+                        color: var(--color-text-secondary); 
+                    }
+                    input { 
+                        padding: var(--space-md); 
+                        background: var(--color-bg); 
+                        border: 1px solid var(--color-border); 
+                        color: var(--color-text-primary); 
+                        border-radius: var(--radius-sm); 
+                    }
                     input[disabled] { opacity: 0.7; }
-                    .form-message { text-align: center; margin-top: var(--space-md); }
+                    .form-message { 
+                        text-align: center; 
+                        margin-top: var(--space-md); 
+                    }
                     .form-message.success { color: var(--color-primary); }
                     .form-message.error { color: var(--color-secondary); }
-                    .documents-card h3, .plan-card h3 { margin-top: 0; margin-bottom: var(--space-lg); color: var(--color-primary); }
+                    
+                    .documents-card h3, .plan-card h3 { 
+                        margin-top: 0; 
+                        margin-bottom: var(--space-lg); 
+                        color: var(--color-primary); 
+                        padding-bottom: var(--space-md);
+                        border-bottom: 1px solid var(--color-border);
+                    }
                     .document-list { list-style: none; padding: 0; margin: 0; }
-                    .document-item { display: flex; justify-content: space-between; align-items: center; padding: var(--space-md) 0; border-bottom: 1px solid var(--color-border); }
+                    .document-item { 
+                        display: flex; 
+                        justify-content: space-between; 
+                        align-items: center; 
+                        padding: var(--space-md) 0; 
+                        border-bottom: 1px solid var(--color-border); 
+                    }
                     .document-item:last-child { border-bottom: none; }
-                    .document-item a { color: var(--color-text-primary); text-decoration: none; font-weight: 500; }
+                    .document-item a { 
+                        color: var(--color-text-primary); 
+                        text-decoration: none; 
+                        font-weight: 500; 
+                    }
                     .document-item a:hover { color: var(--color-primary); }
-                    .document-date { font-size: 0.9rem; color: var(--color-text-secondary); }
-                    .no-documents { text-align: center; color: var(--color-text-secondary); padding: var(--space-xl); }
-                    .plan-info { text-align: center; }
-                    .plan-info p { margin: 0 0 var(--space-sm) 0; color: var(--color-text-secondary); }
-                    .plan-name { font-size: 1.2rem; font-weight: bold; color: var(--color-heading); text-transform: capitalize; }
-                    .usage-bar { width: 100%; background-color: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-sm); height: 20px; margin: var(--space-md) 0; overflow: hidden; }
-                    .usage-bar-fill { height: 100%; background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)); transition: width 0.5s ease-in-out; }
+                    .document-date { 
+                        font-size: 0.9rem; 
+                        color: var(--color-text-secondary); 
+                    }
+                    .no-documents { 
+                        text-align: center; 
+                        color: var(--color-text-secondary); 
+                        padding: var(--space-xl);
+                        border: 1px dashed var(--color-border);
+                        border-radius: var(--radius-md);
+                    }
+                    .plan-info { text-align: left; }
+                    .plan-info p { 
+                        margin: 0 0 var(--space-sm) 0; 
+                        color: var(--color-text-secondary); 
+                    }
+                    .plan-name { 
+                        font-size: 1.2rem; 
+                        font-weight: bold; 
+                        color: var(--color-heading); 
+                        text-transform: capitalize; 
+                    }
+                    .usage-bar { 
+                        width: 100%; 
+                        background-color: var(--color-bg); 
+                        border: 1px solid var(--color-border); 
+                        border-radius: var(--radius-sm); 
+                        height: 20px; 
+                        margin: var(--space-md) 0; 
+                        overflow: hidden; 
+                    }
+                    .usage-bar-fill { 
+                        height: 100%; 
+                        background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)); 
+                        transition: width 0.5s ease-in-out; 
+                    }
                     .usage-text { font-weight: 500; }
                 `}</style>
             </Head>
@@ -154,7 +267,6 @@ export default function AccountPage({ userSession }) {
             <main className="account-page-main" style={{ padding: 'var(--space-xxl) 0' }}>
                 <section id="account-dashboard">
                     <div className="container">
-                        {/* === НАЧАЛО ИЗМЕНЕНИЙ: Новый контейнер-панель === */}
                         <div className="dashboard-panel">
                             <h2 className="dashboard-title">{t.accountTitle}</h2>
                             {isLoading ? ( <p style={{ textAlign: 'center' }}>{t.aiSummaryLoading}</p> ) 
@@ -163,7 +275,16 @@ export default function AccountPage({ userSession }) {
                                 <div className="account-grid">
                                     <div className="profile-and-plan-stack" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-xxl)'}}>
                                         <div className="card profile-card">
-                                            <div className="avatar-placeholder"><Icon name={getAvatarIcon()} /></div>
+                                            {/* === НАЧАЛО ИЗМЕНЕНИЙ: Замена Icon на Image === */}
+                                            <div className="avatar-placeholder">
+                                                <Image 
+                                                    src={avatarUrl}
+                                                    alt="User Avatar"
+                                                    width={100}
+                                                    height={100}
+                                                />
+                                            </div>
+                                            {/* === КОНЕЦ ИЗМЕНЕНИЙ === */}
                                             <form className="profile-form" onSubmit={handleSaveProfile}>
                                                 <div className="form-group"><label htmlFor="email">Email</label><input id="email" type="email" value={email} disabled /></div>
                                                 <div className="form-group"><label htmlFor="name">{t.profileNameLabel}</label><input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder={t.profileNamePlaceholder} /></div>
@@ -174,6 +295,7 @@ export default function AccountPage({ userSession }) {
                                                 {t.signOutButton}
                                             </button>
                                         </div>
+                                        
                                         {quota && (
                                             <div className="card plan-card">
                                                 <h3>{t.planCardTitle}</h3>
@@ -187,6 +309,7 @@ export default function AccountPage({ userSession }) {
                                             </div>
                                         )}
                                     </div>
+
                                     <div className="card documents-card">
                                         <h3>{t.documentsCardTitle}</h3>
                                         {documents.length > 0 ? (
@@ -208,7 +331,6 @@ export default function AccountPage({ userSession }) {
                                 </div>
                             )}
                         </div>
-                        {/* === КОНЕЦ ИЗМЕНЕНИЙ === */}
                     </div>
                 </section>
             </main>
