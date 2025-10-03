@@ -101,9 +101,9 @@ const translations = {
     Əsas nailiyyətlər
   </h4>
 
-  <h5>Zeus Core Banking System-i sıfırdan yaratdım</h5>
+  <h5>Yeni Avtomatlaşdırılmış Bank Əməliyyat sisteminin sıfırdan yaradılmasında aparıcı rol oynadım</h5>
   <p>
-    Azərbaycanın ən böyük bankı üçün tam bir core banking sistemini birgə yaratdım — arxitekturadan və məhsul məntiqindən tutmuş, data miqrasiyası və inteqrasiyalara qədər. <strong>7 əsas modulu</strong> sıfırdan layihələndirdim:
+    Azərbaycanın ən böyük bankı üçün yeni Avtomatlaşdırılmış Bank Əməliyyat sisteminin sıfırdan yaradılmasında aparıcı rol oynadım — arxitekturadan və məhsul məntiqindən tutmuş, data miqrasiyası və inteqrasiyalara qədər. <strong>7 əsas modulu</strong> sıfırdan layihələndirdim:
   </p>
   <ul>
     <li><strong>Müştəri modulu</strong> — fiziki şəxslər, sahibkarlar, hüquqi şəxslər, banklar və qarşı tərəflər üçün bütün müştəri atributlarını müəyyənləşdirdim. Dublikatlardan müştəri bazasının təmizlənməsinə rəhbərlik etdim.</li>
@@ -236,7 +236,7 @@ const translations = {
     Əlaqə saxlayaq
   </h4>
   <p>
-    🚀 <strong>Əməkdaşlıq axtarırsınız?</strong> Gəlin birlikdə bank sistemlərinin gələcəyini quraq.
+     <strong>Əməkdaşlıq axtarırsınız?</strong> Gəlin birlikdə bank sistemlərinin gələcəyini quraq.
   </p>
   <p>
     Beynəlxalq komandalarla 'remote' və hibrid imkanlara açığam, texniki anlayış və insana yönəlik düşüncə ilə <strong>transformasiya təşəbbüslərinə</strong> töhfə verə bilərəm.
@@ -244,7 +244,7 @@ const translations = {
   <p>
     Növbəti layihənizi müzakirə etməyə hazırsınız? Gəlin danışaq.
   </p>
-  <div style="text-align: center; margin-top: 24px;">
+  <div style="text-align: left; margin-top: 24px;">
       <a href="https://www.linkedin.com/in/sarkhanhajiyev" target="_blank" rel="noopener noreferrer" class="btn" style="gap: 8px;">
           <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
@@ -414,9 +414,9 @@ const translations = {
     KEY ACHIEVEMENTS
   </h4>
 
-  <h5>Built Zeus Core Banking System from Scratch</h5>
+  <h5>Co-built Zeus Core Banking System from Scratch</h5>
   <p>
-    Co-engineered an entire core banking system for Azerbaijan’s largest bank — from architecture and product logic to data migration and integrations. <strong>Designed 7 core modules</strong> from the ground up:
+    Co-engineered an entire core banking system for Azerbaijan’s largest bank with the team of senior developers and system architectors — from architecture and product logic to data migration and integrations. <strong>Designed 7 core modules</strong> from the ground up:
   </p>
   <ul>
     <li><strong>Client Module</strong> — defined all client attributes for individuals, entrepreneurs, legal entities, banks, and counterparties. Led client database cleanup from duplicates.</li>
@@ -724,9 +724,9 @@ const translations = {
     КЛЮЧЕВЫЕ ДОСТИЖЕНИЯ
   </h4>
 
-  <h5>Создал Zeus Core Banking System с нуля</h5>
+  <h5>Был ведущим ИТ бизнес аналитиком в проекте создания новой Автоматизированной Банковской Системы с нуля</h5>
   <p>
-    Со-разработал полноценную систему core banking для крупнейшего банка Азербайджана — от архитектуры и продуктовой логики до миграции данных и интеграций. <strong>Спроектировал 7 основных модулей</strong> с нуля:
+    Со-разработал вместе с командой разработчиков и системных архитекторов полноценную автоматизированную банковскую систему для крупнейшего банка Азербайджана — от архитектуры и продуктовой логики до миграции данных и интеграций. <strong>Спроектировал 7 основных модулей</strong> с нуля:
   </p>
   <ul>
     <li><strong>Клиентский модуль</strong> — определил все клиентские атрибуты для физических лиц, предпринимателей, юридических лиц, банков и контрагентов. Руководил очисткой клиентской базы от дубликатов.</li>
