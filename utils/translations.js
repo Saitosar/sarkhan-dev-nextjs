@@ -222,48 +222,184 @@ const translations = {
         aboutSectionTitle: "About", aboutName: "Sarkhan Hajiyev",
         aboutShortBio: "IT Business Analyst with over 10 years of experience in banking systems.",
         aboutLongBio: `
-  <h3>👨‍💼 Who I Am</h3>
-  <p>Senior IT Business Analyst with 10+ years specializing in core banking systems and enterprise integrations. I bridge the gap between business needs and technical execution — from building banking platforms from scratch to orchestrating migrations and leading Agile transformations. My superpower? Turning complexity into clarity and driving solutions all the way to production.</p>
-
-  <h3>🚀 What I've Built</h3>
-  <ul>
-    <li><strong>Core Banking from Scratch:</strong> Co-engineered Zeus Core Banking System for Azerbaijan's largest bank — designed 7 core modules (Client, Account, Credit, Deposit, Cash Desk, GL, EOD/SOD). Participated in architectural decisions, wrote SQL for validation, and personally tested 70% of the system.</li>
-    <li><strong>Enterprise Migrations:</strong> Led migration from Oracle Flexcube with <0.01% delta at go-live. Coordinated cross-team efforts for retail banking, revolving credit lines, and card processing integration.</li>
-    <li><strong>50+ Complex Integrations:</strong> Designed API architecture between Zeus, Processing, CRM, BPM, and payment systems. Expert in REST APIs, Swagger/Postman, and end-to-end integration testing.</li>
-    <li><strong>Agile at Scale:</strong> Drove PDLC redesign across 80+ teams (300+ people). Coached teams, standardized frameworks, increased deployment frequency by 25%.</li>
-  </ul>
-
-  <h3>💡 My Approach</h3>
-  <p>I don't just document requirements — I co-create solutions with architects and developers. My philosophy: find the simplest solution that works flawlessly in any situation.</p>
-  <p>Key strengths:</p>
-  <ul>
-    <li>Systems thinking & architectural mindset</li>
-    <li>High technical depth + business acumen</li>
-    <li>End-to-end ownership from discovery to production</li>
-    <li>Turning chaos into structure</li>
-  </ul>
-
-  <h3>🛠️ Beyond Projects</h3>
-  <ul>
-      <li><strong>Building AI-Powered Platforms:</strong> Creator of Sarkhan.dev (AI tools for BAs) and aiCV (AI CV generator) — built solo using Next.js + AI.</li>
-      <li><strong>Process Automation:</strong> Expert in n8n workflow automation — creating intelligent solutions that eliminate manual work.</li>
-      <li><strong>Leadership & Mentoring:</strong> Process Owner, Agile Coach, trainer at Matrix Academy, and Franklin Covey certified mentor.</li>
-  </ul>
-
-  <h3>🎯 What's Next</h3>
-  <p><em>"My job is to turn chaos of ideas into clear, working solutions. Today I do it as a Senior IT BA. Tomorrow — as a System Architect, designing large-scale ecosystems and AI-powered solutions."</em></p>
-  <p>Currently preparing for TOGAF certification, focusing on Enterprise Architecture.</p>
-
-  <h3>📫 Let's Connect</h3>
-  <p>🚀 Looking for collaboration? Let's build the future of banking systems together. Open to remote and hybrid opportunities with international teams where I can contribute transformation initiatives with both technical insight and human-centered thinking.</p>
   <p>
-    <a href="#about" class="contact-link" style="text-decoration: underline;">View Full Profile</a> • 
-    <a href="https://linkedin.com/in/sarkhanhajiyev" target="_blank" rel="noopener noreferrer" class="contact-link" style="text-decoration: underline;">LinkedIn</a> • 
-    <a href="#contact" class="contact-link" style="text-decoration: underline;">Contact Me</a>
+    <strong>Jump to:</strong> <a href="#summary">Summary</a> • <a href="#journey">Journey</a> • <a href="#achievements">Achievements</a> • <a href="#strengths">Strengths</a> • <a href="#projects">Projects</a> • <a href="#certifications">Certifications</a> • <a href="#connect">Connect</a>
+  </p>
+  <hr>
+
+  <h3 id="summary">
+    <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+    Professional Summary
+  </h3>
+  <p>
+    Senior IT Business Analyst with <strong>10+ years</strong> of experience in digital banking and fintech, specializing in the most complex domain of the industry — <strong>core banking systems and enterprise integrations</strong>.
   </p>
   <p>
-    <strong>Languages:</strong> English • Russian • Turkish • Azerbaijani<br>
-    <strong>Based in:</strong> Baku, Azerbaijan 🇦🇿
+    My expertise spans the full lifecycle: from building core banking platforms from scratch to orchestrating large-scale migrations, designing API architectures, and leading Agile transformations across enterprise teams. I bridge the gap between business needs and technical execution, turning complexity into working solutions that drive financial institutions forward.
+  </p>
+  <hr>
+
+  <h3 id="journey">
+    <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+    What Makes Me Different
+  </h3>
+  <p>
+    My career began in <strong>2013</strong> on the retail frontlines of banking — issuing loans, understanding client needs, and seeing the real impact of broken processes. This foundation gave me something rare: a <strong>deep understanding of both business pain points and technical solutions</strong>.
+  </p>
+  <p>
+    Over the years, I evolved from front-office operations to the <strong>core of banking technology</strong>, where I’ve spent the last decade turning complexity into clarity.
+  </p>
+  <hr>
+
+  <h3 id="achievements">
+    <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13.52l4.24-4.24a5.66 5.66 0 0 1 8 0L22 17.52"></path><path d="m15 5 6 6"></path></svg>
+    Key Achievements
+  </h3>
+
+  <h4>Built Zeus Core Banking System from Scratch</h4>
+  <p>
+    Co-engineered an entire core banking system for Azerbaijan’s largest bank — from architecture and product logic to data migration and integrations. <strong>Designed 7 core modules</strong> from the ground up:
+  </p>
+  <ul>
+    <li><strong>Client Module</strong> — defined all client attributes for individuals, entrepreneurs, legal entities, banks, and counterparties. Led client database cleanup from duplicates.</li>
+    <li><strong>Account Module</strong> — structured chart of accounts in Excel for system logic, configured balance sheet accounts, personal accounts, internal bank accounts, transit accounts, and GL accounts. Worked closely with Finance department on accounting entries and cross-system integration.</li>
+    <li><strong>Credit Module</strong> — described all credit types, attributes, operations, and behaviors including disbursement, interest accrual, penalty calculation, commission formation, reserve calculation, invoice generation, grace periods, and off-balance accounts management.</li>
+    <li><strong>Deposit Module</strong> — defined all deposit products, conditions, attributes, and operations.</li>
+    <li><strong>Cash Desk Module</strong> — designed fraud-proof cash management system replacing manual ledgers. Created structure for cash opening, cashier advances, cash in/out, currency exchange, safe deposit boxes, and 24/7 branch operations. <strong>Wrote SQL reports</strong> used by cashiers for tracking.</li>
+    <li><strong>Reserve Calculation Engine</strong> — one of the most complex tasks, designed credit reserve calculation operations.</li>
+    <li><strong>EOD/SOD Processing</strong> — defined end-of-day and start-of-day logic, determining which operations run before/after EOD.</li>
+  </ul>
+  <p>
+    <strong>Key approach:</strong> Collaborated with architects and core developers to find the <strong>simplest solutions that work flawlessly</strong> in any situation. Participated in architectural decisions, not just documenting — but co-creating resilient system logic. <strong>Personally tested 70% of the entire system</strong> using SQL queries and manual interface testing.
+  </p>
+
+  <h4>Led Enterprise-Scale Data Migration</h4>
+  <p>
+    Orchestrated migration from Oracle Flexcube and legacy systems with <strong>&lt;0.01% delta</strong> at go-live. Coordinated cross-team efforts for retail banking products, revolving credit lines, and card processing integration.
+  </p>
+
+  <h4>Delivered 50+ High-Complexity Integrations</h4>
+  <p>
+    Designed and documented API integration strategy between Zeus, Processing (CMS), CRM, BPM (ELMA), payment systems, Flexcube, and external systems. Expert in REST APIs, Swagger/Postman, and end-to-end integration testing. <strong>Worked closely with Finance department</strong> on accounting entries for cross-system transactions.
+  </p>
+
+  <h4>Drove Agile Transformation at Scale</h4>
+  <p>
+    Led re-design of PDLC across <strong>80+ teams</strong> (300+ people). Coached 10+ Agile teams, standardized frameworks, and increased deployment frequency by <strong>25%</strong>. Served as Agile Coach and Process Owner.
+  </p>
+  <hr>
+
+  <h3 id="strengths">
+    <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+    Core Strengths
+  </h3>
+
+  <h4>Business & Technical Bridge</h4>
+  <p>
+    Skilled in requirement elicitation, process modeling (BPMN, UML), and stakeholder management — but most importantly, in <strong>turning complexity into clarity</strong> and driving solutions all the way to production.
+  </p>
+
+  <h4>Systems Thinking & Problem Solving</h4>
+  <p>
+    Whether it’s untangling legacy systems, designing universal logic, or drafting precise documentation — I bring structure to chaos. My approach: <strong>find the simplest solution that works flawlessly in any situation</strong>.
+  </p>
+  <p>
+    I don’t just document requirements — I participate in architectural decisions, collaborate with developers to co-create solutions, write SQL for data validation, and personally test critical functionality. Known for <strong>high technical depth</strong> combined with business acumen.
+  </p>
+
+  <h4>End-to-End Ownership</h4>
+  <p>
+    I don’t just document requirements. I orchestrate discovery, design integrations, coordinate testing, manage migrations, and ensure go-live success. High ownership, adaptability, and depth in both business and tech contexts.
+  </p>
+  <hr>
+
+  <h3 id="projects">
+    <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+    Beyond Projects
+  </h3>
+
+  <h4>Building AI-Powered Platforms</h4>
+  <p>I create my own products from scratch using <strong>Next.js and AI</strong>:</p>
+  <ul>
+    <li><strong>Sarkhan.dev</strong> — AI-powered tools and resources for Business Analysts (built solo with AI assistance)</li>
+    <li><strong>aiCV</strong> — AI-enhanced CV generator for IT professionals (Next.js + AI, from concept to production)</li>
+  </ul>
+
+  <h4>Process Automation Expert</h4>
+  <p>
+    Skilled in <strong>n8n</strong> workflow automation — creating intelligent automation solutions that streamline operations and eliminate manual work. Passionate about leveraging no-code/low-code tools to drive efficiency.
+  </p>
+
+  <h4>Leadership & Mentoring</h4>
+  <ul>
+    <li>Served as <strong>Process Owner</strong> — leading PDLC transformation and governance frameworks</li>
+    <li>Trainer at <strong>Matrix Academy</strong>, teaching IT Business Analysis courses</li>
+    <li>Completed <strong>Franklin Covey</strong> mentoring training program</li>
+    <li>Actively mentor junior BAs and coach teams on Agile practices and product thinking</li>
+  </ul>
+
+  <h4>Knowledge Sharing</h4>
+  <p>
+    Creating educational content, tools, and resources for the BA community. Believe in lifting others through sharing practical expertise and real-world insights.
+  </p>
+  <hr>
+
+  <h3 id="certifications">
+      <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15l-3.5-3.5 1.5-1.5 2 2 4-4 1.5 1.5L12 15z"></path><path d="M19.3 6.7A8 8 0 0 1 20 12a8 8 0 0 1-8 8 8 8 0 0 1-8-8c0-1.7.5-3.3 1.4-4.6"></path></svg>
+    Certifications & Education
+  </h3>
+  <ul>
+      <li>ICAgile Product Management</li>
+      <li>ICAgile Enterprise Agile Coaching</li>
+      <li>Erickson Coaching Professional</li>
+      <li>PSPO I / PSM I (Scrum.org)</li>
+      <li>PDLC – Keytorc</li>
+      <li>Preparing for <strong>TOGAF</strong> certification (Enterprise Architecture focus)</li>
+  </ul>
+  <h4>Education:</h4>
+  <ul>
+      <li>MSc in Financial Engineering — Qafqaz University (2012-2014)</li>
+      <li>BSc in Banking Management — Qafqaz University (2006-2011)</li>
+  </ul>
+  <hr>
+
+  <h3 id="languages">
+    <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+    Languages & Location
+  </h3>
+  <p>
+    <strong>Languages:</strong> English (Advanced), Russian (Advanced), Turkish (Advanced), Azerbaijani (Native)<br>
+    <strong>Based in:</strong> Baku, Azerbaijan<br>
+    <strong>Open to:</strong> Remote and hybrid opportunities with international teams
+  </p>
+  <hr>
+  
+  <h3>
+    <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
+    My Philosophy
+  </h3>
+  <blockquote>
+    <p><em>“My job is to turn chaos of ideas into clear, working solutions. Today I do it as a Senior IT BA. Tomorrow — as a System Architect, designing large-scale ecosystems and AI-powered solutions.”</em></p>
+  </blockquote>
+  <p>
+    I’m driven by <strong>curiosity, clarity, and the pursuit of meaningful solutions</strong>. Whether working on core banking transformation, regulatory compliance, or real-time operations — I contribute transformation initiatives with both <strong>technical insight and human-centered thinking</strong>.
+  </p>
+  <hr>
+
+  <h3 id="connect">
+    <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+    Let’s Connect
+  </h3>
+  <p>
+    🚀 <strong>Looking for collaboration?</strong> Let’s build the future of banking systems together.
+  </p>
+  <p>
+    Open to remote and hybrid opportunities with international teams where I can contribute to <strong>transformation initiatives</strong> with both technical insight and human-centered thinking.
+  </p>
+  <p>
+    <a href="#about" class="contact-link" style="text-decoration: underline;">View Full Profile</a> • 
+    <a href="https://www.linkedin.com/in/sarkhanhajiyev" target="_blank" rel="noopener noreferrer" class="contact-link" style="text-decoration: underline;">LinkedIn</a> • 
+    <a href="#contact" class="contact-link" style="text-decoration: underline;">Contact Me</a>
   </p>
 `,
         skillsTitle: "Core Skills",
