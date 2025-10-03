@@ -2364,3 +2364,22 @@ a.skill-tag:hover {
   text-transform: none; /* Убираем 'uppercase', если он где-то унаследован */
   font-family: var(--font-heading, inherit); /* Убедимся, что используется шрифт для заголовков */
 }
+/* === НАЧАЛО: Адаптация таблицы в SRD для мобильных === */
+
+/* Создаем контейнер-обертку для таблицы */
+.srd-table-wrapper {
+  overflow-x: auto; /* Включаем горизонтальную прокрутку, если контент не помещается */
+  -webkit-overflow-scrolling: touch; /* Обеспечиваем плавную прокрутку на iOS */
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  margin: var(--space-lg) 0;
+}
+
+/* Стили для самой таблицы внутри обертки */
+.srd-table-wrapper table {
+  margin-top: 0; /* Убираем верхний отступ, так как он теперь у обертки */
+  margin-bottom: 0; /* Убираем нижний отступ */
+  border: none; /* Убираем рамку у таблицы, так как она теперь у обертки */
+}
+
+/* === КОНЕЦ: Адаптация таблицы в SRD для мобильных === */

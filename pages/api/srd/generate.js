@@ -32,7 +32,7 @@ function convertJsonToMarkdown(jsonData) {
         functionalRequirements: d => `## 5. Functional Requirements (FR)\n${(d || []).map(item => `- **${item.id}:** ${item.text}`).join('\n')}\n\n`,
         acceptanceCriteria: d => `## 6. Acceptance Criteria (AC)\n${(d || []).map(item => `- **For ${item.for_fr}:** (${item.type}) ${item.text}`).join('\n')}\n\n`,
         nonFunctionalConstraints: d => `## 7. Non-Functional Constraints\n${(d || []).map(item => `- **${item.category}:** ${item.requirement}`).join('\n')}\n\n`,
-        dataAndFields: d => `## 8. Data & Fields\n| Field Name | Type | Validation | Note |\n|---|---|---|---|\n${(d || []).map(item => `| ${item.fieldName} | ${item.type} | ${item.validation} | ${item.integrationNote} |`).join('\n')}\n\n`,
+        dataAndFields: d => `## 8. Data & Fields\n<div class="srd-table-wrapper">\n\n| Field Name | Type | Validation | Note |\n|---|---|---|---|\n${(d || []).map(item => `| ${item.fieldName} | ${item.type} | ${item.validation} | ${item.integrationNote} |`).join('\n')}\n\n</div>\n\n`,
         businessRules: d => `## 9. Business Rules\n${(d || []).map(item => `- **${item.ruleId}:** ${item.description}`).join('\n')}\n\n`,
         // --- ИЗМЕНЕНИЕ ЗДЕСЬ: JSON обернут в блоки кода ```json ... ``` ---
         interfacesApiContract: d => `## 10. Interfaces / API Contract\n- **Endpoint:** \`${d.endpoint}\`\n- **Method:** \`${d.method}\`\n- **Request:**\n\`\`\`json\n${JSON.stringify(d.request, null, 2)}\n\`\`\`\n- **Response:**\n\`\`\`json\n${JSON.stringify(d.response, null, 2)}\n\`\`\`\n\n`,
