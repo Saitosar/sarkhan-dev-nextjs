@@ -62,65 +62,100 @@ const translations = {
         aboutLongBio: `
   <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 24px;">
     <strong style="font-size: 0.9em; color: var(--color-text-secondary); margin-right: 8px;">Keçid et:</strong>
-    <a href="#summary" class="skill-tag">Mən kiməm</a>
-    <a href="#achievements" class="skill-tag">Nələr yaratmışam</a>
-    <a href="#strengths" class="skill-tag">Yanaşmam</a>
-    <a href="#projects" class="skill-tag">Layihələrdən kənar</a>
-    <a href="#next-step" class="skill-tag">Növbəti addım</a>
+    <a href="#summary" class="skill-tag">Xülasə</a>
+    <a href="#journey" class="skill-tag">Yol</a>
+    <a href="#achievements" class="skill-tag">Nailiyyətlər</a>
+    <a href="#strengths" class="skill-tag">Güclü tərəflər</a>
+    <a href="#projects" class="skill-tag">Layihələr</a>
+    <a href="#certifications" class="skill-tag">Sertifikatlar</a>
     <a href="#connect" class="skill-tag">Əlaqə</a>
   </div>
   <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
 
   <h4 id="summary" style="display: flex; align-items: center; gap: 0.5em;">
     <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-    Mən kiməm
+    Peşəkar xülasə
   </h4>
   <p>
-    10+ illik təcrübəyə malik Senior IT Business Analyst, core banking sistemləri və korporativ inteqrasiyalar üzrə ixtisaslaşmışam.
+    12+ illik təcrübəyə malik Senior IT Business Analyst, sənayenin ən mürəkkəb sahəsi olan <strong>core banking sistemləri və korporativ inteqrasiyalar</strong> üzrə ixtisaslaşmışam.
   </p>
   <p>
-    Biznes ehtiyacları ilə texniki icra arasında körpü qururam — bank platformalarını sıfırdan qurmaqdan tutmuş, miqrasiyaları təşkil etməyə və Agile transformasiyalarına rəhbərlik etməyə qədər. Mənim super gücüm? Mürəkkəbliyi aydınlığa çevirmək və həlləri produksiyaya qədər çatdırmaq.
+    Mənim təcrübəm tam həyat dövrünü əhatə edir: bank platformalarını sıfırdan qurmaqdan tutmuş, geniş miqyaslı miqrasiyaları təşkil etməyə, API arxitekturalarını layihələndirməyə və korporativ komandalar üzrə Agile transformasiyalarına rəhbərlik etməyə qədər. Biznes ehtiyacları ilə texniki icra arasında körpü qururam, mürəkkəbliyi maliyyə institutlarını irəli aparan işləyən həllərə çevirirəm.
+  </p>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
+
+  <h4 id="journey" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+    Məni nə fərqləndirir
+  </h4>
+  <p>
+    Mənim karyeram <strong>2013-cü ildə</strong> bankın pərakəndə xəttində başladı — kreditlər verirdim, müştəri ehtiyaclarını başa düşürdüm və pozulmuş proseslərin real təsirini görürdüm. Bu təməl mənə nadir olan bir şey verdi: <strong>həm biznes problemlərinin, həm də texniki həllərin dərin anlaşılması</strong>.
+  </p>
+  <p>
+    Bu illər ərzində mən front-office əməliyyatlarından <strong>bank texnologiyalarının nüvəsinə</strong> keçid etdim və son on ildə mürəkkəbliyi aydınlığa çevirirəm.
   </p>
   <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
 
   <h4 id="achievements" style="display: flex; align-items: center; gap: 0.5em;">
     <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13.52l4.24-4.24a5.66 5.66 0 0 1 8 0L22 17.52"></path><path d="m15 5 6 6"></path></svg>
-    Nələr yaratmışam
+    Əsas nailiyyətlər
   </h4>
 
-  <h5>Sıfırdan Core Banking</h5>
+  <h5>Zeus Core Banking System-i sıfırdan yaratdım</h5>
   <p>
-    Azərbaycanın ən böyük bankı üçün Zeus Core Banking System-i birgə yaratdım — 7 əsas modulu (Müştərilər, Hesablar, Kreditlər, Depozitlər, Kassa, GL, EOD/SOD) layihələndirdim. Arxitektura qərarlarında iştirak etdim, yoxlama üçün SQL yazdım və sistemin 70%-ni şəxsən test etdim.
+    Azərbaycanın ən böyük bankı üçün tam bir core banking sistemini birgə yaratdım — arxitekturadan və məhsul məntiqindən tutmuş, data miqrasiyası və inteqrasiyalara qədər. <strong>7 əsas modulu</strong> sıfırdan layihələndirdim:
+  </p>
+  <ul>
+    <li><strong>Müştəri modulu</strong> — fiziki şəxslər, sahibkarlar, hüquqi şəxslər, banklar və qarşı tərəflər üçün bütün müştəri atributlarını müəyyənləşdirdim. Dublikatlardan müştəri bazasının təmizlənməsinə rəhbərlik etdim.</li>
+    <li><strong>Hesab modulu</strong> — sistem məntiqi üçün Excel-də hesablar planını strukturlaşdırdım, balans hesabları, şəxsi hesablar, daxili bank hesabları, tranzit hesablar və GL hesablarını konfiqurasiya etdim. Maliyyə departamenti ilə mühasibat yazılışları və sistemlərarası inteqrasiya üzərində sıx işlədim.</li>
+    <li><strong>Kredit modulu</strong> — bütün kredit növlərini, atributları, əməliyyatları və davranışı təsvir etdim: verilmə, faiz hesablanması, cərimə hesablanması, komissiya formalaşdırılması, ehtiyat hesablanması, invoice generasiyası, güzəşt dövrləri və balansdan kənar hesabların idarə edilməsi.</li>
+    <li><strong>Depozit modulu</strong> — bütün depozit məhsullarını, şərtləri, atributları və əməliyyatları müəyyənləşdirdim.</li>
+    <li><strong>Kassa modulu</strong> — əl jurnallarını əvəz edən fırıldaqçılığa qarşı nağd pul idarəetmə sistemini layihələndirdim. Kassanın açılması, kassir avansları, nağd pulun qəbulu/verilməsi, valyuta mübadiləsi, depozit səndükləri və filialın 24/7 işi üçün struktur yaratdım. Uçot üçün kassirlər tərəfindən istifadə olunan <strong>SQL hesabatları yazdım</strong>.</li>
+    <li><strong>Ehtiyat hesablama mexanizmi</strong> — ən mürəkkəb vəzifələrdən biri, kredit ehtiyatlarının hesablanması əməliyyatlarını layihələndirdim.</li>
+    <li><strong>EOD/SOD prosessinq</strong> — günün bağlanması və açılması məntiqini müəyyənləşdirdim, hansı əməliyyatların EOD-dən əvvəl/sonra icra olunacağını təyin etdim.</li>
+  </ul>
+  <p>
+    <strong>Əsas yanaşma:</strong> Arxitektorlar və core developer-lərlə hər hansı vəziyyətdə <strong>qüsursuz işləyən ən sadə həlləri tapmaq</strong> üçün əməkdaşlıq etdim. Arxitektura qərarlarında iştirak etdim, sadəcə sənədləşdirmədim, davamlı sistem məntiqini birgə yaratdım. SQL sorğuları və interfeys vasitəsilə əl ilə test istifadə edərək <strong>sistemin 70%-ni şəxsən test etdim</strong>.
   </p>
 
-  <h5>Korporativ miqrasiyalar</h5>
+  <h5>Korporativ səviyyəli data miqrasiyasına rəhbərlik etdim</h5>
   <p>
-    Oracle Flexcube-dan miqrasiyanı idarə etdim, istifadəyə verilmə anında &lt;0,01% delta ilə. Pərakəndə bank əməliyyatları, təkrar kredit xətləri və prosessinqlə inteqrasiya üzrə komandalar arası səyləri koordinasiya etdim.
+    Oracle Flexcube və legacy sistemlərdən miqrasiyanı təşkil etdim, istifadəyə verilmə anında <strong>&lt;0,01% delta</strong> ilə. Pərakəndə bank məhsulları, təkrar kredit xətləri və kart prosessinqi ilə inteqrasiya üzrə komandalar arası səyləri koordinasiya etdim.
   </p>
 
-  <h5>50+ mürəkkəb inteqrasiya</h5>
+  <h5>50+ yüksək mürəkkəblikli inteqrasiya həyata keçirdim</h5>
   <p>
-    Zeus, prosessinq, CRM, BPM və ödəniş sistemləri arasında API arxitekturasını layihələndirdim. REST API, Swagger/Postman və end-to-end inteqrasiya testləri üzrə ekspert.
+    Zeus, Prosessinq (CMS), CRM, BPM (ELMA), ödəniş sistemləri, Flexcube və xarici sistemlər arasında API inteqrasiya strategiyasını layihələndirdim və sənədləşdirdim. REST API, Swagger/Postman və end-to-end inteqrasiya testləri üzrə ekspert. Sistemlərarası əməliyyatlar üçün mühasibat yazılışları üzərində <strong>Maliyyə departamenti ilə sıx işlədim</strong>.
   </p>
 
-  <h5>Miqyasda Agile</h5>
+  <h5>Miqyasda Agile transformasiyasını həyata keçirdim</h5>
   <p>
-    80+ komanda (300+ nəfər) üçün PDLC-nin yenidən dizaynını həyata keçirdim. Komandaları kouçluq etdim, freymvorkları standartlaşdırdım, deploy tezliyini 25% artırdım.
+    <strong>80+ komanda</strong> (300+ nəfər) üçün PDLC-nin yenidən dizaynına rəhbərlik etdim. 10+ Agile komandasını kouçluq etdim, freymvorkları standartlaşdırdım və deploy tezliyini <strong>25%</strong> artırdım. Agile Coach və Process Owner kimi çalışdım.
   </p>
   <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
 
   <h4 id="strengths" style="display: flex; align-items: center; gap: 0.5em;">
     <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-    Mənim yanaşmam
+    Əsas güclü tərəflər
   </h4>
-    <p>Mən sadəcə tələbləri sənədləşdirmirəm — arxitektorlar və developerlərlə birlikdə həllər yaradıram. Mənim fəlsəfəm: hər hansı vəziyyətdə qüsursuz işləyən ən sadə həlli tapmaq.</p>
-    <p>Əsas güclü tərəflər:</p>
-    <ul>
-        <li>Sistem düşüncəsi və arxitektura yanaşması</li>
-        <li>Yüksək texniki dərinlik + biznes anlayışı</li>
-        <li>Discovery-dən production-a qədər end-to-end ownership</li>
-        <li>Xaosu strukturlaşdırmaq</li>
-    </ul>
+
+  <h5>Biznes və texnika arasında körpü</h5>
+  <p>
+    Tələblərin toplanması, proses modelləşdirilməsi (BPMN, UML) və steykholderlərin idarə edilməsi bacarıqlarına sahibəm — amma ən əsası, <strong>mürəkkəbliyi aydınlığa çevirmək</strong> və həlləri produksiyaya qədər çatdırmaq bacarığı.
+  </p>
+
+  <h5>Sistem düşüncəsi və problem həlli</h5>
+  <p>
+    İstər legacy sistemləri açmaq, istər universal məntiq layihələndirmək, istərsə də dəqiq sənədləşdirmə — mən xaosa struktur gətirirəm. Mənim yanaşmam: <strong>hər hansı vəziyyətdə qüsursuz işləyən ən sadə həlli tapmaq</strong>.
+  </p>
+  <p>
+    Mən sadəcə tələbləri sənədləşdirmirəm — arxitektura qərarlarında iştirak edirəm, həllər yaratmaq üçün developer-lərlə əməkdaşlıq edirəm, data validasiyası üçün SQL yazıram və kritik funksionallığı şəxsən test edirəm. Biznes anlayışı ilə birlikdə <strong>yüksək texniki dərinliklə</strong> tanınıram.
+  </p>
+
+  <h5>End-to-End sahiblik</h5>
+  <p>
+    Mən sadəcə tələbləri sənədləşdirmirəm. Discovery təşkil edirəm, inteqrasiyalar layihələndirirəm, testi koordinasiya edirəm, miqrasiyaları idarə edirəm və uğurlu işə salınmanı təmin edirəm. Həm biznes, həm də texniki kontekstlərdə yüksək məsuliyyət, uyğunlaşma və dərinlik.
+  </p>
   <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
 
   <h4 id="projects" style="display: flex; align-items: center; gap: 0.5em;">
@@ -128,22 +163,72 @@ const translations = {
     Layihələrdən kənar
   </h4>
 
-  <h5>AI-Platformaların yaradılması</h5>
-  <p>Sarkhan.dev (BA-lar üçün AI alətləri) və aiCV (AI CV generatoru) yaradıcısı — Next.js + AI istifadə edərək solo şəkildə hazırlanmışdır.</p>
+  <h5>AI-ilə işləyən platformaların yaradılması</h5>
+  <p><strong>Next.js və AI</strong> istifadə edərək öz məhsullarımı sıfırdan yaradıram:</p>
+  <ul>
+    <li><strong>Sarkhan.dev</strong> — Business Analyst-lər üçün AI alətləri və resurslar (AI köməyi ilə solo olaraq hazırlanmışdır)</li>
+    <li><strong>aiCV</strong> — IT mütəxəssisləri üçün AI CV generatoru (Next.js + AI, konsepsiyadan produksiyaya qədər)</li>
+  </ul>
 
-  <h5>Proseslərin avtomatlaşdırılması</h5>
-  <p>n8n vasitəsilə avtomatlaşdırma üzrə ekspert — əl əməyini aradan qaldıran intellektual həllər yaradıram.</p>
-  
+  <h5>Proses avtomatlaşdırma eksperti</h5>
+  <p>
+    <strong>n8n</strong> iş axını avtomatlaşdırması üzrə bacarıqlıyam — əməliyyatları sadələşdirən və əl işini aradan qaldıran intellektual avtomatlaşdırma həlləri yaradıram. Səmərəliliyi artırmaq üçün no-code/low-code alətlərindən istifadə etməyə böyük maraq göstərirəm.
+  </p>
+
   <h5>Liderlik və mentorluq</h5>
-  <p>Process Owner, Agile Coach, Matrix Academy-də təlimçi və Franklin Covey sertifikatlı mentor.</p>
+  <ul>
+    <li><strong>Process Owner</strong> kimi çalışdım — PDLC transformasiyasına və governance çərçivələrinə rəhbərlik etdim</li>
+    <li><strong>Matrix Academy</strong>-də təlimçi, IT Business Analysis kursları aparıram</li>
+    <li><strong>Franklin Covey</strong> mentorluq təlim proqramını başa vurdum</li>
+    <li>Junior BA-ları aktiv şəkildə mentorluq edirəm və komandaları Agile təcrübələri və məhsul düşüncəsi üzrə kouçluq edirəm</li>
+  </ul>
+
+  <h5>Bilik paylaşımı</h5>
+  <p>
+    BA icması üçün təhsil məzmunu, alətlər və resurslar yaradıram. Praktiki təcrübə və real dünya görüşlərini paylaşmaqla başqalarını yüksəltməyə inanıram.
+  </p>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
+
+  <h4 id="certifications" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15l-3.5-3.5 1.5-1.5 2 2 4-4 1.5 1.5L12 15z"></path><path d="M19.3 6.7A8 8 0 0 1 20 12a8 8 0 0 1-8 8 8 8 0 0 1-8-8c0-1.7.5-3.3 1.4-4.6"></path></svg>
+    Sertifikatlar və təhsil
+  </h4>
+  <ul>
+      <li>ICAgile Product Management</li>
+      <li>ICAgile Enterprise Agile Coaching</li>
+      <li>Erickson Coaching Professional</li>
+      <li>PSPO I / PSM I (Scrum.org)</li>
+      <li>PDLC – Keytorc</li>
+      <li><strong>TOGAF</strong> sertifikasiyasına hazırlaşıram (Enterprise Architecture fokus)</li>
+  </ul>
+  <h5>Təhsil:</h5>
+  <ul>
+      <li>Maliyyə mühəndisliyi üzrə magistr — Qafqaz Universiteti (2012-2014)</li>
+      <li>Bank menecmenti üzrə bakalavr — Qafqaz Universiteti (2006-2011)</li>
+  </ul>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
+
+  <h4 id="languages" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+    Dillər və məkan
+  </h4>
+  <p>
+    <strong>Dillər:</strong> İngilis (İrəliləmiş), Rus (İrəliləmiş), Türk (İrəliləmiş), Azərbaycan (Ana dil)<br>
+    <strong>Məkan:</strong> Bakı, Azərbaycan<br>
+    <strong>Açığam:</strong> Beynəlxalq komandalarla uzaqdan və hibrid imkanlar üçün
+  </p>
   <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
   
-  <h4 id="next-step" style="display: flex; align-items: center; gap: 0.5em;">
-      <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-    Növbəti addım
+  <h4 id="philosophy" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
+    Mənim fəlsəfəm
   </h4>
-  <p><em>"Mənim işim — ideyaların xaosunu aydın, işləyən həllərə çevirməkdir. Bu gün bunu Senior IT BA kimi edirəm. Sabah — System Architect olaraq, geniş miqyaslı ekosistemlər və AI həlləri layihələndirəcəyəm."</em></p>
-  <p>Hal-hazırda TOGAF sertifikasiyasına hazırlaşıram, Enterprise Architecture üzərində fokuslanıram.</p>
+  <blockquote>
+    <p><em>“Mənim işim — ideyaların xaosunu aydın, işləyən həllərə çevirməkdir. Bu gün bunu Senior IT BA kimi edirəm. Sabah — System Architect olaraq, geniş miqyaslı ekosistemlər və AI həlləri layihələndirəcəyəm.”</em></p>
+  </blockquote>
+  <p>
+    Məni maraq, aydınlıq və mənalı həllər axtarışı hərəkətə gətirir. İstər core banking transformasiyası, istər tənzimləyici uyğunluq, istərsə də real-time əməliyyatlar üzərində işləyirəm — mən <strong>texniki anlayış və insana yönəlik düşüncə</strong> ilə transformasiya təşəbbüslərinə töhfə verirəm.
+  </p>
   <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
 
   <h4 id="connect" style="display: flex; align-items: center; gap: 0.5em;">
@@ -151,10 +236,13 @@ const translations = {
     Əlaqə saxlayaq
   </h4>
   <p>
-     Əməkdaşlıq axtarırsınız? Gəlin birlikdə bank sistemlərinin gələcəyini quraq.
+    🚀 <strong>Əməkdaşlıq axtarırsınız?</strong> Gəlin birlikdə bank sistemlərinin gələcəyini quraq.
   </p>
   <p>
-    Beynəlxalq komandalarla uzaqdan və hibrid iş imkanlarına açığam, texniki anlayış və insana yönəlik düşüncə ilə transformasiya təşəbbüslərinə töhfə verə bilərəm.
+    Beynəlxalq komandalarla 'remote' və hibrid imkanlara açığam, texniki anlayış və insana yönəlik düşüncə ilə <strong>transformasiya təşəbbüslərinə</strong> töhfə verə bilərəm.
+  </p>
+  <p>
+    Növbəti layihənizi müzakirə etməyə hazırsınız? Gəlin danışaq.
   </p>
   <div style="text-align: center; margin-top: 24px;">
       <a href="https://www.linkedin.com/in/sarkhanhajiyev" target="_blank" rel="noopener noreferrer" class="btn" style="gap: 8px;">
@@ -166,10 +254,6 @@ const translations = {
           <span>LinkedIn'də əlaqə</span>
       </a>
   </div>
-  <p style="margin-top: 24px;">
-    <strong>Dillər:</strong> İngilis • Rus • Türk • Azərbaycan<br>
-    <strong>Məkan:</strong> Bakı, Azərbaycan 🇦🇿
-  </p>
 `,
         skillsTitle: "Əsas Bacarıqlar",
         skillsListShort: ["Oracle Flexcube 12", "System Integration (API)", "Process Mapping (BPMN/UML)", "Agile & PDLC"],
@@ -772,7 +856,7 @@ const translations = {
 
   <h4 id="connect" style="display: flex; align-items: center; gap: 0.5em;">
     <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-    ДАВАЙТЕ НА СВЯЗЬ
+    СВЯЖИТЕСЬ СО МНОЙ
   </h4>
   <p>
      <strong>Ищете сотрудничество?</strong> Давайте вместе строить будущее банковских систем.
