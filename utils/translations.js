@@ -59,15 +59,51 @@ const translations = {
         backToHome: "Əsas Səhifəyə Qayıt",
         aboutSectionTitle: "Haqqımda", aboutName: "Sərxan Hacıyev",
         aboutShortBio: "10 ildən artıq bank sistemləri sahəsində təcrübəyə malik IT Biznes Analitik.",
-        aboutLongBio: `Mən Oracle Flexcube, məlumatların miqrasiyası və sistem inteqrasiyaları ilə praktiki təcrübə də daxil olmaqla, rəqəmsal bankçılıq və korporativ sistemlər sahəsində on ildən artıq təcrübəyə malik Baş IT Biznes Analitikəm. Karyeram 2013-cü ildə bankın pərakəndə satış xəttində başlamışdır — kreditlərin verilməsi, müştəri ehtiyaclarını anlamaq və pozulmuş proseslərin real təsirini görməklə.
+        aboutLongBio: `
+  <h3>👨‍💼 Mən kiməm</h3>
+  <p>10+ illik təcrübəyə malik Senior IT Business Analyst, core banking sistemləri və korporativ inteqrasiyalar üzrə ixtisaslaşmışam. Biznes ehtiyacları ilə texniki icra arasında körpü qururam — bank platformalarını sıfırdan qurmaqdan tutmuş, miqrasiyaları təşkil etməyə və Agile transformasiyalarına rəhbərlik etməyə qədər. Mənim super gücüm? Mürəkkəbliyi aydınlığa çevirmək və həlləri produksiyaya qədər çatdırmaq.</p>
 
-İllər keçdikcə mən front-ofis əməliyyatlarından bank texologiyasının özəyinə keçdim. Karyeramın ən yaddaqalan məqamlarından biri, memarlıq və məhsul məntiqindən tutmuş məlumatların miqrasiyası və inteqrasiyasına qədər fərdi Əsas Bank Sistemini sıfırdan qurmaqda iştirakım oldu. Bu praktiki təcrübə, əsas bankçılığın transformasiyası, normativ uyğunluq və real vaxt rejimində əməliyyatlar kimi yüksək riskli mühitlərdə texniki həlləri biznes məqsədləri ilə uyğunlaşdırmaq bacarığımı gücləndirdi.
+  <h3>🚀 Nələr yaratmışam</h3>
+  <ul>
+    <li><strong>Sıfırdan Core Banking:</strong> Azərbaycanın ən böyük bankı üçün Zeus Core Banking System-i birgə yaratdım — 7 əsas modulu (Müştərilər, Hesablar, Kreditlər, Depozitlər, Kassa, GL, EOD/SOD) layihələndirdim. Arxitektura qərarlarında iştirak etdim, yoxlama üçün SQL yazdım və sistemin 70%-ni şəxsən test etdim.</li>
+    <li><strong>Korporativ miqrasiyalar:</strong> Oracle Flexcube-dan miqrasiyanı idarə etdim, istifadəyə verilmə anında <0,01% delta ilə. Pərakəndə bank əməliyyatları, təkrar kredit xətləri və prosessinqlə inteqrasiya üzrə komandalar arası səyləri koordinasiya etdim.</li>
+    <li><strong>50+ mürəkkəb inteqrasiya:</strong> Zeus, prosessinq, CRM, BPM və ödəniş sistemləri arasında API arxitekturasını layihələndirdim. REST API, Swagger/Postman və end-to-end inteqrasiya testləri üzrə ekspert.</li>
+    <li><strong>Miqyasda Agile:</strong> 80+ komanda (300+ nəfər) üçün PDLC-nin yenidən dizaynını həyata keçirdim. Komandaları kouçluq etdim, freymvorkları standartlaşdırdım, deploy tezliyini 25% artırdım.</li>
+  </ul>
 
-Mən həm kəşfiyyat, həm də icra mərhələlərində çalışaraq mürəkkəbliyi aydınlığa çevirmiş, həm yerli, həm də paylanmış komandalarla əməkdaşlıq etmişəm. Həmçinin Məhsul Sahibi, Agile Kouçu və Proses Sahibi kimi vəzifələrdə çalışmışam — proqram təminatının həyat dövrünü (PDLC) təkmilləşdirmiş, kross-funksional komandalara təlimlər keçmiş, Jira və Confluence ekosistemlərini idarə etmiş və müəssisə miqyasında Agile tətbiqinə (300+ nəfər) rəhbərlik etmişəm.
+  <h3>💡 Mənim yanaşmam</h3>
+  <p>Mən sadəcə tələbləri sənədləşdirmirəm — arxitektorlar və developerlərlə birlikdə həllər yaradıram. Mənim fəlsəfəm: hər hansı vəziyyətdə qüsursuz işləyən ən sadə həlli tapmaq.</p>
+  <p>Əsas güclü tərəflər:</p>
+  <ul>
+    <li>Sistem düşüncəsi və arxitektura yanaşması</li>
+    <li>Yüksək texniki dərinlik + biznes anlayışı</li>
+    <li>Discovery-dən production-a qədər end-to-end ownership</li>
+    <li>Xaosu strukturlaşdırmaq</li>
+  </ul>
 
-Həmkarlarım məni tez-tez xaosu nizama salan bir sistem düşüncəli insan kimi təsvir edirlər. İstər köhnə sistemləri anlamaq, istər universal məntiq dizayn etmək, istərsə də dəqiq sənədlər hazırlamaq olsun — məni maraq, aydınlıq və mənalı həllər axtarışı idarə edir.
+  <h3>🛠️ Layihələrdən kənar</h3>
+  <ul>
+      <li><strong>AI-Platformaların yaradılması:</strong> Sarkhan.dev (BA-lar üçün AI alətləri) və aiCV (AI CV generatoru) yaradıcısı — Next.js + AI istifadə edərək solo şəkildə hazırlanmışdır.</li>
+      <li><strong>Proseslərin avtomatlaşdırılması:</strong> n8n vasitəsilə avtomatlaşdırma üzrə ekspert — əl əməyini aradan qaldıran intellektual həllər yaradıram.</li>
+      <li><strong>Liderlik və mentorluq:</strong> Process Owner, Agile Coach, Matrix Academy-də təlimçi və Franklin Covey sertifikatlı mentor.</li>
+  </ul>
 
-Texniki biliklərimi və insana yönümlü düşüncə tərzimi transformasiya təşəbbüslərinə töhfə verə biləcəyim beynəlxalq komandalarla uzaqdan və ya hibrid iş imkanlarına açığam.`,
+  <h3>🎯 Növbəti addım</h3>
+  <p><em>"Mənim işim — ideyaların xaosunu aydın, işləyən həllərə çevirməkdir. Bu gün bunu Senior IT BA kimi edirəm. Sabah — System Architect olaraq, geniş miqyaslı ekosistemlər və AI həlləri layihələndirəcəyəm."</em></p>
+  <p>Hal-hazırda TOGAF sertifikasiyasına hazırlaşıram, Enterprise Architecture üzərində fokuslanıram.</p>
+
+  <h3>📫 Əlaqə saxlayaq</h3>
+  <p>🚀 Əməkdaşlıq axtarırsınız? Gəlin birlikdə bank sistemlərinin gələcəyini quraq. Beynəlxalq komandalarla uzaqdan və hibrid iş imkanlarına açığam, texniki anlayış və insana yönəlik düşüncə ilə transformasiya təşəbbüslərinə töhfə verə bilərəm.</p>
+  <p>
+    <a href="#about" class="contact-link" style="text-decoration: underline;">Tam Profil</a> • 
+    <a href="https://linkedin.com/in/sarkhanhajiyev" target="_blank" rel="noopener noreferrer" class="contact-link" style="text-decoration: underline;">LinkedIn</a> • 
+    <a href="#contact" class="contact-link" style="text-decoration: underline;">Əlaqə</a>
+  </p>
+  <p>
+    <strong>Dillər:</strong> İngilis • Rus • Türk • Azərbaycan<br>
+    <strong>Məkan:</strong> Bakı, Azərbaycan 🇦🇿
+  </p>
+`,
         skillsTitle: "Əsas Bacarıqlar",
         skillsListShort: ["Oracle Flexcube 12", "System Integration (API)", "Process Mapping (BPMN/UML)", "Agile & PDLC"],
         skillsList: ["Oracle Flexcube 12", "Zeus (in house)", "Processing (CMS/TWO)", "ELMA BPM", "Mobile bank app", "API design & integration", "SQL (Oracle)", "Jira/Confluence", "BRD/SRS", "Process Mapping (BPMN/UML)", "UAT planning", "Stakeholder management"],
@@ -185,11 +221,51 @@ Texniki biliklərimi və insana yönümlü düşüncə tərzimi transformasiya t
         backToHome: "Back to Home",
         aboutSectionTitle: "About", aboutName: "Sarkhan Hajiyev",
         aboutShortBio: "IT Business Analyst with over 10 years of experience in banking systems.",
-        aboutLongBio: `I’m a Senior IT Business Analyst with over a decade of experience in digital banking and enterprise systems, including hands-on expertise with Oracle Flexcube, data migration, and system integrations. My career began in 2013, working on the retail frontlines of banking — issuing loans, understanding client needs, and seeing the real impact of broken processes.
-Over the years, I moved from front-office operations to the core of banking technology. One of the highlights of my journey was co-building a custom Core Banking System from scratch — from architecture and product logic to data migration and integrations. This hands-on experience sharpened my ability to align technical solutions with business goals in high-stakes environments like core banking transformation, regulatory compliance, and real-time operations.
-I’ve worked across discovery and delivery phases, turning complexity into clarity, and collaborating with both local and distributed teams. I’ve also served as Product Owner, Agile Coach, and Process Owner — improving development lifecycles (PDLC), coaching cross-functional teams, managing Jira & Confluence ecosystems, and leading enterprise-wide Agile adoption (300+ people).
-My colleagues often describe me as a systems thinker who brings order to chaos. Whether it's untangling legacy systems, designing universal logic, or drafting precise documentation — I’m driven by curiosity, clarity, and the pursuit of meaningful solutions.
-Open to remote or hybrid opportunities with international teams where I can contribute to transformation initiatives with both technical insight and human-centered thinking.`,
+        aboutLongBio: `
+  <h3>👨‍💼 Who I Am</h3>
+  <p>Senior IT Business Analyst with 10+ years specializing in core banking systems and enterprise integrations. I bridge the gap between business needs and technical execution — from building banking platforms from scratch to orchestrating migrations and leading Agile transformations. My superpower? Turning complexity into clarity and driving solutions all the way to production.</p>
+
+  <h3>🚀 What I've Built</h3>
+  <ul>
+    <li><strong>Core Banking from Scratch:</strong> Co-engineered Zeus Core Banking System for Azerbaijan's largest bank — designed 7 core modules (Client, Account, Credit, Deposit, Cash Desk, GL, EOD/SOD). Participated in architectural decisions, wrote SQL for validation, and personally tested 70% of the system.</li>
+    <li><strong>Enterprise Migrations:</strong> Led migration from Oracle Flexcube with <0.01% delta at go-live. Coordinated cross-team efforts for retail banking, revolving credit lines, and card processing integration.</li>
+    <li><strong>50+ Complex Integrations:</strong> Designed API architecture between Zeus, Processing, CRM, BPM, and payment systems. Expert in REST APIs, Swagger/Postman, and end-to-end integration testing.</li>
+    <li><strong>Agile at Scale:</strong> Drove PDLC redesign across 80+ teams (300+ people). Coached teams, standardized frameworks, increased deployment frequency by 25%.</li>
+  </ul>
+
+  <h3>💡 My Approach</h3>
+  <p>I don't just document requirements — I co-create solutions with architects and developers. My philosophy: find the simplest solution that works flawlessly in any situation.</p>
+  <p>Key strengths:</p>
+  <ul>
+    <li>Systems thinking & architectural mindset</li>
+    <li>High technical depth + business acumen</li>
+    <li>End-to-end ownership from discovery to production</li>
+    <li>Turning chaos into structure</li>
+  </ul>
+
+  <h3>🛠️ Beyond Projects</h3>
+  <ul>
+      <li><strong>Building AI-Powered Platforms:</strong> Creator of Sarkhan.dev (AI tools for BAs) and aiCV (AI CV generator) — built solo using Next.js + AI.</li>
+      <li><strong>Process Automation:</strong> Expert in n8n workflow automation — creating intelligent solutions that eliminate manual work.</li>
+      <li><strong>Leadership & Mentoring:</strong> Process Owner, Agile Coach, trainer at Matrix Academy, and Franklin Covey certified mentor.</li>
+  </ul>
+
+  <h3>🎯 What's Next</h3>
+  <p><em>"My job is to turn chaos of ideas into clear, working solutions. Today I do it as a Senior IT BA. Tomorrow — as a System Architect, designing large-scale ecosystems and AI-powered solutions."</em></p>
+  <p>Currently preparing for TOGAF certification, focusing on Enterprise Architecture.</p>
+
+  <h3>📫 Let's Connect</h3>
+  <p>🚀 Looking for collaboration? Let's build the future of banking systems together. Open to remote and hybrid opportunities with international teams where I can contribute transformation initiatives with both technical insight and human-centered thinking.</p>
+  <p>
+    <a href="#about" class="contact-link" style="text-decoration: underline;">View Full Profile</a> • 
+    <a href="https://linkedin.com/in/sarkhanhajiyev" target="_blank" rel="noopener noreferrer" class="contact-link" style="text-decoration: underline;">LinkedIn</a> • 
+    <a href="#contact" class="contact-link" style="text-decoration: underline;">Contact Me</a>
+  </p>
+  <p>
+    <strong>Languages:</strong> English • Russian • Turkish • Azerbaijani<br>
+    <strong>Based in:</strong> Baku, Azerbaijan 🇦🇿
+  </p>
+`,
         skillsTitle: "Core Skills",
         skillsListShort: ["Oracle Flexcube 12", "System Integration (API)", "Process Mapping (BPMN/UML)", "Agile & PDLC"],
         skillsList: ["Oracle Flexcube 12", "Zeus (in house)", "Processing (CMS/TWO)", "ELMA BPM", "Mobile bank app", "API design & integration (REST/JSON/XML)", "SQL (Oracle)", "Swagger/Postman", "Jira/Confluence", "Canva/Draw.io", "BRD", "SRS", "Process Mapping (BPMN/UML)", "API Specifications", "User Story writing", "Acceptance Criteria", "UAT planning & execution", "Functional testing", "Integration testing", "Stakeholder management", "Coaching/mentoring", "Facilitation", "Training", "System thinking", "Problem solving"],
@@ -307,11 +383,51 @@ Open to remote or hybrid opportunities with international teams where I can cont
         backToHome: "Вернуться на Главную",
         aboutSectionTitle: "Обо мне", aboutName: "Сархан Гаджиев",
         aboutShortBio: "IT бизнес-аналитик с более чем 10-летним опытом работы в банковских системах.",
-        aboutLongBio: `Я — старший IT-бизнес-аналитик с более чем десятилетним опытом в сфере цифрового банкинга и корпоративных систем, включая практический опыт работы с Oracle Flexcube, миграцией данных и системными интеграциями. Моя карьера началась в 2013 году на передовой розничного банкинга — я выдавал кредиты, разбирался в потребностях клиентов и видел реальные последствия неэффективных процессов.
-Со временем я перешел от фронт-офисных операций к ядру банковских технологий. Одним из ключевых моментов моего пути стало участие в создании кастомной Core Banking System с нуля — от архитектуры и продуктовой логики до миграции данных и интеграций. Этот практический опыт отточил мою способность приводить технические решения в соответствие с бизнес-целями в таких сложных областях, как трансформация основного банкинга, соблюдение нормативных требований и операции в реальном времени.
-Я работал на всех этапах — от исследования до внедрения, превращая сложность в ясность и сотрудничая как с местными, так и с распределенными командами. Я также выполнял роли Владельца Продукта, Agile-коуча и Владельца Процесса — улучшал жизненный цикл разработки (PDLC), обучал кросс-функциональные команды, управлял экосистемами Jira и Confluence и руководил внедрением Agile в масштабах предприятия (более 300 человек).
-Коллеги часто описывают меня как системно мыслящего человека, который наводит порядок в хаосе. Будь то распутывание унаследованных систем, проектирование универсальной логики или составление точной документации — мной движет любопытство, стремление к ясности и поиск значимых решений.
-Открыт для удаленных или гибридных возможностей в международных командах, где я могу внести свой вклад в инициативы по трансформации, сочетая технические знания с человеко-ориентированным мышлением.`,
+        aboutLongBio: `
+  <h3>👨‍💼 Кто я</h3>
+  <p>Senior IT Business Analyst с опытом 10+ лет, специализирующийся на системах core banking и корпоративных интеграциях. Я выстраиваю мост между бизнес-потребностями и технической реализацией — от создания банковских платформ с нуля до организации миграций и руководства Agile-трансформациями. Моя суперсила? Превращать сложность в ясность и доводить решения до продакшена.</p>
+
+  <h3>🚀 Что я создал</h3>
+  <ul>
+    <li><strong>Core Banking с нуля:</strong> Со-разработал Zeus Core Banking System для крупнейшего банка Азербайджана — спроектировал 7 основных модулей (Клиенты, Счета, Кредиты, Депозиты, Касса, GL, EOD/SOD). Участвовал в архитектурных решениях, писал SQL для валидации и лично протестировал 70% системы.</li>
+    <li><strong>Корпоративные миграции:</strong> Руководил миграцией с Oracle Flexcube с дельтой <0,01% на момент запуска. Координировал кросс-командные усилия по розничному банкингу, возобновляемым кредитным линиям и интеграции с процессингом.</li>
+    <li><strong>50+ сложных интеграций:</strong> Спроектировал API-архитектуру между Zeus, процессингом, CRM, BPM и платёжными системами. Эксперт в REST API, Swagger/Postman и end-to-end тестировании интеграций.</li>
+    <li><strong>Agile в масштабе:</strong> Провёл редизайн PDLC для 80+ команд (300+ человек). Коучил команды, стандартизировал фреймворки, увеличил частоту деплоев на 25%.</li>
+  </ul>
+
+  <h3>💡 Мой подход</h3>
+  <p>Я не просто документирую требования — я со-создаю решения вместе с архитекторами и разработчиками. Моя философия: найти самое простое решение, которое работает безупречно в любой ситуации.</p>
+  <p>Ключевые сильные стороны:</p>
+  <ul>
+    <li>Системное мышление и архитектурный подход</li>
+    <li>Высокая техническая глубина + бизнес-понимание</li>
+    <li>End-to-end ownership от discovery до production</li>
+    <li>Превращение хаоса в структуру</li>
+  </ul>
+
+  <h3>🛠️ Помимо проектов</h3>
+  <ul>
+      <li><strong>Создание AI-платформ:</strong> Создатель Sarkhan.dev (AI-инструменты для BA) и aiCV (AI-генератор резюме) — разработано solo с использованием Next.js + AI.</li>
+      <li><strong>Автоматизация процессов:</strong> Эксперт в автоматизации через n8n — создание интеллектуальных решений, устраняющих ручную работу.</li>
+      <li><strong>Лидерство и менторство:</strong> Process Owner, Agile Coach, тренер в Matrix Academy и сертифицированный ментор Franklin Covey.</li>
+  </ul>
+
+  <h3>🎯 Что дальше</h3>
+  <p><em>"Моя работа — превращать хаос идей в чёткие, работающие решения. Сегодня я делаю это как Senior IT BA. Завтра — как System Architect, проектирующий масштабные экосистемы и AI-решения."</em></p>
+  <p>В настоящее время готовлюсь к сертификации TOGAF, фокусируюсь на Enterprise Architecture.</p>
+
+  <h3>📫 Давайте на связь</h3>
+  <p>🚀 Ищете сотрудничество? Давайте вместе строить будущее банковских систем. Открыт к удалённым и гибридным возможностям в международных командах, где смогу внести вклад в трансформационные инициативы с техническим пониманием и человеко-ориентированным мышлением.</p>
+  <p>
+    <a href="#about" class="contact-link" style="text-decoration: underline;">Полный профиль</a> • 
+    <a href="https://linkedin.com/in/sarkhanhajiyev" target="_blank" rel="noopener noreferrer" class="contact-link" style="text-decoration: underline;">LinkedIn</a> • 
+    <a href="#contact" class="contact-link" style="text-decoration: underline;">Связаться</a>
+  </p>
+  <p>
+    <strong>Языки:</strong> Английский • Русский • Турецкий • Азербайджанский<br>
+    <strong>Местоположение:</strong> Баку, Азербайджан 🇦🇿
+  </p>
+`,
         skillsTitle: "Ключевые навыки",
         skillsListShort: ["Oracle Flexcube 12", "Системная интеграция (API)", "Моделирование процессов (BPMN/UML)", "Agile и PDLC"],
         skillsList: ["Oracle Flexcube 12", "Zeus (in house)", "Processing (CMS/TWO)", "ELMA BPM", "Mobile bank app", "Проектирование и интеграция API (REST/JSON/XML)", "SQL (Oracle)", "Swagger/Postman", "Jira/Confluence", "Canva/Draw.io", "BRD", "SRS", "Моделирование процессов (BPMN/UML)", "Спецификации API", "Написание User Story", "Критерии приемки", "Планирование и проведение UAT", "Функциональное тестирование", "Интеграционное тестирование", "Управление стейкхолдерами", "Коучинг/менторство", "Фасилитация", "Проведение тренингов", "Системное мышление", "Решение проблем"],
