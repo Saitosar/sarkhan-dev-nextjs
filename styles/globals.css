@@ -479,6 +479,7 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 .about-text h3 { font-size: 2rem; color: var(--color-primary); }
 .about-text .btn { margin-block-start: var(--space-xl); }
 
+
 /* MODALS & OVERLAYS */
 .modal-overlay, .fullscreen-overlay {
   position: fixed; inset: 0; background: rgba(1, 4, 19, 0.9);
@@ -497,7 +498,19 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 .modal-content h3 { font-size: 2rem; color: var(--color-primary); margin-block-end: var(--space-lg); }
 .modal-content p { margin-block-end: var(--space-md); }
 .modal-close-btn { position: absolute; inset-block-start: var(--space-md); inset-inline-end: var(--space-md); background: none; border: none; color: var(--color-text-primary); font-size: 2rem; cursor: pointer; z-index: 10; }
-.fullscreen-content { background: var(--color-surface); width: 100%; height: 100%; overflow-y: auto; padding: var(--space-xxl); position: relative; transform: scale(0.9); transition: transform var(--duration-slow) var(--ease-in-out-quart); }
+.fullscreen-content {
+  background: var(--color-surface);
+  width: 95%; /* Немного уменьшим ширину для отступов */
+  max-width: 1200px; /* Ограничим максимальную ширину */
+  height: 95vh; /* Ограничим высоту, чтобы был виден фон */
+  overflow-y: auto;
+  padding: var(--space-xxl);
+  position: relative;
+  transform: scale(0.9);
+  transition: transform var(--duration-slow) var(--ease-in-out-quart);
+  border-radius: var(--radius-md); /* Добавим скругление углов */
+  border: 1px solid var(--color-border); /* Добавим рамку в общем стиле */
+}
 .fullscreen-content h3 { font-size: 2.5rem; text-align: center; }
 .skills-section, .career-map { margin-block-start: var(--space-xxl); }
 .skills-section h4, .career-map h4 { font-size: 1.5rem; text-align: center; margin-block-end: var(--space-xl); }
@@ -974,6 +987,7 @@ footer p {
   gap: var(--space-sm); /* Расстояние между тегами */
   margin-block: var(--space-lg) 0; /* Отступы сверху и снизу */
 }
+
 
 /* Стили для каждого тега */
 .skill-tag {
@@ -2184,6 +2198,7 @@ a.resource-card, a.resource-card:hover {
 .srd-document-view p {
   max-width: none;
   text-align: justify;
+  padding-bottom: var(--space-sm);
 }
 /* Стили для светлой темы */
 [data-theme="light"] .srd-document-view {
@@ -2194,7 +2209,7 @@ a.resource-card, a.resource-card:hover {
 .srd-document-view h1 {
   text-align: center; /* Меняем выравнивание на классическое для документов */
   font-size: 2.2rem;
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-lg);
   color: var(--color-heading);
 }
 
@@ -2212,8 +2227,8 @@ a.resource-card, a.resource-card:hover {
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--color-primary);
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-md);
   margin-top: var(--space-xl);
   margin-bottom: var(--space-lg);
 }
@@ -2327,3 +2342,25 @@ a.resource-card, a.resource-card:hover {
 }
 
 /* === КОНЕЦ: Обновленные стили для страницы SRD-документа === */
+
+/* === Стили для тегов-ссылок === */
+a.skill-tag {
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+a.skill-tag:hover {
+  color: var(--color-heading);
+  background-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+/* === Стили для подзаголовков в модальном окне "Обо мне" === */
+.modal-column-right h5 {
+  font-size: 1.1rem; /* Точно такой же размер, как у должностей */
+  color: var(--color-heading); /* Основной цвет заголовков */
+  margin-top: var(--space-xl); /* Добавляем отступ сверху */
+  margin-bottom: var(--space-lg); /* Добавляем отступ снизу до текста */
+  text-transform: none; /* Убираем 'uppercase', если он где-то унаследован */
+  font-family: var(--font-heading, inherit); /* Убедимся, что используется шрифт для заголовков */
+}

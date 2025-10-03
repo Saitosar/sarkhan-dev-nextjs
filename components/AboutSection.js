@@ -1,11 +1,19 @@
 // components/AboutSection.js
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import FocusTrap from 'focus-trap-react';
 
 const AboutSection = ({ t }) => {
     const [isAboutModalOpen, setAboutModalOpen] = useState(false);
     const triggerRef = useRef(null);
+    useEffect(() => {
+        document.body.classList.toggle('no-scroll', isAboutModalOpen);
+
+        // Функция очистки, чтобы убрать класс, если компонент размонтируется
+        return () => {
+            document.body.classList.remove('no-scroll');
+        };
+    }, [isAboutModalOpen]);
 
     const openModal = (e) => {
         triggerRef.current = e.currentTarget;
@@ -65,7 +73,7 @@ const AboutSection = ({ t }) => {
                             {/* Правая колонка: Биография */}
                             <div className="modal-column modal-column-right">
                                 <h4>{t.aboutSectionTitle}</h4>
-                                <div className="about-long-bio">{t.aboutLongBio}</div>
+                                <div className="about-long-bio" dangerouslySetInnerHTML={{ __html: t.aboutLongBio }} />
                             </div>
                         </div>
 
