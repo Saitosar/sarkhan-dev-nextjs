@@ -58,7 +58,7 @@ const translations = {
         srdImproveQuery: "Sorğunu təkmilləşdir",
         backToHome: "Əsas Səhifəyə Qayıt",
         aboutSectionTitle: "Haqqımda", aboutName: "Sərxan Hacıyev",
-        aboutShortBio: "10 ildən artıq bank sistemləri sahəsində təcrübəyə malik IT Biznes Analitik.",
+        aboutShortBio: "12 ildən artıq bank sistemləri sahəsində təcrübəyə malik IT Biznes Analitik.",
         aboutLongBio: `
   <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 24px;">
     <strong style="font-size: 0.9em; color: var(--color-text-secondary); margin-right: 8px;">Keçid et:</strong>
@@ -260,11 +260,12 @@ const translations = {
         skillsList: ["Oracle Flexcube 12", "Zeus (in house)", "Processing (CMS/TWO)", "ELMA BPM", "Mobile bank app", "API design & integration", "SQL (Oracle)", "Jira/Confluence", "BRD/SRS", "Process Mapping (BPMN/UML)", "UAT planning", "Stakeholder management"],
         careerMapTitle: "Karyera Xəritəsi",
         careerHistory: [
-            { title: "Baş IT BA - Əsas Bankçılıq və İnteqrasiyalar", company: "Kapital Bank", date: "2024 - Hazırda", desc: "Zeus, Processing, CRM, BPM və xarici sistemlər arasında API-əsaslı kommunikasiya üçün inteqrasiya sahibi." },
-            { title: "Proses Sahibi - Agile PDLC Optimizasiyası", company: "Kapital Bank", date: "2023-2024", desc: "80+ komanda üzrə PDLC və Agile idarəetməsinin yenidən dizaynına rəhbərlik." },
+            { title: "IT BA - Texnoloji Platformalar sahəsi - API inteqrasiya", company: "Kapital Bank", date: "2024 - Hazırda", desc: "Zeus, Processing, CRM, BPM və xarici sistemlər arasında API-əsaslı kommunikasiya üçün inteqrasiya sahibi." },
+            { title: "Proses Sahibi/Funksional lider - Agile Məhsul inkişafı və Metodologiyası", company: "Kapital Bank", date: "2023-2024", desc: "80+ komanda üzrə PDLC və Agile idarəetməsinin yenidən dizaynına rəhbərlik." },
             { title: "Agile Kouç - Məhsul və Çatdırılma Transformasiyası", company: "Kapital Bank", date: "2021-2023", desc: "10+ Agile komandasına mentorluq və rəhbərliyə məhsul və çatdırılma mükəmməlliyi üzrə təlimlər." },
-            { title: "Aparıcı IT BA - Əsas Bankçılıq Transformasiyası", company: "Kapital Bank", date: "2016-2019", desc: "Flexcube və Processing-i əvəz edən Zeus ABS-nin sıfırdan dizaynı, sənədləşdirilməsi və test edilməsi." },
-            { title: "Baş IT Biznes Analitik - Əsas Bankçılıq Sistemləri", company: "Bank of Baku", date: "2014-2016", desc: "Flexcube və kart prosessinq platformaları üçün yeni funksionallıqların çatdırılması." }
+            { title: "Baş IT BA/Məhsul sahibi - Bank sistemlərinin İnkişafı və Transformasiyası", company: "Kapital Bank", date: "2016-2019", desc: "Flexcube və Processing-i əvəz edən Zeus ABS-nin sıfırdan dizaynı, sənədləşdirilməsi və test edilməsi." },
+            { title: "Aparıcı IT Biznes Analitik - Bank sistemlərinin inkişafı və dəstək", company: "Bank of Baku", date: "2014-2016", desc: "Rstyle Bank Əməliyyat Sistemi və kart prosessinq platformaları üçün yeni funksionallıqların çatdırılması və dəstək." },
+            { title: "Kredit eksperti - Pərakəndə kreditlər", company: "Bank of Baku", date: "2013-2014", desc: "Müştəri analizi, kredit rəsmiləşdirilməsi və satış" }
         ],
         contactSectionTitle: "Əlaqə", formNamePlaceholder: "Adınız", formEmailPlaceholder: "E-mail ünvanınız", formMessagePlaceholder: "Mesajınız...", formSubmitButton: "Göndər",
         formSubmitting: "Göndərilir...",
@@ -371,7 +372,7 @@ const translations = {
         srdImproveQuery: "Improve Request",
         backToHome: "Back to Home",
         aboutSectionTitle: "About", aboutName: "Sarkhan Hajiyev",
-        aboutShortBio: "IT Business Analyst with over 10 years of experience in banking systems.",
+        aboutShortBio: "IT Business Analyst with over 12 years of experience in banking systems.",
         aboutLongBio: `
   <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 24px;">
     <strong style="font-size: 0.9em; color: var(--color-text-secondary); margin-right: 8px;">Jump to:</strong>
@@ -390,7 +391,7 @@ const translations = {
     PROFESSIONAL SUMMARY
   </h4>
   <p>
-    Senior IT Business Analyst with <strong>10+ years</strong> of experience in digital banking and fintech, specializing in the most complex domain of the industry — <strong>core banking systems and enterprise integrations</strong>.
+    Senior IT Business Analyst with <strong>12+ years</strong> of experience in digital banking and fintech, specializing in the most complex domain of the industry — <strong>core banking systems and enterprise integrations</strong>.
   </p>
   <p>
     My expertise spans the full lifecycle: from building core banking platforms from scratch to orchestrating large-scale migrations, designing API architectures, and leading Agile transformations across enterprise teams. I bridge the gap between business needs and technical execution, turning complexity into working solutions that drive financial institutions forward.
@@ -570,11 +571,12 @@ const translations = {
         skillsList: ["Oracle Flexcube 12", "Zeus (in house)", "Processing (CMS/TWO)", "ELMA BPM", "Mobile bank app", "API design & integration (REST/JSON/XML)", "SQL (Oracle)", "Swagger/Postman", "Jira/Confluence", "Canva/Draw.io", "BRD", "SRS", "Process Mapping (BPMN/UML)", "API Specifications", "User Story writing", "Acceptance Criteria", "UAT planning & execution", "Functional testing", "Integration testing", "Stakeholder management", "Coaching/mentoring", "Facilitation", "Training", "System thinking", "Problem solving"],
         careerMapTitle: "Career Map",
         careerHistory: [
-            { title: "Senior IT BA - Core Banking & Integrations", company: "Kapital Bank", date: "2024 - Present", desc: "Act as integration owner for API-based communication between Zeus, Processing, CRM, BPM and external systems." },
-            { title: "Process Owner - Agile PDLC Optimization", company: "Kapital Bank", date: "2023-2024", desc: "Led re-design of PDLC and Agile governance across 80+ teams." },
+            { title: "IT BA - Core Banking & Integrations", company: "Kapital Bank", date: "2024 - Present", desc: "Act as integration owner for API-based communication between Zeus, Processing, CRM, BPM and external systems." },
+            { title: "Process Owner/Chapter Lead - Agile PDLC Optimization and Governance", company: "Kapital Bank", date: "2023-2024", desc: "Led re-design of PDLC and Agile governance across 80+ teams." },
             { title: "Agile Coach - Product & Delivery Transformation", company: "Kapital Bank", date: "2021-2023", desc: "Mentored 10+ Agile teams and coached leadership on product and delivery excellence." },
-            { title: "Lead IT BA - Core Banking Transformation", company: "Kapital Bank", date: "2016-2019", desc: "Designed, documented, and tested Zeus ABS from scratch, replacing Flexcube & Processing modules." },
-            { title: "Senior IT Business Analyst - Core Banking Systems", company: "Bank of Baku", date: "2014-2016", desc: "Delivered new features for Flexcube and card processing platforms." }
+            { title: "Lead IT BA/Product Owner - Core Banking Transformation", company: "Kapital Bank", date: "2016-2019", desc: "Designed, documented, and tested Zeus ABS from scratch, replacing Flexcube & Processing modules." },
+            { title: "Senior IT Business Analyst - Core Banking Systems", company: "Bank of Baku", date: "2014-2016", desc: "Delivered new features and products for RStyle ABS and card processing platforms." },
+            { title: "Credit expert - Retail credit products", company: "Bank of Baku", date: "2013-2014", desc: "Analysis of cutomer, contract forming and loan sale" }
         ],
         contactSectionTitle: "Contact", formNamePlaceholder: "Your name", formEmailPlaceholder: "Your email", formMessagePlaceholder: "Your message...", formSubmitButton: "Send",
         formSubmitting: "Sending...",
@@ -681,7 +683,7 @@ const translations = {
         srdImproveQuery: "Улучшить запрос",
         backToHome: "Вернуться на Главную",
         aboutSectionTitle: "Обо мне", aboutName: "Сархан Гаджиев",
-        aboutShortBio: "IT бизнес-аналитик с более чем 10-летним опытом работы в банковских системах.",
+        aboutShortBio: "IT бизнес-аналитик с более чем 12-летним опытом работы в банковских системах.",
         aboutLongBio: `
   <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 24px;">
     <strong style="font-size: 0.9em; color: var(--color-text-secondary); margin-right: 8px;">Перейти к:</strong>
@@ -700,7 +702,7 @@ const translations = {
     ПРОФЕССИОНАЛЬНОЕ РЕЗЮМЕ
   </h4>
   <p>
-    Senior IT Business Analyst с опытом <strong>10+ лет</strong> в цифровом банкинге и финтехе, специализирующийся на самой сложной области индустрии — <strong>системах core banking и корпоративных интеграциях</strong>.
+    Senior IT Business Analyst с опытом <strong>12+ лет</strong> в цифровом банкинге и финтехе, специализирующийся на самой сложной области индустрии — <strong>системах core banking и корпоративных интеграциях</strong>.
   </p>
   <p>
     Моя экспертиза охватывает весь жизненный цикл: от создания банковских платформ с нуля до организации масштабных миграций, проектирования API-архитектур и руководства Agile-трансформациями в корпоративных командах. Я выстраиваю мост между бизнес-потребностями и технической реализацией, превращая сложность в работающие решения, которые двигают финансовые институты вперёд.
@@ -864,7 +866,7 @@ const translations = {
   <p>
     Открыт к удалённым и гибридным возможностям в международных командах, где смогу внести вклад в <strong>трансформационные инициативы</strong> с техническим пониманием и человеко-ориентированным мышлением.
   </p>
-  <div style="text-align: center; margin-top: 24px;">
+  <div style="text-align: left; margin-top: 24px;">
       <a href="https://www.linkedin.com/in/sarkhanhajiyev" target="_blank" rel="noopener noreferrer" class="btn" style="gap: 8px;">
           <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
@@ -880,11 +882,12 @@ const translations = {
         skillsList: ["Oracle Flexcube 12", "Zeus (in house)", "Processing (CMS/TWO)", "ELMA BPM", "Mobile bank app", "Проектирование и интеграция API (REST/JSON/XML)", "SQL (Oracle)", "Swagger/Postman", "Jira/Confluence", "Canva/Draw.io", "BRD", "SRS", "Моделирование процессов (BPMN/UML)", "Спецификации API", "Написание User Story", "Критерии приемки", "Планирование и проведение UAT", "Функциональное тестирование", "Интеграционное тестирование", "Управление стейкхолдерами", "Коучинг/менторство", "Фасилитация", "Проведение тренингов", "Системное мышление", "Решение проблем"],
         careerMapTitle: "Карта карьеры",
         careerHistory: [
-            { title: "Ведущий IT БА - Core Banking и Интеграции", company: "Kapital Bank", date: "2024 - настоящее время", desc: "Владелец интеграции для API-взаимодействия между Zeus, процессингом, CRM, BPM и внешними системами." },
-            { title: "Владелец Процесса - Оптимизация Agile PDLC", company: "Kapital Bank", date: "2023-2024", desc: "Руководил редизайном PDLC и Agile-управления в 80+ командах." },
+            { title: "IT БА - Core Banking и Интеграции", company: "Kapital Bank", date: "2024 - настоящее время", desc: "Владелец интеграции для API-взаимодействия между Zeus, процессингом, CRM, BPM и внешними системами." },
+            { title: "Владелец Процесса/Лидер команды - Оптимизация Agile PDLC", company: "Kapital Bank", date: "2023-2024", desc: "Руководил редизайном PDLC и Agile-управления в 80+ командах." },
             { title: "Agile-коуч - Трансформация Продукта и Поставок", company: "Kapital Bank", date: "2021-2023", desc: "Менторил более 10 Agile-команд и обучал руководство продуктовому и исполнительскому мастерству." },
-            { title: "Ведущий IT БА - Трансформация Core Banking", company: "Kapital Bank", date: "2016-2019", desc: "Проектировал, документировал и тестировал АБС Zeus с нуля, заменяя модули Flexcube и Процессинга." },
-            { title: "Старший IT-бизнес-аналитик - Core Banking Системы", company: "Bank of Baku", date: "2014-2016", desc: "Отвечал за поставку нового функционала для платформ Flexcube и карточного процессинга." }
+            { title: "Старший IT бизнес-аналитик/Владелец Продукта - Трансформация Core Banking", company: "Kapital Bank", date: "2016-2019", desc: "Проектировал, документировал и тестировал АБС Zeus с нуля, заменяя модули Flexcube и Процессинга." },
+            { title: "Ведущий IT-бизнес-аналитик - Core Banking Системы", company: "Bank of Baku", date: "2014-2016", desc: "Отвечал за поставку нового функционала и продуктов для платформ RStyle и карточного процессинга." },
+            { title: "Кредтный эксперт - Розничные кредиты", company: "Bank of Baku", date: "2013-2014", desc: "Оценка клиента, оформление и выдача кредитов" }
         ],
         contactSectionTitle: "Связь", formNamePlaceholder: "Ваше имя", formEmailPlaceholder: "Ваш email", formMessagePlaceholder: "Ваше сообщение...", formSubmitButton: "Отправить",
         formSubmitting: "Отправка...",
