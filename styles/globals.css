@@ -2357,41 +2357,40 @@ a.skill-tag:hover {
   font-family: var(--font-heading, inherit); /* Убедимся, что используется шрифт для заголовков */
 }
 
-/* === НАЧАЛО: Финальные стили для адаптивных таблиц SRD v3 === */
+/* === НАЧАЛО: Адаптивная таблица SRD (версия 4, финальная) === */
 
-/* Контейнер-обертка для таблиц, требующих прокрутки */
+/* 1. Контейнер-обертка для таблицы */
 .srd-table-wrapper {
-  overflow-x: auto; /* Включаем горизонтальную прокрутку */
-  -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
-  margin: var(--space-lg) 0;
+  display: block; /* Убеждаемся, что это стандартный блочный элемент */
+  width: 100%;    /* Обертка занимает всю доступную ширину родителя */
+  overflow-x: auto; /* Включаем горизонтальный скролл, если контент внутри шире */
+  -webkit-overflow-scrolling: touch; /* Обеспечиваем плавный скролл на iOS */
+  margin-block: var(--space-lg); /* Добавляем вертикальные отступы */
 }
 
-/* Общие стили для ВСЕХ таблиц в документе */
-.srd-document-view table {
+/* 2. Стили для самой таблицы ВНУТРИ нашей обертки.
+      Используем селектор с высоким приоритетом, чтобы перебить все конфликты. */
+.srd-document-view .srd-table-wrapper table {
+  width: 100%; /* Таблица пытается занять 100% ширины обертки */
   border-collapse: collapse;
-  font-size: 0.95em;
-  width: 100%; /* По умолчанию таблица занимает всю ширину */
+  /* table-layout: auto; — по умолчанию, позволяет таблице растягиваться */
 }
 
-/* КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ:
-   Для таблицы, которая находится ВНУТРИ нашей обертки,
-   мы отменяем правило width: 100% и позволяем ей быть шире. */
-.srd-table-wrapper table {
-  width: auto; /* Позволяет таблице растягиваться по содержимому */
-  min-width: 100%; /* Гарантирует, что она не будет уже контейнера */
-}
-
-.srd-document-view th,
-.srd-document-view td {
-  border: 1px solid var(--color-border);
+/* 3. КЛЮЧЕВОЕ ПРАВИЛО: Запрещаем перенос текста в ячейках.
+      Это заставит таблицу стать шире, чем ее контейнер, если текст не помещается. */
+.srd-document-view .srd-table-wrapper th,
+.srd-document-view .srd-table-wrapper td {
+  white-space: nowrap; /* Запрещаем перенос текста */
   padding: var(--space-md);
+  border: 1px solid var(--color-border);
   text-align: left;
   vertical-align: top;
 }
 
-.srd-document-view th {
+/* Стили для заголовков таблицы остаются прежними */
+.srd-document-view .srd-table-wrapper th {
   background-color: color-mix(in srgb, var(--color-primary) 5%, transparent);
   font-weight: 600;
 }
 
-/* === КОНЕЦ: Финальные стили для адаптивных таблиц SRD v3 === */
+/* === КОНЕЦ: Адаптивная таблица SRD (версия 4, финальная) === */
