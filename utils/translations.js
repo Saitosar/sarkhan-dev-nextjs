@@ -222,41 +222,48 @@ const translations = {
         aboutSectionTitle: "About", aboutName: "Sarkhan Hajiyev",
         aboutShortBio: "IT Business Analyst with over 10 years of experience in banking systems.",
         aboutLongBio: `
-  <p>
-    <strong>Jump to:</strong> <a href="#summary">Summary</a> • <a href="#journey">Journey</a> • <a href="#achievements">Achievements</a> • <a href="#strengths">Strengths</a> • <a href="#projects">Projects</a> • <a href="#certifications">Certifications</a> • <a href="#connect">Connect</a>
-  </p>
-  <hr>
+  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 24px;">
+    <strong style="font-size: 0.9em; color: var(--color-text-secondary); margin-right: 8px;">Jump to:</strong>
+    <a href="#summary" class="skill-tag">Summary</a>
+    <a href="#journey" class="skill-tag">Journey</a>
+    <a href="#achievements" class="skill-tag">Achievements</a>
+    <a href="#strengths" class="skill-tag">Strengths</a>
+    <a href="#projects" class="skill-tag">Projects</a>
+    <a href="#certifications" class="skill-tag">Certifications</a>
+    <a href="#connect" class="skill-tag">Connect</a>
+  </div>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
 
-  <h3 id="summary">
-    <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-    Professional Summary
-  </h3>
+  <h4 id="summary" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+    PROFESSIONAL SUMMARY
+  </h4>
   <p>
     Senior IT Business Analyst with <strong>10+ years</strong> of experience in digital banking and fintech, specializing in the most complex domain of the industry — <strong>core banking systems and enterprise integrations</strong>.
   </p>
   <p>
     My expertise spans the full lifecycle: from building core banking platforms from scratch to orchestrating large-scale migrations, designing API architectures, and leading Agile transformations across enterprise teams. I bridge the gap between business needs and technical execution, turning complexity into working solutions that drive financial institutions forward.
   </p>
-  <hr>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
 
-  <h3 id="journey">
-    <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-    What Makes Me Different
-  </h3>
+  <h4 id="journey" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+    WHAT MAKES ME DIFFERENT
+  </h4>
   <p>
     My career began in <strong>2013</strong> on the retail frontlines of banking — issuing loans, understanding client needs, and seeing the real impact of broken processes. This foundation gave me something rare: a <strong>deep understanding of both business pain points and technical solutions</strong>.
   </p>
   <p>
     Over the years, I evolved from front-office operations to the <strong>core of banking technology</strong>, where I’ve spent the last decade turning complexity into clarity.
   </p>
-  <hr>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
 
-  <h3 id="achievements">
-    <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13.52l4.24-4.24a5.66 5.66 0 0 1 8 0L22 17.52"></path><path d="m15 5 6 6"></path></svg>
-    Key Achievements
-  </h3>
+  <h4 id="achievements" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13.52l4.24-4.24a5.66 5.66 0 0 1 8 0L22 17.52"></path><path d="m15 5 6 6"></path></svg>
+    KEY ACHIEVEMENTS
+  </h4>
 
-  <h4>Built Zeus Core Banking System from Scratch</h4>
+  <h5>Built Zeus Core Banking System from Scratch</h5>
   <p>
     Co-engineered an entire core banking system for Azerbaijan’s largest bank — from architecture and product logic to data migration and integrations. <strong>Designed 7 core modules</strong> from the ground up:
   </p>
@@ -273,33 +280,33 @@ const translations = {
     <strong>Key approach:</strong> Collaborated with architects and core developers to find the <strong>simplest solutions that work flawlessly</strong> in any situation. Participated in architectural decisions, not just documenting — but co-creating resilient system logic. <strong>Personally tested 70% of the entire system</strong> using SQL queries and manual interface testing.
   </p>
 
-  <h4>Led Enterprise-Scale Data Migration</h4>
+  <h5>Led Enterprise-Scale Data Migration</h5>
   <p>
     Orchestrated migration from Oracle Flexcube and legacy systems with <strong>&lt;0.01% delta</strong> at go-live. Coordinated cross-team efforts for retail banking products, revolving credit lines, and card processing integration.
   </p>
 
-  <h4>Delivered 50+ High-Complexity Integrations</h4>
+  <h5>Delivered 50+ High-Complexity Integrations</h5>
   <p>
     Designed and documented API integration strategy between Zeus, Processing (CMS), CRM, BPM (ELMA), payment systems, Flexcube, and external systems. Expert in REST APIs, Swagger/Postman, and end-to-end integration testing. <strong>Worked closely with Finance department</strong> on accounting entries for cross-system transactions.
   </p>
 
-  <h4>Drove Agile Transformation at Scale</h4>
+  <h5>Drove Agile Transformation at Scale</h5>
   <p>
     Led re-design of PDLC across <strong>80+ teams</strong> (300+ people). Coached 10+ Agile teams, standardized frameworks, and increased deployment frequency by <strong>25%</strong>. Served as Agile Coach and Process Owner.
   </p>
-  <hr>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
 
-  <h3 id="strengths">
-    <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-    Core Strengths
-  </h3>
+  <h4 id="strengths" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+    CORE STRENGTHS
+  </h4>
 
-  <h4>Business & Technical Bridge</h4>
+  <h5>Business & Technical Bridge</h5>
   <p>
     Skilled in requirement elicitation, process modeling (BPMN, UML), and stakeholder management — but most importantly, in <strong>turning complexity into clarity</strong> and driving solutions all the way to production.
   </p>
 
-  <h4>Systems Thinking & Problem Solving</h4>
+  <h5>Systems Thinking & Problem Solving</h5>
   <p>
     Whether it’s untangling legacy systems, designing universal logic, or drafting precise documentation — I bring structure to chaos. My approach: <strong>find the simplest solution that works flawlessly in any situation</strong>.
   </p>
@@ -307,30 +314,30 @@ const translations = {
     I don’t just document requirements — I participate in architectural decisions, collaborate with developers to co-create solutions, write SQL for data validation, and personally test critical functionality. Known for <strong>high technical depth</strong> combined with business acumen.
   </p>
 
-  <h4>End-to-End Ownership</h4>
+  <h5>End-to-End Ownership</h5>
   <p>
     I don’t just document requirements. I orchestrate discovery, design integrations, coordinate testing, manage migrations, and ensure go-live success. High ownership, adaptability, and depth in both business and tech contexts.
   </p>
-  <hr>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
 
-  <h3 id="projects">
-    <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-    Beyond Projects
-  </h3>
+  <h4 id="projects" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+    BEYOND PROJECTS
+  </h4>
 
-  <h4>Building AI-Powered Platforms</h4>
+  <h5>Building AI-Powered Platforms</h5>
   <p>I create my own products from scratch using <strong>Next.js and AI</strong>:</p>
   <ul>
     <li><strong>Sarkhan.dev</strong> — AI-powered tools and resources for Business Analysts (built solo with AI assistance)</li>
     <li><strong>aiCV</strong> — AI-enhanced CV generator for IT professionals (Next.js + AI, from concept to production)</li>
   </ul>
 
-  <h4>Process Automation Expert</h4>
+  <h5>Process Automation Expert</h5>
   <p>
     Skilled in <strong>n8n</strong> workflow automation — creating intelligent automation solutions that streamline operations and eliminate manual work. Passionate about leveraging no-code/low-code tools to drive efficiency.
   </p>
 
-  <h4>Leadership & Mentoring</h4>
+  <h5>Leadership & Mentoring</h5>
   <ul>
     <li>Served as <strong>Process Owner</strong> — leading PDLC transformation and governance frameworks</li>
     <li>Trainer at <strong>Matrix Academy</strong>, teaching IT Business Analysis courses</li>
@@ -338,16 +345,16 @@ const translations = {
     <li>Actively mentor junior BAs and coach teams on Agile practices and product thinking</li>
   </ul>
 
-  <h4>Knowledge Sharing</h4>
+  <h5>Knowledge Sharing</h5>
   <p>
     Creating educational content, tools, and resources for the BA community. Believe in lifting others through sharing practical expertise and real-world insights.
   </p>
-  <hr>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
 
-  <h3 id="certifications">
-      <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15l-3.5-3.5 1.5-1.5 2 2 4-4 1.5 1.5L12 15z"></path><path d="M19.3 6.7A8 8 0 0 1 20 12a8 8 0 0 1-8 8 8 8 0 0 1-8-8c0-1.7.5-3.3 1.4-4.6"></path></svg>
-    Certifications & Education
-  </h3>
+  <h4 id="certifications" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15l-3.5-3.5 1.5-1.5 2 2 4-4 1.5 1.5L12 15z"></path><path d="M19.3 6.7A8 8 0 0 1 20 12a8 8 0 0 1-8 8 8 8 0 0 1-8-8c0-1.7.5-3.3 1.4-4.6"></path></svg>
+    CERTIFICATIONS & EDUCATION
+  </h4>
   <ul>
       <li>ICAgile Product Management</li>
       <li>ICAgile Enterprise Agile Coaching</li>
@@ -356,40 +363,40 @@ const translations = {
       <li>PDLC – Keytorc</li>
       <li>Preparing for <strong>TOGAF</strong> certification (Enterprise Architecture focus)</li>
   </ul>
-  <h4>Education:</h4>
+  <h5>Education:</h5>
   <ul>
       <li>MSc in Financial Engineering — Qafqaz University (2012-2014)</li>
       <li>BSc in Banking Management — Qafqaz University (2006-2011)</li>
   </ul>
-  <hr>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
 
-  <h3 id="languages">
-    <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-    Languages & Location
-  </h3>
+  <h4 id="languages" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+    LANGUAGES & LOCATION
+  </h4>
   <p>
     <strong>Languages:</strong> English (Advanced), Russian (Advanced), Turkish (Advanced), Azerbaijani (Native)<br>
     <strong>Based in:</strong> Baku, Azerbaijan<br>
     <strong>Open to:</strong> Remote and hybrid opportunities with international teams
   </p>
-  <hr>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
   
-  <h3>
-    <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
-    My Philosophy
-  </h3>
+  <h4 style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
+    MY PHILOSOPHY
+  </h4>
   <blockquote>
     <p><em>“My job is to turn chaos of ideas into clear, working solutions. Today I do it as a Senior IT BA. Tomorrow — as a System Architect, designing large-scale ecosystems and AI-powered solutions.”</em></p>
   </blockquote>
   <p>
     I’m driven by <strong>curiosity, clarity, and the pursuit of meaningful solutions</strong>. Whether working on core banking transformation, regulatory compliance, or real-time operations — I contribute transformation initiatives with both <strong>technical insight and human-centered thinking</strong>.
   </p>
-  <hr>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
 
-  <h3 id="connect">
-    <svg style="width: 1.5em; height: 1.5em; vertical-align: -0.3em; margin-right: 0.5em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-    Let’s Connect
-  </h3>
+  <h4 id="connect" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+    LET'S CONNECT
+  </h4>
   <p>
     🚀 <strong>Looking for collaboration?</strong> Let’s build the future of banking systems together.
   </p>

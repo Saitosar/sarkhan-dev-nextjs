@@ -479,6 +479,7 @@ p { max-width: var(--max-text-width); overflow-wrap: break-word; }
 .about-text h3 { font-size: 2rem; color: var(--color-primary); }
 .about-text .btn { margin-block-start: var(--space-xl); }
 
+
 /* MODALS & OVERLAYS */
 .modal-overlay, .fullscreen-overlay {
   position: fixed; inset: 0; background: rgba(1, 4, 19, 0.9);
@@ -974,6 +975,7 @@ footer p {
   gap: var(--space-sm); /* Расстояние между тегами */
   margin-block: var(--space-lg) 0; /* Отступы сверху и снизу */
 }
+
 
 /* Стили для каждого тега */
 .skill-tag {
@@ -2184,6 +2186,7 @@ a.resource-card, a.resource-card:hover {
 .srd-document-view p {
   max-width: none;
   text-align: justify;
+  padding-bottom: var(--space-sm);
 }
 /* Стили для светлой темы */
 [data-theme="light"] .srd-document-view {
@@ -2194,7 +2197,7 @@ a.resource-card, a.resource-card:hover {
 .srd-document-view h1 {
   text-align: center; /* Меняем выравнивание на классическое для документов */
   font-size: 2.2rem;
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-lg);
   color: var(--color-heading);
 }
 
@@ -2212,8 +2215,8 @@ a.resource-card, a.resource-card:hover {
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--color-primary);
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-md);
   margin-top: var(--space-xl);
   margin-bottom: var(--space-lg);
 }
@@ -2327,3 +2330,16 @@ a.resource-card, a.resource-card:hover {
 }
 
 /* === КОНЕЦ: Обновленные стили для страницы SRD-документа === */
+
+/* === Стили для тегов-ссылок === */
+a.skill-tag {
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+a.skill-tag:hover {
+  color: var(--color-heading);
+  background-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
