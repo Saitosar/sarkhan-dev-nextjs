@@ -2343,3 +2343,12 @@ a.skill-tag:hover {
   border-color: var(--color-primary);
   transform: translateY(-2px);
 }
+/* === Стили для подзаголовков в модальном окне "Обо мне" === */
+.modal-column-right h5 {
+  font-size: 1.1rem; /* Точно такой же размер, как у должностей */
+  color: var(--color-heading); /* Основной цвет заголовков */
+  margin-top: var(--space-xl); /* Добавляем отступ сверху */
+  margin-bottom: var(--space-lg); /* Добавляем отступ снизу до текста */
+  text-transform: none; /* Убираем 'uppercase', если он где-то унаследован */
+  font-family: var(--font-heading, inherit); /* Убедимся, что используется шрифт для заголовков */
+}
