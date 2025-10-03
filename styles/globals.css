@@ -2263,14 +2263,6 @@ a.resource-card, a.resource-card:hover {
  * --- ДОБАВЛЕННЫЕ СТИЛИ ДЛЯ ТАБЛИЦ И КОДА ---
  */
 
-/* Стили для таблиц (секция Data & Fields) */
-.srd-document-view table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: var(--space-lg);
-  margin-bottom: 1.5em;
-  font-size: 0.95em;
-}
 
 .srd-document-view th,
 .srd-document-view td {
@@ -2364,26 +2356,42 @@ a.skill-tag:hover {
   text-transform: none; /* Убираем 'uppercase', если он где-то унаследован */
   font-family: var(--font-heading, inherit); /* Убедимся, что используется шрифт для заголовков */
 }
-/* === НАЧАЛО: Адаптация таблицы в SRD для мобильных v2 === */
 
-/* Контейнер-обертка для таблицы */
+/* === НАЧАЛО: Финальные стили для адаптивных таблиц SRD v3 === */
+
+/* Контейнер-обертка для таблиц, требующих прокрутки */
 .srd-table-wrapper {
   overflow-x: auto; /* Включаем горизонтальную прокрутку */
   -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
   margin: var(--space-lg) 0;
 }
 
-/* Ключевое исправление: мы говорим таблице внутри обертки
-  не пытаться сжаться до 100% ширины, а быть такой широкой,
-  какой требует ее содержимое.
-*/
-.srd-table-wrapper table {
-  width: auto; /* Убираем принудительную ширину 100% */
-  min-width: 100%; /* Гарантируем, что таблица не будет уже своего контейнера */
-  margin: 0; /* Убираем все внешние отступы */
-  border: none; /* Убираем рамку, так как она теперь на обертке */
+/* Общие стили для ВСЕХ таблиц в документе */
+.srd-document-view table {
+  border-collapse: collapse;
+  font-size: 0.95em;
+  width: 100%; /* По умолчанию таблица занимает всю ширину */
 }
 
-/* === КОНЕЦ: Адаптация таблицы в SRD для мобильных v2 === */
+/* КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ:
+   Для таблицы, которая находится ВНУТРИ нашей обертки,
+   мы отменяем правило width: 100% и позволяем ей быть шире. */
+.srd-table-wrapper table {
+  width: auto; /* Позволяет таблице растягиваться по содержимому */
+  min-width: 100%; /* Гарантирует, что она не будет уже контейнера */
+}
+
+.srd-document-view th,
+.srd-document-view td {
+  border: 1px solid var(--color-border);
+  padding: var(--space-md);
+  text-align: left;
+  vertical-align: top;
+}
+
+.srd-document-view th {
+  background-color: color-mix(in srgb, var(--color-primary) 5%, transparent);
+  font-weight: 600;
+}
+
+/* === КОНЕЦ: Финальные стили для адаптивных таблиц SRD v3 === */
