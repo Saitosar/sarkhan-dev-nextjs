@@ -99,14 +99,14 @@ Texniki biliklərimi və insana yönümlü düşüncə tərzimi transformasiya t
         aiAssistantSend: "Göndər",
         navServices: "Xidmətlər",
         servicesSectionTitle: "Xidmətlər",
-        mentorshipTitle: "Mentorluq Proqramı",
-        mentorshipDescription: "Karyeran inkişafınızı sürətləndirmək və IT biznes analiz sahəsində əsas bacarıqları inkişaf etdirmək üçün fərdi dəstək.",
-        mentorshipIncludesTitle: "Proqrama daxildir:",
+        mentorshipTitle: "Mentorluq",
+        mentorshipDescription: "Fərdi mentorluqla İT Biznes Analizində karyeranı inkişaf etdir.",
+        mentorshipIncludesTitle: "Sən nə əldə edəcəksən:",
         mentorshipIncludesList: [
-                                    "Fərdi karyera planının hazırlanması",
-                                    "Praktiki tapşırıqlar və real keyslərin təhlili",
-                                    "Rezyumenin və müsahibəyə hazırlığın yoxlanılması",
-                                    "Daimi əlaqə və suallara cavablar"
+                                    "Fərdi inkişaf planının hazırlanması",
+                                    "Praktiki məsləhətlər və real iş nümunələri",
+                                    "CV və LinkedIn profilinin optimallaşdırılması + müsahibəyə hazırlıq",
+                                    "Davamlı rəy, suallara cavab və şəxsi dəstək"
 ],
         mentorshipCtaButton: "Müraciət et",
         accountTitle: "Şəxsi kabinet",
@@ -121,7 +121,7 @@ Texniki biliklərimi və insana yönümlü düşüncə tərzimi transformasiya t
         planCardTitle: "Tarif planı",
         planCurrent: "Sizin cari plan:",
         planUsage: "SRD istifadə edilib: {used} / {limit}",
-        planChangeButton: "Tariqi dəyişmək",
+        planChangeButton: "Tarifi dəyişmək",
         documentsCardTitle: "Mənim sənədlərim",
         documentsNone: "Siz hələ heç bir SRD sənədi yaratmamısınız.",
         documentsCreateNew: "Yenisini yarat"
@@ -221,14 +221,14 @@ Open to remote or hybrid opportunities with international teams where I can cont
         aiAssistantSend: "Send",
         navServices: "Services",
         servicesSectionTitle: "Services",
-        mentorshipTitle: "Mentorship Program",
-        mentorshipDescription: "Personalized support to accelerate your career and master key skills in IT business analysis.",
+        mentorshipTitle: "Mentorship",
+        mentorshipDescription: "Level up your career with personalized mentoring in IT Business Analysis.",
         mentorshipIncludesTitle: "What you'll get:",
         mentorshipIncludesList: [
                                     "Personal career plan development",
-                                    "Practical tasks and real-world case studies",
-                                    "Resume review and interview preparation",
-                                    "Regular feedback and Q&A sessions"
+                                    "Practical advice and real-world examples",
+                                    "Resume & LinkedIn profile optimization + interview preparation",
+                                    "Continuous feedback, Q&A, and personal support"
 ],
         mentorshipCtaButton: "Apply Now",
         accountTitle: "My Account",
@@ -343,14 +343,14 @@ Open to remote or hybrid opportunities with international teams where I can cont
         aiAssistantSend: "Отправить",
         navServices: "Услуги",
         servicesSectionTitle: "Услуги",
-        mentorshipTitle: "Программа Менторства",
-        mentorshipDescription: "Персональная поддержка, чтобы ускорить вашу карьеру и освоить ключевые навыки в IT-бизнес-анализе.",
+        mentorshipTitle: "Менторство",
+        mentorshipDescription: "Продвинь свою карьеру с персональным менторством в сфере IT-бизнес анализа.",
         mentorshipIncludesTitle: "Что вы получите:",
         mentorshipIncludesList: [
                                     "Разработка личного карьерного плана",
-                                    "Практические задания и разбор реальных кейсов",
-                                    "Ревью резюме и подготовка к собеседованию",
-                                    "Регулярная обратная связь и ответы на вопросы"
+                                    "Практические задания и кейсы из реальных IT-проектов",
+                                    "Оптимизацию резюме и LinkedIn + подготовку к интервью",
+                                    "Постоянную обратную связь, ответы на вопросы и личную поддержку"
 ],
         mentorshipCtaButton: "Оставить заявку",
         accountTitle: "Личный кабинет",

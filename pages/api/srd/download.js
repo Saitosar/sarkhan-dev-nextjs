@@ -1,4 +1,4 @@
-// pages/api/srd/download.js (ВЕРСИЯ 3.0 - ФИНАЛЬНОЕ ИСПРАВЛЕНИЕ ОТПРАВКИ)
+// pages/api/srd/download.js (ВЕРСИЯ 4.0 - С ФИРМЕННЫМ КОЛОНТИТУЛОМ)
 
 import chromium from '@sparticuz/chromium';
 import puppeteer from 'puppeteer-core';
@@ -11,14 +11,11 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import SrdPrintLayout from '../../../components/SrdPrintLayout';
 
-// --- ИЗМЕНЕНИЕ 1: Гарантируем, что этот код будет работать в среде Node.js на Vercel ---
 export const runtime = 'nodejs';
-
-// --- ИЗМЕНЕНИЕ 2 (Опционально, но рекомендуется): Отключаем автоматический парсинг тела запроса, так как он нам не нужен для GET ---
 export const config = {
     api: {
         bodyParser: false,
-        responseLimit: false, // Снимаем ограничение на размер ответа для больших PDF
+        responseLimit: false,
     },
 };
 
@@ -72,18 +69,35 @@ export default async function handler(req, res) {
         const page = await browser.newPage();
         await page.setContent(printHtml, { waitUntil: 'networkidle0' });
 
+        // --- НАЧАЛО ИЗМЕНЕНИЙ ---
         const pdfBuffer = await page.pdf({
             format: 'A4',
             printBackground: true,
-            margin: { top: '20px', right: '20px', bottom: '20px', left: '20px' },
+            displayHeaderFooter: true, // Включаем отображение колонтитулов
+            footerTemplate: `
+              <div style="width: 100%; font-size: 9px; padding: 0 20px; color: #888; opacity: 0.7; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <span>Generated with ITBAI on sarkhan.dev</span>
+                </div>
+                <div>
+                  <span class="pageNumber"></span> / <span class="totalPages"></span>
+                </div>
+              </div>
+            `,
+            margin: {
+                top: '20px',
+                right: '20px',
+                bottom: '40px', // Увеличили нижний отступ для колонтитула
+                left: '20px',
+            },
         });
+        // --- КОНЕЦ ИЗМЕНЕНИЙ ---
         
         const safeFileName = (document.title || 'srd-document').replace(/[^a-z0-9]/gi, '_').toLowerCase();
         
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Disposition', `attachment; filename="${safeFileName}.pdf"`);
         
-        // --- ИЗМЕНЕНИЕ 3: Используем res.end() для прямой отправки бинарного буфера ---
         res.status(200).end(pdfBuffer);
 
     } catch (error) {
