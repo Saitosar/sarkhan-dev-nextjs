@@ -14,7 +14,7 @@ const translations = {
         verifySubtitle: "Giriş üçün keçid e-poçt ünvanınıza göndərildi.",
         heroTitlePart1: "Analitik düşüncə.", heroTitlePart2: "Praktiki alətlər.", heroTitlePart3: "Rəqəmsal gələcək.",
         heroSubtitle: "IT biznes analitiklər üçün faydalı",
-        ctaPrimaryAction: "- yoxla, işini sürətləndir",
+        ctaPrimaryAction: "- ilə işini sürətləndir",
         ctaPrimaryBrand: "ITBAI",
         ctaSecondary: "Bacarıqlarını artır",
         panelBlog: "Blog", panelResources: "Resurslar", panelAbout: "Haqqımda", panelContact: "Əlaqə",
@@ -60,46 +60,113 @@ const translations = {
         aboutSectionTitle: "Haqqımda", aboutName: "Sərxan Hacıyev",
         aboutShortBio: "10 ildən artıq bank sistemləri sahəsində təcrübəyə malik IT Biznes Analitik.",
         aboutLongBio: `
-  <h3>👨‍💼 Mən kiməm</h3>
-  <p>10+ illik təcrübəyə malik Senior IT Business Analyst, core banking sistemləri və korporativ inteqrasiyalar üzrə ixtisaslaşmışam. Biznes ehtiyacları ilə texniki icra arasında körpü qururam — bank platformalarını sıfırdan qurmaqdan tutmuş, miqrasiyaları təşkil etməyə və Agile transformasiyalarına rəhbərlik etməyə qədər. Mənim super gücüm? Mürəkkəbliyi aydınlığa çevirmək və həlləri produksiyaya qədər çatdırmaq.</p>
+  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 24px;">
+    <strong style="font-size: 0.9em; color: var(--color-text-secondary); margin-right: 8px;">Keçid et:</strong>
+    <a href="#summary" class="skill-tag">Mən kiməm</a>
+    <a href="#achievements" class="skill-tag">Nələr yaratmışam</a>
+    <a href="#strengths" class="skill-tag">Yanaşmam</a>
+    <a href="#projects" class="skill-tag">Layihələrdən kənar</a>
+    <a href="#next-step" class="skill-tag">Növbəti addım</a>
+    <a href="#connect" class="skill-tag">Əlaqə</a>
+  </div>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
 
-  <h3>🚀 Nələr yaratmışam</h3>
-  <ul>
-    <li><strong>Sıfırdan Core Banking:</strong> Azərbaycanın ən böyük bankı üçün Zeus Core Banking System-i birgə yaratdım — 7 əsas modulu (Müştərilər, Hesablar, Kreditlər, Depozitlər, Kassa, GL, EOD/SOD) layihələndirdim. Arxitektura qərarlarında iştirak etdim, yoxlama üçün SQL yazdım və sistemin 70%-ni şəxsən test etdim.</li>
-    <li><strong>Korporativ miqrasiyalar:</strong> Oracle Flexcube-dan miqrasiyanı idarə etdim, istifadəyə verilmə anında <0,01% delta ilə. Pərakəndə bank əməliyyatları, təkrar kredit xətləri və prosessinqlə inteqrasiya üzrə komandalar arası səyləri koordinasiya etdim.</li>
-    <li><strong>50+ mürəkkəb inteqrasiya:</strong> Zeus, prosessinq, CRM, BPM və ödəniş sistemləri arasında API arxitekturasını layihələndirdim. REST API, Swagger/Postman və end-to-end inteqrasiya testləri üzrə ekspert.</li>
-    <li><strong>Miqyasda Agile:</strong> 80+ komanda (300+ nəfər) üçün PDLC-nin yenidən dizaynını həyata keçirdim. Komandaları kouçluq etdim, freymvorkları standartlaşdırdım, deploy tezliyini 25% artırdım.</li>
-  </ul>
-
-  <h3>💡 Mənim yanaşmam</h3>
-  <p>Mən sadəcə tələbləri sənədləşdirmirəm — arxitektorlar və developerlərlə birlikdə həllər yaradıram. Mənim fəlsəfəm: hər hansı vəziyyətdə qüsursuz işləyən ən sadə həlli tapmaq.</p>
-  <p>Əsas güclü tərəflər:</p>
-  <ul>
-    <li>Sistem düşüncəsi və arxitektura yanaşması</li>
-    <li>Yüksək texniki dərinlik + biznes anlayışı</li>
-    <li>Discovery-dən production-a qədər end-to-end ownership</li>
-    <li>Xaosu strukturlaşdırmaq</li>
-  </ul>
-
-  <h3>🛠️ Layihələrdən kənar</h3>
-  <ul>
-      <li><strong>AI-Platformaların yaradılması:</strong> Sarkhan.dev (BA-lar üçün AI alətləri) və aiCV (AI CV generatoru) yaradıcısı — Next.js + AI istifadə edərək solo şəkildə hazırlanmışdır.</li>
-      <li><strong>Proseslərin avtomatlaşdırılması:</strong> n8n vasitəsilə avtomatlaşdırma üzrə ekspert — əl əməyini aradan qaldıran intellektual həllər yaradıram.</li>
-      <li><strong>Liderlik və mentorluq:</strong> Process Owner, Agile Coach, Matrix Academy-də təlimçi və Franklin Covey sertifikatlı mentor.</li>
-  </ul>
-
-  <h3>🎯 Növbəti addım</h3>
-  <p><em>"Mənim işim — ideyaların xaosunu aydın, işləyən həllərə çevirməkdir. Bu gün bunu Senior IT BA kimi edirəm. Sabah — System Architect olaraq, geniş miqyaslı ekosistemlər və AI həlləri layihələndirəcəyəm."</em></p>
-  <p>Hal-hazırda TOGAF sertifikasiyasına hazırlaşıram, Enterprise Architecture üzərində fokuslanıram.</p>
-
-  <h3>📫 Əlaqə saxlayaq</h3>
-  <p>🚀 Əməkdaşlıq axtarırsınız? Gəlin birlikdə bank sistemlərinin gələcəyini quraq. Beynəlxalq komandalarla uzaqdan və hibrid iş imkanlarına açığam, texniki anlayış və insana yönəlik düşüncə ilə transformasiya təşəbbüslərinə töhfə verə bilərəm.</p>
+  <h4 id="summary" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+    Mən kiməm
+  </h4>
   <p>
-    <a href="#about" class="contact-link" style="text-decoration: underline;">Tam Profil</a> • 
-    <a href="https://linkedin.com/in/sarkhanhajiyev" target="_blank" rel="noopener noreferrer" class="contact-link" style="text-decoration: underline;">LinkedIn</a> • 
-    <a href="#contact" class="contact-link" style="text-decoration: underline;">Əlaqə</a>
+    10+ illik təcrübəyə malik Senior IT Business Analyst, core banking sistemləri və korporativ inteqrasiyalar üzrə ixtisaslaşmışam.
   </p>
   <p>
+    Biznes ehtiyacları ilə texniki icra arasında körpü qururam — bank platformalarını sıfırdan qurmaqdan tutmuş, miqrasiyaları təşkil etməyə və Agile transformasiyalarına rəhbərlik etməyə qədər. Mənim super gücüm? Mürəkkəbliyi aydınlığa çevirmək və həlləri produksiyaya qədər çatdırmaq.
+  </p>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
+
+  <h4 id="achievements" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13.52l4.24-4.24a5.66 5.66 0 0 1 8 0L22 17.52"></path><path d="m15 5 6 6"></path></svg>
+    Nələr yaratmışam
+  </h4>
+
+  <h5>Sıfırdan Core Banking</h5>
+  <p>
+    Azərbaycanın ən böyük bankı üçün Zeus Core Banking System-i birgə yaratdım — 7 əsas modulu (Müştərilər, Hesablar, Kreditlər, Depozitlər, Kassa, GL, EOD/SOD) layihələndirdim. Arxitektura qərarlarında iştirak etdim, yoxlama üçün SQL yazdım və sistemin 70%-ni şəxsən test etdim.
+  </p>
+
+  <h5>Korporativ miqrasiyalar</h5>
+  <p>
+    Oracle Flexcube-dan miqrasiyanı idarə etdim, istifadəyə verilmə anında &lt;0,01% delta ilə. Pərakəndə bank əməliyyatları, təkrar kredit xətləri və prosessinqlə inteqrasiya üzrə komandalar arası səyləri koordinasiya etdim.
+  </p>
+
+  <h5>50+ mürəkkəb inteqrasiya</h5>
+  <p>
+    Zeus, prosessinq, CRM, BPM və ödəniş sistemləri arasında API arxitekturasını layihələndirdim. REST API, Swagger/Postman və end-to-end inteqrasiya testləri üzrə ekspert.
+  </p>
+
+  <h5>Miqyasda Agile</h5>
+  <p>
+    80+ komanda (300+ nəfər) üçün PDLC-nin yenidən dizaynını həyata keçirdim. Komandaları kouçluq etdim, freymvorkları standartlaşdırdım, deploy tezliyini 25% artırdım.
+  </p>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
+
+  <h4 id="strengths" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+    Mənim yanaşmam
+  </h4>
+    <p>Mən sadəcə tələbləri sənədləşdirmirəm — arxitektorlar və developerlərlə birlikdə həllər yaradıram. Mənim fəlsəfəm: hər hansı vəziyyətdə qüsursuz işləyən ən sadə həlli tapmaq.</p>
+    <p>Əsas güclü tərəflər:</p>
+    <ul>
+        <li>Sistem düşüncəsi və arxitektura yanaşması</li>
+        <li>Yüksək texniki dərinlik + biznes anlayışı</li>
+        <li>Discovery-dən production-a qədər end-to-end ownership</li>
+        <li>Xaosu strukturlaşdırmaq</li>
+    </ul>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
+
+  <h4 id="projects" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+    Layihələrdən kənar
+  </h4>
+
+  <h5>AI-Platformaların yaradılması</h5>
+  <p>Sarkhan.dev (BA-lar üçün AI alətləri) və aiCV (AI CV generatoru) yaradıcısı — Next.js + AI istifadə edərək solo şəkildə hazırlanmışdır.</p>
+
+  <h5>Proseslərin avtomatlaşdırılması</h5>
+  <p>n8n vasitəsilə avtomatlaşdırma üzrə ekspert — əl əməyini aradan qaldıran intellektual həllər yaradıram.</p>
+  
+  <h5>Liderlik və mentorluq</h5>
+  <p>Process Owner, Agile Coach, Matrix Academy-də təlimçi və Franklin Covey sertifikatlı mentor.</p>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
+  
+  <h4 id="next-step" style="display: flex; align-items: center; gap: 0.5em;">
+      <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+    Növbəti addım
+  </h4>
+  <p><em>"Mənim işim — ideyaların xaosunu aydın, işləyən həllərə çevirməkdir. Bu gün bunu Senior IT BA kimi edirəm. Sabah — System Architect olaraq, geniş miqyaslı ekosistemlər və AI həlləri layihələndirəcəyəm."</em></p>
+  <p>Hal-hazırda TOGAF sertifikasiyasına hazırlaşıram, Enterprise Architecture üzərində fokuslanıram.</p>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
+
+  <h4 id="connect" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+    Əlaqə saxlayaq
+  </h4>
+  <p>
+     Əməkdaşlıq axtarırsınız? Gəlin birlikdə bank sistemlərinin gələcəyini quraq.
+  </p>
+  <p>
+    Beynəlxalq komandalarla uzaqdan və hibrid iş imkanlarına açığam, texniki anlayış və insana yönəlik düşüncə ilə transformasiya təşəbbüslərinə töhfə verə bilərəm.
+  </p>
+  <div style="text-align: center; margin-top: 24px;">
+      <a href="https://www.linkedin.com/in/sarkhanhajiyev" target="_blank" rel="noopener noreferrer" class="btn" style="gap: 8px;">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+          <span>LinkedIn'də əlaqə</span>
+      </a>
+  </div>
+  <p style="margin-top: 24px;">
     <strong>Dillər:</strong> İngilis • Rus • Türk • Azərbaycan<br>
     <strong>Məkan:</strong> Bakı, Azərbaycan 🇦🇿
   </p>
@@ -126,7 +193,7 @@ const translations = {
         langToggle: "Dili dəyişdir",
         validation: { nameRequired: "Ad tələb olunur", emailRequired: "E-mail tələb olunur", emailInvalid: "Yanlış e-mail formatı", messageRequired: "Mesaj tələb olunur", inquiryRequired: "Zəhmət olmasa, mövzunu seçin", messageMin: "Mesaj ən azı 10 simvol olmalıdır" },
         contactInfoTitle: "Əlaqə saxlayın",
-        contactInfoText: "Formadan istifadə edərək və ya sosial şəbəkələrdə mənimlə əlaqə saxlaya bilərsiniz.",
+        contactInfoText: "Formadan istifadə edərək və ya sosial şəbəkələrdə mənimlə əlaqə saxlaya və ya 'feedback' yaza bilərsiniz.",
         aiSummaryButton: "AI-Xülasə", // (или "AI Summary", "AI-Xülasə")
         aiSummaryLoading: "Analiz edirəm...",
         aiSummaryError: "Xəta. Bir müddət sonra təkrar yoxlayın.",
@@ -398,7 +465,7 @@ const translations = {
     LET'S CONNECT
   </h4>
   <p>
-    🚀 <strong>Looking for collaboration?</strong> Let’s build the future of banking systems together.
+     <strong>Looking for collaboration?</strong> Let’s build the future of banking systems together.
   </p>
   <p>
     Open to remote and hybrid opportunities with international teams where I can contribute to <strong>transformation initiatives</strong> with both technical insight and human-centered thinking.
@@ -436,7 +503,7 @@ const translations = {
         langToggle: "Change language",
         validation: { nameRequired: "Name is required", emailRequired: "Email is required", emailInvalid: "Invalid email format", messageRequired: "Message is required", inquiryRequired: "Please select a topic", messageMin: "Message must be at least 10 characters long" },
         contactInfoTitle: "Get in Touch",
-        contactInfoText: "Feel free to reach out using the form or connect with me on social media.",
+        contactInfoText: "Feel free to reach out or send feedback using the form or connect with me on social media.",
         aiSummaryButton: "AI-summary", // (или "AI Summary", "AI-Xülasə")
         aiSummaryLoading: "Analyzing...",
         aiSummaryError: "Error. Please, try again later.",
@@ -532,49 +599,197 @@ const translations = {
         aboutSectionTitle: "Обо мне", aboutName: "Сархан Гаджиев",
         aboutShortBio: "IT бизнес-аналитик с более чем 10-летним опытом работы в банковских системах.",
         aboutLongBio: `
-  <h3>👨‍💼 Кто я</h3>
-  <p>Senior IT Business Analyst с опытом 10+ лет, специализирующийся на системах core banking и корпоративных интеграциях. Я выстраиваю мост между бизнес-потребностями и технической реализацией — от создания банковских платформ с нуля до организации миграций и руководства Agile-трансформациями. Моя суперсила? Превращать сложность в ясность и доводить решения до продакшена.</p>
+  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 24px;">
+    <strong style="font-size: 0.9em; color: var(--color-text-secondary); margin-right: 8px;">Перейти к:</strong>
+    <a href="#summary" class="skill-tag">Резюме</a>
+    <a href="#journey" class="skill-tag">Путь</a>
+    <a href="#achievements" class="skill-tag">Достижения</a>
+    <a href="#strengths" class="skill-tag">Сильные стороны</a>
+    <a href="#projects" class="skill-tag">Проекты</a>
+    <a href="#certifications" class="skill-tag">Сертификаты</a>
+    <a href="#connect" class="skill-tag">Контакты</a>
+  </div>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
 
-  <h3>🚀 Что я создал</h3>
-  <ul>
-    <li><strong>Core Banking с нуля:</strong> Со-разработал Zeus Core Banking System для крупнейшего банка Азербайджана — спроектировал 7 основных модулей (Клиенты, Счета, Кредиты, Депозиты, Касса, GL, EOD/SOD). Участвовал в архитектурных решениях, писал SQL для валидации и лично протестировал 70% системы.</li>
-    <li><strong>Корпоративные миграции:</strong> Руководил миграцией с Oracle Flexcube с дельтой <0,01% на момент запуска. Координировал кросс-командные усилия по розничному банкингу, возобновляемым кредитным линиям и интеграции с процессингом.</li>
-    <li><strong>50+ сложных интеграций:</strong> Спроектировал API-архитектуру между Zeus, процессингом, CRM, BPM и платёжными системами. Эксперт в REST API, Swagger/Postman и end-to-end тестировании интеграций.</li>
-    <li><strong>Agile в масштабе:</strong> Провёл редизайн PDLC для 80+ команд (300+ человек). Коучил команды, стандартизировал фреймворки, увеличил частоту деплоев на 25%.</li>
-  </ul>
-
-  <h3>💡 Мой подход</h3>
-  <p>Я не просто документирую требования — я со-создаю решения вместе с архитекторами и разработчиками. Моя философия: найти самое простое решение, которое работает безупречно в любой ситуации.</p>
-  <p>Ключевые сильные стороны:</p>
-  <ul>
-    <li>Системное мышление и архитектурный подход</li>
-    <li>Высокая техническая глубина + бизнес-понимание</li>
-    <li>End-to-end ownership от discovery до production</li>
-    <li>Превращение хаоса в структуру</li>
-  </ul>
-
-  <h3>🛠️ Помимо проектов</h3>
-  <ul>
-      <li><strong>Создание AI-платформ:</strong> Создатель Sarkhan.dev (AI-инструменты для BA) и aiCV (AI-генератор резюме) — разработано solo с использованием Next.js + AI.</li>
-      <li><strong>Автоматизация процессов:</strong> Эксперт в автоматизации через n8n — создание интеллектуальных решений, устраняющих ручную работу.</li>
-      <li><strong>Лидерство и менторство:</strong> Process Owner, Agile Coach, тренер в Matrix Academy и сертифицированный ментор Franklin Covey.</li>
-  </ul>
-
-  <h3>🎯 Что дальше</h3>
-  <p><em>"Моя работа — превращать хаос идей в чёткие, работающие решения. Сегодня я делаю это как Senior IT BA. Завтра — как System Architect, проектирующий масштабные экосистемы и AI-решения."</em></p>
-  <p>В настоящее время готовлюсь к сертификации TOGAF, фокусируюсь на Enterprise Architecture.</p>
-
-  <h3>📫 Давайте на связь</h3>
-  <p>🚀 Ищете сотрудничество? Давайте вместе строить будущее банковских систем. Открыт к удалённым и гибридным возможностям в международных командах, где смогу внести вклад в трансформационные инициативы с техническим пониманием и человеко-ориентированным мышлением.</p>
+  <h4 id="summary" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+    ПРОФЕССИОНАЛЬНОЕ РЕЗЮМЕ
+  </h4>
   <p>
-    <a href="#about" class="contact-link" style="text-decoration: underline;">Полный профиль</a> • 
-    <a href="https://linkedin.com/in/sarkhanhajiyev" target="_blank" rel="noopener noreferrer" class="contact-link" style="text-decoration: underline;">LinkedIn</a> • 
-    <a href="#contact" class="contact-link" style="text-decoration: underline;">Связаться</a>
+    Senior IT Business Analyst с опытом <strong>10+ лет</strong> в цифровом банкинге и финтехе, специализирующийся на самой сложной области индустрии — <strong>системах core banking и корпоративных интеграциях</strong>.
   </p>
   <p>
-    <strong>Языки:</strong> Английский • Русский • Турецкий • Азербайджанский<br>
-    <strong>Местоположение:</strong> Баку, Азербайджан 🇦🇿
+    Моя экспертиза охватывает весь жизненный цикл: от создания банковских платформ с нуля до организации масштабных миграций, проектирования API-архитектур и руководства Agile-трансформациями в корпоративных командах. Я выстраиваю мост между бизнес-потребностями и технической реализацией, превращая сложность в работающие решения, которые двигают финансовые институты вперёд.
   </p>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
+
+  <h4 id="journey" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+    ЧТО МЕНЯ ОТЛИЧАЕТ
+  </h4>
+  <p>
+    Моя карьера началась в <strong>2013</strong> году на розничной линии банкинга — я выдавал кредиты, понимал потребности клиентов и видел реальное влияние сломанных процессов. Этот фундамент дал мне то, что встречается редко: <strong>глубокое понимание как бизнес-проблем, так и технических решений</strong>.
+  </p>
+  <p>
+    За эти годы я эволюционировал от фронт-офисных операций к <strong>ядру банковских технологий</strong>, где последнее десятилетие превращаю сложность в ясность.
+  </p>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
+
+  <h4 id="achievements" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13.52l4.24-4.24a5.66 5.66 0 0 1 8 0L22 17.52"></path><path d="m15 5 6 6"></path></svg>
+    КЛЮЧЕВЫЕ ДОСТИЖЕНИЯ
+  </h4>
+
+  <h5>Создал Zeus Core Banking System с нуля</h5>
+  <p>
+    Со-разработал полноценную систему core banking для крупнейшего банка Азербайджана — от архитектуры и продуктовой логики до миграции данных и интеграций. <strong>Спроектировал 7 основных модулей</strong> с нуля:
+  </p>
+  <ul>
+    <li><strong>Клиентский модуль</strong> — определил все клиентские атрибуты для физических лиц, предпринимателей, юридических лиц, банков и контрагентов. Руководил очисткой клиентской базы от дубликатов.</li>
+    <li><strong>Модуль счетов</strong> — структурировал план счетов в Excel для системной логики, настроил балансовые счета, лицевые счета, внутрибанковские счета, транзитные счета и GL-счета. Тесно работал с финансовым департаментом над бухгалтерскими проводками и кросс-системной интеграцией.</li>
+    <li><strong>Кредитный модуль</strong> — описал все виды кредитов, атрибуты, операции и поведение, включая выдачу, начисление процентов, расчёт штрафов, формирование комиссий, расчёт резервов, генерацию инвойсов, грейс-периоды и управление внебалансовыми счетами.</li>
+    <li><strong>Депозитный модуль</strong> — определил все депозитные продукты, условия, атрибуты и операции.</li>
+    <li><strong>Кассовый модуль</strong> — спроектировал защищённую от мошенничества систему управления наличностью, заменяющую ручные журналы. Создал структуру для открытия кассы, авансов кассирам, приёма/выдачи наличных, обмена валют, депозитных ячеек и 24/7 работы филиала. <strong>Написал SQL-отчёты</strong>, используемые кассирами для учёта.</li>
+    <li><strong>Механизм расчёта резервов</strong> — одна из самых сложных задач, спроектировал операции расчёта кредитных резервов.</li>
+    <li><strong>EOD/SOD обработка</strong> — определил логику закрытия и открытия дня, какие операции выполняются до/после EOD.</li>
+  </ul>
+  <p>
+    <strong>Ключевой подход:</strong> Сотрудничал с архитекторами и core-разработчиками для поиска <strong>самых простых решений, которые работают безупречно</strong> в любой ситуации. Участвовал в архитектурных решениях, не просто документируя, но со-создавая отказоустойчивую системную логику. <strong>Лично протестировал 70% всей системы</strong>, используя SQL-запросы и ручное тестирование через интерфейс.
+  </p>
+
+  <h5>Руководил корпоративной миграцией</h5>
+  <p>
+    Организовал миграцию с Oracle Flexcube и legacy-систем с <strong>&lt;0,01% дельтой</strong> на момент запуска. Координировал кросс-командные усилия по розничным банковским продуктам, возобновляемым кредитным линиям и интеграции с процессингом.
+  </p>
+
+  <h5>Реализовал 50+ сложных интеграций</h5>
+  <p>
+    Спроектировал и задокументировал API-стратегию интеграции между Zeus, процессингом (CMS), CRM, BPM (ELMA), платёжными системами, Flexcube и внешними системами. Эксперт в REST API, Swagger/Postman и end-to-end тестировании интеграций. <strong>Тесно работал с финансовым департаментом</strong> над бухгалтерскими проводками для кросс-системных транзакций.
+  </p>
+
+  <h5>Провёл Agile-трансформацию в масштабе</h5>
+  <p>
+    Руководил редизайном PDLC для <strong>80+ команд</strong> (300+ человек). Коучил 10+ Agile-команд, стандартизировал фреймворки и увеличил частоту деплоев на <strong>25%</strong>. Работал как Agile Coach и Process Owner.
+  </p>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
+
+  <h4 id="strengths" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+    ОСНОВНЫЕ СИЛЬНЫЕ СТОРОНЫ
+  </h4>
+
+  <h5>Мост между бизнесом и техникой</h5>
+  <p>
+    Владею навыками сбора требований, моделирования процессов (BPMN, UML) и управления стейкхолдерами — но самое главное, умею <strong>превращать сложность в ясность</strong> и доводить решения до продакшена.
+  </p>
+
+  <h5>Системное мышление и решение проблем</h5>
+  <p>
+    Будь то распутывание legacy-систем, проектирование универсальной логики или составление точной документации — я привношу структуру в хаос. Мой подход: <strong>найти самое простое решение, которое работает безупречно в любой ситуации</strong>.
+  </p>
+  <p>
+    Я не просто документирую требования — участвую в архитектурных решениях, сотрудничаю с разработчиками для со-создания решений, пишу SQL для валидации данных и лично тестирую критическую функциональность. Известен <strong>высокой технической глубиной</strong> в сочетании с бизнес-пониманием.
+  </p>
+
+  <h5>End-to-End владение</h5>
+  <p>
+    Я не просто документирую требования. Я организую discovery, проектирую интеграции, координирую тестирование, управляю миграциями и обеспечиваю успешный запуск. Высокая ответственность, адаптивность и глубина как в бизнес, так и в технических контекстах.
+  </p>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
+
+  <h4 id="projects" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+    ПОМИМО ПРОЕКТОВ
+  </h4>
+
+  <h5>Создание AI-платформ</h5>
+  <p>Создаю собственные продукты с нуля, используя <strong>Next.js и AI</strong>:</p>
+  <ul>
+    <li><strong>Sarkhan.dev</strong> — AI-инструменты и ресурсы для Business Analysts (разработано solo с помощью AI)</li>
+    <li><strong>aiCV</strong> — AI-генератор резюме для IT-специалистов (Next.js + AI, от концепции до продакшена)</li>
+  </ul>
+
+  <h5>Эксперт по автоматизации процессов</h5>
+  <p>
+    Владею автоматизацией через <strong>n8n</strong> — создаю интеллектуальные решения для автоматизации, которые оптимизируют операции и устраняют ручную работу. Увлечён использованием no-code/low-code инструментов для повышения эффективности.
+  </p>
+
+  <h5>Лидерство и менторство</h5>
+  <ul>
+    <li>Работал как <strong>Process Owner</strong> — руководил PDLC-трансформацией и governance-фреймворками</li>
+    <li>Тренер в <strong>Matrix Academy</strong>, веду курсы по IT Business Analysis</li>
+    <li>Прошёл программу менторского тренинга <strong>Franklin Covey</strong></li>
+    <li>Активно менторю junior BA и коучу команды по Agile-практикам и продуктовому мышлению</li>
+  </ul>
+
+  <h5>Обмен знаниями</h5>
+  <p>
+    Создаю образовательный контент, инструменты и ресурсы для BA-сообщества. Верю в то, что нужно поднимать других через обмен практической экспертизой и реальными инсайтами.
+  </p>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
+
+  <h4 id="certifications" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15l-3.5-3.5 1.5-1.5 2 2 4-4 1.5 1.5L12 15z"></path><path d="M19.3 6.7A8 8 0 0 1 20 12a8 8 0 0 1-8 8 8 8 0 0 1-8-8c0-1.7.5-3.3 1.4-4.6"></path></svg>
+    СЕРТИФИКАТЫ И ОБРАЗОВАНИЕ
+  </h4>
+  <ul>
+      <li>ICAgile Product Management</li>
+      <li>ICAgile Enterprise Agile Coaching</li>
+      <li>Erickson Coaching Professional</li>
+      <li>PSPO I / PSM I (Scrum.org)</li>
+      <li>PDLC – Keytorc</li>
+      <li>Готовлюсь к сертификации <strong>TOGAF</strong> (фокус на Enterprise Architecture)</li>
+  </ul>
+  <h5>Образование:</h5>
+  <ul>
+      <li>Магистр финансового инжиниринга — Qafqaz University (2012-2014)</li>
+      <li>Бакалавр банковского менеджмента — Qafqaz University (2006-2011)</li>
+  </ul>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
+
+  <h4 id="languages" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+    ЯЗЫКИ И МЕСТОПОЛОЖЕНИЕ
+  </h4>
+  <p>
+    <strong>Языки:</strong> Английский (продвинутый), Русский (продвинутый), Турецкий (продвинутый), Азербайджанский (родной)<br>
+    <strong>Местоположение:</strong> Баку, Азербайджан<br>
+    <strong>Открыт к:</strong> Удалённым и гибридным возможностям в международных командах
+  </p>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
+  
+  <h4 id="philosophy" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
+    МОЯ ФИЛОСОФИЯ
+  </h4>
+  <blockquote>
+    <p><em>“Моя работа — превращать хаос идей в чёткие, работающие решения. Сегодня я делаю это как Senior IT BA. Завтра — как System Architect, проектирующий масштабные экосистемы и AI-решения.”</em></p>
+  </blockquote>
+  <p>
+    Меня движут <strong>любопытство, ясность и стремление к значимым решениям</strong>. Работаю ли я над трансформацией core banking, регуляторным соответствием или real-time операциями — я вношу вклад в трансформационные инициативы с <strong>техническим пониманием и человеко-ориентированным мышлением</strong>.
+  </p>
+  <hr style="border: none; height: 1px; background-color: var(--color-border); margin: var(--space-xl) 0;" />
+
+  <h4 id="connect" style="display: flex; align-items: center; gap: 0.5em;">
+    <svg style="width: 1.2em; height: 1.2em; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+    ДАВАЙТЕ НА СВЯЗЬ
+  </h4>
+  <p>
+     <strong>Ищете сотрудничество?</strong> Давайте вместе строить будущее банковских систем.
+  </p>
+  <p>
+    Открыт к удалённым и гибридным возможностям в международных командах, где смогу внести вклад в <strong>трансформационные инициативы</strong> с техническим пониманием и человеко-ориентированным мышлением.
+  </p>
+  <div style="text-align: center; margin-top: 24px;">
+      <a href="https://www.linkedin.com/in/sarkhanhajiyev" target="_blank" rel="noopener noreferrer" class="btn" style="gap: 8px;">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+          <span>Связаться в LinkedIn</span>
+      </a>
+  </div>
 `,
         skillsTitle: "Ключевые навыки",
         skillsListShort: ["Oracle Flexcube 12", "Системная интеграция (API)", "Моделирование процессов (BPMN/UML)", "Agile и PDLC"],
@@ -598,7 +813,7 @@ const translations = {
         langToggle: "Сменить язык",
         validation: { nameRequired: "Имя обязательно", emailRequired: "Email обязателен", emailInvalid: "Неверный формат email", messageRequired: "Сообщение обязательно", inquiryRequired: "Пожалуйста, выберите тему", messageMin: "Сообщение должно содержать не менее 10 символов" },
         contactInfoTitle: "Свяжитесь со мной",
-        contactInfoText: "Смело пишите мне через форму или свяжитесь со мной в социальных сетях.",
+        contactInfoText: "Смело пишите мне или оставьте обратную связь через форму или свяжитесь со мной в социальных сетях.",
         aiSummaryButton: "AI-Выжимка", // (или "AI Summary", "AI-Xülasə")
         aiSummaryLoading: "Анализирую...",
         aiSummaryError: "Ошибка. Попробуйте позже.",
