@@ -65,7 +65,7 @@ const AboutSection = ({ t }) => {
                             {/* Правая колонка: Биография */}
                             <div className="modal-column modal-column-right">
                                 <h4>{t.aboutSectionTitle}</h4>
-                                <div className="about-long-bio">{t.aboutLongBio}</div>
+                                <div className="about-long-bio" dangerouslySetInnerHTML={{ __html: t.aboutLongBio }} />
                             </div>
                         </div>
 
